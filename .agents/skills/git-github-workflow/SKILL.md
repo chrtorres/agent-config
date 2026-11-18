@@ -58,6 +58,12 @@ For a pull request, provide a clear title, summary, implementation notes, test r
 
 For issues, comments, labels, reviews, merges, releases, or branch deletion, distinguish preparation from execution. Prepare text or commands locally when authorization is missing; do not perform the external mutation by inference. When reviewing a pull request, inspect the actual diff, changed files, checks, discussion context, and merge state, and report observed evidence separately from assumptions.
 
+## Final review and push confirmation
+
+Before any push, perform a final review and present it to the user. Include the repository and destination remote, current and target branches, exact commit range, changed files, relevant checks and outcomes, whether the remote has advanced, and the effect of the proposed push. Do not include credentials or private runtime data.
+
+Stop after presenting the review and request a separate, explicit confirmation to push. A prior request to make or prepare the change is not confirmation for this final push gate. Do not infer confirmation from a general approval, an earlier message, or a successful local validation. If the user declines or does not confirm, leave the commit local and report the exact next action. Only an affirmative confirmation for the reviewed destination and commit range authorizes `git push`.
+
 ## Validate and hand off
 
 Classify each check as pass, fail, blocked, or not tested. A successful local test does not prove remote checks, permissions, branch protection, or deployment success. Capture the commands, repository revision, relevant test results, and external artifact links in task-local evidence; keep credentials and private runtime output outside the repository.

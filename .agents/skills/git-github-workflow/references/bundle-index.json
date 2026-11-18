@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 6843,
-      "sha256": "0691c85f192951c48ce9329c0492e9fe33e35afacd53d678c0bc804be96089ef",
+      "bytes": 7701,
+      "sha256": "837c107fe4a158e136c3aee05d77da6b2dc93376203b5cca4b2b05f5f7a2cb22",
       "executable": false
     },
     "references": {
@@ -19,8 +19,8 @@
     },
     "references/comparison-and-disposition.md": {
       "type": "file",
-      "bytes": 2813,
-      "sha256": "e011166ad7432789220b95ca19679672cb535809b66256d0ad917249ae1fe56d",
+      "bytes": 3313,
+      "sha256": "7744b88ae4814ae675435f36d6e6e782f452467fdf2170eba2a0208662064cea",
       "executable": false
     }
   }
