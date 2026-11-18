@@ -1,0 +1,162 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 11382,
+      "sha256": "97ed3a2f5c85e143c0bdc03848386f890ea92a051f7d19ecaef8ab69886faa74",
+      "executable": false
+    },
+    "assets": {
+      "type": "directory"
+    },
+    "assets/interactive-review-viewer": {
+      "type": "directory"
+    },
+    "assets/interactive-review-viewer/README.md": {
+      "type": "file",
+      "bytes": 529,
+      "sha256": "9e0e9a1d8d491c60d6f1faee71deb893d480182d20f27f3b6bd67f897b34e242",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/index.html": {
+      "type": "file",
+      "bytes": 1788,
+      "sha256": "159ded3f56bc716457c9acece384dc757e339f9c2f7f5044235bd9ad0b444426",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/metadata.json": {
+      "type": "file",
+      "bytes": 491,
+      "sha256": "08672fb331233d63d794577900f9f76ea0cc9133d5a2747752e778214bb09b0d",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/styles.css": {
+      "type": "file",
+      "bytes": 2582,
+      "sha256": "a8f3e1b4f9c4d73cd805e4c9d61a4787e422f0deacdb556ac6b007369d00344d",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/viewer.js": {
+      "type": "file",
+      "bytes": 4335,
+      "sha256": "35278363360743e24167886b4ac9635ef1392c35fc4fbfdfe3357584d57d415b",
+      "executable": false
+    },
+    "assets/rail-joint-example": {
+      "type": "directory"
+    },
+    "assets/rail-joint-example/create_frame.py": {
+      "type": "file",
+      "bytes": 5723,
+      "sha256": "f2b62c9cea8a3a68a7a140801619dcb2ccbeaaf1c9ec8a807c30c9082a5bdb5f",
+      "executable": false
+    },
+    "assets/rail-joint-example/render_previews.py": {
+      "type": "file",
+      "bytes": 2802,
+      "sha256": "a95d43624bd6c42638e28c81cfff66b68912e26460299973a16bf751cc268a32",
+      "executable": false
+    },
+    "assets/rail-joint-example/verify_frame.py": {
+      "type": "file",
+      "bytes": 5204,
+      "sha256": "4074f3737caef68998dbbee642b15fcb7851f314351ca7660e07bb61742f0ef1",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/assembly-refinement.md": {
+      "type": "file",
+      "bytes": 4922,
+      "sha256": "97c52a3c726240271acae9c6c74f709903bcea082a447192d5e602793ce08dc8",
+      "executable": false
+    },
+    "references/comparison-and-feedback.md": {
+      "type": "file",
+      "bytes": 3519,
+      "sha256": "537dcd21205a99ede2a0f17e8ea0a8708aa1e1d1ce16c62568e0c84c4b33297a",
+      "executable": false
+    },
+    "references/interactive-smoke-testing.md": {
+      "type": "file",
+      "bytes": 1884,
+      "sha256": "86d57ffb2daa30ffe8b16cf891f706c05a0efc81f54637de9202be960bfb47d0",
+      "executable": false
+    },
+    "references/interactive-viewer.md": {
+      "type": "file",
+      "bytes": 3833,
+      "sha256": "5d942ed02248da6dbb786dfdeeae22c4cadd3be9e1649f1a61bffc3dc4c7dc7f",
+      "executable": false
+    },
+    "references/resource-disposition.md": {
+      "type": "file",
+      "bytes": 2966,
+      "sha256": "fde843b9f05818afa520826458ca83647fdf6d5542fe248f79777c3eef054016",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/create_box_frame.py": {
+      "type": "file",
+      "bytes": 3003,
+      "sha256": "d678512f90456acfd0bc712b0fa8a8fdef0aff2147f3d846e3e7467ff1080695",
+      "executable": false
+    },
+    "scripts/launch_interactive_viewer.py": {
+      "type": "file",
+      "bytes": 946,
+      "sha256": "51f307ac8cf83edaeb2cdd759ac7ac96715cf7548f41c505b01b2023b2568469",
+      "executable": false
+    },
+    "scripts/render_preview.py": {
+      "type": "file",
+      "bytes": 1696,
+      "sha256": "32f0174525ab7830d95fedb143b266e0b9f79aa61f02021c28f7b3cdba0a294e",
+      "executable": false
+    },
+    "scripts/run_interactive_review_smoke.py": {
+      "type": "file",
+      "bytes": 5992,
+      "sha256": "ad69df4d62b4989046930a9d868a71487d75a696a34962ae441dabf67ce5ae1c",
+      "executable": false
+    },
+    "scripts/smoke_model_generator.py": {
+      "type": "file",
+      "bytes": 3723,
+      "sha256": "062b87d83850e8a7c3a9eaad1df7d9cbabce93268b8ea5508391bf53f421992a",
+      "executable": false
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_box_frame_workflow.py": {
+      "type": "file",
+      "bytes": 1986,
+      "sha256": "161304e37b4495e2ed20a7bf82726183c663d28a11f2b4f082db9e440e168b4a",
+      "executable": false
+    },
+    "tests/test_interactive_smoke_runner.py": {
+      "type": "file",
+      "bytes": 822,
+      "sha256": "2bec5b889497334112c5e9eedec67445a39a447d3fc4b372ef9a2e47edd6bb54",
+      "executable": false
+    },
+    "tests/test_interactive_viewer_template.py": {
+      "type": "file",
+      "bytes": 1174,
+      "sha256": "a8a1f304658e24928462d4f011ba12c69eac805f4c7eeaa494bb2f43d6b55994",
+      "executable": false
+    }
+  }
+}

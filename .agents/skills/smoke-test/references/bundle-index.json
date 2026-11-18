@@ -1,0 +1,105 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 3627,
+      "sha256": "a7d5980179c8d29234b67aa7e67c935b96fd9d4afa3055f7f62ab944d2e22ee5",
+      "executable": false
+    },
+    "assets": {
+      "type": "directory"
+    },
+    "assets/interactive-review-viewer": {
+      "type": "directory"
+    },
+    "assets/interactive-review-viewer/README.md": {
+      "type": "file",
+      "bytes": 529,
+      "sha256": "9e0e9a1d8d491c60d6f1faee71deb893d480182d20f27f3b6bd67f897b34e242",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/index.html": {
+      "type": "file",
+      "bytes": 1788,
+      "sha256": "159ded3f56bc716457c9acece384dc757e339f9c2f7f5044235bd9ad0b444426",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/metadata.json": {
+      "type": "file",
+      "bytes": 491,
+      "sha256": "08672fb331233d63d794577900f9f76ea0cc9133d5a2747752e778214bb09b0d",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/styles.css": {
+      "type": "file",
+      "bytes": 2582,
+      "sha256": "a8f3e1b4f9c4d73cd805e4c9d61a4787e422f0deacdb556ac6b007369d00344d",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/viewer.js": {
+      "type": "file",
+      "bytes": 4335,
+      "sha256": "35278363360743e24167886b4ac9635ef1392c35fc4fbfdfe3357584d57d415b",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/interactive-smoke-testing.md": {
+      "type": "file",
+      "bytes": 1884,
+      "sha256": "86d57ffb2daa30ffe8b16cf891f706c05a0efc81f54637de9202be960bfb47d0",
+      "executable": false
+    },
+    "references/provenance.md": {
+      "type": "file",
+      "bytes": 2389,
+      "sha256": "2905b7d1b53cb6d23c25f39a7e0ee3c195389c83e6c30e65f7dd78e2c39cecbb",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/launch_interactive_viewer.py": {
+      "type": "file",
+      "bytes": 946,
+      "sha256": "51f307ac8cf83edaeb2cdd759ac7ac96715cf7548f41c505b01b2023b2568469",
+      "executable": false
+    },
+    "scripts/run_interactive_review_smoke.py": {
+      "type": "file",
+      "bytes": 5992,
+      "sha256": "ad69df4d62b4989046930a9d868a71487d75a696a34962ae441dabf67ce5ae1c",
+      "executable": false
+    },
+    "scripts/smoke_model_generator.py": {
+      "type": "file",
+      "bytes": 3723,
+      "sha256": "062b87d83850e8a7c3a9eaad1df7d9cbabce93268b8ea5508391bf53f421992a",
+      "executable": false
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_interactive_smoke_runner.py": {
+      "type": "file",
+      "bytes": 822,
+      "sha256": "2bec5b889497334112c5e9eedec67445a39a447d3fc4b372ef9a2e47edd6bb54",
+      "executable": false
+    },
+    "tests/test_interactive_viewer_template.py": {
+      "type": "file",
+      "bytes": 1174,
+      "sha256": "a8a1f304658e24928462d4f011ba12c69eac805f4c7eeaa494bb2f43d6b55994",
+      "executable": false
+    }
+  }
+}

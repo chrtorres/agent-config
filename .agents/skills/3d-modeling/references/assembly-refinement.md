@@ -1,0 +1,24 @@
+# Refining an interlocking assembly
+
+1. Compare the feedback against the reviewed preview and geometry. Write a short revision brief with the change, the dimensions and other constraints that carry forward, and observable acceptance criteria. For example, “too bulky” can become “keep all corner features within the existing rail profile.” “Rails should interlock” can become “each rail mates directly with another rail using features on the parts.”
+2. When joint selection calls for research, check the scope of relevant standards and process-specific guidance from primary sources. Choose the joint against section thickness, directions of force, assembly access, build orientation, clearance, and whether the user needs disassembly. The public scope of ISO/ASTM 52910 provides general design guidance. Stratasys discusses dovetail, butterfly and lap joints for FDM bonding. Formlabs ties clearance to printer and material. Use these sources to justify a joint family and the tests it needs. [ISO/ASTM 52910](https://www.iso.org/standard/67289.html) · [Stratasys FDM joining guide, §2.4.3](https://www.stratasys.com/contentassets/1a0cc7a8e7d14f29ac972189bfeade4c/dg_fdm_designconsiderationsfdmtooling_0718a.pdf?v=48fbe5) · [Formlabs interlocking-parts guide](https://formlabs.com/blog/how-to-3d-print-interlocking-joints/)
+3. Choose the insertion direction and order before modeling the joints. For a closed frame, check how the last part and any part engaging two joints at once can enter. Draw or model the stop and retention features separately in your reasoning. A sliding dovetail can resist withdrawal across its undercut while permitting sliding along its insertion axis. Identify what stops travel in each direction and what secures the last removable part if the intended loads require it.
+4. Model separate solids in a new version and share dimensions between the mating features. Record side clearance, end clearance, remaining material around pockets and keys, and provisional scale. Leave physical fit open when printer, material, and scale are unspecified. For thin features or loads that matter, plan a fit coupon or a representative load test using the intended process.
+5. Check the overall envelope, part count, and closed, connected meshes. Check for positive-volume overlap at the assembled pose and along each intended insertion move, including the last closure. Probe representative prohibited movements to see whether the claimed stop or retention engages. Record sample spacing and geometric tolerances when sampling motion. Report CAD results, printed fit, and load testing as distinct outcomes.
+6. Render the whole object and the revised interfaces from the actual model. Use a close-up or an exploded view with an assembly order when parts would otherwise hide the fit. Record version, feedback, outcome, assumptions, and approval alongside the preview. A new geometry revision needs its own review.
+
+## Runnable dovetail example
+
+The [example source](../assets/rail-joint-example/) contains three files for a scale-neutral, 12-rail frame. The horizontal rails form two rings with stopped dovetails. The vertical posts seat from inside the assembly and their shoulders block the dovetails from sliding back out. The post keys are a clearance fit and permit axial separation. The example uses a fixed 5-unit envelope and 0.50-unit rail width as fixture geometry. Tune the mating profiles together if adapting it, and update checks and camera placement for the changed geometry.
+
+Use Blender 4.5 LTS from the [official Blender distribution](https://www.blender.org/download/lts/4-5/) or a compatible build with Python, Boolean Exact and Workbench rendering. Set `skill_dir` to the directory containing this skill's entrypoint, then run the following from a shell. Blender writes the review artifacts into a fresh temporary directory.
+
+```sh
+fixture="$skill_dir/assets/rail-joint-example"
+review_dir=$(mktemp -d)
+blender -b --factory-startup --python-exit-code 1 --python "$fixture/create_frame.py" -- --output "$review_dir/frame.blend"
+blender -b "$review_dir/frame.blend" --python-exit-code 1 --python "$fixture/verify_frame.py"
+blender -b --factory-startup --python-exit-code 1 --python "$fixture/render_previews.py" -- --blend "$review_dir/frame.blend" --output-dir "$review_dir/previews"
+```
+
+Expect 12 connected manifold solids, a 5 × 5 × 5 envelope, no positive-volume collisions in 66 assembled pairs and 854 pair checks along sampled assembly moves, and interference for both attempted lengthwise dovetail withdrawal and slide-out with a post seated. The motion sampler uses 0.025-unit increments for ring assembly and 0.020-unit increments for post and top-ring assembly. Inspect both `assembled.png` and `joint-detail.png`. These checks reproduce the CAD review. Physical fit and strength depend on scale, tolerances, print settings, material, and post retention.
