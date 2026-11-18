@@ -62,7 +62,7 @@ For issues, comments, labels, reviews, merges, releases, or branch deletion, dis
 
 Before any push, perform a final review and present it to the user. Include the repository and destination remote, current and target branches, exact commit range, changed files, relevant checks and outcomes, whether the remote has advanced, and the effect of the proposed push. Do not include credentials or private runtime data.
 
-Stop after presenting the review and request a separate, explicit confirmation to push. A prior request to make or prepare the change is not confirmation for this final push gate. Do not infer confirmation from a general approval, an earlier message, or a successful local validation. If the user declines or does not confirm, leave the commit local and report the exact next action. Only an affirmative confirmation for the reviewed destination and commit range authorizes `git push`.
+Stop after presenting the review and request a separate, explicit confirmation using the short form `Ready to <insert_action>? (Y/n)`, replacing `<insert_action>` with the reviewed action, such as `Ready to push to origin/main? (Y/n)`. A prior request to make or prepare the change is not confirmation for this final push gate. Do not infer confirmation from a general approval, an earlier message, or a successful local validation. If the user declines or does not confirm, leave the commit local and report the exact next action. Only an affirmative confirmation for the reviewed destination and commit range authorizes `git push`.
 
 ## Validate and hand off
 

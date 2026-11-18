@@ -17,6 +17,7 @@ The score uses the weighted rubric in `skill-add/references/skill-comparison.md`
 | --- | --- | --- | --- |
 | User requested a reusable skill for “working with git/github.” | Created a provider-aware but credential-free procedure covering local Git state, safe edits, commits, remote synchronization, and GitHub collaboration. | Frontmatter, links, bundle index, and placeholder scan are validated during capture. | Live remote actions and hosted checks require an authorized target repository and account. |
 | User requested a final review step requiring confirmation before a push, then asked to test the gate. | Added a mandatory final review containing destination, branch, commit range, changed files, checks, divergence, and push effect, followed by an explicit confirmation stop. | This task will validate the gate by stopping before push; the subsequent push remains pending confirmation. | The gate cannot be tested through a push until the user confirms the reviewed destination and commit range. |
+| User requested a shorter confirmation prompt. | Standardized the gate prompt as `Ready to <insert_action>? (Y/n)`, with the action filled in for the reviewed operation. | The skill text now specifies the exact prompt format. | Confirmation is still required; shortening the prompt does not weaken the gate. |
 
 ## Resource disposition
 
