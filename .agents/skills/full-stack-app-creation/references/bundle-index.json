@@ -1,0 +1,450 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 7386,
+      "sha256": "212ac01451256a4129e05caeab065fc351edfb1352c4834378e0f4f06c419a15",
+      "executable": false
+    },
+    "assets": {
+      "type": "directory"
+    },
+    "assets/monitoring-app": {
+      "type": "directory"
+    },
+    "assets/monitoring-app/.gitignore": {
+      "type": "file",
+      "bytes": 40,
+      "sha256": "8d29cb3457ff021d782d2e9308231281f4d228002ec4dce1b05f965a08b584fa",
+      "executable": false
+    },
+    "assets/monitoring-app/README.md": {
+      "type": "file",
+      "bytes": 7972,
+      "sha256": "5ae3849ed5629b639a29128859c0972085af88c073f13db958e475fc08c67d71",
+      "executable": false
+    },
+    "assets/monitoring-app/WORKFLOW.md": {
+      "type": "file",
+      "bytes": 4850,
+      "sha256": "3928aaf0bfecb04a36f8a4a04ec20cdcfb4231c203b9b3807a7ffde7bc8f3628",
+      "executable": false
+    },
+    "assets/monitoring-app/monitor.py": {
+      "type": "file",
+      "bytes": 16252,
+      "sha256": "cfbebff65dcbaf3e3f7004822f453e0c92a12f5e43478d4036f1f874a4c4b748",
+      "executable": false
+    },
+    "assets/monitoring-app/objects": {
+      "type": "directory"
+    },
+    "assets/monitoring-app/objects/formats.json": {
+      "type": "file",
+      "bytes": 1838,
+      "sha256": "d355367704cdda1eeeac67d7c835ee42778f6e44460ebb8f9e53a79413101499",
+      "executable": false
+    },
+    "assets/monitoring-app/package-lock.json": {
+      "type": "file",
+      "bytes": 598,
+      "sha256": "29f104739d1846ec65932428ae84427af8f075fd9d58e06114444a59ee5613c6",
+      "executable": false
+    },
+    "assets/monitoring-app/package.json": {
+      "type": "file",
+      "bytes": 145,
+      "sha256": "9b815d3fb0c84b28465848931a7482b29a778c64f4a0a5adbcf13a334b4d5ce3",
+      "executable": false
+    },
+    "assets/monitoring-app/scripts": {
+      "type": "directory"
+    },
+    "assets/monitoring-app/scripts/run_checks.py": {
+      "type": "file",
+      "bytes": 5194,
+      "sha256": "b1ebd9d484faa8f1f622d8aae15488a4b37b6d7a6aa61f205e62fe95ebbcc18c",
+      "executable": false
+    },
+    "assets/monitoring-app/server.py": {
+      "type": "file",
+      "bytes": 5555,
+      "sha256": "af8948c6440c5a590587c74b65b42035c4f1c891eec1ae28c51d1f2a0028d557",
+      "executable": false
+    },
+    "assets/monitoring-app/tests": {
+      "type": "directory"
+    },
+    "assets/monitoring-app/tests/browser-check.mjs": {
+      "type": "file",
+      "bytes": 11241,
+      "sha256": "5f2feba67f6e634f88c9796a854c658ef66a933a1f2c47a21901663cf9ec00b3",
+      "executable": false
+    },
+    "assets/monitoring-app/tests/test-core.mjs": {
+      "type": "file",
+      "bytes": 1379,
+      "sha256": "0f95eb6ce2a82369bd672bd8a8992d5e89aacfee89e98e020165d5c8035f9630",
+      "executable": false
+    },
+    "assets/monitoring-app/tests/test_monitor.py": {
+      "type": "file",
+      "bytes": 8582,
+      "sha256": "a8449ab17cc530d09e4d147174016267ed007744486fb6523ec0893192b2e015",
+      "executable": false
+    },
+    "assets/monitoring-app/tests/test_validation_manifest.py": {
+      "type": "file",
+      "bytes": 935,
+      "sha256": "144eeb46484ada67ea6bcd61ce7cd45f4033ff4e511e16de74438d5010acefe3",
+      "executable": false
+    },
+    "assets/monitoring-app/web": {
+      "type": "directory"
+    },
+    "assets/monitoring-app/web/app.mjs": {
+      "type": "file",
+      "bytes": 17043,
+      "sha256": "19a31895701d49f98a6c8d1774c41b1807babe05fe1357e83784314bf923dc33",
+      "executable": false
+    },
+    "assets/monitoring-app/web/core.mjs": {
+      "type": "file",
+      "bytes": 5686,
+      "sha256": "8e2b4637b43ec9885588d55f241ba2a9d74a588fd76f5835695c9e35cc04d2db",
+      "executable": false
+    },
+    "assets/monitoring-app/web/index.html": {
+      "type": "file",
+      "bytes": 10159,
+      "sha256": "ca58834bdc08d1bc5b7e8c0341bfc00f87108d78a2f9eaf8a82ae780bd410306",
+      "executable": false
+    },
+    "assets/monitoring-app/web/style.css": {
+      "type": "file",
+      "bytes": 21063,
+      "sha256": "f280048b492e5598ef39753c4c128bea00aa9274c256d50222b267a631938025",
+      "executable": false
+    },
+    "assets/storage-app": {
+      "type": "directory"
+    },
+    "assets/storage-app/.gitignore": {
+      "type": "file",
+      "bytes": 43,
+      "sha256": "bc3453e5a9b1e3a6e7bd3a22b46ce861f4cbf8e13db44859bb21c165ec39cd79",
+      "executable": false
+    },
+    "assets/storage-app/PRODUCT.md": {
+      "type": "file",
+      "bytes": 4721,
+      "sha256": "af531e9a415d3f14f679ebd2fd4193d4eb4205592a628b29739694d6f21d63c3",
+      "executable": false
+    },
+    "assets/storage-app/README.md": {
+      "type": "file",
+      "bytes": 3823,
+      "sha256": "b86fa8605768d098689d42a650093819a4238cb136d0b94093e4024ea2305ed8",
+      "executable": false
+    },
+    "assets/storage-app/jit.py": {
+      "type": "file",
+      "bytes": 3479,
+      "sha256": "33b8cd769f3ef24e791dfa486111caf1244211eb4eda959ee5c82b71c0b55a94",
+      "executable": false
+    },
+    "assets/storage-app/package-lock.json": {
+      "type": "file",
+      "bytes": 1596,
+      "sha256": "752842e27c164d44420b83fd745731d92d0afe4e21c1a1415940c0a97ffc391b",
+      "executable": false
+    },
+    "assets/storage-app/package.json": {
+      "type": "file",
+      "bytes": 310,
+      "sha256": "ec3bfe06fc0093f1500f43dacd85094e6e701f0cc22db91f22f19ba3aab1c82f",
+      "executable": false
+    },
+    "assets/storage-app/reference": {
+      "type": "directory"
+    },
+    "assets/storage-app/reference/storage-sweep.sh": {
+      "type": "file",
+      "bytes": 1055,
+      "sha256": "84dd984f18e3a095ccb8bc603c942429359b21625b46dd5a5eab9ed09908c216",
+      "executable": true
+    },
+    "assets/storage-app/scripts": {
+      "type": "directory"
+    },
+    "assets/storage-app/scripts/validate.py": {
+      "type": "file",
+      "bytes": 7621,
+      "sha256": "9ea7abe1d3c46b6208ed23127498ffda5739464a680524c478b4862da175f11e",
+      "executable": false
+    },
+    "assets/storage-app/server.py": {
+      "type": "file",
+      "bytes": 6468,
+      "sha256": "43ac8265c936ab27b5f69a59850ecc86d56bf73c110fc2dc469610244b968e9d",
+      "executable": false
+    },
+    "assets/storage-app/start.sh": {
+      "type": "file",
+      "bytes": 101,
+      "sha256": "24003e4d538bc6beee4968717df97fbbfa26c939f43ccf215b5ffefa875dfe33",
+      "executable": true
+    },
+    "assets/storage-app/telemetry.py": {
+      "type": "file",
+      "bytes": 17947,
+      "sha256": "fbed88db340230c2a1bed4929eb68b2663250d83a2be5a5c62ba98e6c3949ed3",
+      "executable": false
+    },
+    "assets/storage-app/tests": {
+      "type": "directory"
+    },
+    "assets/storage-app/tests/browser.mjs": {
+      "type": "file",
+      "bytes": 18120,
+      "sha256": "067b86692ef191f2bbffb47a7ab438fc70cd45daa2c585e4e271da8627653e14",
+      "executable": false
+    },
+    "assets/storage-app/tests/core.test.mjs": {
+      "type": "file",
+      "bytes": 1305,
+      "sha256": "cd24aa0006b59c0e89835628544c2b500c1bc11670a2982ecbc190ed855a0bc4",
+      "executable": false
+    },
+    "assets/storage-app/tests/run_backend.py": {
+      "type": "file",
+      "bytes": 1277,
+      "sha256": "792b06b95349164701aac966de85ca68c62e9977109bb22634d92dbcd3ce9e87",
+      "executable": false
+    },
+    "assets/storage-app/tests/test_jit.py": {
+      "type": "file",
+      "bytes": 4079,
+      "sha256": "a8efadeb0c2115c4795bab2f07f98df38b2eca7edb607572cd5b46cfe589f947",
+      "executable": false
+    },
+    "assets/storage-app/tests/test_telemetry.py": {
+      "type": "file",
+      "bytes": 15363,
+      "sha256": "f376354016b8f2f25676c827cf2e8a3f5f621d36d4a7eb4263341fc07f147373",
+      "executable": false
+    },
+    "assets/storage-app/web": {
+      "type": "directory"
+    },
+    "assets/storage-app/web/app.mjs": {
+      "type": "file",
+      "bytes": 22579,
+      "sha256": "20a94bfcb4d056483d903236cdc5b66797a2c684c3561e476650daf46b0c5ee5",
+      "executable": false
+    },
+    "assets/storage-app/web/core.mjs": {
+      "type": "file",
+      "bytes": 1691,
+      "sha256": "134ac75a2a7eb51e24f601998eb9e99b961f75352915c7c963024f291443d66e",
+      "executable": false
+    },
+    "assets/storage-app/web/favicon.svg": {
+      "type": "file",
+      "bytes": 184,
+      "sha256": "6dc5913c1ccc9dc31c1022a199515218b5d2a9570af9c4ea5fb5c41b4ff299b9",
+      "executable": false
+    },
+    "assets/storage-app/web/index.html": {
+      "type": "file",
+      "bytes": 9676,
+      "sha256": "f2b7317c35c35a9e2388bcdfe74bb6b5b83fd61455e69271bf80a7e6b9011389",
+      "executable": false
+    },
+    "assets/storage-app/web/style.css": {
+      "type": "file",
+      "bytes": 27699,
+      "sha256": "425cb008066a53b3671f078401c19896254260f23699c7323ce36d2d3de3d2bc",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/architecture-and-qa.md": {
+      "type": "file",
+      "bytes": 5187,
+      "sha256": "bd653ad45331c27c963c9dae860261680d0e0cde9787c90a5bcd1b6bb51ac323",
+      "executable": false
+    },
+    "references/dependencies.md": {
+      "type": "file",
+      "bytes": 4009,
+      "sha256": "7717c6543e8726c58b3cbbeb59ae785d4966e9154ee744a96cf3f3ec9f94bfa7",
+      "executable": false
+    },
+    "references/diagnostic-contract.md": {
+      "type": "file",
+      "bytes": 4431,
+      "sha256": "5ca7e45e93052b852487de658bba49943cd329670796c592a5979f96206d58ec",
+      "executable": false
+    },
+    "references/example-evidence": {
+      "type": "directory"
+    },
+    "references/example-evidence/README.md": {
+      "type": "file",
+      "bytes": 1997,
+      "sha256": "0a942065d7009c0d7950e634e8f0f2eeef65cfc4417ff8076aa6a490d896937e",
+      "executable": false
+    },
+    "references/example-evidence/core-tests.txt": {
+      "type": "file",
+      "bytes": 159,
+      "sha256": "94e7d59b1fa93567772de3954573031acdee7c28e2316f3e12e6dd8dfca23af7",
+      "executable": false
+    },
+    "references/example-evidence/demo-report.json": {
+      "type": "file",
+      "bytes": 6424,
+      "sha256": "298e1b3f8f9f8fd4ebc3a24fb7c1c236dc0d114e0a092c37d49f72b610571776",
+      "executable": false
+    },
+    "references/example-evidence/diagnostics-desktop.png": {
+      "type": "file",
+      "bytes": 134829,
+      "sha256": "49696d6c194fa49f5c0e383174b0a1c2f7a3d88cee03086249869ece5d975540",
+      "executable": false
+    },
+    "references/example-evidence/diagnostics-mobile.png": {
+      "type": "file",
+      "bytes": 102574,
+      "sha256": "543c766b4ef5f973843b7c44f99dafda2c79467aefc193ccca54f4adea7b725b",
+      "executable": false
+    },
+    "references/example-evidence/http-example.json": {
+      "type": "file",
+      "bytes": 1210,
+      "sha256": "0ab0fbde11d73107408a6de9bd455c1ec42d00f872ee3eb61a7edf594b45ee81",
+      "executable": false
+    },
+    "references/example-evidence/overview-desktop.png": {
+      "type": "file",
+      "bytes": 165867,
+      "sha256": "8c8199ceefe35b3f2377fd0db3fadfc20f948f5303a14930444db11b82577983",
+      "executable": false
+    },
+    "references/example-evidence/overview-mobile.png": {
+      "type": "file",
+      "bytes": 128230,
+      "sha256": "52419b59fccd3077ae6b0be830df3436876e1c0e50e7e30f40b339e5472d4a90",
+      "executable": false
+    },
+    "references/example-evidence/python-tests.txt": {
+      "type": "file",
+      "bytes": 1204,
+      "sha256": "013e1a231eaaa7f4c37e0803bfb599570de50558712a04d08bb522bb99ffaaf2",
+      "executable": false
+    },
+    "references/example-evidence/validation-example.json": {
+      "type": "file",
+      "bytes": 7157,
+      "sha256": "78e6f305d7a7bf442141177f0a723cf2577dde56019ba6027275337e5562d29c",
+      "executable": false
+    },
+    "references/resources.md": {
+      "type": "file",
+      "bytes": 6043,
+      "sha256": "d7d187e4edd4a1a4b4ed66182597b13ef194e2d41c9202570db3ea8e470d02b3",
+      "executable": false
+    },
+    "references/storage-and-jit.md": {
+      "type": "file",
+      "bytes": 7461,
+      "sha256": "43c3ae8a18ed326ccb0ec26310e5e989c517084827f0713af6c2ab3b008e6e55",
+      "executable": false
+    },
+    "references/storage-example-evidence": {
+      "type": "directory"
+    },
+    "references/storage-example-evidence/README.md": {
+      "type": "file",
+      "bytes": 334,
+      "sha256": "181dfccc7e6c32dac0c1b3c1bdbc85e53c5f4f627b8362263cc45bf08c859ba4",
+      "executable": false
+    },
+    "references/storage-example-evidence/overview-desktop.png": {
+      "type": "file",
+      "bytes": 211415,
+      "sha256": "3c0693cbf5e8ee9cfde024489af13ae152adfde0708bebb71f7c1d0365f45bb3",
+      "executable": false
+    },
+    "references/storage-example-evidence/synthetic-snapshot.json": {
+      "type": "file",
+      "bytes": 7100,
+      "sha256": "9d11dbd5c867bc76be1f437f255a2dc1612f09f90d1dbeb01c5912f0cf439b24",
+      "executable": false
+    },
+    "references/storage-example-evidence/volumes-mobile.png": {
+      "type": "file",
+      "bytes": 92540,
+      "sha256": "b04a77ee6240935712586a73b842645080cdcbc42df8d4ecc8ab0ec7f5c29475",
+      "executable": false
+    },
+    "references/worked-example.md": {
+      "type": "file",
+      "bytes": 1526,
+      "sha256": "c26169cc912be2129e60c35fe82f9d019023d73b5846cd05a30d487901a8fb82",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/capture_examples.mjs": {
+      "type": "file",
+      "bytes": 5117,
+      "sha256": "5705974b6eb47a75cb1e505fa4299b55fd7c119931b011247d7ce66708f87751",
+      "executable": false
+    },
+    "scripts/capture_storage_examples.mjs": {
+      "type": "file",
+      "bytes": 2391,
+      "sha256": "4c54b1a23fb4ca65426d9eb097d6a5fb0a2ccaf759aa3cfd58e7db07ea326d2c",
+      "executable": false
+    },
+    "scripts/create_app.py": {
+      "type": "file",
+      "bytes": 1472,
+      "sha256": "47248594c85cbe093a94be679d2acd645e13302e5943b527b66d4856fd6716b8",
+      "executable": false
+    },
+    "scripts/create_storage_app.py": {
+      "type": "file",
+      "bytes": 1070,
+      "sha256": "c4e5460066eb5960e7eba3c9e488cbefe22c40bdd90f9258dd6d1b87493b7cf9",
+      "executable": false
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_creation.py": {
+      "type": "file",
+      "bytes": 1967,
+      "sha256": "9805a33cbd600e2dc41026f82e8b8a7c79f2a8aa28f148c7885135963737300a",
+      "executable": false
+    },
+    "tests/test_storage_creation.py": {
+      "type": "file",
+      "bytes": 1667,
+      "sha256": "b5a1389057cf3fa6927becf58a880bc68a2e79711a790609f288bc96fe4976f9",
+      "executable": false
+    }
+  }
+}

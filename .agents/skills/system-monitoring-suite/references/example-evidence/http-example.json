@@ -1,0 +1,66 @@
+{
+  "kind": "curated synthetic HTTP route example",
+  "timestamps": "Normalized to a fictional UTC clock; no production host data",
+  "http": [
+    {
+      "method": "GET",
+      "route": "/api/config",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "route": "/api/job",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "route": "/api/snapshot?mode=demo",
+      "status": 200
+    },
+    {
+      "method": "POST",
+      "route": "/api/jobs",
+      "status": 202
+    },
+    {
+      "method": "GET",
+      "route": "/api/job",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "route": "/api/job",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "route": "/api/job",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "route": "/api/job",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "route": "/api/job",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "route": "/api/snapshot?mode=demo",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "route": "/api/snapshot?mode=demo",
+      "status": 200
+    },
+    {
+      "method": "GET",
+      "route": "/api/snapshot?mode=demo",
+      "status": 200
+    }
+  ]
+}

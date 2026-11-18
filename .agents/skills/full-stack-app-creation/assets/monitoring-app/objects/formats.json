@@ -1,0 +1,26 @@
+{
+  "description": "Runtime field contract, not a JSON Schema validator. Synthetic fixtures use these shapes too.",
+  "snapshot": {
+    "required": ["source", "collected_at", "sequence", "host", "cpu_percent", "memory", "disk", "uptime_seconds", "load", "pressure", "processes", "gaps", "reboot_required"],
+    "source": ["live", "demo"],
+    "time": "UTC ISO-8601",
+    "unknowns": "CPU, memory, capacity, uptime, load, and pressure values can be null. Never coerce unknown to zero.",
+    "processes": "At most 20 by RSS from at most 2,000 PIDs. pid, ppid, name, state, rss bytes, cpu_percent per logical core.",
+    "capacity": "percent = used / (used + space available to an ordinary user), root mount only"
+  },
+  "job": {
+    "required": ["id", "source", "profile", "title", "started_at", "finished_at", "status", "results", "planned", "active"],
+    "status": ["running", "cancelling", "cancelled", "completed"],
+    "result_required": ["id", "title", "category", "argv", "started_at", "status", "returncode", "output", "truncated", "duration_ms", "assessment", "summary"],
+    "collection_status": ["completed", "cancelled", "timeout", "missing", "unavailable"],
+    "assessment": ["observed", "review", "limited"],
+    "bounds": "Eight seconds and 12,000 retained output bytes per fixed command; capped output is limited evidence. Latest job only."
+  },
+  "report": {
+    "format": "fieldwork-report-v1",
+    "required": ["format", "exported_at", "source", "latest_snapshot", "session_samples", "latest_diagnostic", "coverage", "limits"],
+    "nullable": ["latest_snapshot", "latest_diagnostic"],
+    "samples": "Up to 200 browser-session samples: sequence, collected_at, cpu, memory. Reload clears samples.",
+    "coverage": "Rows of title, assessment, explanation. Unrun, inaccessible, and excluded areas remain limited."
+  }
+}

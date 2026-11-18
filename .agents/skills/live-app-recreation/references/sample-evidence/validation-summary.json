@@ -1,0 +1,31 @@
+{
+  "purpose": "Historical successful run of this bundled example; rerun against current source to validate a new task.",
+  "scope": "Bundled behavioral recreations; no native device or real LLM execution",
+  "checks": [
+    {
+      "name": "python-tests",
+      "status": "pass",
+      "exit_code": 0
+    },
+    {
+      "name": "python-demo",
+      "status": "pass",
+      "exit_code": 0
+    },
+    {
+      "name": "engine-tests",
+      "status": "pass",
+      "exit_code": 0
+    },
+    {
+      "name": "app-syntax",
+      "status": "pass",
+      "exit_code": 0
+    },
+    {
+      "name": "browser-tests",
+      "status": "pass",
+      "exit_code": 0
+    }
+  ]
+}

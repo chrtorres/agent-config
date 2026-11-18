@@ -1,0 +1,22 @@
+test_absolute_external_read_is_blocked (test_agent.FunctionalTests) ... ok
+test_ambiguous_edit_does_not_mutate (test_agent.FunctionalTests) ... ok
+test_approved_edit_and_denied_edit (test_agent.FunctionalTests) ... ok
+test_approved_write_creates_actual_file (test_agent.FunctionalTests) ... ok
+test_confirmation_disabled_skips_prompt (test_agent.FunctionalTests) ... ok
+test_conversation_round_trip (test_agent.FunctionalTests) ... ok
+test_denied_overwrite_preserves_original (test_agent.FunctionalTests) ... ok
+test_denied_write_never_creates_file_and_reports_error (test_agent.FunctionalTests) ... ok
+test_find_and_grep (test_agent.FunctionalTests) ... ok
+test_http_failure_is_visible (test_agent.FunctionalTests) ... ok
+test_list_read_and_return_results_to_server (test_agent.FunctionalTests) ... ok
+test_malformed_and_unknown_tools_report_errors (test_agent.FunctionalTests) ... ok
+test_path_traversal_write_is_blocked (test_agent.FunctionalTests) ... ok
+test_streamed_chat_and_wire_contract (test_agent.FunctionalTests) ... ok
+test_symlink_escape_read_and_write_are_blocked (test_agent.FunctionalTests) ... ok
+test_truncated_stream_is_rejected (test_agent.FunctionalTests) ... ok
+test_turn_limit_stops_unbounded_tool_loop (test_agent.FunctionalTests) ... ok
+
+----------------------------------------------------------------------
+Ran 17 tests in 9.057s
+
+OK

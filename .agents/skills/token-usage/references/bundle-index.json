@@ -1,0 +1,72 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 4536,
+      "sha256": "c93506582ab877996a45495710fee38ea9ea7fc574b17105b3e267d3fb90eea2",
+      "executable": false
+    },
+    "assets": {
+      "type": "directory"
+    },
+    "assets/report-template.md": {
+      "type": "file",
+      "bytes": 356,
+      "sha256": "b95bcb9c3c078b45153bf6f45663677ebac6d6ef27cb71af06a1eb95f5e61b71",
+      "executable": false
+    },
+    "assets/synthetic-session.jsonl": {
+      "type": "file",
+      "bytes": 811,
+      "sha256": "0d23ef475a6e81bb4c730839b55fd531a0ca782689456a551f6029243e3bda0d",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/capture-provenance.md": {
+      "type": "file",
+      "bytes": 2871,
+      "sha256": "79866dbde5818fb842297313bec46c92f524fb94e19d9bc1e76049b2fe0385eb",
+      "executable": false
+    },
+    "references/reproduction.md": {
+      "type": "file",
+      "bytes": 1451,
+      "sha256": "7b3fa90c1d95713278a1b6a4e7a7b2a0fd03d9eb5a32490aee3f01b1421346db",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/token_usage.py": {
+      "type": "file",
+      "bytes": 3298,
+      "sha256": "d27e074f7a9813c8b02eb3357b350df5213eda5ba77220334d95dd3a98b6b083",
+      "executable": false
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_cli.py": {
+      "type": "file",
+      "bytes": 1273,
+      "sha256": "7be8670d7687cbefd28cffce5c7b307dfbe5cb9ecbd3cbac76137db2d16c187a",
+      "executable": false
+    },
+    "tests/test_token_usage.py": {
+      "type": "file",
+      "bytes": 1707,
+      "sha256": "1af77364be601dc3662eb23cb740c17a65d6e5f0820565185bd4eda661e6392f",
+      "executable": false
+    }
+  }
+}

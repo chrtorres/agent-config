@@ -1,0 +1,14 @@
+{
+  "name": "atlas-storage-telemetry",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "python3 -B server.py --port 0",
+    "test": "python3 -B scripts/validate.py"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "playwright-core": "1.65.1"
+  }
+}

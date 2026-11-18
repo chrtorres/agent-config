@@ -1,0 +1,7 @@
+{
+  "description": "Collector emits one JSON object to stdout, never a saved report by default.",
+  "fields": {
+    "collected_at": "UTC ISO-8601 timestamp",
+    "checks": "Array of command result objects: argv, status (completed/missing/timeout), returncode (integer or null), output, truncated (boolean)"
+  }
+}

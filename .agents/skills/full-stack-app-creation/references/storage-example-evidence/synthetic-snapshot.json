@@ -1,0 +1,323 @@
+{
+  "drives": [
+    {
+      "id": "/dev/nvme0n1",
+      "name": "nvme0n1",
+      "path": "/dev/nvme0n1",
+      "model": "Aurora NVMe 1TB",
+      "size": 1099511627776,
+      "transport": "nvme",
+      "media": "SSD",
+      "partitions": [
+        {
+          "id": "/dev/nvme0n1p1",
+          "name": "nvme0n1p1",
+          "path": "/dev/nvme0n1p1",
+          "type": "part",
+          "size": 1073741824,
+          "fstype": "vfat",
+          "label": "",
+          "uuid": "",
+          "mountpoints": [
+            "/boot/efi"
+          ],
+          "drive_ids": [
+            "/dev/nvme0n1"
+          ],
+          "state": "mounted"
+        },
+        {
+          "id": "/dev/nvme0n1p2",
+          "name": "nvme0n1p2",
+          "path": "/dev/nvme0n1p2",
+          "type": "part",
+          "size": 1098437885952,
+          "fstype": "ext4",
+          "label": "System",
+          "uuid": "",
+          "mountpoints": [
+            "/"
+          ],
+          "drive_ids": [
+            "/dev/nvme0n1"
+          ],
+          "state": "mounted"
+        }
+      ],
+      "volume_ids": [
+        "/dev/nvme0n1p1",
+        "/dev/nvme0n1p2"
+      ],
+      "usage": {
+        "total": 1074815565824,
+        "used": 668082162892,
+        "available": 376668631860,
+        "reserved": 30064771072,
+        "percent": 63.9
+      },
+      "health": {
+        "state": "healthy",
+        "reason": "Simulated SMART status",
+        "temperature_c": 34
+      },
+      "io": {
+        "read_bps": 12000000,
+        "write_bps": 3200000
+      }
+    },
+    {
+      "id": "/dev/sda",
+      "name": "sda",
+      "path": "/dev/sda",
+      "model": "Meridian Archive 2TB",
+      "size": 2199023255552,
+      "transport": "sata",
+      "media": "HDD",
+      "partitions": [
+        {
+          "id": "/dev/sda1",
+          "name": "sda1",
+          "path": "/dev/sda1",
+          "type": "part",
+          "size": 2199023255552,
+          "fstype": "ext4",
+          "label": "Archive",
+          "uuid": "",
+          "mountpoints": [
+            "/mnt/archive"
+          ],
+          "drive_ids": [
+            "/dev/sda"
+          ],
+          "state": "mounted"
+        }
+      ],
+      "volume_ids": [
+        "/dev/sda1"
+      ],
+      "usage": {
+        "total": 2147483648000,
+        "used": 1868310773760,
+        "available": 279172874240,
+        "reserved": 0,
+        "percent": 87
+      },
+      "health": {
+        "state": "healthy",
+        "reason": "Simulated SMART status",
+        "temperature_c": 37
+      },
+      "io": {
+        "read_bps": 6000000,
+        "write_bps": 1600000
+      }
+    },
+    {
+      "id": "/dev/sdb",
+      "name": "sdb",
+      "path": "/dev/sdb",
+      "model": "Pocket SSD 512GB",
+      "size": 549755813888,
+      "transport": "usb",
+      "media": "SSD",
+      "partitions": [
+        {
+          "id": "/dev/sdb1",
+          "name": "sdb1",
+          "path": "/dev/sdb1",
+          "type": "part",
+          "size": 536870912000,
+          "fstype": "exfat",
+          "label": "Travel",
+          "uuid": "",
+          "mountpoints": [],
+          "drive_ids": [
+            "/dev/sdb"
+          ],
+          "state": "unmounted"
+        }
+      ],
+      "volume_ids": [],
+      "usage": null,
+      "health": {
+        "state": "unavailable",
+        "reason": "USB adapter does not expose SMART",
+        "temperature_c": null
+      },
+      "io": {
+        "read_bps": 4000000,
+        "write_bps": 1066666.6666666667
+      }
+    }
+  ],
+  "volumes": [
+    {
+      "id": "/dev/nvme0n1p1",
+      "name": "nvme0n1p1",
+      "path": "/dev/nvme0n1p1",
+      "label": "",
+      "fstype": "vfat",
+      "mountpoints": [
+        "/boot/efi"
+      ],
+      "mountpoint": "/boot/efi",
+      "drive_ids": [
+        "/dev/nvme0n1"
+      ],
+      "total": 1073741824,
+      "used": 214748364,
+      "available": 858993460,
+      "reserved": 0,
+      "percent": 20,
+      "severity": "normal",
+      "error": null
+    },
+    {
+      "id": "/dev/nvme0n1p2",
+      "name": "nvme0n1p2",
+      "path": "/dev/nvme0n1p2",
+      "label": "System",
+      "fstype": "ext4",
+      "mountpoints": [
+        "/"
+      ],
+      "mountpoint": "/",
+      "drive_ids": [
+        "/dev/nvme0n1"
+      ],
+      "total": 1073741824000,
+      "used": 667867414528,
+      "available": 375809638400,
+      "reserved": 30064771072,
+      "percent": 64,
+      "severity": "normal",
+      "error": null
+    },
+    {
+      "id": "/dev/sda1",
+      "name": "sda1",
+      "path": "/dev/sda1",
+      "label": "Archive",
+      "fstype": "ext4",
+      "mountpoints": [
+        "/mnt/archive"
+      ],
+      "mountpoint": "/mnt/archive",
+      "drive_ids": [
+        "/dev/sda"
+      ],
+      "total": 2147483648000,
+      "used": 1868310773760,
+      "available": 279172874240,
+      "reserved": 0,
+      "percent": 87,
+      "severity": "warning",
+      "error": null
+    }
+  ],
+  "partitions": [
+    {
+      "id": "/dev/nvme0n1p1",
+      "name": "nvme0n1p1",
+      "path": "/dev/nvme0n1p1",
+      "type": "part",
+      "size": 1073741824,
+      "fstype": "vfat",
+      "label": "",
+      "uuid": "",
+      "mountpoints": [
+        "/boot/efi"
+      ],
+      "drive_ids": [
+        "/dev/nvme0n1"
+      ],
+      "state": "mounted"
+    },
+    {
+      "id": "/dev/nvme0n1p2",
+      "name": "nvme0n1p2",
+      "path": "/dev/nvme0n1p2",
+      "type": "part",
+      "size": 1098437885952,
+      "fstype": "ext4",
+      "label": "System",
+      "uuid": "",
+      "mountpoints": [
+        "/"
+      ],
+      "drive_ids": [
+        "/dev/nvme0n1"
+      ],
+      "state": "mounted"
+    },
+    {
+      "id": "/dev/sda1",
+      "name": "sda1",
+      "path": "/dev/sda1",
+      "type": "part",
+      "size": 2199023255552,
+      "fstype": "ext4",
+      "label": "Archive",
+      "uuid": "",
+      "mountpoints": [
+        "/mnt/archive"
+      ],
+      "drive_ids": [
+        "/dev/sda"
+      ],
+      "state": "mounted"
+    },
+    {
+      "id": "/dev/sdb1",
+      "name": "sdb1",
+      "path": "/dev/sdb1",
+      "type": "part",
+      "size": 536870912000,
+      "fstype": "exfat",
+      "label": "Travel",
+      "uuid": "",
+      "mountpoints": [],
+      "drive_ids": [
+        "/dev/sdb"
+      ],
+      "state": "unmounted"
+    }
+  ],
+  "totals": {
+    "total": 3222299213824,
+    "used": 2536392936652,
+    "available": 655841506100,
+    "reserved": 30064771072,
+    "physical": 3848290697216,
+    "drive_count": 3,
+    "volume_count": 3,
+    "unmounted_count": 1,
+    "unknown_volume_count": 0,
+    "percent": 79.5,
+    "attention_count": 1
+  },
+  "issues": [],
+  "schema_version": 1,
+  "source": "demo",
+  "captured_at": "2000-01-01T12:00:00+00:00",
+  "host": "atlas-demo",
+  "evidence": [
+    {
+      "source": "deterministic fixture",
+      "status": "simulated"
+    }
+  ],
+  "findings": [
+    {
+      "kind": "capacity",
+      "level": "warning",
+      "target": "/dev/sda1",
+      "title": "Archive is 87% used",
+      "detail": "Review this volume before adding large files. Available space excludes filesystem reserves."
+    }
+  ],
+  "coverage": {
+    "usage": "complete",
+    "hardware_health": 2
+  }
+}

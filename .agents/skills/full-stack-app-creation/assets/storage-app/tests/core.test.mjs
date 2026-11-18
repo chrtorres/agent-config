@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {bytes,percent,filterVolumes,escapeHTML} from '../web/core.mjs';
+assert.equal(bytes(1024**3),'1 GiB');
+assert.equal(bytes(1e9,'decimal'),'1 GB');
+assert.equal(bytes(null),'Unknown');
+assert.equal(percent(null),'Unknown');
+assert.equal(percent(84.4),'84.4%');
+assert.equal(escapeHTML('<script>"&'), '&lt;script&gt;&quot;&amp;');
+const volumes=[{path:'/dev/a',label:'System',fstype:'ext4',mountpoints:['/'],percent:50,available:400,severity:'normal'},{path:'/dev/b',label:'Archive',fstype:'ntfs',mountpoints:['/mnt/archive'],percent:90,available:100,severity:'critical'},{path:'/dev/c',label:'',fstype:'ext4',mountpoints:['/backup'],percent:null,available:null,severity:'unknown'}];
+assert.deepEqual(filterVolumes(volumes,'ARCHIVE').map(v=>v.path),['/dev/b']);
+assert.deepEqual(filterVolumes(volumes,'','attention').map(v=>v.path),['/dev/b']);
+assert.deepEqual(filterVolumes(volumes,'','normal').map(v=>v.path),['/dev/a']);
+assert.deepEqual(filterVolumes(volumes,'','all','available').map(v=>v.path),['/dev/a','/dev/b','/dev/c']);
+assert.equal(filterVolumes(volumes,'no result').length,0);
+assert.deepEqual(volumes.map(v=>v.path),['/dev/a','/dev/b','/dev/c']);
+console.log('PASS: formatting, unknown states, safe text, filtering, sorting, and immutability');

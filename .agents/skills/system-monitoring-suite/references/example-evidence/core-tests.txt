@@ -1,0 +1,3 @@
+HISTORICAL EXAMPLE — not a current pass
+
+13 core assertions passed: missing data, findings, coverage, chart gaps, real time spacing, formats, report source.

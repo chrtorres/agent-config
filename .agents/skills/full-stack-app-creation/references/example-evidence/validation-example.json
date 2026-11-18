@@ -1,0 +1,167 @@
+{
+  "kind": "historical sanitized reproduction example; not a current validation receipt",
+  "source": "Isolated copy of the portable starter with declared dependencies acquired independently",
+  "runtime_versions": {
+    "python": "3.10.12",
+    "node": "20.19.5",
+    "playwright_core": "1.65.1",
+    "chromium": "157.0.8103.78"
+  },
+  "outcomes": {
+    "package_creation_tests": 3,
+    "python_tests": 13,
+    "javascript_core_assertions": 13,
+    "fixture_browser_assertions": 33,
+    "live_browser_assertions": 36,
+    "fixture_browser_passed": true,
+    "live_browser_passed": true
+  },
+  "fixture_scope": "Actual loopback HTTP and synthetic fixtures only; live host diagnosis not exercised.",
+  "live_scope": "Actual loopback HTTP, authorized live baseline, and synthetic fixtures.",
+  "fixture_checks": [
+    "Dashboard serves over real HTTP",
+    "Initial load does not inspect host telemetry",
+    "Unknown CPU is shown as unknown",
+    "Synthetic mode is visibly labeled",
+    "Synthetic capacity finding is driven by fixture data",
+    "Pause prevents scheduled fixture samples",
+    "Resume collects a new fixture sample over HTTP",
+    "Fixture process table is populated",
+    "Source cannot switch during a running diagnostic",
+    "Demo check produces an inspectable review finding",
+    "Rendered tool output equals actual backend result",
+    "Downloaded JSON identifies source and exact displayed job",
+    "Export preserves exact synthetic command evidence",
+    "Cancelling a diagnostic leaves later checks unrun",
+    "Missing sensors appear as limited coverage",
+    "Coverage explicitly reports unverified hardware areas",
+    "Guided tour opens through the real control",
+    "Tour supports keyboard dismissal",
+    "Untrusted process names render as text, without HTML execution",
+    "overview remains contained at 360px",
+    "diagnostics remains contained at 360px",
+    "processes remains contained at 360px",
+    "evidence remains contained at 360px",
+    "overview remains contained at 768px",
+    "diagnostics remains contained at 768px",
+    "processes remains contained at 768px",
+    "evidence remains contained at 768px",
+    "Reload clears in-memory chart samples",
+    "Reload restores the latest backend job with correct source",
+    "Restored fixture job keeps its demo label",
+    "Fixture-only browser run makes no live telemetry or diagnostic request",
+    "No browser JavaScript runtime errors",
+    "All exercised application HTTP requests succeed"
+  ],
+  "live_checks": [
+    "Dashboard serves over real HTTP",
+    "Initial load does not inspect host telemetry",
+    "Unknown CPU is shown as unknown",
+    "Monitoring reads real host identity",
+    "Live CPU receives interval samples through HTTP",
+    "Actual process table is populated",
+    "Pause prevents further scheduled samples",
+    "Resume collects a new live sample",
+    "Quick baseline executes five fixed live checks",
+    "Live command evidence expands in the actual interface",
+    "Synthetic mode is visibly labeled",
+    "Synthetic capacity finding is driven by fixture data",
+    "Source cannot switch during a running diagnostic",
+    "Demo check produces an inspectable review finding",
+    "Rendered tool output equals actual backend result",
+    "Downloaded JSON identifies source and exact displayed job",
+    "Export preserves exact synthetic command evidence",
+    "Cancelling a diagnostic leaves later checks unrun",
+    "Missing sensors appear as limited coverage",
+    "Coverage explicitly reports unverified hardware areas",
+    "Guided tour opens through the real control",
+    "Tour supports keyboard dismissal",
+    "Untrusted process names render as text, without HTML execution",
+    "overview remains contained at 360px",
+    "diagnostics remains contained at 360px",
+    "processes remains contained at 360px",
+    "evidence remains contained at 360px",
+    "overview remains contained at 768px",
+    "diagnostics remains contained at 768px",
+    "processes remains contained at 768px",
+    "evidence remains contained at 768px",
+    "Reload clears in-memory chart samples",
+    "Reload restores the latest backend job with correct source",
+    "Restored fixture job keeps its demo label",
+    "No browser JavaScript runtime errors",
+    "All exercised application HTTP requests succeed"
+  ],
+  "commands": [
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-v"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "tests/test-core.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "node",
+        "--check",
+        "web/app.mjs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "scripts/run_checks.py",
+        "--output",
+        "<fresh-evidence-directory>",
+        "--browser"
+      ],
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "python3",
+        "-B",
+        "scripts/run_checks.py",
+        "--output",
+        "<different-fresh-evidence-directory>",
+        "--browser",
+        "--live-host"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "source_hashes": {
+    "README.md": "5ae3849ed5629b639a29128859c0972085af88c073f13db958e475fc08c67d71",
+    "WORKFLOW.md": "3928aaf0bfecb04a36f8a4a04ec20cdcfb4231c203b9b3807a7ffde7bc8f3628",
+    "monitor.py": "cfbebff65dcbaf3e3f7004822f453e0c92a12f5e43478d4036f1f874a4c4b748",
+    "objects/formats.json": "d355367704cdda1eeeac67d7c835ee42778f6e44460ebb8f9e53a79413101499",
+    "package-lock.json": "29f104739d1846ec65932428ae84427af8f075fd9d58e06114444a59ee5613c6",
+    "package.json": "9b815d3fb0c84b28465848931a7482b29a778c64f4a0a5adbcf13a334b4d5ce3",
+    "scripts/run_checks.py": "b1ebd9d484faa8f1f622d8aae15488a4b37b6d7a6aa61f205e62fe95ebbcc18c",
+    "server.py": "af8948c6440c5a590587c74b65b42035c4f1c891eec1ae28c51d1f2a0028d557",
+    "tests/browser-check.mjs": "5f2feba67f6e634f88c9796a854c658ef66a933a1f2c47a21901663cf9ec00b3",
+    "tests/test-core.mjs": "0f95eb6ce2a82369bd672bd8a8992d5e89aacfee89e98e020165d5c8035f9630",
+    "tests/test_monitor.py": "a8449ab17cc530d09e4d147174016267ed007744486fb6523ec0893192b2e015",
+    "tests/test_validation_manifest.py": "144eeb46484ada67ea6bcd61ce7cd45f4033ff4e511e16de74438d5010acefe3",
+    "web/app.mjs": "19a31895701d49f98a6c8d1774c41b1807babe05fe1357e83784314bf923dc33",
+    "web/core.mjs": "8e2b4637b43ec9885588d55f241ba2a9d74a588fd76f5835695c9e35cc04d2db",
+    "web/index.html": "ca58834bdc08d1bc5b7e8c0341bfc00f87108d78a2f9eaf8a82ae780bd410306",
+    "web/style.css": "f280048b492e5598ef39753c4c128bea00aa9274c256d50222b267a631938025"
+  },
+  "removed": "Original paths, host identity, ports/origins, PIDs/job IDs, raw live output, timezone, run timestamps, and dependency-install locations. Example graphics/report use a fictional UTC clock.",
+  "followup": "A source-manifest dependency-README inclusion bug was corrected and regression-tested. Final Python/core/syntax/source-hash checks passed; browser harness and runtime UI/backend were unchanged from the successful fixture/live browser runs."
+}

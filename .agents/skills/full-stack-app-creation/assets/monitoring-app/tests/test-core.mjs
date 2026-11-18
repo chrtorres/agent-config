@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {findings,coverage,pathFor,report,uptime,percent} from '../web/core.mjs';
+const snapshot={source:'demo',cpu_percent:24,memory:{percent:40},disk:{percent:87},reboot_required:false};
+assert.equal(findings(snapshot,null)[0].level,'review');
+assert.match(findings(snapshot,null)[0].text,/87%/);
+assert.match(findings({...snapshot,cpu_percent:null,memory:null,disk:null},null)[0].title,/pending/);
+assert.equal(coverage(null,null).every(row=>row[1]==='limited'),true);
+assert.equal(coverage(snapshot,{results:[{id:'services',assessment:'review'}]}).find(row=>row[0]==='Startup & services')[1],'review');
+assert.equal(pathFor([{cpu:10},{cpu:null},{cpu:20}],'cpu').match(/M/g).length,2);
+assert.equal(pathFor([{cpu:10},{cpu:20}],'cpu').match(/L/g).length,1);
+assert.match(pathFor([{cpu:10,collected_at:'2020-01-01T00:00:00Z'},{cpu:20,collected_at:'2020-01-01T00:00:01Z'},{cpu:30,collected_at:'2020-01-01T00:00:10Z'}],'cpu'),/L102\.1,/);
+assert.equal(percent(null),'—');
+assert.equal(uptime(185340),'2d 3h');
+assert.equal(report(snapshot,[],null).source,'demo');
+assert.equal(report(null,[],{source:'live'}).source,'live');
+assert.equal(findings(null,{results:[],status:'cancelled'})[0].level,'limited');
+console.log('13 core assertions passed: missing data, findings, coverage, chart gaps, real time spacing, formats, report source.');

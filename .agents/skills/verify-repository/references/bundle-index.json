@@ -1,0 +1,78 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 6735,
+      "sha256": "91009277edcc3a0bdb7b3339d93ba5b67fe68358476c2cfa7123886ac2acc293",
+      "executable": false
+    },
+    "assets": {
+      "type": "directory"
+    },
+    "assets/review-template.md": {
+      "type": "file",
+      "bytes": 468,
+      "sha256": "84e7a1ded1e6cab8d4e93f78ac785b10ed5ba90353b9773982ac6199cad03fc2",
+      "executable": false
+    },
+    "assets/synthetic-result.json": {
+      "type": "file",
+      "bytes": 69,
+      "sha256": "35fae9d2c499b2ec0cdfdaa3b3fd2250a22f69a891be07c035ec90f50f6ee909",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/capture-provenance.md": {
+      "type": "file",
+      "bytes": 4862,
+      "sha256": "1eb76993e8536435e6732190484090e57817aa4f22907e33849a28f5ba2c95bb",
+      "executable": false
+    },
+    "references/gpu-kernel-module-verification.md": {
+      "type": "file",
+      "bytes": 3351,
+      "sha256": "0dc547830e15600a7b38366a4ac310a0b66a1b575f4f41da970824126add5e9d",
+      "executable": false
+    },
+    "references/gpu-verification.md": {
+      "type": "file",
+      "bytes": 1728,
+      "sha256": "df902830b3a700df5d8de0e69a9a2e31665dac6f58fda7b7cf89c2f8dd98bafc",
+      "executable": false
+    },
+    "references/reproduction.md": {
+      "type": "file",
+      "bytes": 1576,
+      "sha256": "6d9c070c92f480d5be0d1eeec87e16a6f914169053ff428cacb3ff2703704e4d",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/check_evidence.py": {
+      "type": "file",
+      "bytes": 1647,
+      "sha256": "9a81743adf96e8fe0e78b0e43c409fa35e99c6bef1324b9e28ab6708634096b6",
+      "executable": false
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_evidence.py": {
+      "type": "file",
+      "bytes": 1330,
+      "sha256": "cc957cd6c5afb54b687e0e18973c75c0aa1a4e3c0c02258dbcfc54f8fa3ff4a2",
+      "executable": false
+    }
+  }
+}

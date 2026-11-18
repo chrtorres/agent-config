@@ -1,0 +1,108 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 9422,
+      "sha256": "a32a609ecc43f011d3c0e5245109d9d559bc3968f15ed30ac975a058c560a5b8",
+      "executable": false
+    },
+    "assets": {
+      "type": "directory"
+    },
+    "assets/fixture-skill": {
+      "type": "directory"
+    },
+    "assets/fixture-skill/SKILL.md": {
+      "type": "file",
+      "bytes": 774,
+      "sha256": "f340089eb8a736f1247c0fd4121a849510dc5ce0809b54601bd69b9828bb3a79",
+      "executable": false
+    },
+    "assets/fixture-skill/assets": {
+      "type": "directory"
+    },
+    "assets/fixture-skill/assets/object.bin": {
+      "type": "file",
+      "bytes": 32,
+      "sha256": "630dcd2966c4336691125448bbb25b4ff412a49c732db2c8abc1b8581bd710dd",
+      "executable": false
+    },
+    "assets/fixture-skill/references": {
+      "type": "directory"
+    },
+    "assets/fixture-skill/references/bundle-index.json": {
+      "type": "file",
+      "bytes": 682,
+      "sha256": "df4c059dc15afb3aaa6effc431b6d8c5cfc96fba0795003ad8272c86087f0a0b",
+      "executable": false
+    },
+    "assets/skill-template": {
+      "type": "directory"
+    },
+    "assets/skill-template/SKILL.md": {
+      "type": "file",
+      "bytes": 705,
+      "sha256": "5c9302b25af85a77173a30697bfa8073e6e54ee2e11d51985d3d56601d81e90c",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/helper-test-results.txt": {
+      "type": "file",
+      "bytes": 1137,
+      "sha256": "f8a0bab47c1468b852dfac69f67a2cfdfad3a867436c879857e09deeb45e7689",
+      "executable": false
+    },
+    "references/resource-capture.md": {
+      "type": "file",
+      "bytes": 3781,
+      "sha256": "2df2341fcc520e4fb056a4203f3fe188f2d5f464989cebe2a89051f1040ac998",
+      "executable": false
+    },
+    "references/skill-comparison.md": {
+      "type": "file",
+      "bytes": 6352,
+      "sha256": "3d6b580a38b69e67e27e88965aff304697f61027758ad495cac8444c1d6e6d44",
+      "executable": false
+    },
+    "references/validation-and-handoff.md": {
+      "type": "file",
+      "bytes": 3390,
+      "sha256": "1ec483400992389c9dfb47bf181442169d3c6393694020d0e42e3925f32337ea",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/bundle.py": {
+      "type": "file",
+      "bytes": 4798,
+      "sha256": "a0c04d987811399ed5e75ce1dcd3a0979db0ebdd7462a2a6e26e94deaa0db684",
+      "executable": false
+    },
+    "scripts/link_skill.py": {
+      "type": "file",
+      "bytes": 2557,
+      "sha256": "728f29bf77527d7539a2ce839a25206008982f154584dd213dbbd987cf5bb3fa",
+      "executable": false
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_tools.py": {
+      "type": "file",
+      "bytes": 5784,
+      "sha256": "5c5483bd5f76817759d04cbf5463d2bf419edd7fb0d5a2ee9021ef9cdc61c965",
+      "executable": false
+    }
+  }
+}

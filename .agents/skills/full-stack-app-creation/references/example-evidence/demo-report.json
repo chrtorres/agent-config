@@ -1,0 +1,246 @@
+{
+  "format": "fieldwork-report-v1",
+  "exported_at": "2020-01-01T12:00:00.000Z",
+  "source": "demo",
+  "latest_snapshot": {
+    "source": "demo",
+    "sequence": 1,
+    "collected_at": "2020-01-01T12:00:03.000Z",
+    "host": {
+      "name": "demo-workstation",
+      "system": "Linux",
+      "kernel": "synthetic fixture",
+      "cpus": 8,
+      "scope": "Synthetic values, no host inspection."
+    },
+    "cpu_percent": 27,
+    "memory": {
+      "total": 17179869184,
+      "available": 10307921510.4,
+      "used": 6871947673.6,
+      "percent": 40,
+      "swap_used": 0
+    },
+    "disk": {
+      "mount": "/",
+      "total": 549755813888,
+      "used": 477815111680,
+      "available": 71940702208,
+      "percent": 87
+    },
+    "uptime_seconds": 185343,
+    "load": [
+      1.42,
+      1.18,
+      1.05
+    ],
+    "pressure": {
+      "cpu": 1.2,
+      "memory": 0,
+      "io": 0.4
+    },
+    "gaps": [],
+    "reboot_required": false,
+    "processes": [
+      {
+        "pid": 100,
+        "ppid": 1,
+        "name": "browser",
+        "state": "S",
+        "rss": 880803840,
+        "cpu_percent": 12.4
+      },
+      {
+        "pid": 101,
+        "ppid": 1,
+        "name": "editor",
+        "state": "S",
+        "rss": 534773760,
+        "cpu_percent": 3.2
+      },
+      {
+        "pid": 102,
+        "ppid": 1,
+        "name": "desktop-shell",
+        "state": "S",
+        "rss": 230686720,
+        "cpu_percent": 1.8
+      },
+      {
+        "pid": 103,
+        "ppid": 1,
+        "name": "python3",
+        "state": "S",
+        "rss": 50331648,
+        "cpu_percent": 0.7
+      }
+    ]
+  },
+  "session_samples": [
+    {
+      "sequence": 1,
+      "collected_at": "2020-01-01T12:00:03.000Z",
+      "cpu": 27,
+      "memory": 40
+    }
+  ],
+  "latest_diagnostic": {
+    "id": "synthetic-example-job",
+    "source": "demo",
+    "profile": "baseline",
+    "title": "Quick baseline",
+    "started_at": "2020-01-01T12:00:00.000Z",
+    "finished_at": "2020-01-01T12:00:02.000Z",
+    "status": "completed",
+    "results": [
+      {
+        "id": "services",
+        "title": "System services",
+        "category": "startup",
+        "argv": [
+          "systemctl",
+          "--failed",
+          "--plain",
+          "--no-legend",
+          "--no-pager"
+        ],
+        "started_at": "2020-01-01T12:00:00.000Z",
+        "status": "completed",
+        "returncode": 0,
+        "output": "demo-backup.service loaded failed failed Synthetic backup fixture",
+        "truncated": false,
+        "duration_ms": 250,
+        "assessment": "review",
+        "summary": "Reported items need review."
+      },
+      {
+        "id": "user-services",
+        "title": "User services",
+        "category": "startup",
+        "argv": [
+          "systemctl",
+          "--user",
+          "--failed",
+          "--plain",
+          "--no-legend",
+          "--no-pager"
+        ],
+        "started_at": "2020-01-01T12:00:00.000Z",
+        "status": "completed",
+        "returncode": 0,
+        "output": "",
+        "truncated": false,
+        "duration_ms": 250,
+        "assessment": "observed",
+        "summary": "No issues reported by this check."
+      },
+      {
+        "id": "capacity",
+        "title": "Filesystem capacity",
+        "category": "storage",
+        "argv": [
+          "df",
+          "-hT",
+          "-x",
+          "squashfs",
+          "-x",
+          "tmpfs"
+        ],
+        "started_at": "2020-01-01T12:00:00.000Z",
+        "status": "completed",
+        "returncode": 0,
+        "output": "Filesystem Type Size Used Avail Use% Mounted on\n/dev/demo ext4 512G 445G 67G 87% /",
+        "truncated": false,
+        "duration_ms": 250,
+        "assessment": "observed",
+        "summary": "Collected successfully. Review context before drawing conclusions."
+      },
+      {
+        "id": "inodes",
+        "title": "Root filesystem inodes",
+        "category": "storage",
+        "argv": [
+          "df",
+          "-i",
+          "/"
+        ],
+        "started_at": "2020-01-01T12:00:00.000Z",
+        "status": "completed",
+        "returncode": 0,
+        "output": "Filesystem Inodes IUsed IFree IUse% Mounted on\n/dev/demo 32000000 510000 31490000 2% /",
+        "truncated": false,
+        "duration_ms": 250,
+        "assessment": "observed",
+        "summary": "Collected successfully. Review context before drawing conclusions."
+      },
+      {
+        "id": "packages",
+        "title": "Package installation state",
+        "category": "context",
+        "argv": [
+          "dpkg",
+          "--audit"
+        ],
+        "started_at": "2020-01-01T12:00:00.000Z",
+        "status": "completed",
+        "returncode": 0,
+        "output": "",
+        "truncated": false,
+        "duration_ms": 250,
+        "assessment": "observed",
+        "summary": "No issues reported by this check."
+      }
+    ],
+    "planned": [
+      "services",
+      "user-services",
+      "capacity",
+      "inodes",
+      "packages"
+    ],
+    "active": null
+  },
+  "coverage": [
+    [
+      "CPU & memory",
+      "observed",
+      "Interval CPU, available memory, swap occupancy, and host-visible pressure. Container limits are not normalized."
+    ],
+    [
+      "Filesystem capacity",
+      "observed",
+      "Root mount capacity only. Targeted checks add inode and device output."
+    ],
+    [
+      "Startup & services",
+      "review",
+      "System and user failed units, boot timing, and overlapping service durations."
+    ],
+    [
+      "Recent errors",
+      "limited",
+      "Visible journal entries from this boot and the last 15 minutes, capped at 40 per check."
+    ],
+    [
+      "Packages & local network",
+      "limited",
+      "Installation state, local routes, and cumulative interface counters. No update refresh or remote probes."
+    ],
+    [
+      "Drive health & graphics",
+      "limited",
+      "SMART/NVMe attributes, GPU health, and hardware self-tests are outside first-pass coverage."
+    ],
+    [
+      "Thermal interpretation",
+      "limited",
+      "Optional sensors output is available as evidence. Vendor limits and thermal trends need further investigation."
+    ]
+  ],
+  "limits": [
+    "Read-only local observation; no repairs or remote probes.",
+    "Synthetic demo data is not evidence about this host.",
+    "Thresholds are triage heuristics; this is not hardware or security certification.",
+    "Latest job only; browser chart clears on reload."
+  ]
+}

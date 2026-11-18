@@ -1,0 +1,36 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 7182,
+      "sha256": "e157bbfcaddaab8c3138dbd29d7baa5c131e8cf9b74e0267181f7aa89077f333",
+      "executable": false
+    },
+    "assets": {
+      "type": "directory"
+    },
+    "assets/uat-report-template.md": {
+      "type": "file",
+      "bytes": 1648,
+      "sha256": "9d23ed206afd382fb8a02c5df2d147d61ace83e3b538568aca981ecd27d9eefc",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/comparison-and-provenance.md": {
+      "type": "file",
+      "bytes": 3970,
+      "sha256": "94bbae86f7e86968f95460eeec85181133318a2d717f0159038410585f9a9d9e",
+      "executable": false
+    }
+  }
+}

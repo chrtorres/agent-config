@@ -1,0 +1,20 @@
+HISTORICAL EXAMPLE — not a current pass
+
+test_bounded_output_and_exit_code (test_monitor.CollectorTests) ... ok
+test_cancel_after_stdout_closes (test_monitor.CollectorTests) ... ok
+test_cancel_before_launch_has_no_observed_assessment (test_monitor.CollectorTests) ... ok
+test_interval_cpu_available_memory_and_process_identity (test_monitor.CollectorTests) ... ok
+test_missing_proc_is_a_gap (test_monitor.CollectorTests) ... ok
+test_restricted_journal_is_not_a_pass (test_monitor.CollectorTests) ... ok
+test_timeout_and_missing_tool_are_unknowns (test_monitor.CollectorTests) ... ok
+test_arbitrary_commands_and_unknown_fields_rejected (test_monitor.HTTPTests) ... ok
+test_cross_origin_and_dns_rebinding_rejected (test_monitor.HTTPTests) ... ok
+test_demo_job_over_http_never_calls_live_runner (test_monitor.HTTPTests) ... ok
+test_real_http_fixture_and_explicit_routes (test_monitor.HTTPTests) ... ok
+test_cancel_stops_remaining_commands_and_prevents_overlap (test_monitor.JobTests) ... ok
+test_authored_sources_exclude_dependency_and_evidence_readmes (test_validation_manifest.ManifestScopeTests) ... ok
+
+----------------------------------------------------------------------
+Ran 13 tests in 1.359s
+
+OK

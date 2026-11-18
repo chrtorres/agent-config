@@ -1,0 +1,1638 @@
+[
+  {
+    "path": "/v1/chat/completions",
+    "body": {
+      "model": "scripted-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Work with the phone workspace using tools. Ask before changes."
+        },
+        {
+          "role": "user",
+          "content": "Read my welcome note, create and edit a note, then exercise denied and out-of-workspace writes."
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "description": "ls in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read",
+            "description": "read in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "write",
+            "description": "write in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "content"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "edit",
+            "description": "edit in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "oldText": {
+                  "type": "string"
+                },
+                "newText": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "oldText",
+                "newText"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "find",
+            "description": "find in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "grep",
+            "description": "grep in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        }
+      ],
+      "stream": true
+    },
+    "authorization": null
+  },
+  {
+    "path": "/v1/chat/completions",
+    "body": {
+      "model": "scripted-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Work with the phone workspace using tools. Ask before changes."
+        },
+        {
+          "role": "user",
+          "content": "Read my welcome note, create and edit a note, then exercise denied and out-of-workspace writes."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_1_0",
+              "type": "function",
+              "function": {
+                "name": "ls",
+                "arguments": "{\"path\": \".\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_1_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome.md\"}"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "description": "ls in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read",
+            "description": "read in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "write",
+            "description": "write in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "content"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "edit",
+            "description": "edit in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "oldText": {
+                  "type": "string"
+                },
+                "newText": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "oldText",
+                "newText"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "find",
+            "description": "find in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "grep",
+            "description": "grep in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        }
+      ],
+      "stream": true
+    },
+    "authorization": null
+  },
+  {
+    "path": "/v1/chat/completions",
+    "body": {
+      "model": "scripted-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Work with the phone workspace using tools. Ask before changes."
+        },
+        {
+          "role": "user",
+          "content": "Read my welcome note, create and edit a note, then exercise denied and out-of-workspace writes."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_1_0",
+              "type": "function",
+              "function": {
+                "name": "ls",
+                "arguments": "{\"path\": \".\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_1_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome.md\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_2_0",
+              "type": "function",
+              "function": {
+                "name": "read",
+                "arguments": "{\"path\": \"Welcome.md\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_2_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome to the simulated phone workspace.\\n\"}"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "description": "ls in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read",
+            "description": "read in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "write",
+            "description": "write in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "content"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "edit",
+            "description": "edit in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "oldText": {
+                  "type": "string"
+                },
+                "newText": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "oldText",
+                "newText"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "find",
+            "description": "find in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "grep",
+            "description": "grep in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        }
+      ],
+      "stream": true
+    },
+    "authorization": null
+  },
+  {
+    "path": "/v1/chat/completions",
+    "body": {
+      "model": "scripted-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Work with the phone workspace using tools. Ask before changes."
+        },
+        {
+          "role": "user",
+          "content": "Read my welcome note, create and edit a note, then exercise denied and out-of-workspace writes."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_1_0",
+              "type": "function",
+              "function": {
+                "name": "ls",
+                "arguments": "{\"path\": \".\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_1_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome.md\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_2_0",
+              "type": "function",
+              "function": {
+                "name": "read",
+                "arguments": "{\"path\": \"Welcome.md\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_2_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome to the simulated phone workspace.\\n\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_3_0",
+              "type": "function",
+              "function": {
+                "name": "write",
+                "arguments": "{\"path\": \"Notes/review.txt\", \"content\": \"The recreated agent wrote this file.\\n\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_3_0",
+          "content": "{\"isError\": false, \"text\": \"Successfully changed Notes/review.txt\"}"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "description": "ls in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read",
+            "description": "read in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "write",
+            "description": "write in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "content"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "edit",
+            "description": "edit in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "oldText": {
+                  "type": "string"
+                },
+                "newText": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "oldText",
+                "newText"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "find",
+            "description": "find in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "grep",
+            "description": "grep in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        }
+      ],
+      "stream": true
+    },
+    "authorization": null
+  },
+  {
+    "path": "/v1/chat/completions",
+    "body": {
+      "model": "scripted-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Work with the phone workspace using tools. Ask before changes."
+        },
+        {
+          "role": "user",
+          "content": "Read my welcome note, create and edit a note, then exercise denied and out-of-workspace writes."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_1_0",
+              "type": "function",
+              "function": {
+                "name": "ls",
+                "arguments": "{\"path\": \".\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_1_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome.md\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_2_0",
+              "type": "function",
+              "function": {
+                "name": "read",
+                "arguments": "{\"path\": \"Welcome.md\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_2_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome to the simulated phone workspace.\\n\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_3_0",
+              "type": "function",
+              "function": {
+                "name": "write",
+                "arguments": "{\"path\": \"Notes/review.txt\", \"content\": \"The recreated agent wrote this file.\\n\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_3_0",
+          "content": "{\"isError\": false, \"text\": \"Successfully changed Notes/review.txt\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_4_0",
+              "type": "function",
+              "function": {
+                "name": "edit",
+                "arguments": "{\"path\": \"Notes/review.txt\", \"oldText\": \"wrote\", \"newText\": \"created\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_4_0",
+          "content": "{\"isError\": false, \"text\": \"Successfully changed Notes/review.txt\"}"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "description": "ls in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read",
+            "description": "read in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "write",
+            "description": "write in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "content"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "edit",
+            "description": "edit in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "oldText": {
+                  "type": "string"
+                },
+                "newText": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "oldText",
+                "newText"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "find",
+            "description": "find in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "grep",
+            "description": "grep in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        }
+      ],
+      "stream": true
+    },
+    "authorization": null
+  },
+  {
+    "path": "/v1/chat/completions",
+    "body": {
+      "model": "scripted-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Work with the phone workspace using tools. Ask before changes."
+        },
+        {
+          "role": "user",
+          "content": "Read my welcome note, create and edit a note, then exercise denied and out-of-workspace writes."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_1_0",
+              "type": "function",
+              "function": {
+                "name": "ls",
+                "arguments": "{\"path\": \".\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_1_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome.md\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_2_0",
+              "type": "function",
+              "function": {
+                "name": "read",
+                "arguments": "{\"path\": \"Welcome.md\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_2_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome to the simulated phone workspace.\\n\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_3_0",
+              "type": "function",
+              "function": {
+                "name": "write",
+                "arguments": "{\"path\": \"Notes/review.txt\", \"content\": \"The recreated agent wrote this file.\\n\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_3_0",
+          "content": "{\"isError\": false, \"text\": \"Successfully changed Notes/review.txt\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_4_0",
+              "type": "function",
+              "function": {
+                "name": "edit",
+                "arguments": "{\"path\": \"Notes/review.txt\", \"oldText\": \"wrote\", \"newText\": \"created\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_4_0",
+          "content": "{\"isError\": false, \"text\": \"Successfully changed Notes/review.txt\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_5_0",
+              "type": "function",
+              "function": {
+                "name": "read",
+                "arguments": "{\"path\": \"Notes/review.txt\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_5_0",
+          "content": "{\"isError\": false, \"text\": \"The recreated agent created this file.\\n\"}"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "description": "ls in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read",
+            "description": "read in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "write",
+            "description": "write in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "content"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "edit",
+            "description": "edit in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "oldText": {
+                  "type": "string"
+                },
+                "newText": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "oldText",
+                "newText"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "find",
+            "description": "find in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "grep",
+            "description": "grep in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        }
+      ],
+      "stream": true
+    },
+    "authorization": null
+  },
+  {
+    "path": "/v1/chat/completions",
+    "body": {
+      "model": "scripted-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Work with the phone workspace using tools. Ask before changes."
+        },
+        {
+          "role": "user",
+          "content": "Read my welcome note, create and edit a note, then exercise denied and out-of-workspace writes."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_1_0",
+              "type": "function",
+              "function": {
+                "name": "ls",
+                "arguments": "{\"path\": \".\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_1_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome.md\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_2_0",
+              "type": "function",
+              "function": {
+                "name": "read",
+                "arguments": "{\"path\": \"Welcome.md\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_2_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome to the simulated phone workspace.\\n\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_3_0",
+              "type": "function",
+              "function": {
+                "name": "write",
+                "arguments": "{\"path\": \"Notes/review.txt\", \"content\": \"The recreated agent wrote this file.\\n\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_3_0",
+          "content": "{\"isError\": false, \"text\": \"Successfully changed Notes/review.txt\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_4_0",
+              "type": "function",
+              "function": {
+                "name": "edit",
+                "arguments": "{\"path\": \"Notes/review.txt\", \"oldText\": \"wrote\", \"newText\": \"created\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_4_0",
+          "content": "{\"isError\": false, \"text\": \"Successfully changed Notes/review.txt\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_5_0",
+              "type": "function",
+              "function": {
+                "name": "read",
+                "arguments": "{\"path\": \"Notes/review.txt\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_5_0",
+          "content": "{\"isError\": false, \"text\": \"The recreated agent created this file.\\n\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_6_0",
+              "type": "function",
+              "function": {
+                "name": "write",
+                "arguments": "{\"path\": \"denied.txt\", \"content\": \"This must never be written.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_6_0",
+          "content": "{\"isError\": true, \"text\": \"The user declined this change\"}"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "description": "ls in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read",
+            "description": "read in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "write",
+            "description": "write in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "content"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "edit",
+            "description": "edit in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "oldText": {
+                  "type": "string"
+                },
+                "newText": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "oldText",
+                "newText"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "find",
+            "description": "find in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "grep",
+            "description": "grep in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        }
+      ],
+      "stream": true
+    },
+    "authorization": null
+  },
+  {
+    "path": "/v1/chat/completions",
+    "body": {
+      "model": "scripted-model",
+      "messages": [
+        {
+          "role": "system",
+          "content": "Work with the phone workspace using tools. Ask before changes."
+        },
+        {
+          "role": "user",
+          "content": "Read my welcome note, create and edit a note, then exercise denied and out-of-workspace writes."
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_1_0",
+              "type": "function",
+              "function": {
+                "name": "ls",
+                "arguments": "{\"path\": \".\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_1_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome.md\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_2_0",
+              "type": "function",
+              "function": {
+                "name": "read",
+                "arguments": "{\"path\": \"Welcome.md\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_2_0",
+          "content": "{\"isError\": false, \"text\": \"Welcome to the simulated phone workspace.\\n\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_3_0",
+              "type": "function",
+              "function": {
+                "name": "write",
+                "arguments": "{\"path\": \"Notes/review.txt\", \"content\": \"The recreated agent wrote this file.\\n\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_3_0",
+          "content": "{\"isError\": false, \"text\": \"Successfully changed Notes/review.txt\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_4_0",
+              "type": "function",
+              "function": {
+                "name": "edit",
+                "arguments": "{\"path\": \"Notes/review.txt\", \"oldText\": \"wrote\", \"newText\": \"created\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_4_0",
+          "content": "{\"isError\": false, \"text\": \"Successfully changed Notes/review.txt\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_5_0",
+              "type": "function",
+              "function": {
+                "name": "read",
+                "arguments": "{\"path\": \"Notes/review.txt\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_5_0",
+          "content": "{\"isError\": false, \"text\": \"The recreated agent created this file.\\n\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_6_0",
+              "type": "function",
+              "function": {
+                "name": "write",
+                "arguments": "{\"path\": \"denied.txt\", \"content\": \"This must never be written.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_6_0",
+          "content": "{\"isError\": true, \"text\": \"The user declined this change\"}"
+        },
+        {
+          "role": "assistant",
+          "content": null,
+          "tool_calls": [
+            {
+              "id": "call_7_0",
+              "type": "function",
+              "function": {
+                "name": "write",
+                "arguments": "{\"path\": \"../escape.txt\", \"content\": \"This must not escape.\"}"
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_call_id": "call_7_0",
+          "content": "{\"isError\": true, \"text\": \"Path is outside the workspace\"}"
+        }
+      ],
+      "tools": [
+        {
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "description": "ls in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": []
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "read",
+            "description": "read in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "write",
+            "description": "write in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "content": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "content"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "edit",
+            "description": "edit in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "path": {
+                  "type": "string"
+                },
+                "oldText": {
+                  "type": "string"
+                },
+                "newText": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "path",
+                "oldText",
+                "newText"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "find",
+            "description": "find in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        },
+        {
+          "type": "function",
+          "function": {
+            "name": "grep",
+            "description": "grep in the phone workspace",
+            "parameters": {
+              "type": "object",
+              "properties": {
+                "pattern": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pattern"
+              ]
+            }
+          }
+        }
+      ],
+      "stream": true
+    },
+    "authorization": null
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "scope": "Python behavioral recreation; no iOS execution; scripted server, no LLM",
+  "answer": "Read the welcome file, created and edited the note. Denied write and workspace escape were blocked.",
+  "approvals": [
+    {
+      "tool": "write",
+      "path": "Notes/review.txt",
+      "allowed": true
+    },
+    {
+      "tool": "edit",
+      "path": "Notes/review.txt",
+      "allowed": true
+    },
+    {
+      "tool": "write",
+      "path": "denied.txt",
+      "allowed": false
+    },
+    {
+      "tool": "write",
+      "path": "../escape.txt",
+      "allowed": true
+    }
+  ],
+  "checks": {
+    "note_has_expected_content": true,
+    "denied_file_absent": true,
+    "escaped_file_absent": true,
+    "tool_results_returned_to_server": true,
+    "http_request_count": true
+  },
+  "passed": true
+}

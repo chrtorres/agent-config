@@ -1,0 +1,51 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 5362,
+      "sha256": "8c4c3036e39db77f48f6717198faa6e39a77768fabe53b40335224992fcd5dec",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/comparison.md": {
+      "type": "file",
+      "bytes": 2602,
+      "sha256": "f19b92591a0577c2c6b358a06250501e071082defcc0b203dd8f693159377d0b",
+      "executable": false
+    },
+    "references/resource-disposition.md": {
+      "type": "file",
+      "bytes": 1336,
+      "sha256": "384445887bec76ae851fa5d4a591a6fd2269e35b42a19d01c12d87128db79943",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/audit_release.py": {
+      "type": "file",
+      "bytes": 2933,
+      "sha256": "9b528bbdbda1690817d4d123ebb1bbf1652b6e99624cbd7f58ad3b7165ba65e5",
+      "executable": true
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_audit_release.py": {
+      "type": "file",
+      "bytes": 1896,
+      "sha256": "45b105f2053f5cfbf66599149302b593df43b55f3590c6a14b221ed204d49a42",
+      "executable": false
+    }
+  }
+}

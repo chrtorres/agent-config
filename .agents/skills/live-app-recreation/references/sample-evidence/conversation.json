@@ -1,0 +1,213 @@
+{
+  "messages": [
+    {
+      "role": "system",
+      "content": "Work with the phone workspace using tools. Ask before changes."
+    },
+    {
+      "role": "user",
+      "content": "Read my welcome note, create and edit a note, then exercise denied and out-of-workspace writes."
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_1_0",
+          "type": "function",
+          "function": {
+            "name": "ls",
+            "arguments": "{\"path\": \".\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_1_0",
+      "content": "{\"isError\": false, \"text\": \"Welcome.md\"}"
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_2_0",
+          "type": "function",
+          "function": {
+            "name": "read",
+            "arguments": "{\"path\": \"Welcome.md\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_2_0",
+      "content": "{\"isError\": false, \"text\": \"Welcome to the simulated phone workspace.\\n\"}"
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_3_0",
+          "type": "function",
+          "function": {
+            "name": "write",
+            "arguments": "{\"path\": \"Notes/review.txt\", \"content\": \"The recreated agent wrote this file.\\n\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_3_0",
+      "content": "{\"isError\": false, \"text\": \"Successfully changed Notes/review.txt\"}"
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_4_0",
+          "type": "function",
+          "function": {
+            "name": "edit",
+            "arguments": "{\"path\": \"Notes/review.txt\", \"oldText\": \"wrote\", \"newText\": \"created\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_4_0",
+      "content": "{\"isError\": false, \"text\": \"Successfully changed Notes/review.txt\"}"
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_5_0",
+          "type": "function",
+          "function": {
+            "name": "read",
+            "arguments": "{\"path\": \"Notes/review.txt\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_5_0",
+      "content": "{\"isError\": false, \"text\": \"The recreated agent created this file.\\n\"}"
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_6_0",
+          "type": "function",
+          "function": {
+            "name": "write",
+            "arguments": "{\"path\": \"denied.txt\", \"content\": \"This must never be written.\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_6_0",
+      "content": "{\"isError\": true, \"text\": \"The user declined this change\"}"
+    },
+    {
+      "role": "assistant",
+      "content": null,
+      "tool_calls": [
+        {
+          "id": "call_7_0",
+          "type": "function",
+          "function": {
+            "name": "write",
+            "arguments": "{\"path\": \"../escape.txt\", \"content\": \"This must not escape.\"}"
+          }
+        }
+      ]
+    },
+    {
+      "role": "tool",
+      "tool_call_id": "call_7_0",
+      "content": "{\"isError\": true, \"text\": \"Path is outside the workspace\"}"
+    },
+    {
+      "role": "assistant",
+      "content": "Read the welcome file, created and edited the note. Denied write and workspace escape were blocked."
+    }
+  ],
+  "events": [
+    {
+      "event": "tool",
+      "name": "ls",
+      "error": false,
+      "output": "Welcome.md"
+    },
+    {
+      "event": "tool",
+      "name": "read",
+      "error": false,
+      "output": "Welcome to the simulated phone workspace.\n"
+    },
+    {
+      "event": "approval",
+      "tool": "write",
+      "allowed": true
+    },
+    {
+      "event": "tool",
+      "name": "write",
+      "error": false,
+      "output": "Successfully changed Notes/review.txt"
+    },
+    {
+      "event": "approval",
+      "tool": "edit",
+      "allowed": true
+    },
+    {
+      "event": "tool",
+      "name": "edit",
+      "error": false,
+      "output": "Successfully changed Notes/review.txt"
+    },
+    {
+      "event": "tool",
+      "name": "read",
+      "error": false,
+      "output": "The recreated agent created this file.\n"
+    },
+    {
+      "event": "approval",
+      "tool": "write",
+      "allowed": false
+    },
+    {
+      "event": "tool",
+      "name": "write",
+      "error": true,
+      "output": "The user declined this change"
+    },
+    {
+      "event": "approval",
+      "tool": "write",
+      "allowed": true
+    },
+    {
+      "event": "tool",
+      "name": "write",
+      "error": true,
+      "output": "Path is outside the workspace"
+    }
+  ]
+}

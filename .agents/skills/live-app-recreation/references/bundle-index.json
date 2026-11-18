@@ -1,0 +1,109 @@
+{
+  "purpose": "Portable bundled resource inventory; hashes establish file identity, not test correctness.",
+  "files": {
+    "SKILL.md": {
+      "sha256": "d8065c7c93db9d6927eeed7cdfff66a5a38845b0d9c40f98a93d7b1cf99cd656",
+      "bytes": 8014
+    },
+    "assets/python-agent/agent.py": {
+      "sha256": "9a638f4678c62455a8abe1917c52247f503f4916b508551dbcd9c95b2ee80053",
+      "bytes": 7713
+    },
+    "assets/python-agent/demo.py": {
+      "sha256": "c3e2da54e3e71f07742f31764c13e04249a1e875e9f63267b3abaabbf8e5f95d",
+      "bytes": 3751
+    },
+    "assets/python-agent/mock_server.py": {
+      "sha256": "b325b3c4ad666d7398e7ee7fb5fcc43462d7546e4c063ffa901abc25e111e567",
+      "bytes": 2953
+    },
+    "assets/reference-images/desktop.png": {
+      "sha256": "4eb4f40ce15e5815f83184f0fce4b93aca62669a1bf3f931b66f10c7a7e37d53",
+      "bytes": 179473
+    },
+    "assets/reference-images/mobile.png": {
+      "sha256": "b398741c3c2cf0fbf0f2426383f95fa8e9982482e40cabc1c1b83627fceefaf3",
+      "bytes": 82061
+    },
+    "assets/web-app/app.mjs": {
+      "sha256": "c9c25a92ea612bb2734f00eda9172d0d3240efa9cfd0fd61cbf49ad1f9f86167",
+      "bytes": 11497
+    },
+    "assets/web-app/engine.mjs": {
+      "sha256": "a7195e80025106bc7aa468973dbaa161c045bcd843d955ee6ad5b3cf2447f913",
+      "bytes": 3734
+    },
+    "assets/web-app/index.html": {
+      "sha256": "dbd403ccf048ae1154cc1ba49402402524147b2cde02652fd90e47e3e297a18f",
+      "bytes": 6275
+    },
+    "assets/web-app/style.css": {
+      "sha256": "a695c019de4e89e5b8462c1c3fe78b09e0a37d824c6012552f2ffcaed86282e0",
+      "bytes": 15540
+    },
+    "references/bundled-resources.md": {
+      "sha256": "d33aa6584e9374a1090f9e601e48da9f855b6c5546304baeea03b928ad54ed66",
+      "bytes": 8101
+    },
+    "references/sample-evidence/README.md": {
+      "sha256": "bb853d6daf44349d4793769c76b47115c5e2ba8bff7ba7928397232ef5cc5c02",
+      "bytes": 513
+    },
+    "references/sample-evidence/browser-results.json": {
+      "sha256": "679cf280fffd3df068614479353e1366f2879c1413758a28272316a9988ead89",
+      "bytes": 664
+    },
+    "references/sample-evidence/conversation.json": {
+      "sha256": "68b7a7adb04199c7fc5a7c428798a3d2ce32ce6e08362c90d1c26c3fc6be40a3",
+      "bytes": 5055
+    },
+    "references/sample-evidence/demo_result.json": {
+      "sha256": "dadd0a13f05dfc26edc43833364a4652b8dccfe959e7c291483719d13b5417aa",
+      "bytes": 800
+    },
+    "references/sample-evidence/engine-tests.txt": {
+      "sha256": "a360c009adce535e623dc1a76f292253a742881ec6d0db482c056f37ec6c1bc2",
+      "bytes": 29
+    },
+    "references/sample-evidence/http_requests.json": {
+      "sha256": "3c5fb210e3fea2b112cea93cee7dc1b49c6563d2ab05d1ce38e1d4126c9ada69",
+      "bytes": 42760
+    },
+    "references/sample-evidence/python-tests.txt": {
+      "sha256": "67fb4bf9078122a6f242f23a704e5cb70d2ffb374abd92acabcf5ae6c7045eea",
+      "bytes": 1362
+    },
+    "references/sample-evidence/validation-summary.json": {
+      "sha256": "1ad7d734001752d57715600e3d5db7876b94b680402969f594765f62d472801d",
+      "bytes": 663
+    },
+    "references/sample-evidence/workspace/Notes/review.txt": {
+      "sha256": "336ce6cf3f1085870c60748c73cfffa8d6e0e07acb8102b8920cee797e506891",
+      "bytes": 39
+    },
+    "references/sample-evidence/workspace/Welcome.md": {
+      "sha256": "7336dd244dad34e113483c46c60d05b04087d674bb3f0fd62f5d365aae7ead27",
+      "bytes": 42
+    },
+    "scripts/run_checks.py": {
+      "sha256": "fad081b9eb1fb8630989818494dea77c9f968fc38eb0811d17baeef893226b50",
+      "bytes": 4205
+    },
+    "scripts/serve.py": {
+      "sha256": "d2ca62eeddba530a2534acedccd7b3b685d3391952e6a127f13e6f9b0b60685f",
+      "bytes": 1049
+    },
+    "tests/browser-check.mjs": {
+      "sha256": "144d230d4450ed6d4780009c03a1991c7ce53d4b890edc7cfc13f177e0aec7ce",
+      "bytes": 5758
+    },
+    "tests/test-engine.mjs": {
+      "sha256": "2ec02f0b3dd72961bb8008017dad11fb59a5c16e6b76ad0ae36a833de695ddda",
+      "bytes": 1090
+    },
+    "tests/test_agent.py": {
+      "sha256": "9e90939da11ca96adcf21e69eb13e5f1c971f51f2f38daa704a78ae503c9b7aa",
+      "bytes": 8469
+    }
+  }
+}

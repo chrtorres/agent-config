@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {Workspace,planFor} from '../assets/web-app/engine.mjs';
+const w=new Workspace();
+assert.match(w.execute('ls'),/Welcome.md/);
+assert.match(w.execute('read',{path:'Welcome.md'}),/workspace/);
+w.execute('write',{path:'Notes/hello.md',content:'hello'});
+assert.equal(w.execute('read',{path:'Notes/hello.md'}),'hello');
+w.execute('edit',{path:'Notes/hello.md',oldText:'hello',newText:'updated'});
+assert.equal(w.files['Notes/hello.md'],'updated');
+assert.throws(()=>w.execute('write',{path:'../escape.txt',content:'bad'}),/outside/);
+assert.throws(()=>w.execute('read',{path:'/etc/passwd'}),/relative/);
+assert.throws(()=>w.execute('edit',{path:'Notes/hello.md',oldText:'missing',newText:'bad'}),/unique/);
+assert.match(w.execute('grep',{pattern:'experiment'}),/ideas/);
+assert.equal(planFor('Create a note',w.files).steps[0].name,'write');
+assert.equal(planFor('Edit my note',w.files).steps[1].name,'edit');
+assert.equal(planFor('test workspace escape',w.files).steps[0].args.path,'../outside.txt');
+console.log('11 engine assertions passed.');

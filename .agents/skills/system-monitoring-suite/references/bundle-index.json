@@ -1,0 +1,252 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 6027,
+      "sha256": "710880886878985ea01c1a2feef2a1cf61ee79bcb86e882779c11d8e36a92e02",
+      "executable": false
+    },
+    "assets": {
+      "type": "directory"
+    },
+    "assets/monitoring-app": {
+      "type": "directory"
+    },
+    "assets/monitoring-app/.gitignore": {
+      "type": "file",
+      "bytes": 40,
+      "sha256": "8d29cb3457ff021d782d2e9308231281f4d228002ec4dce1b05f965a08b584fa",
+      "executable": false
+    },
+    "assets/monitoring-app/README.md": {
+      "type": "file",
+      "bytes": 7972,
+      "sha256": "5ae3849ed5629b639a29128859c0972085af88c073f13db958e475fc08c67d71",
+      "executable": false
+    },
+    "assets/monitoring-app/WORKFLOW.md": {
+      "type": "file",
+      "bytes": 4850,
+      "sha256": "3928aaf0bfecb04a36f8a4a04ec20cdcfb4231c203b9b3807a7ffde7bc8f3628",
+      "executable": false
+    },
+    "assets/monitoring-app/monitor.py": {
+      "type": "file",
+      "bytes": 16252,
+      "sha256": "cfbebff65dcbaf3e3f7004822f453e0c92a12f5e43478d4036f1f874a4c4b748",
+      "executable": false
+    },
+    "assets/monitoring-app/objects": {
+      "type": "directory"
+    },
+    "assets/monitoring-app/objects/formats.json": {
+      "type": "file",
+      "bytes": 1838,
+      "sha256": "d355367704cdda1eeeac67d7c835ee42778f6e44460ebb8f9e53a79413101499",
+      "executable": false
+    },
+    "assets/monitoring-app/package-lock.json": {
+      "type": "file",
+      "bytes": 598,
+      "sha256": "29f104739d1846ec65932428ae84427af8f075fd9d58e06114444a59ee5613c6",
+      "executable": false
+    },
+    "assets/monitoring-app/package.json": {
+      "type": "file",
+      "bytes": 145,
+      "sha256": "9b815d3fb0c84b28465848931a7482b29a778c64f4a0a5adbcf13a334b4d5ce3",
+      "executable": false
+    },
+    "assets/monitoring-app/scripts": {
+      "type": "directory"
+    },
+    "assets/monitoring-app/scripts/run_checks.py": {
+      "type": "file",
+      "bytes": 5194,
+      "sha256": "b1ebd9d484faa8f1f622d8aae15488a4b37b6d7a6aa61f205e62fe95ebbcc18c",
+      "executable": false
+    },
+    "assets/monitoring-app/server.py": {
+      "type": "file",
+      "bytes": 5555,
+      "sha256": "af8948c6440c5a590587c74b65b42035c4f1c891eec1ae28c51d1f2a0028d557",
+      "executable": false
+    },
+    "assets/monitoring-app/tests": {
+      "type": "directory"
+    },
+    "assets/monitoring-app/tests/browser-check.mjs": {
+      "type": "file",
+      "bytes": 11241,
+      "sha256": "5f2feba67f6e634f88c9796a854c658ef66a933a1f2c47a21901663cf9ec00b3",
+      "executable": false
+    },
+    "assets/monitoring-app/tests/test-core.mjs": {
+      "type": "file",
+      "bytes": 1379,
+      "sha256": "0f95eb6ce2a82369bd672bd8a8992d5e89aacfee89e98e020165d5c8035f9630",
+      "executable": false
+    },
+    "assets/monitoring-app/tests/test_monitor.py": {
+      "type": "file",
+      "bytes": 8582,
+      "sha256": "a8449ab17cc530d09e4d147174016267ed007744486fb6523ec0893192b2e015",
+      "executable": false
+    },
+    "assets/monitoring-app/tests/test_validation_manifest.py": {
+      "type": "file",
+      "bytes": 935,
+      "sha256": "144eeb46484ada67ea6bcd61ce7cd45f4033ff4e511e16de74438d5010acefe3",
+      "executable": false
+    },
+    "assets/monitoring-app/web": {
+      "type": "directory"
+    },
+    "assets/monitoring-app/web/app.mjs": {
+      "type": "file",
+      "bytes": 17043,
+      "sha256": "19a31895701d49f98a6c8d1774c41b1807babe05fe1357e83784314bf923dc33",
+      "executable": false
+    },
+    "assets/monitoring-app/web/core.mjs": {
+      "type": "file",
+      "bytes": 5686,
+      "sha256": "8e2b4637b43ec9885588d55f241ba2a9d74a588fd76f5835695c9e35cc04d2db",
+      "executable": false
+    },
+    "assets/monitoring-app/web/index.html": {
+      "type": "file",
+      "bytes": 10159,
+      "sha256": "ca58834bdc08d1bc5b7e8c0341bfc00f87108d78a2f9eaf8a82ae780bd410306",
+      "executable": false
+    },
+    "assets/monitoring-app/web/style.css": {
+      "type": "file",
+      "bytes": 21063,
+      "sha256": "f280048b492e5598ef39753c4c128bea00aa9274c256d50222b267a631938025",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/architecture-and-qa.md": {
+      "type": "file",
+      "bytes": 5187,
+      "sha256": "bd653ad45331c27c963c9dae860261680d0e0cde9787c90a5bcd1b6bb51ac323",
+      "executable": false
+    },
+    "references/dependencies.md": {
+      "type": "file",
+      "bytes": 4009,
+      "sha256": "7717c6543e8726c58b3cbbeb59ae785d4966e9154ee744a96cf3f3ec9f94bfa7",
+      "executable": false
+    },
+    "references/diagnostic-contract.md": {
+      "type": "file",
+      "bytes": 4431,
+      "sha256": "5ca7e45e93052b852487de658bba49943cd329670796c592a5979f96206d58ec",
+      "executable": false
+    },
+    "references/example-evidence": {
+      "type": "directory"
+    },
+    "references/example-evidence/README.md": {
+      "type": "file",
+      "bytes": 1997,
+      "sha256": "0a942065d7009c0d7950e634e8f0f2eeef65cfc4417ff8076aa6a490d896937e",
+      "executable": false
+    },
+    "references/example-evidence/core-tests.txt": {
+      "type": "file",
+      "bytes": 159,
+      "sha256": "94e7d59b1fa93567772de3954573031acdee7c28e2316f3e12e6dd8dfca23af7",
+      "executable": false
+    },
+    "references/example-evidence/demo-report.json": {
+      "type": "file",
+      "bytes": 6424,
+      "sha256": "298e1b3f8f9f8fd4ebc3a24fb7c1c236dc0d114e0a092c37d49f72b610571776",
+      "executable": false
+    },
+    "references/example-evidence/diagnostics-desktop.png": {
+      "type": "file",
+      "bytes": 134829,
+      "sha256": "49696d6c194fa49f5c0e383174b0a1c2f7a3d88cee03086249869ece5d975540",
+      "executable": false
+    },
+    "references/example-evidence/diagnostics-mobile.png": {
+      "type": "file",
+      "bytes": 102574,
+      "sha256": "543c766b4ef5f973843b7c44f99dafda2c79467aefc193ccca54f4adea7b725b",
+      "executable": false
+    },
+    "references/example-evidence/http-example.json": {
+      "type": "file",
+      "bytes": 1210,
+      "sha256": "0ab0fbde11d73107408a6de9bd455c1ec42d00f872ee3eb61a7edf594b45ee81",
+      "executable": false
+    },
+    "references/example-evidence/overview-desktop.png": {
+      "type": "file",
+      "bytes": 165867,
+      "sha256": "8c8199ceefe35b3f2377fd0db3fadfc20f948f5303a14930444db11b82577983",
+      "executable": false
+    },
+    "references/example-evidence/overview-mobile.png": {
+      "type": "file",
+      "bytes": 128230,
+      "sha256": "52419b59fccd3077ae6b0be830df3436876e1c0e50e7e30f40b339e5472d4a90",
+      "executable": false
+    },
+    "references/example-evidence/python-tests.txt": {
+      "type": "file",
+      "bytes": 1204,
+      "sha256": "013e1a231eaaa7f4c37e0803bfb599570de50558712a04d08bb522bb99ffaaf2",
+      "executable": false
+    },
+    "references/example-evidence/validation-example.json": {
+      "type": "file",
+      "bytes": 7157,
+      "sha256": "78e6f305d7a7bf442141177f0a723cf2577dde56019ba6027275337e5562d29c",
+      "executable": false
+    },
+    "references/resources.md": {
+      "type": "file",
+      "bytes": 5500,
+      "sha256": "8410eacea1cbd38837c7e056ae87d7d6c126ec6856416564394d19c71a3a3666",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/capture_examples.mjs": {
+      "type": "file",
+      "bytes": 5117,
+      "sha256": "5705974b6eb47a75cb1e505fa4299b55fd7c119931b011247d7ce66708f87751",
+      "executable": false
+    },
+    "scripts/create_app.py": {
+      "type": "file",
+      "bytes": 1472,
+      "sha256": "47248594c85cbe093a94be679d2acd645e13302e5943b527b66d4856fd6716b8",
+      "executable": false
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_creation.py": {
+      "type": "file",
+      "bytes": 1967,
+      "sha256": "9805a33cbd600e2dc41026f82e8b8a7c79f2a8aa28f148c7885135963737300a",
+      "executable": false
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Research branch and evidence ledger",
+  "type": "object",
+  "required": ["target", "authorization", "evidence", "branches"],
+  "properties": {
+    "target": {"type": "string", "minLength": 1},
+    "authorization": {"type": "string", "minLength": 1},
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "claim", "source", "limitations"],
+        "properties": {
+          "id": {"type": "string"},
+          "kind": {"enum": ["live", "artifact", "primary-source", "owner-report", "inference", "proposed-requirement", "unknown"]},
+          "claim": {"type": "string"},
+          "source": {"type": "string"},
+          "limitations": {"type": "string"}
+        }
+      }
+    },
+    "branches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["approach", "disposition", "prerequisites", "procedure_status", "recovery", "evidence_ids", "reopen_evidence"],
+        "properties": {
+          "approach": {"type": "string"},
+          "disposition": {"enum": ["established", "conditional", "incompatible-in-scope", "partial-only", "unresolved"]},
+          "prerequisites": {"type": "array", "items": {"type": "string"}},
+          "procedure_status": {"type": "string"},
+          "recovery": {"type": "string"},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}},
+          "reopen_evidence": {"type": "string"}
+        }
+      }
+    }
+  }
+}

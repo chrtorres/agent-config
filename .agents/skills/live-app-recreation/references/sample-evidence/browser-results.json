@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "checks": [
+    "page serves successfully",
+    "denied write does not create file",
+    "approved write persists file",
+    "approved edit persists content",
+    "Files view opens actual edited content",
+    "traversal blocked in browser",
+    "files, messages and settings survive reload",
+    "stop response releases composer",
+    "conversation history retains both chats",
+    "reset restores clean workspace",
+    "full walkthrough completes with two user approvals",
+    "synthetic mobile layout has no horizontal overflow",
+    "no browser JavaScript errors"
+  ],
+  "errors": [],
+  "scope": "Chrome browser tests of recreation only"
+}

@@ -1,0 +1,33 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 4964,
+      "sha256": "0d5657e33c85b705acf3b423a2647e7be09819568558d5bae2f60743397a09b0",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/comment-checklist.md": {
+      "type": "file",
+      "bytes": 1677,
+      "sha256": "d2dcafe5dad0b2a8bb9fe1c09c95ed9c04ffbaabc32849c5e66e3365d47bbb68",
+      "executable": false
+    },
+    "references/provenance.md": {
+      "type": "file",
+      "bytes": 2559,
+      "sha256": "9fe37024f22d6a448c578cd5433bd332a3f247694a51d98e5bf6e8a956abd647",
+      "executable": false
+    }
+  }
+}
