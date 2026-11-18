@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 5362,
-      "sha256": "8c4c3036e39db77f48f6717198faa6e39a77768fabe53b40335224992fcd5dec",
+      "bytes": 6694,
+      "sha256": "a2f1f95ce135be3ae48523da44a84aa12340da0c40e337c40f8a47aeb88a6472",
       "executable": false
     },
     "references": {
@@ -19,18 +19,24 @@
     },
     "references/comparison.md": {
       "type": "file",
-      "bytes": 2602,
-      "sha256": "f19b92591a0577c2c6b358a06250501e071082defcc0b203dd8f693159377d0b",
+      "bytes": 3594,
+      "sha256": "bc58771ad78abf22a042c4ef93d0b94992030af6dd8dee49ff4f10de37a62978",
       "executable": false
     },
     "references/resource-disposition.md": {
       "type": "file",
-      "bytes": 1336,
-      "sha256": "384445887bec76ae851fa5d4a591a6fd2269e35b42a19d01c12d87128db79943",
+      "bytes": 1746,
+      "sha256": "deb182e63c1843f6f57ed3eb02685161cb360392b1d5331acf95937b4ba3083c",
       "executable": false
     },
     "scripts": {
       "type": "directory"
+    },
+    "scripts/audit_processes.py": {
+      "type": "file",
+      "bytes": 2407,
+      "sha256": "1d17bd8432843edc9e5d33e1d859fe812b44340b09a8d2b180164181f8cdbd44",
+      "executable": false
     },
     "scripts/audit_release.py": {
       "type": "file",
@@ -40,6 +46,12 @@
     },
     "tests": {
       "type": "directory"
+    },
+    "tests/test_audit_processes.py": {
+      "type": "file",
+      "bytes": 1695,
+      "sha256": "213fca3984e84abcd32066734e9d51e60b61e0c331f84e2206e03282993bdced",
+      "executable": false
     },
     "tests/test_audit_release.py": {
       "type": "file",

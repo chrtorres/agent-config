@@ -1,6 +1,6 @@
 ---
 name: 3d-modeling
-description: Create and refine parametric Blender models in versioned runs. Generate both rendered and interactive browser previews for every workflow, use user feedback to revise geometry and verify multipart assembly, and only prepare approved print exports after review.
+description: Create and revise parametric Blender models, review versioned designs with rendered and interactive previews, and prepare approved print exports. Use for multipart assembly, exploded browser inspection, and standalone print-part previews.
 ---
 
 # Iterative 3D modeling and print preparation
@@ -13,10 +13,11 @@ Use this skill when the user asks for a new 3D model, a revision to an existing 
 2. Title the run and create its project parent under the workspace-root `creations/` directory. Use the layout `<workspace-root>/creations/<project-name>/version-001/`, with later revisions in sibling directories such as `version-002/`. Keep each version's source, previews, and exports together inside its version directory; do not place creation artifacts in the workspace root or in an unrelated directory.
 3. Translate the request into observable geometry requirements: units, overall dimensions, thicknesses, clearances, tolerances, intended use, and any print-orientation constraints. Resolve routine assumptions explicitly in the run notes.
 4. Create a parameterized Blender source script. Prefer reproducible construction from primitives or other inspectable operations over an unrecorded interactive edit. Save the `.blend` and source only in the current version directory.
-5. Render a review preview from the generated Blender model. The preview should show enough angles or detail to inspect silhouette, openings, interfaces, thickness, and likely print issues. Store it under the same version directory.
+5. Render a review preview from the generated Blender model. Show enough angles or detail to inspect silhouette, openings, interfaces, thickness, and likely print issues. Build the interactive review from the same version before requesting approval. For multipart models, use [multipart-preview.md](references/multipart-preview.md) to provide Explode, individual inspection, and Reassemble.
 6. Stop for user review. Ask for approval or concrete feedback; do not call the STL/Blend final or continue to slicing/printing on the basis of a generated file alone.
 7. If rejected or revised, record the feedback as observable changes and identify which requirements carry forward. Create the next sibling version, preserve the prior evidence, and rerun the checks affected by the revision. For interlocking or multipart revisions, use [assembly-refinement.md](references/assembly-refinement.md) to choose a joint, check assembly motion and retention, and present an exploded or detail view alongside the assembled view. Repeat the review gate.
 8. Record explicit approval against the exact version and previews reviewed. Material changes to the design restart review. Prepare the requested print exports from the approved geometry at the intended physical scale. Run the relevant mesh and slicer checks, record settings, and distinguish CAD verification from printed fit and strength. Physical printing requires separate authorization.
+9. For multipart print prep, provide separate exploded and individual print-part sheets under `print-prep/preview/`, rendered from the individual meshes being handed off. Label pieces with STL filenames and measured dimensions. Use the [multipart preview builder](references/multipart-preview.md). Viewer-only changes can stay with the approved version when the geometry and print-file identities are verified.
 
 ## Patterned spherical frame workflow
 
@@ -44,6 +45,7 @@ For a request to turn a sphere into a patterned frame, use the sphere as the pre
 - [references/comparison-and-feedback.md](references/comparison-and-feedback.md) records the existing-skill comparison and the user feedback that established the preview/approval gate.
 - [tests/test_box_frame_workflow.py](tests/test_box_frame_workflow.py) runs a small end-to-end geometry check when Blender is available.
 - [references/assembly-refinement.md](references/assembly-refinement.md) includes an isolated Blender reproduction of a flush rail-to-rail dovetail revision, with model generation, collision and retention checks, and two preview renders.
+- [references/multipart-preview.md](references/multipart-preview.md) documents the reusable explode/inspect controls, print-mesh sheets, and multipart smoke test.
 
 The examples were tested with Blender 4.5 LTS on PATH. Choose mesh repair or slicing tools to suit the requested print workflow and report the checks that actually ran. The example generators and renderers accept caller-supplied output locations.
 
@@ -66,7 +68,7 @@ Every new or revised modeling workflow must include an interactive browser revie
 2. Serve the review directory over HTTP with [scripts/launch_interactive_viewer.py](scripts/launch_interactive_viewer.py). Do not rely on `file://` loading; browser module and GLB requests can be blocked by local-file security rules.
 3. Provide orbit, zoom, pan, reset/fit view, optional auto-rotate, and a wireframe or inspection mode. Use readable lighting and show the model's review metadata and approval state beside the viewport.
 4. Validate the viewer asset with an HTTP `200` check, JavaScript syntax check, and a browser smoke test that confirms the GLB renders. Inspect at least one screenshot and exercise the relevant controls when browser automation is available.
-5. Before handing off a changed viewer workflow, run at least 20 smoke checks in an isolated sandbox. The suite must cover the source/build path, GLB and metadata delivery, review-page loading, rendered visibility, and controls; include multiple geometric shapes and multiple lighting/shadow setups rather than repeating one object. Record the exact check count, artifacts, failures, and runtime versions in sandbox evidence.
+5. Before handing off a changed viewer workflow, run at least 20 smoke checks in an isolated sandbox. Cover the source/build path, GLB and metadata delivery, loading, rendering, and controls across multiple shapes and lighting setups. For multipart changes, also exercise real part movement, per-part visibility and framing, and exact restoration through repeated reassembly. Record check counts, artifacts, failures, and runtime versions in sandbox evidence.
 6. Keep the smoke-test sandbox and its evidence outside the shared skill. Do not delete it automatically: leave it available for user inspection and ask for approval before cleanup. Cleanup approval applies only to the named smoke-test sandbox, not to authored creation runs.
 7. Treat the interactive viewer as review evidence, not a substitute for Blender geometry checks, mesh repair, slicing, physical fit, or load testing. Stop at the same user approval gate; do not label the model printable or load-certified because the viewer loads successfully.
 

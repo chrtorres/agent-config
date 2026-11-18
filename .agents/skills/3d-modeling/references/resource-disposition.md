@@ -26,3 +26,13 @@ No credentials, account identifiers, hostnames, usernames, private runtime state
 | Design sources and user feedback | Link the primary standards and manufacturing guides in [assembly-refinement.md](assembly-refinement.md). Preserve sanitized feedback and the historical approval in [comparison-and-feedback.md](comparison-and-feedback.md). |
 
 The fixture uses authored Blender Python plus Blender's bundled modules. Acquire Blender from its official distribution and discover it on PATH. Fresh validation artifacts and project-specific approvals belong with their task evidence. Original run names, dates, workstation and launch paths, and physical print settings are outside the shared package.
+
+## Exploded review and print-part sheets
+
+| Resource | Disposition |
+| --- | --- |
+| HTML, CSS, JavaScript, and part metadata | Extended the existing [viewer template](../assets/interactive-review-viewer/) with reversible explode and isolation. The empty part list preserves single-model callers. Use caller-supplied names and offsets. |
+| Print preview rendering and composition | Bundled [Blender renderer](../scripts/render_print_meshes.py) and [sheet builder](../scripts/build_print_previews.py). They take checksummed, individual STL inputs, use display-only translations, and record original extents. |
+| Browser interaction and source objects | The [multipart test](../tests/check_multipart_viewer.py) uses the caller's review or the bundled [synthetic generator](../tests/fixtures/create_multipart_review.py). The generator produces the STL inputs, manifests, Blend, render, and GLB. The existing single-shape browser matrix remains available. |
+| Run-specific assets and evidence | Original source and print binaries, model-specific labels and offsets, screenshots, browser profiles, ports, and result logs stay with the originating or fresh run outside this skill. Rebuild synthetic evidence with [the reproduction recipe](multipart-preview.md). |
+| External dependencies | Use Blender, Chromium/WebGL, pinned Three.js from its CDN, Python Pillow, DejaVu Sans, and Python websocket-client. No installed dependency tree is bundled. |

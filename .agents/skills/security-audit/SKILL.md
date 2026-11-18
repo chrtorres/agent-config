@@ -1,6 +1,6 @@
 ---
 name: security-audit
-description: Audit an application source tree and release artifacts for secrets, personal data, private runtime state, and unsafe packaging before open-source or public distribution; remediate generated evidence without changing application behavior and verify the clean release.
+description: Audit an application source tree, release artifacts, and local runtime state for secrets, personal data, private process arguments, and unsafe packaging before open-source or public distribution; remediate generated evidence without changing application behavior and verify the clean release.
 ---
 
 # Security audit for public release
@@ -11,17 +11,20 @@ Audit the complete source-and-delivery surface of an application before publishi
 
 1. Read workspace instructions and identify the application root, release command, packaging scripts, runtime entrypoint, tests, generated-artifact directories, and intended public distribution format. If the project is not under version control, treat every present file as potentially shippable.
 2. Inventory source, hidden files, runtime state, evidence, screenshots, archives, databases, bytecode, dependency trees, and packaging manifests. Inspect both the working tree and any prebuilt archive.
-3. Search text and serialized data for secrets and personal/system identity: credentials and tokens, private keys, email/phone data, usernames, home paths, hostnames, PIDs, absolute working directories, device serials/UUIDs, mount paths and labels, IP/MAC addresses, browser profiles, timestamps tied to a real user, and raw diagnostic output. Inspect image/document metadata and rendered screenshots when they may contain identity.
-4. Trace data flow in the application. Identify what is collected, persisted, exported, logged, rendered, or sent externally. Distinguish local diagnostic data intentionally exposed to the owner from accidental data embedded in the public release. Check whether exports and evidence include the full live snapshot.
-5. Inspect packaging logic for unsafe inclusion rules such as “all files in evidence,” recursive directory copies, runtime directories, dependency trees, or live validation output. Replace broad inclusion with an explicit authored-source allowlist and clearly labeled synthetic fixtures. Generalize environment-derived values; never embed secrets or tokens.
-6. Remediate only the release surface unless the user requests a behavior change: quarantine or remove live/private artifacts, regenerate evidence from synthetic fixtures, update ignore rules and documentation, and make packaging exclude private/generated state by construction. Preserve the app's APIs, UI, runtime behavior, and tests.
-7. Rebuild the release archive in an isolated output location. Inspect archive members and payload contents, then run the smallest real application smoke test from the extracted archive. Run relevant unit/backend/frontend tests without retaining live evidence in the public tree.
-8. Report findings by severity with exact paths and evidence, state what was changed, distinguish recoverable quarantine from deletion, and disclose remaining limits. Do not claim that local-only runtime collection is equivalent to zero sensitive data; document local inventory and export semantics.
+3. Inspect live local runtime state when authorized and relevant, including process command lines and environment metadata. Search `/proc/<pid>/cmdline` or an equivalent process listing for credential-bearing flags such as API keys, access tokens, passwords, bearer values, secrets, and private keys. Use [`scripts/audit_processes.py`](scripts/audit_processes.py), which reports only PID, executable, field name, and category; never copy the value into notes, logs, screenshots, or skill resources. Treat an active credential in a process argument as an urgent finding: identify its owner, stop further exposure where authorized, rotate/revoke it through the owning provider, and record only redacted evidence. If access is denied or the platform is not Linux, state that process inspection was unavailable rather than claiming a clean result.
+4. Search text and serialized data for secrets and personal/system identity: credentials and tokens, private keys, email/phone data, usernames, home paths, hostnames, PIDs, absolute working directories, device serials/UUIDs, mount paths and labels, IP/MAC addresses, browser profiles, timestamps tied to a real user, and raw diagnostic output. Inspect image/document metadata and rendered screenshots when they may contain identity.
+5. Trace data flow in the application. Identify what is collected, persisted, exported, logged, rendered, or sent externally. Distinguish local diagnostic data intentionally exposed to the owner from accidental data embedded in the public release. Check whether exports and evidence include the full live snapshot, including process listings or command-line arguments.
+6. Inspect packaging logic for unsafe inclusion rules such as “all files in evidence,” recursive directory copies, runtime directories, dependency trees, or live validation output. Replace broad inclusion with an explicit authored-source allowlist and clearly labeled synthetic fixtures. Generalize environment-derived values; never embed secrets or tokens.
+7. Remediate only the release surface unless the user requests a behavior change: quarantine or remove live/private artifacts, regenerate evidence from synthetic fixtures, update ignore rules and documentation, and make packaging exclude private/generated state by construction. Preserve the app's APIs, UI, runtime behavior, and tests.
+8. Rebuild the release archive in an isolated output location. Inspect archive members and payload contents, then run the smallest real application smoke test from the extracted archive. Run relevant unit/backend/frontend tests without retaining live evidence in the public tree.
+9. Report findings by severity with exact paths and redacted evidence, state what was changed, distinguish recoverable quarantine from deletion, and disclose remaining limits. Do not claim that local-only runtime collection is equivalent to zero sensitive data; document local inventory and export semantics.
 
 ## Reproduction resources
 
 - [`scripts/audit_release.py`](scripts/audit_release.py) scans a source tree and optional archive for common secret, identity, and private-runtime patterns without printing matched values.
+- [`scripts/audit_processes.py`](scripts/audit_processes.py) scans Linux process command lines for credential-bearing flags without printing command-line values.
 - [`tests/test_audit_release.py`](tests/test_audit_release.py) exercises tree scanning, archive scanning, safe synthetic data, and nonzero findings.
+- [`tests/test_audit_processes.py`](tests/test_audit_processes.py) exercises safe command lines, separated credential values, and equals-form flags.
 - [`references/comparison.md`](references/comparison.md) records the candidate-skill comparison and routing decision for this capture.
 - [`references/resource-disposition.md`](references/resource-disposition.md) records what was inspected, bundled, regenerated, generalized, quarantined, or excluded.
 
@@ -34,8 +37,9 @@ From this skill directory:
 ```sh
 python3 -m unittest discover -s tests -v
 python3 scripts/audit_release.py --root <application-root> --archive <release-archive>
+python3 scripts/audit_processes.py
 ```
 
-The audit command exits nonzero when it finds configured sensitive patterns and reports only file/member, line, and category. Validate the actual extracted release with its documented startup command and a representative local request or user journey. Confirm that expected synthetic fixtures remain available, private artifacts are absent, and application tests still pass. Store fresh machine-specific reports outside the shared skill.
+The audit commands exit nonzero when they find configured sensitive patterns. The process audit reports only PID, executable, flag name, and category; it must never print values. Validate the actual extracted release with its documented startup command and a representative local request or user journey. Confirm that expected synthetic fixtures remain available, private artifacts are absent, and application tests still pass. Store fresh machine-specific reports outside the shared skill.
 
 Link this canonical directory into each intended model discovery directory with the `skill-add` linker. The invocation name is `security-audit`. Required external inputs are the application source and its release/validation instructions; no external account, credential, network service, or privileged access is required for the audit itself.
