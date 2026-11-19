@@ -1,0 +1,11 @@
+# Animated playback review
+
+Define a compact contract between the artifact, the loader and the UI. Discover clips from the delivered asset. Use optional metadata for a default clip, display labels, loop defaults, and a stable follow node. Keep playback state per viewer instance. A static same-origin package serves this use case without a service or database.
+
+- Use one clock for playback and scrubbed poses. Expose duration, elapsed time, play/pause, playback rate, and loop. Treat the exact final key as a valid scrub destination. Suppress automatic playback when reduced motion is preferred. Reset the wall clock when a document returns from the background.
+- Keep camera behavior independent of the rig. Fit at a paused pose, and follow evaluated world translation only when tracking is enabled. Check behavior with nested bones, a small screen, and the follow option disabled.
+- Give static layout and animation clear transform ownership. In the bundled viewer animation suspends during explode and restores the prior paused time after reassembly. Keep static models usable when they have no clips. Handle missing clips, bad roots, and model-load failures visibly.
+- Test via the actual local HTTP package. Confirm that controls change an evaluated transform and rendered pixels, switching actions clears old state, orbit and follow stay usable, and loop and one-shot boundaries behave as promised. Wait for a settled, rendered state using a synchronous browser predicate over an already imported reader. A promise returned to a polling predicate can be truthy before the renderer has changed.
+- Record asset hashes and an observed negative result. Use a synthetic one-shot incorrectly declared as a loop, an intentionally absent model, or a comparable isolated fault. Distinguish the sample's numerical checks from the user's domain fidelity claim.
+
+The sibling [animated figure review](../../3d-modeling/references/animated-figure-review.md) supplies the complete fixture generator, binary validator, standalone Three.js view, packager, and browser harness. [Capture decision and inventory](../../3d-modeling/references/animated-figure-provenance.md) document routing and reproduction boundaries.

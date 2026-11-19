@@ -51,6 +51,10 @@ Use isolated task storage and explicitly declared dependencies. Preserve actual 
 
 When an interface explains real structures or factual relationships, use [evidence-linked review](references/evidence-linked-review.md). Carry research and uncertainty into the data contract and inspection UI. Test that selections change the rendered artifact and restore its state, then validate factual claims against independent evidence.
 
+## Animated 3D review
+
+Use [animated playback review](references/animated-playback-review.md) when a browser app needs clip selection, scrubbing, transport controls, camera tracking, or animated poses alongside static inspection. Validate rendered geometry and state transitions against the same GLB delivered to the user.
+
 ## Deliver and iterate
 
 Provide the verified running view or build artifact, a specific starting action, retained runnable source, setup instructions, evidence, and material limitations. For hosted delivery, publish the exact prepared source through the active provider workflow and verify the deployment result. For a requested local running application, retain its preview when supported and document its lifecycle in task evidence.

@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 9259,
-      "sha256": "ba95d9a3cd25578ea3b88a9cab8466994db3dc7ed91a0dc0c5c0700dfc15e914",
+      "bytes": 9583,
+      "sha256": "5fa709246791e44c149cbb9134eae2a661ee401624cb15023c9c161279f15d38",
       "executable": false
     },
     "assets": {
@@ -441,6 +441,12 @@
       "type": "file",
       "bytes": 334297,
       "sha256": "3c956a090b6df1a32a071d514f0bbc7e7b974c4d08ff7690b394e25099c4e58a",
+      "executable": false
+    },
+    "references/animated-playback-review.md": {
+      "type": "file",
+      "bytes": 2206,
+      "sha256": "b36b3c49ad66c1d435b2f1d366cc96c0efdb8c30e3786036eab7dd394df27149",
       "executable": false
     },
     "references/architecture-and-qa.md": {

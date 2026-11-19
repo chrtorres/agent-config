@@ -23,6 +23,10 @@ Use this skill when the user asks for a new 3D model, a revision to an existing 
 
 For a Blender asset intended for a game or browser scene, use the [runtime GLB workflow](references/runtime-glb.md). It defines an engine-facing asset contract, separate studio and runtime exports, and validation of the exact GLB used in the browser. Print approval applies only to physical outputs.
 
+## Research-driven animation
+
+Use [animated figure review](references/animated-figure-review.md) for a figure that deforms, articulates, or travels through a scene. Author poses and root motion in Blender, bake named clips, and inspect the exported GLB in the browser. The bundled generator covers both rigid pivots and a weighted skeleton. Connect observed motion to measurable checks and state which parameters were inferred.
+
 ## Material variants
 
 When several colorways or finishes share a model, use the [material-variant workflow](references/material-variants.md). Keep shared geometry and UVs consistent, generate editable scenes and textured GLBs for each variant, and use identical studio views and a browser selector that preserves the inspection camera. Run the bundled [worked example](assets/material-variant-example/README.md) to reproduce the texture, export, and review pipeline.
