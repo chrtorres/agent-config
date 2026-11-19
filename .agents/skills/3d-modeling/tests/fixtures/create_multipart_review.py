@@ -34,6 +34,16 @@ def main():
     ring.name = "Fixture ring"
     parts = ((plate, "Plate", (-24, 0, 0)), (pad, "Pad", (24, 0, 0)), (ring, "Ring", (0, 20, 5)))
 
+    bpy.context.view_layer.update()
+    bounds = {}
+    for part, _, _ in parts:
+        vertices = [part.matrix_world @ vertex.co for vertex in part.data.vertices]
+        bounds[part.name] = [[reducer(vertex[axis] for vertex in vertices) for axis in range(3)]
+                             for reducer in (min, max)]
+    (output / "geometry.json").write_text(json.dumps({
+        "units": "mm", "part_bounds_xyz_mm": bounds,
+    }, indent=2) + "\n")
+
     exports, definitions = [], []
     for index, (part, label, offset) in enumerate(parts):
         file = stls / f"piece-{index + 1}.stl"

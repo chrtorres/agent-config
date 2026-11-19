@@ -1,6 +1,6 @@
 ---
 name: 3d-modeling
-description: Create and revise parametric Blender models, review versioned designs with rendered and interactive previews, and prepare approved print exports. Use for multipart assembly, exploded browser inspection, and standalone print-part previews.
+description: Create and revise parametric Blender models, including photo-based reconstruction, labeled exploded review, versioned interactive previews, and approved print exports. Use for multipart assembly, exploded browser inspection, and standalone print-part previews.
 ---
 
 # Iterative 3D modeling and print preparation
@@ -13,11 +13,17 @@ Use this skill when the user asks for a new 3D model, a revision to an existing 
 2. Title the run and create its project parent under the workspace-root `creations/` directory. Use the layout `<workspace-root>/creations/<project-name>/version-001/`, with later revisions in sibling directories such as `version-002/`. Keep each version's source, previews, and exports together inside its version directory; do not place creation artifacts in the workspace root or in an unrelated directory.
 3. Translate the request into observable geometry requirements: units, overall dimensions, thicknesses, clearances, tolerances, intended use, and any print-orientation constraints. Resolve routine assumptions explicitly in the run notes.
 4. Create a parameterized Blender source script. Prefer reproducible construction from primitives or other inspectable operations over an unrecorded interactive edit. Save the `.blend` and source only in the current version directory.
-5. Render a review preview from the generated Blender model. Show enough angles or detail to inspect silhouette, openings, interfaces, thickness, and likely print issues. Build the interactive review from the same version before requesting approval. For multipart models, use [multipart-preview.md](references/multipart-preview.md) to provide Explode, individual inspection, and Reassemble.
+5. Render a review preview from the generated Blender model. Show enough angles or detail to inspect silhouette, openings, interfaces, thickness, and likely print issues. Build the interactive review from the same version before requesting approval. For multipart models, use [multipart-preview.md](references/multipart-preview.md) and [exploded-part-labels.md](references/exploded-part-labels.md) to provide Explode, labeled callouts, individual inspection, and Reassemble.
 6. Stop for user review. Ask for approval or concrete feedback; do not call the STL/Blend final or continue to slicing/printing on the basis of a generated file alone.
 7. If rejected or revised, record the feedback as observable changes and identify which requirements carry forward. Create the next sibling version, preserve the prior evidence, and rerun the checks affected by the revision. For interlocking or multipart revisions, use [assembly-refinement.md](references/assembly-refinement.md) to choose a joint, check assembly motion and retention, and present an exploded or detail view alongside the assembled view. Repeat the review gate.
 8. Record explicit approval against the exact version and previews reviewed. Material changes to the design restart review. Prepare the requested print exports from the approved geometry at the intended physical scale. Run the relevant mesh and slicer checks, record settings, and distinguish CAD verification from printed fit and strength. Physical printing requires separate authorization.
 9. For multipart print prep, provide separate exploded and individual print-part sheets under `print-prep/preview/`, rendered from the individual meshes being handed off. Label pieces with STL filenames and measured dimensions. Use the [multipart preview builder](references/multipart-preview.md). Viewer-only changes can stay with the approved version when the geometry and print-file identities are verified.
+
+## Photo-based reconstruction and refinement
+
+Use [photo-based refinement](references/photo-based-refinement.md) when matching a physical object from photos, dimensions, manufacturer diagrams, or teardown exhibits. Fit the visible landmarks, document uncertainty and hidden geometry, and verify any requested fidelity threshold against independent evidence. Retain the source, matched views, measurements, and browser smoke results with the version.
+
+For a multipart photo reconstruction, research the exact manufacturer/model first, prioritizing manufacturer pages and manuals, regulatory external/internal photos, and orthogonal teardown or underside views. Record source URLs and what each source establishes. Calibrate visible landmarks before adding detail, then represent every inspection-worthy physical piece as a stable top-level node. Populate the review metadata `parts` contract and require numbered callouts, leader lines, a part key, click-to-isolate behavior, and exact reassembly restoration. A 3D review demonstrates correspondence and inspectability; it cannot prove a 99% visual match without a documented comparison protocol and independent views.
 
 ## Patterned spherical frame workflow
 
@@ -46,6 +52,7 @@ For a request to turn a sphere into a patterned frame, use the sphere as the pre
 - [tests/test_box_frame_workflow.py](tests/test_box_frame_workflow.py) runs a small end-to-end geometry check when Blender is available.
 - [references/assembly-refinement.md](references/assembly-refinement.md) includes an isolated Blender reproduction of a flush rail-to-rail dovetail revision, with model generation, collision and retention checks, and two preview renders.
 - [references/multipart-preview.md](references/multipart-preview.md) documents the reusable explode/inspect controls, print-mesh sheets, and multipart smoke test.
+- [references/exploded-part-labels.md](references/exploded-part-labels.md) documents the generalized labeled-callout contract for multipart exploded review.
 
 The examples were tested with Blender 4.5 LTS on PATH. Choose mesh repair or slicing tools to suit the requested print workflow and report the checks that actually ran. The example generators and renderers accept caller-supplied output locations.
 

@@ -1,0 +1,22 @@
+[
+  {
+    "feature": "Synthetic plate width",
+    "part": "Fixture plate",
+    "axis": "x",
+    "kind": "span",
+    "basis": "fit",
+    "reading_px": 96,
+    "allowance_px": 2,
+    "calibration": {"span_px": 80, "span_mm": 40}
+  },
+  {
+    "feature": "Synthetic pad center offset",
+    "part": "Fixture pad.001",
+    "axis": "x",
+    "kind": "center",
+    "basis": "holdout",
+    "reading_px": 42,
+    "allowance_px": 1,
+    "calibration": {"span_px": 80, "span_mm": 40}
+  }
+]

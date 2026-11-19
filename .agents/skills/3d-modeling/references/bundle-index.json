@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 12126,
-      "sha256": "697a46862ea45912a39dea4e72c3ff638c76acf6047ba3b81de24749554e36db",
+      "bytes": 13558,
+      "sha256": "95a0f8f2dd786123c4c04a11ec02104a3a8a93c79283add8c16dcdf9715a55ad",
       "executable": false
     },
     "assets": {
@@ -86,6 +86,12 @@
       "sha256": "70d99e54351a6a0163c06cc49ce2524e5f0c2317b169c3aedc8f01e8fa1ef915",
       "executable": false
     },
+    "references/exploded-part-labels.md": {
+      "type": "file",
+      "bytes": 1358,
+      "sha256": "abfe6bc028e61ee3dbe92b449cd08ccfbc5a7b8f8455b7f396207c110d2f9eb2",
+      "executable": false
+    },
     "references/interactive-smoke-testing.md": {
       "type": "file",
       "bytes": 1884,
@@ -104,6 +110,12 @@
       "sha256": "d56afae123a0f1919022dd2334b8a7920e8b66e64cb65f06e9c76124b0d3262b",
       "executable": false
     },
+    "references/photo-based-refinement.md": {
+      "type": "file",
+      "bytes": 4669,
+      "sha256": "f33701f31a256f78e1afffe0587de2f87d83bf2735217bddfe664cae664ea4ac",
+      "executable": false
+    },
     "references/resource-disposition.md": {
       "type": "file",
       "bytes": 4410,
@@ -117,6 +129,12 @@
       "type": "file",
       "bytes": 4046,
       "sha256": "89524147e60129aad9953c5c737b8fee34fb23d59de715d8715b93cf23ef4d80",
+      "executable": false
+    },
+    "scripts/compare_landmarks.py": {
+      "type": "file",
+      "bytes": 1995,
+      "sha256": "6e2122902aa808c28ad34d009fe8a5bbfdf535f4fad1e2dda8245d38108ae7a0",
       "executable": false
     },
     "scripts/create_box_frame.py": {
@@ -169,8 +187,14 @@
     },
     "tests/fixtures/create_multipart_review.py": {
       "type": "file",
-      "bytes": 3468,
-      "sha256": "de3204be5a035f8a7559cdcb3e70dc31b17e1fcb5991eda51b49e54762af260a",
+      "bytes": 3920,
+      "sha256": "872e5edcd163feed02a24b63b029f3783d1d8195ad07c57782569ff290ab6070",
+      "executable": false
+    },
+    "tests/fixtures/photo-landmarks.json": {
+      "type": "file",
+      "bytes": 477,
+      "sha256": "71610537e29b0ffb949cfb0f65a19695c834b1b2de513e27c866b9be6cadefbd",
       "executable": false
     },
     "tests/test_box_frame_workflow.py": {
