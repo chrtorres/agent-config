@@ -27,6 +27,10 @@ For a Blender asset intended for a game or browser scene, use the [runtime GLB w
 
 Use [animated figure review](references/animated-figure-review.md) for a figure that deforms, articulates, or travels through a scene. Author poses and root motion in Blender, bake named clips, and inspect the exported GLB in the browser. The bundled generator covers both rigid pivots and a weighted skeleton. Connect observed motion to measurable checks and state which parameters were inferred.
 
+## Combined review workspaces
+
+Use [combined review workspaces](references/combined-review-workspaces.md) when a contextual scene, animated study and a multipart inspection need a shared entry point. Package the tested review assets together and verify each view's visible state, lifecycle, download and source metadata.
+
 ## Material variants
 
 When several colorways or finishes share a model, use the [material-variant workflow](references/material-variants.md). Keep shared geometry and UVs consistent, generate editable scenes and textured GLBs for each variant, and use identical studio views and a browser selector that preserves the inspection camera. Run the bundled [worked example](assets/material-variant-example/README.md) to reproduce the texture, export, and review pipeline.

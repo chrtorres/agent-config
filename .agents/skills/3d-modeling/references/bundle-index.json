@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 15128,
-      "sha256": "ada465fcb9fc7405220490a13c55216960b88a450451e7596989e5bfe6c42922",
+      "bytes": 15450,
+      "sha256": "4b15c8e07f145c14bd74b3f73fa6770562c983c7de804d5fcdf1d23768b0d528",
       "executable": false
     },
     "assets": {
@@ -22,8 +22,14 @@
     },
     "assets/interactive-review-viewer/README.md": {
       "type": "file",
-      "bytes": 4306,
-      "sha256": "d82c2075ea04969681f5dcf0b8a3efbd366263d088174c55c1b76b8e2b71a222",
+      "bytes": 5788,
+      "sha256": "273683d152a0f8198090f544b199b1814a4073a143e693a47d41354b48ab2c71",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/embedding.js": {
+      "type": "file",
+      "bytes": 652,
+      "sha256": "15b444546393fb7af73bb6e33ec07bd588ac86dbbce2a55d971dc3de35773efc",
       "executable": false
     },
     "assets/interactive-review-viewer/index.html": {
@@ -44,16 +50,43 @@
       "sha256": "bdf9a093aecf92ff0e62c9ffd3ca1a8445441652990667ca3c8f83cb12dd4747",
       "executable": false
     },
+    "assets/interactive-review-viewer/path-trace.js": {
+      "type": "file",
+      "bytes": 1033,
+      "sha256": "9367874aa76b2d4d654891a0f3d92d42e7cb6ce17c5e3c1af18b19fdd41128da",
+      "executable": false
+    },
     "assets/interactive-review-viewer/styles.css": {
       "type": "file",
-      "bytes": 6083,
-      "sha256": "a3b0fe23315dd42ff6372051856b095f5330649d142774f9cf35b391fe92fde5",
+      "bytes": 6123,
+      "sha256": "08ac6b5e67b700a7d5f0537a667f8c7fbf42714e019779f49ecd7ff5a182dec8",
       "executable": false
     },
     "assets/interactive-review-viewer/viewer.js": {
       "type": "file",
-      "bytes": 19243,
-      "sha256": "1469246461986025a9bf9fa4b7417cf32bedc8961671f6705fb2dbd441f35431",
+      "bytes": 19447,
+      "sha256": "8f72fff13150e48a26f59978cb43d182859be4ba7526e6127f63bbdaf6395f30",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/workspace": {
+      "type": "directory"
+    },
+    "assets/interactive-review-viewer/workspace/index.html": {
+      "type": "file",
+      "bytes": 551,
+      "sha256": "53cf52b5bb06df11549f3e43f1868f3d54649e175bfca344fe66f9ca5da2ef42",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/workspace/shell.css": {
+      "type": "file",
+      "bytes": 1571,
+      "sha256": "c15513957ea60632946c8c2d078779c302bf6564ddf40bee9e8a5deab79f8250",
+      "executable": false
+    },
+    "assets/interactive-review-viewer/workspace/shell.js": {
+      "type": "file",
+      "bytes": 3814,
+      "sha256": "01d33a782a3d62b13f7c3d503fdf2dda82d1016131b592923fc7f8f77c99c5b0",
       "executable": false
     },
     "assets/material-variant-example": {
@@ -218,6 +251,18 @@
       "sha256": "97c52a3c726240271acae9c6c74f709903bcea082a447192d5e602793ce08dc8",
       "executable": false
     },
+    "references/combined-review-provenance.md": {
+      "type": "file",
+      "bytes": 2490,
+      "sha256": "7495be71a99a9b5996d42e641670e8ca91fbb2fb783022d06a38f55ae121f093",
+      "executable": false
+    },
+    "references/combined-review-workspaces.md": {
+      "type": "file",
+      "bytes": 2714,
+      "sha256": "55c025921701af0ed753d5675b1790afcd2e1498f6bc02ca752b6f6674d165e2",
+      "executable": false
+    },
     "references/comparison-and-feedback.md": {
       "type": "file",
       "bytes": 5367,
@@ -323,6 +368,12 @@
       "sha256": "d7ce6fd9c41ef1ae389d2930fb65f2524ebebd48f4a8bcc96afd0ea8b3dd8bed",
       "executable": false
     },
+    "scripts/combine_reviews.py": {
+      "type": "file",
+      "bytes": 3351,
+      "sha256": "72e4f18874da26acac994a7963d301a0ab0bfec03f53c31c28c871f1c2c12b4b",
+      "executable": false
+    },
     "scripts/compare_landmarks.py": {
       "type": "file",
       "bytes": 1995,
@@ -367,8 +418,8 @@
     },
     "scripts/prepare_reference_review.py": {
       "type": "file",
-      "bytes": 11811,
-      "sha256": "68b45a39a7bb22c71a0ecb53eb32c07083af9244c8d7a8eb17f5fbc54b6b34bf",
+      "bytes": 11869,
+      "sha256": "7d8f4e0d64bb507fecdfbfebbab28a9c666e79a9eb84fc384b12b3cada8eb4a6",
       "executable": false
     },
     "scripts/render_preview.py": {
@@ -397,6 +448,12 @@
     },
     "tests": {
       "type": "directory"
+    },
+    "tests/check_combined_review.mjs": {
+      "type": "file",
+      "bytes": 7322,
+      "sha256": "738a4483564c4485a9dc35e570a6e6379931b52dc46a7d6129616a3209657967",
+      "executable": false
     },
     "tests/check_material_variants.mjs": {
       "type": "file",

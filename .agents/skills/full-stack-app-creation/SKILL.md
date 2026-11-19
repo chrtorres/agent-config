@@ -55,6 +55,10 @@ When an interface explains real structures or factual relationships, use [eviden
 
 Use [animated playback review](references/animated-playback-review.md) when a browser app needs clip selection, scrubbing, transport controls, camera tracking, or animated poses alongside static inspection. Validate rendered geometry and state transitions against the same GLB delivered to the user.
 
+## Composing live and inspection views
+
+Use [multiview review architecture](references/multiview-review.md) to combine existing interactive scenes under a compact tab shell. Test lazy startup, playback suspension, camera preservation, keyboard navigation and independent load failures.
+
 ## Deliver and iterate
 
 Provide the verified running view or build artifact, a specific starting action, retained runnable source, setup instructions, evidence, and material limitations. For hosted delivery, publish the exact prepared source through the active provider workflow and verify the deployment result. For a requested local running application, retain its preview when supported and document its lifecycle in task evidence.

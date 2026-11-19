@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 9583,
-      "sha256": "5fa709246791e44c149cbb9134eae2a661ee401624cb15023c9c161279f15d38",
+      "bytes": 9870,
+      "sha256": "4d81d25cb12eb1f00c8e55b0ce5ea376bb02a0b3faec0f5eaadde4cad5e6cacf",
       "executable": false
     },
     "assets": {
@@ -540,6 +540,12 @@
       "type": "file",
       "bytes": 5766,
       "sha256": "261ade4ce7e3f83f89cceb292e2204c39a1770cafc5caeee9aedba1bc10329fe",
+      "executable": false
+    },
+    "references/multiview-review.md": {
+      "type": "file",
+      "bytes": 1715,
+      "sha256": "a213935a25ee44f8c2dcc1f8ac1dbf01205927d2f01287b13a0e92e935c88a1f",
       "executable": false
     },
     "references/playable-3d.md": {
