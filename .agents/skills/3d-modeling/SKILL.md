@@ -1,6 +1,6 @@
 ---
 name: 3d-modeling
-description: Create and revise parametric Blender models, including photo-based reconstruction, labeled exploded review, versioned interactive previews, and approved print exports. Use for multipart assembly, exploded browser inspection, and standalone print-part previews.
+description: Create and revise parametric Blender models with versioned browser review. Use for photo-based reconstruction, multipart inspection, material variants, runtime GLB assets with named pivots, and approved print exports.
 ---
 
 # Iterative 3D modeling and print preparation
@@ -19,11 +19,23 @@ Use this skill when the user asks for a new 3D model, a revision to an existing 
 8. Record explicit approval against the exact version and previews reviewed. Material changes to the design restart review. Prepare the requested print exports from the approved geometry at the intended physical scale. Run the relevant mesh and slicer checks, record settings, and distinguish CAD verification from printed fit and strength. Physical printing requires separate authorization.
 9. For multipart print prep, provide separate exploded and individual print-part sheets under `print-prep/preview/`, rendered from the individual meshes being handed off. Label pieces with STL filenames and measured dimensions. Use the [multipart preview builder](references/multipart-preview.md). Viewer-only changes can stay with the approved version when the geometry and print-file identities are verified.
 
+## Runtime assets
+
+For a Blender asset intended for a game or browser scene, use the [runtime GLB workflow](references/runtime-glb.md). It defines an engine-facing asset contract, separate studio and runtime exports, and validation of the exact GLB used in the browser. Print approval applies only to physical outputs.
+
+## Material variants
+
+When several colorways or finishes share a model, use the [material-variant workflow](references/material-variants.md). Keep shared geometry and UVs consistent, generate editable scenes and textured GLBs for each variant, and use identical studio views and a browser selector that preserves the inspection camera. Run the bundled [worked example](assets/material-variant-example/README.md) to reproduce the texture, export, and review pipeline.
+
 ## Photo-based reconstruction and refinement
 
 Use [photo-based refinement](references/photo-based-refinement.md) when matching a physical object from photos, dimensions, manufacturer diagrams, or teardown exhibits. Fit the visible landmarks, document uncertainty and hidden geometry, and verify any requested fidelity threshold against independent evidence. Retain the source, matched views, measurements, and browser smoke results with the version.
 
 For a multipart photo reconstruction, research the exact manufacturer/model first, prioritizing manufacturer pages and manuals, regulatory external/internal photos, and orthogonal teardown or underside views. Record source URLs and what each source establishes. Calibrate visible landmarks before adding detail, then represent every inspection-worthy physical piece as a stable top-level node. Populate the review metadata `parts` contract and require numbered callouts, leader lines, a part key, click-to-isolate behavior, and exact reassembly restoration. A 3D review demonstrates correspondence and inspectability; it cannot prove a 99% visual match without a documented comparison protocol and independent views.
+
+## Research-driven realism
+
+Use [research-driven refinement](references/research-driven-refinement.md) when a model will be referenced for accurate form, internal structure, or material appearance. Tie each correction to a source and an observable check. Use the bundled Blender and browser fixture to reproduce scripted fit checks, layered presets, nested isolation and evidence-linked review.
 
 ## Patterned spherical frame workflow
 

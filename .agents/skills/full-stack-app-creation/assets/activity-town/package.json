@@ -1,0 +1,21 @@
+{
+  "name": "activity-town",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "start": "node scripts/serve.mjs",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "files": ["dist", "scripts/activity.mjs", "scripts/serve.mjs"],
+  "type": "module",
+  "dependencies": {
+    "@fontsource-variable/dm-sans": "5.2.8",
+    "three": "0.187.0"
+  },
+  "devDependencies": {
+    "playwright": "1.65.1",
+    "vite": "6.4.6"
+  },
+  "private": true
+}

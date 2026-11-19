@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 13558,
-      "sha256": "95a0f8f2dd786123c4c04a11ec02104a3a8a93c79283add8c16dcdf9715a55ad",
+      "bytes": 14699,
+      "sha256": "bb8058433a46fde30a6ffbda0f161aa92bcc5c66181691db157a2dc8a270f587",
       "executable": false
     },
     "assets": {
@@ -22,14 +22,14 @@
     },
     "assets/interactive-review-viewer/README.md": {
       "type": "file",
-      "bytes": 1114,
-      "sha256": "f140386bd9bfe698613189e2cd53d167ac7cd59a7d14d411ebc02133422fd65c",
+      "bytes": 2784,
+      "sha256": "86c69a38be42dffc0df636dbc003cdbd910cf9884c46132ecb4a1e5212c761d3",
       "executable": false
     },
     "assets/interactive-review-viewer/index.html": {
       "type": "file",
-      "bytes": 2123,
-      "sha256": "f632dd1856e6f40b5943e39060aa477c04ff3eeb212389cf4d20b0539316e383",
+      "bytes": 3172,
+      "sha256": "622a710939dfc370a5552f87559b39ae3c617a5a37195e4a64baede70a6dc932",
       "executable": false
     },
     "assets/interactive-review-viewer/metadata.json": {
@@ -40,14 +40,134 @@
     },
     "assets/interactive-review-viewer/styles.css": {
       "type": "file",
-      "bytes": 3107,
-      "sha256": "bd531a7574f88fed69f1e7e785c5afe322b940b02edf127f77fc582b3a207712",
+      "bytes": 5630,
+      "sha256": "3db05cf31d22b6986fe11aa958de7427da8cc6f6132e354efbd20f6978eee457",
       "executable": false
     },
     "assets/interactive-review-viewer/viewer.js": {
       "type": "file",
-      "bytes": 8736,
-      "sha256": "0691a74107f4f9e079c67d86e4b4722f4a53f42203bc22dab25e68eb54f0dbc3",
+      "bytes": 18058,
+      "sha256": "fff7a2abd4addb070ad4a5050fea9982a27deedd55a8df85dba723968cf84309",
+      "executable": false
+    },
+    "assets/material-variant-example": {
+      "type": "directory"
+    },
+    "assets/material-variant-example/README.md": {
+      "type": "file",
+      "bytes": 579,
+      "sha256": "f2d324632e2c0c85c7f6eae142db355f7ac3a381927f60f2a951121d19aafa02",
+      "executable": false
+    },
+    "assets/material-variant-example/review": {
+      "type": "directory"
+    },
+    "assets/material-variant-example/review/index.html": {
+      "type": "file",
+      "bytes": 2028,
+      "sha256": "b064d915930bf7bd74138552331ea64bd98945d1ccaed22f6575056c70d55e81",
+      "executable": false
+    },
+    "assets/material-variant-example/review/styles.css": {
+      "type": "file",
+      "bytes": 3532,
+      "sha256": "1749479761f16bd99e7c120e3f68a2966ce746efeac0d45c94471076fb04b5f8",
+      "executable": false
+    },
+    "assets/material-variant-example/review/vendor": {
+      "type": "directory"
+    },
+    "assets/material-variant-example/review/vendor/LICENSE": {
+      "type": "file",
+      "bytes": 1081,
+      "sha256": "bfe119ea4fd413f5f7ca3fcd63adb0c4a073ed39daa2fe7d3e6b769e21272601",
+      "executable": false
+    },
+    "assets/material-variant-example/review/vendor/build": {
+      "type": "directory"
+    },
+    "assets/material-variant-example/review/vendor/build/three.core.js": {
+      "type": "file",
+      "bytes": 1403455,
+      "sha256": "eb077d2417f61d3e6d9264c317cabc4ea35769ed6b0ab533067292a550784c20",
+      "executable": false
+    },
+    "assets/material-variant-example/review/vendor/build/three.module.js": {
+      "type": "file",
+      "bytes": 603113,
+      "sha256": "c8211c69345d2e9949dc7a8ac969380497aa0600a5a8ac6a459c8cd02dd9cb8a",
+      "executable": false
+    },
+    "assets/material-variant-example/review/vendor/examples": {
+      "type": "directory"
+    },
+    "assets/material-variant-example/review/vendor/examples/jsm": {
+      "type": "directory"
+    },
+    "assets/material-variant-example/review/vendor/examples/jsm/controls": {
+      "type": "directory"
+    },
+    "assets/material-variant-example/review/vendor/examples/jsm/controls/OrbitControls.js": {
+      "type": "file",
+      "bytes": 38703,
+      "sha256": "b97879c748170baadeb3fb84cea1ffdf4674e283dc06042f34e2acb95a76042c",
+      "executable": false
+    },
+    "assets/material-variant-example/review/vendor/examples/jsm/loaders": {
+      "type": "directory"
+    },
+    "assets/material-variant-example/review/vendor/examples/jsm/loaders/GLTFLoader.js": {
+      "type": "file",
+      "bytes": 114739,
+      "sha256": "67ac5551fdafa6e349bd80c8f8e5e39c136d6b2fb1ad647db9abb21dc86f9e4a",
+      "executable": false
+    },
+    "assets/material-variant-example/review/vendor/examples/jsm/utils": {
+      "type": "directory"
+    },
+    "assets/material-variant-example/review/vendor/examples/jsm/utils/BufferGeometryUtils.js": {
+      "type": "file",
+      "bytes": 35539,
+      "sha256": "fda7e946b8e0b5ab39b779206589e7a1079a22eb24efb89d7223e03fdfb1f751",
+      "executable": false
+    },
+    "assets/material-variant-example/review/viewer.js": {
+      "type": "file",
+      "bytes": 10192,
+      "sha256": "9c24e46139b445e79d0637bb16308eb092cf7b567c2618801e5e7d83603efde9",
+      "executable": false
+    },
+    "assets/material-variant-example/source": {
+      "type": "directory"
+    },
+    "assets/material-variant-example/source/compare_renders.py": {
+      "type": "file",
+      "bytes": 1686,
+      "sha256": "58a55d12483831f152b7751257fdaa1c9858c5631af02b3e91e7501801534944",
+      "executable": false
+    },
+    "assets/material-variant-example/source/nishikigoi.py": {
+      "type": "file",
+      "bytes": 26270,
+      "sha256": "15d70873df562de4ea3e83c473b2a4cd893508a2f6bdaf291daa20a47878f466",
+      "executable": false
+    },
+    "assets/material-variant-example/source/skin.py": {
+      "type": "file",
+      "bytes": 4278,
+      "sha256": "482b70144bd675b351bc654b0eff8001374274d800a6a87c9b0781a1b90f3322",
+      "executable": false
+    },
+    "assets/material-variant-example/source/varieties.py": {
+      "type": "file",
+      "bytes": 5042,
+      "sha256": "ac6955af5a83a1a7ae2ea955ed569464752de8ddbd5cd6208d36de4ded9d88c1",
+      "executable": false
+    },
+    "assets/material-variant-example/source/verify_asset.py": {
+      "type": "file",
+      "bytes": 3798,
+      "sha256": "2834e0409f54ad349a894b5afeae90922fb38f803952618335713a5ebca2a062",
       "executable": false
     },
     "assets/rail-joint-example": {
@@ -104,6 +224,18 @@
       "sha256": "5d942ed02248da6dbb786dfdeeae22c4cadd3be9e1649f1a61bffc3dc4c7dc7f",
       "executable": false
     },
+    "references/material-variants-provenance.md": {
+      "type": "file",
+      "bytes": 4485,
+      "sha256": "bf6c8bc741c51bca17fd8055777a7396fcd3759b0e4881250111a5317ebb3f40",
+      "executable": false
+    },
+    "references/material-variants.md": {
+      "type": "file",
+      "bytes": 5982,
+      "sha256": "17c3a17ad7caec5bb423ade0eb6b81c67261b4d17051fd1cf7cf15283aed62ce",
+      "executable": false
+    },
     "references/multipart-preview.md": {
       "type": "file",
       "bytes": 5583,
@@ -116,10 +248,28 @@
       "sha256": "f33701f31a256f78e1afffe0587de2f87d83bf2735217bddfe664cae664ea4ac",
       "executable": false
     },
+    "references/research-driven-refinement-provenance.md": {
+      "type": "file",
+      "bytes": 2721,
+      "sha256": "eadba2ebe826256918ccaf22570b75a47187798141773cac6bafb300e361329e",
+      "executable": false
+    },
+    "references/research-driven-refinement.md": {
+      "type": "file",
+      "bytes": 4469,
+      "sha256": "a45e287daa36540ede9d244ec37f61bb324794e2fc387d6e5fa6a7345754b02c",
+      "executable": false
+    },
     "references/resource-disposition.md": {
       "type": "file",
       "bytes": 4410,
       "sha256": "6f3b8635f0c22351e3d002036877ca68792944203693641d17f786f30da701d4",
+      "executable": false
+    },
+    "references/runtime-glb.md": {
+      "type": "file",
+      "bytes": 5974,
+      "sha256": "8af3e5168bff15f8fa100e278ff7e489f1a124999ad1d0e971abdee3191bb028",
       "executable": false
     },
     "scripts": {
@@ -129,6 +279,24 @@
       "type": "file",
       "bytes": 4046,
       "sha256": "89524147e60129aad9953c5c737b8fee34fb23d59de715d8715b93cf23ef4d80",
+      "executable": false
+    },
+    "scripts/check_reference_envelope.py": {
+      "type": "file",
+      "bytes": 2257,
+      "sha256": "3b443ccf73aa5b38c0a13cc980152187980cdb24dbf87eb6411317e71f195cff",
+      "executable": false
+    },
+    "scripts/check_runtime_character.py": {
+      "type": "file",
+      "bytes": 2614,
+      "sha256": "da37ea927ada3f825e8629f7b01f9ae46fa95597e71b74034f1bcd9d4d0fd26b",
+      "executable": false
+    },
+    "scripts/check_variant_collection.py": {
+      "type": "file",
+      "bytes": 3007,
+      "sha256": "d7ce6fd9c41ef1ae389d2930fb65f2524ebebd48f4a8bcc96afd0ea8b3dd8bed",
       "executable": false
     },
     "scripts/compare_landmarks.py": {
@@ -143,10 +311,34 @@
       "sha256": "d678512f90456acfd0bc712b0fa8a8fdef0aff2147f3d846e3e7467ff1080695",
       "executable": false
     },
+    "scripts/create_material_variant_example.py": {
+      "type": "file",
+      "bytes": 3119,
+      "sha256": "21d390285f30828e5f5c134f0650e347e55971d4426b0617aa96bc5323684614",
+      "executable": false
+    },
+    "scripts/create_reference_fixture.py": {
+      "type": "file",
+      "bytes": 2546,
+      "sha256": "fd2623a5c59778f58f17843115a0d1fa39e34149fcf8e0e712a7843e894b0c65",
+      "executable": false
+    },
+    "scripts/create_runtime_character.py": {
+      "type": "file",
+      "bytes": 9649,
+      "sha256": "f72393a9b9bff89bce1a3e773269f70973591e430e39f98caf8fa60c126517fa",
+      "executable": false
+    },
     "scripts/launch_interactive_viewer.py": {
       "type": "file",
       "bytes": 946,
       "sha256": "51f307ac8cf83edaeb2cdd759ac7ac96715cf7548f41c505b01b2023b2568469",
+      "executable": false
+    },
+    "scripts/prepare_reference_review.py": {
+      "type": "file",
+      "bytes": 10962,
+      "sha256": "36b6aebe436a8befa3c50ec17f93b160861c71223960480dfa6503281cfc6f2f",
       "executable": false
     },
     "scripts/render_preview.py": {
@@ -176,10 +368,22 @@
     "tests": {
       "type": "directory"
     },
+    "tests/check_material_variants.mjs": {
+      "type": "file",
+      "bytes": 6403,
+      "sha256": "de811f0b7b3394bdfb3d38db971b29e58e0fec66b506f761ad2f92b26ac73895",
+      "executable": false
+    },
     "tests/check_multipart_viewer.py": {
       "type": "file",
       "bytes": 14198,
       "sha256": "960cc1d3edec9797db34cffee8d4a3b89b1801fc305ad987d9c21bbcf004ae8c",
+      "executable": false
+    },
+    "tests/check_reference_review.mjs": {
+      "type": "file",
+      "bytes": 6177,
+      "sha256": "e946c516791c46064065e3c8554fc7210e0c4a33b5b9ebae823bdfeb1a9c5234",
       "executable": false
     },
     "tests/fixtures": {

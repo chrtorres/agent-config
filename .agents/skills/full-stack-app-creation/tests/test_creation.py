@@ -10,6 +10,25 @@ spec.loader.exec_module(creator)
 
 
 class CreationTests(unittest.TestCase):
+    def test_playable_example_copies_complete_fixture(self):
+        with tempfile.TemporaryDirectory() as folder:
+            destination = Path(folder) / "fixture"
+            result = creator.create(destination, "playable-3d")
+            for name in ("app.js", "core.js", "core.test.js", "smoke.mjs", "index.html", "package-lock.json"):
+                self.assertTrue((destination / name).is_file())
+            self.assertEqual(result["build_command"], ["npm", "run", "build"])
+
+    def test_activity_example_contains_runtime_and_isolated_checks(self):
+        with tempfile.TemporaryDirectory() as folder:
+            destination = Path(folder) / "isolated-app"
+            result = creator.create(destination, "activity-town")
+            for relative in ["src/town.js", "scripts/activity.mjs", "scripts/serve.mjs",
+                             "scripts/activity.test.mjs", "scripts/smoke.mjs", "package-lock.json"]:
+                self.assertTrue((destination / relative).is_file())
+            for relative in [".git", ".github", "node_modules", "evidence"]:
+                self.assertFalse((destination / relative).exists())
+            self.assertEqual(result["install_command"], ["npm", "ci"])
+
     def test_complete_copy_imports_without_original_task(self):
         import subprocess
         import sys

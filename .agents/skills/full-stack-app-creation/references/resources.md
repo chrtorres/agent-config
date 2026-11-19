@@ -35,3 +35,11 @@ The starter differs from the original tested app only in portable packaging/docu
 ## Storage workflow extension
 
 The storage dashboard and secure native authentication workflow are a related second full-stack example. See [storage-and-jit.md](storage-and-jit.md) for its resource inventory, user feedback, implementation responses, generalized values, prerequisites and limits. The monitoring example and its callers remain intact. New resources are `assets/storage-app/`, `scripts/create_storage_app.py`, `scripts/capture_storage_examples.mjs`, `tests/test_storage_creation.py`, and `references/storage-example-evidence/`.
+
+## Live-state workflow extension
+
+See [live-state-and-browser-qa.md](live-state-and-browser-qa.md) for the comparison, feedback, resource inventory, and reproduction steps for the Activity Town example. Its source and tests are under `assets/activity-town/`. The shared creation helper selects this example with `--example activity-town`.
+
+## Playable 3D workflow extension
+
+See [playable-3d.md](playable-3d.md) for the capture decision, controller and save acceptance, resource inventory, and the runnable `--example playable-3d` fixture.

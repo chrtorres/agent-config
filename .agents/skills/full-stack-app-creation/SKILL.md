@@ -1,11 +1,11 @@
 ---
 name: full-stack-app-creation
-description: Take a full-stack application from an initial idea through requirements, architecture, implementation, backend integration, browser testing, and runnable delivery, with retained source and reproducible evidence.
+description: Take a full-stack application from requirements through architecture, implementation, meaningful code comments, backend integration, browser testing, and runnable delivery. Includes monitoring, native authorization, and interactive live-state examples.
 ---
 
 # Full-stack app creation
 
-Turn a user's idea into a working, inspectable application. Own the path from intent and product definition to implementation, verification, and delivery. The bundled monitoring dashboard is one complete worked example, not the scope or required architecture of this skill.
+Turn a user's idea into a working, inspectable application. Own the path from intent and product definition to implementation, verification, and delivery. Choose the architecture that fits the task. The bundled applications illustrate different choices.
 
 ## Shape the idea
 
@@ -31,6 +31,8 @@ Extend the slice to the agreed scope: input validation, meaningful errors, cance
 
 Develop a coherent visual direction suited to the product. Inspect usable screens early and refine observed issues. Respect reduced motion, keyboard access, responsive navigation, and legible supporting copy.
 
+Apply [comment-code](../comment-code/SKILL.md) during implementation and before handoff. Explain the intent of non-obvious algorithms, state transitions, trust boundaries, concurrency, units, and compatibility decisions beside the code that implements them. Read the surrounding code and tests before describing a contract. Check comments for accuracy and portability, and run the affected syntax or type checks and behavioral tests after comment edits.
+
 ## Verify the actual application
 
 Derive checks from the acceptance criteria and risks rather than copying the example's test matrix wholesale. Test meaningful business outcomes, failure states, boundaries, and persistence. Exercise real HTTP or service traffic when claiming integration; fixture results do not establish a live integration.
@@ -39,7 +41,15 @@ If the user supplies an acceptance threshold, declare its scoring rubric and cri
 
 Drive the actual browser through the primary journey and important error paths. Wait for observable completion. Compare rendered state, backend results, stored bytes, and downloaded artifacts where relevant. Test relevant viewport sizes and keyboard interactions. Inspect settled screenshots alongside assertions.
 
+For animated interfaces wired to live state, verify that controls cause real motion or geometry changes. Wait for a rendered state before measuring it. When modifying a regression check, reproduce the defect or inject a narrowly scoped fault in an isolated copy to show the check still rejects it. See [the live-state example](references/live-state-and-browser-qa.md) for fixture isolation, low-resource browser rendering, and local review practice.
+
+When extending a playable browser 3D app, use [playable 3D regression and delivery](references/playable-3d.md) for a fixed-step simulation, frame-aware input checks, same-origin saves, controller acceptance, and an isolated production-build smoke test.
+
 Use isolated task storage and explicitly declared dependencies. Preserve actual commands, working directories, runtime versions, exit codes, assertions, screenshots, relevant requests/artifacts, and a manifest tying evidence to authored source hashes. Exclude dependency trees, credentials, runtime identities, and private data from reusable resources. Record failures and rerun checks affected by fixes; do not borrow another application's passing results.
+
+## Evidence-linked review
+
+When an interface explains real structures or factual relationships, use [evidence-linked review](references/evidence-linked-review.md). Carry research and uncertainty into the data contract and inspection UI. Test that selections change the rendered artifact and restore its state, then validate factual claims against independent evidence.
 
 ## Deliver and iterate
 
@@ -60,3 +70,5 @@ This helper copies the monitoring worked example into a new task directory witho
 For other applications, retain an equally complete implementation and validation set suited to their actual architecture. Generalize environment values and keep fresh evidence outside the shared skill.
 
 The optional [storage and JIT example](references/storage-and-jit.md) includes a second complete source tree, portable creation helper, original generic shell input, fixtures, locked QA dependencies, and scan security tests. Use `scripts/create_storage_app.py --destination <new-app-directory>` for that domain; read its copied README before choosing fixture-only or explicitly authorized live validation. Its historical acceptance score is not a guaranteed outcome for another app.
+
+Use `scripts/create_app.py --example activity-town --destination <new-app-directory>` for the [Activity Town example](references/live-state-and-browser-qa.md). It includes a Vite and Three.js frontend, a local Node activity relay, synthetic sessions, and Playwright checks for rendered geometry, navigation, and privacy.

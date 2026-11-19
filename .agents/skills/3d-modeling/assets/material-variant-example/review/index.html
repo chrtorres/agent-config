@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Material variants · 3D review</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script type="importmap">
+      {"imports":{"three":"./vendor/build/three.module.js"}}
+    </script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="viewer-card" aria-label="Interactive 3D review viewer">
+        <div id="viewer" class="viewer" role="application" aria-label="Rotatable 3D model viewer">
+          <div id="loading" class="loading" role="status">Loading model…</div>
+          <div class="viewer-help">Drag to orbit · Scroll or pinch to zoom · Right-drag or two-finger drag to pan</div>
+        </div>
+        <div class="toolbar" aria-label="Viewer controls">
+          <button id="reset" type="button">Reset view</button>
+          <button id="overhead" type="button">Overhead</button>
+          <button id="profile" type="button">Profile</button>
+          <button id="detail" type="button" hidden>Detail</button>
+          <button id="autoRotate" type="button" aria-pressed="false">Auto-rotate</button>
+          <button id="wireframe" type="button" aria-pressed="false">Wireframe</button>
+
+        </div>
+      </section>
+      <aside class="info-card">
+        <label class="variety-label" for="variety">Material variant</label>
+        <select id="variety"></select>
+        <h1 id="title">Material variants</h1>
+        <p class="status"><span class="status-dot"></span><span id="status">Loading model</span></p>
+        <dl id="facts" class="facts"></dl>
+        <div class="note"><p id="note"></p></div>
+        <div class="downloads" id="downloads" hidden>
+          <a id="render" target="_blank" rel="noopener">Studio render</a>
+          <a id="glb" download>GLB</a>
+          <a id="blend" download>Blender</a>
+        </div>
+      </aside>
+    </main>
+    <script type="module" src="viewer.js"></script>
+  </body>
+</html>

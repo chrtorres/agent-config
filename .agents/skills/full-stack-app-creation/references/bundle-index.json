@@ -10,12 +10,123 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 7386,
-      "sha256": "212ac01451256a4129e05caeab065fc351edfb1352c4834378e0f4f06c419a15",
+      "bytes": 9259,
+      "sha256": "ba95d9a3cd25578ea3b88a9cab8466994db3dc7ed91a0dc0c5c0700dfc15e914",
       "executable": false
     },
     "assets": {
       "type": "directory"
+    },
+    "assets/activity-town": {
+      "type": "directory"
+    },
+    "assets/activity-town/.gitignore": {
+      "type": "file",
+      "bytes": 107,
+      "sha256": "bea9d408ce110b7ca3aceb9f82a96067d8f610fa6d70abf36ee894f706a6a650",
+      "executable": false
+    },
+    "assets/activity-town/README.md": {
+      "type": "file",
+      "bytes": 4382,
+      "sha256": "4f1cb90dd55135d7c9252f9a9333c08145884451ad5e72b22628fe4600c52fce",
+      "executable": false
+    },
+    "assets/activity-town/index.html": {
+      "type": "file",
+      "bytes": 784,
+      "sha256": "b2e13372d9a428f625c54b669eeec087ac9d696685310bb42f176c8078672a14",
+      "executable": false
+    },
+    "assets/activity-town/package-lock.json": {
+      "type": "file",
+      "bytes": 37060,
+      "sha256": "7c0d7ea7801bd634e91a9d2f18ea977e06fa350e36fd75f7d280b1ca08d24f55",
+      "executable": false
+    },
+    "assets/activity-town/package.json": {
+      "type": "file",
+      "bytes": 486,
+      "sha256": "206cba487de73e474485c34157eaa351c3d7ad214123178fd35dd9ef537ed2ea",
+      "executable": false
+    },
+    "assets/activity-town/scripts": {
+      "type": "directory"
+    },
+    "assets/activity-town/scripts/activity.mjs": {
+      "type": "file",
+      "bytes": 10810,
+      "sha256": "2d3ca4a3b54121c680f037113406a058671be3ebb08313a8832b18106f543f9d",
+      "executable": false
+    },
+    "assets/activity-town/scripts/activity.test.mjs": {
+      "type": "file",
+      "bytes": 2585,
+      "sha256": "5a88febe021e894a4953282dbd5820a583a0988381278c288b2236bb231a21f6",
+      "executable": false
+    },
+    "assets/activity-town/scripts/serve.mjs": {
+      "type": "file",
+      "bytes": 3273,
+      "sha256": "4a9bf70d2846e6596244a629500a925216acefb245f3c395af78d51cf7b5ba9d",
+      "executable": false
+    },
+    "assets/activity-town/scripts/smoke.mjs": {
+      "type": "file",
+      "bytes": 31104,
+      "sha256": "caed814f1ad99db959a9c94c319b33bd447e72257355e7914e0bb42090f9972a",
+      "executable": false
+    },
+    "assets/activity-town/src": {
+      "type": "directory"
+    },
+    "assets/activity-town/src/buildings.js": {
+      "type": "file",
+      "bytes": 21305,
+      "sha256": "c6bf23b7e0fca53346db3bd8728df302ce0e5f8ecd89fa3af55786fbe39e2f3b",
+      "executable": false
+    },
+    "assets/activity-town/src/interface.js": {
+      "type": "file",
+      "bytes": 7049,
+      "sha256": "582b5d2caec3f05dec6dc7d96f43855afcdfc5f22ed57a452658c6d1667b75b0",
+      "executable": false
+    },
+    "assets/activity-town/src/landscape.js": {
+      "type": "file",
+      "bytes": 5765,
+      "sha256": "8003065fa942310dbf59bb45ec759c3c3a7f221d28a61e50dac370d31dfa93f8",
+      "executable": false
+    },
+    "assets/activity-town/src/main.js": {
+      "type": "file",
+      "bytes": 6730,
+      "sha256": "db49c93cf93d704711826cb6214d6f2398b06544624df446a43d6f78bf34906c",
+      "executable": false
+    },
+    "assets/activity-town/src/places.js": {
+      "type": "file",
+      "bytes": 2336,
+      "sha256": "48ea3b56493c4a34175955ebf5fc9929344176d8112ecc5c4af8369b6d338297",
+      "executable": false
+    },
+    "assets/activity-town/src/style.css": {
+      "type": "file",
+      "bytes": 10428,
+      "sha256": "25dce02d753d11afeeca2d53195823c6b60921fcac04a9ea69a05730325c6a3d",
+      "executable": false
+    },
+    "assets/activity-town/src/town.js": {
+      "type": "file",
+      "bytes": 9415,
+      "sha256": "2120ae193ffd5b73a5b0e54878500a33e154bdc1e6ff4c64f2de1d614127c7cf",
+      "executable": false
+    },
+    "assets/activity-town/vite.config.js": {
+      "type": "file",
+      "bytes": 735,
+      "sha256": "8d759b1dec8f34086db9b932b8c69da2607b53d520a3d5abfb99da412b34b24d",
+      "executable": false
     },
     "assets/monitoring-app": {
       "type": "directory"
@@ -132,6 +243,51 @@
       "type": "file",
       "bytes": 21063,
       "sha256": "f280048b492e5598ef39753c4c128bea00aa9274c256d50222b267a631938025",
+      "executable": false
+    },
+    "assets/playable-3d": {
+      "type": "directory"
+    },
+    "assets/playable-3d/app.js": {
+      "type": "file",
+      "bytes": 2858,
+      "sha256": "44a7a7bfb8782cd91a3521a938937b24c32ca1c16a1e21ef3a0e548ad472d630",
+      "executable": false
+    },
+    "assets/playable-3d/core.js": {
+      "type": "file",
+      "bytes": 1701,
+      "sha256": "f9c54b3af79f281db29d45c3344ef7140f85482c1a0aab5ea13ebbbd501dddd5",
+      "executable": false
+    },
+    "assets/playable-3d/core.test.js": {
+      "type": "file",
+      "bytes": 1208,
+      "sha256": "bf1f2256a912562fc72a8f97d010bf1574bbf7e0fa0ef0b574876c32e6c5ba8b",
+      "executable": false
+    },
+    "assets/playable-3d/index.html": {
+      "type": "file",
+      "bytes": 651,
+      "sha256": "e9cd08d048ab146782e2c1d4914586478d9e4c4dd3dfe02df2e71627be6a3925",
+      "executable": false
+    },
+    "assets/playable-3d/package-lock.json": {
+      "type": "file",
+      "bytes": 36615,
+      "sha256": "607979946ba73dd23d62863ccf027f338d04c684e4201fe160e17738f2a1b099",
+      "executable": false
+    },
+    "assets/playable-3d/package.json": {
+      "type": "file",
+      "bytes": 366,
+      "sha256": "fc7117312c2c1d722389e08b59bb8a959634c4cff1d8d3f36686f830a8b364ab",
+      "executable": false
+    },
+    "assets/playable-3d/smoke.mjs": {
+      "type": "file",
+      "bytes": 3541,
+      "sha256": "2de80670dfecf45d6c13f3b5028ebb7817da3ae6555ae8f3a951e12d713704c3",
       "executable": false
     },
     "assets/storage-app": {
@@ -278,6 +434,15 @@
     "references": {
       "type": "directory"
     },
+    "references/activity-town-example-evidence": {
+      "type": "directory"
+    },
+    "references/activity-town-example-evidence/demo-desktop.png": {
+      "type": "file",
+      "bytes": 334297,
+      "sha256": "3c956a090b6df1a32a071d514f0bbc7e7b974c4d08ff7690b394e25099c4e58a",
+      "executable": false
+    },
     "references/architecture-and-qa.md": {
       "type": "file",
       "bytes": 5187,
@@ -294,6 +459,12 @@
       "type": "file",
       "bytes": 4431,
       "sha256": "5ca7e45e93052b852487de658bba49943cd329670796c592a5979f96206d58ec",
+      "executable": false
+    },
+    "references/evidence-linked-review.md": {
+      "type": "file",
+      "bytes": 2561,
+      "sha256": "f355b7c2589c6c9b83fd93cfe34580aa707b197e1f6f114e7302f696e9f2e8e4",
       "executable": false
     },
     "references/example-evidence": {
@@ -359,10 +530,22 @@
       "sha256": "78e6f305d7a7bf442141177f0a723cf2577dde56019ba6027275337e5562d29c",
       "executable": false
     },
+    "references/live-state-and-browser-qa.md": {
+      "type": "file",
+      "bytes": 5766,
+      "sha256": "261ade4ce7e3f83f89cceb292e2204c39a1770cafc5caeee9aedba1bc10329fe",
+      "executable": false
+    },
+    "references/playable-3d.md": {
+      "type": "file",
+      "bytes": 6789,
+      "sha256": "978c3ab967512b0f291bd47eba06b49fd8ddc3cfd601c192d3b5324059d11a7a",
+      "executable": false
+    },
     "references/resources.md": {
       "type": "file",
-      "bytes": 6043,
-      "sha256": "d7d187e4edd4a1a4b4ed66182597b13ef194e2d41c9202570db3ea8e470d02b3",
+      "bytes": 6584,
+      "sha256": "425088a8aca57a9bfb1ea4166a8c509356cf02452675fd47cb84a38b89fb4d8d",
       "executable": false
     },
     "references/storage-and-jit.md": {
@@ -421,8 +604,8 @@
     },
     "scripts/create_app.py": {
       "type": "file",
-      "bytes": 1472,
-      "sha256": "47248594c85cbe093a94be679d2acd645e13302e5943b527b66d4856fd6716b8",
+      "bytes": 2548,
+      "sha256": "59b7d6889e7e2550b6ad3239034e5d8e532ac1ceb880fa2e31692b565310d004",
       "executable": false
     },
     "scripts/create_storage_app.py": {
@@ -436,8 +619,8 @@
     },
     "tests/test_creation.py": {
       "type": "file",
-      "bytes": 1967,
-      "sha256": "9805a33cbd600e2dc41026f82e8b8a7c79f2a8aa28f148c7885135963737300a",
+      "bytes": 3177,
+      "sha256": "ab70b0071c237865a3138109adbcdb77aeaf1c024e6b3d2f8d18348020279e40",
       "executable": false
     },
     "tests/test_storage_creation.py": {
