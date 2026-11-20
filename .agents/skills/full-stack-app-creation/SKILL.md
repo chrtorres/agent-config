@@ -43,7 +43,7 @@ Drive the actual browser through the primary journey and important error paths. 
 
 For animated interfaces wired to live state, verify that controls cause real motion or geometry changes. Wait for a rendered state before measuring it. When modifying a regression check, reproduce the defect or inject a narrowly scoped fault in an isolated copy to show the check still rejects it. See [the live-state example](references/live-state-and-browser-qa.md) for fixture isolation, low-resource browser rendering, and local review practice.
 
-When extending a playable browser 3D app, use [playable 3D regression and delivery](references/playable-3d.md) for a fixed-step simulation, frame-aware input checks, same-origin saves, controller acceptance, and an isolated production-build smoke test.
+When extending a playable browser 3D app, use [playable 3D regression and delivery](references/playable-3d.md) for a fixed-step simulation, frame-aware input checks, same-origin saves, controller acceptance, frame-by-frame pose continuity, and an isolated production-build smoke test.
 
 Use isolated task storage and explicitly declared dependencies. Preserve actual commands, working directories, runtime versions, exit codes, assertions, screenshots, relevant requests/artifacts, and a manifest tying evidence to authored source hashes. Exclude dependency trees, credentials, runtime identities, and private data from reusable resources. Record failures and rerun checks affected by fixes; do not borrow another application's passing results.
 

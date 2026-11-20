@@ -21,11 +21,11 @@ Use this skill when the user asks for a new 3D model, a revision to an existing 
 
 ## Runtime assets
 
-For a Blender asset intended for a game or browser scene, use the [runtime GLB workflow](references/runtime-glb.md). It defines an engine-facing asset contract, separate studio and runtime exports, and validation of the exact GLB used in the browser. Print approval applies only to physical outputs.
+For a Blender asset intended for a game or browser scene, use the [runtime GLB workflow](references/runtime-glb.md). It defines an engine-facing asset contract, separate studio and runtime exports, and validation of the exact GLB used in the browser. Print approval applies only to physical outputs. For fitted gear and expressive faces, use [runtime character fit](references/runtime-character-fit.md) to check rear clearance, facial poses, and moving attachment anchors.
 
 ## Research-driven animation
 
-Use [animated figure review](references/animated-figure-review.md) for a figure that deforms, articulates, or travels through a scene. Author poses and root motion in Blender, bake named clips, and inspect the exported GLB in the browser. The bundled generator covers both rigid pivots and a weighted skeleton. Connect observed motion to measurable checks and state which parameters were inferred.
+Use [animated figure review](references/animated-figure-review.md) for a figure that deforms, articulates, or travels through a scene. For baked motion, author poses and root motion in Blender, bake named clips, and inspect the exported GLB in the browser. For procedural motion, publish the consumer pose code with the exact GLB and verify motion through rendered observations. The bundled generator covers both rigid pivots and a weighted skeleton. Connect observed motion to measurable checks and state which parameters were inferred.
 
 ## Combined review workspaces
 

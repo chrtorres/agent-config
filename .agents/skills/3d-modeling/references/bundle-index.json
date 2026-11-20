@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 15450,
-      "sha256": "4b15c8e07f145c14bd74b3f73fa6770562c983c7de804d5fcdf1d23768b0d528",
+      "bytes": 15763,
+      "sha256": "bd3320bea0f0faac81aaeb4941be6059857fa75a031d990f8df3f354322613fc",
       "executable": false
     },
     "assets": {
@@ -329,10 +329,16 @@
       "sha256": "6f3b8635f0c22351e3d002036877ca68792944203693641d17f786f30da701d4",
       "executable": false
     },
+    "references/runtime-character-fit.md": {
+      "type": "file",
+      "bytes": 5396,
+      "sha256": "9cf9b5185a873b12f7c65eb2013657f8009e7f1cede74c7b8322ab3377a92214",
+      "executable": false
+    },
     "references/runtime-glb.md": {
       "type": "file",
-      "bytes": 5974,
-      "sha256": "8af3e5168bff15f8fa100e278ff7e489f1a124999ad1d0e971abdee3191bb028",
+      "bytes": 6090,
+      "sha256": "fed6504bcf305e4817db8adff6ca3c0d6c13ecce82177b0e7be81b9da3db2c30",
       "executable": false
     },
     "scripts": {
@@ -360,6 +366,12 @@
       "type": "file",
       "bytes": 2614,
       "sha256": "da37ea927ada3f825e8629f7b01f9ae46fa95597e71b74034f1bcd9d4d0fd26b",
+      "executable": false
+    },
+    "scripts/check_runtime_fit.py": {
+      "type": "file",
+      "bytes": 3524,
+      "sha256": "9193f0b4c4e684120ce23b93aa28c2dd8bafe0e55f5daa43b0ea240ca9209ea5",
       "executable": false
     },
     "scripts/check_variant_collection.py": {
@@ -486,6 +498,12 @@
       "type": "file",
       "bytes": 3920,
       "sha256": "872e5edcd163feed02a24b63b029f3783d1d8195ad07c57782569ff290ab6070",
+      "executable": false
+    },
+    "tests/fixtures/create_runtime_fit.py": {
+      "type": "file",
+      "bytes": 2418,
+      "sha256": "e8668323de1a4ce1941eb469147f802b635de433bde59e09dd23431e0c098cf7",
       "executable": false
     },
     "tests/fixtures/photo-landmarks.json": {

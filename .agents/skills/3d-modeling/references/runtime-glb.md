@@ -6,7 +6,8 @@ Use a runtime GLB when a game or browser scene needs reproducible authored geome
 2. Export only runtime geometry and pivots. Keep studio floor, lights and cameras in the authored `.blend` and inspection renders. Preserve the generator, front and rear renders, GLB and metadata under the model version.
 3. Reimport the actual export. Check scale, ground offset, hierarchy, a real transform at each required pivot, included material/texture resources, and triangle and mesh counts. DCC bounds and export bounds can differ when curves or modifiers become meshes. Record the consumer format's axis conversion.
 4. Copy the exact checked bytes into the version's interactive review and record their hash. Use the existing viewer for silhouette, zoom, orbit and material inspection. In an app, also verify the exact runtime asset through the application's load path, including any asynchronous replacement of fallback geometry. Verify that attachments remain parented to the loaded pivots. If the runtime must be offline, ship dependencies locally. The existing review viewer has a CDN dependency.
-5. Record visual review and integration state for this version. Apply print-specific approval and slicing checks only when the user requests a physical deliverable.
+5. For facial deformation and fitted equipment, add the [directional character fit pass](runtime-character-fit.md).
+6. Record visual review and integration state for this version. Apply print-specific approval and slicing checks only when the user requests a physical deliverable.
 
 ## Reproduce the runtime character fixture
 

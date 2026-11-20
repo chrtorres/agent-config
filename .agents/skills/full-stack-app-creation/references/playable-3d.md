@@ -9,6 +9,32 @@ Use this mode for a stateful browser scene with continuous controls, game or sim
 5. Build the production candidate and serve it in an isolated test instance. Drive input through the real page. Wait for rendered observations during motion and for the actual state transition at the end of a journey. Capture runtime and console errors, tested backend and browser versions, screenshots, and the source revision or hashes. Avoid hot reload during acceptance. For slow software rendering, reduce viewport cost or use a verified hardware backend. When splitting suites, record which cases ran and verify that the app source remained identical.
 6. Test the physical controller separately if it is a requirement. Record operating-system visibility, browser enumeration and mapping, activation, motion, actions, and reconnect. A synthetic pad establishes the application input path only. Make test input streams explicit so an attached physical pad cannot interfere with a keyboard-only script.
 
+## Check rendered pose transitions
+
+- Publish a diagnostic snapshot after the render using the actual joint
+  transforms, current action, step identity and rendered frame number.
+  Choose world or player-local coordinates for the claim. Compare world
+  contacts for foot drift and local transforms for animation discontinuity.
+- Replay representative transitions against an uninterrupted run at normal
+  and coarse frame rates. At minimum sample immediately before, on, and
+  after the transition that failed. A neutral input frame should preserve
+  the in-progress gait. A real stop may settle over several frames. When
+  cancelling one action into another, assert that gameplay accepts the
+  replacement on its expected simulation tick and measure the visible
+  blend separately.
+- Install synthetic frame/input clocks before startup in an isolated
+  Playwright context. In ordinary browser waits, install the inspection
+  function once and use synchronous predicates against observable values.
+  An async predicate can satisfy a truthiness test with a Promise before
+  its result is known. For a short transient such as a blink, sample
+  consecutive rendered frames through entry and exit. Use an independent
+  wall-clock watchdog for slow or stalled renderers.
+- Gate the same built candidate that was independently reviewed. Retain
+  exact asset and animator identities, the baseline and interrupted trace,
+  and a negative run that reproduces the defect or injects the narrow fault.
+  Measure a comparable scene if reporting frame pacing. Physical controller
+  activation still requires a hands-on check.
+
 ## Reproduce the synthetic checkpoint fixture
 
 ```sh
@@ -23,7 +49,7 @@ npm run smoke -- <fresh-evidence-directory-outside-app>
 
 The fixture uses Node.js 20.19 or later, npm, locked Vite, Three.js and Playwright, and Chromium with WebGL 2. Playwright may need browser system libraries. The smoke runner allocates and closes its own loopback preview. The default uses SwiftShader. `BROWSER_GPU=1` requests ANGLE OpenGL on a compatible host. Check the browser's renderer before claiming hardware acceleration.
 
-The fixture uses generated primitives. A visible player moves toward a beacon, can activate it in range, changes the rendered beacon state, and persists a versioned save. The unit checks exercise time boundaries, substep input, malformed data and denied storage. The browser fixture drives keyboard and injected controller input, inspects a rendered observation, tests reload, checks console errors, and writes screenshots and outcomes. For authoring a versioned Blender asset, use [runtime GLB](../../3d-modeling/references/runtime-glb.md).
+The fixture uses generated primitives. A visible player moves toward a beacon, can activate it in range, changes the rendered beacon state, and persists a versioned save. The unit checks exercise time boundaries, substep input, malformed data and denied storage. The browser fixture drives keyboard and injected controller input, inspects a rendered observation, tests reload, checks console errors, and writes screenshots and outcomes. The pose replays inject one neutral input frame at 20 and 60 Hz, inspect the rendered boots, and compare the following three frames with uninterrupted travel. In a separate app copy, temporarily reset the phase in `gait.js` when distance is zero, rebuild and rerun the smoke suite. The pose check must reject the broken replay. For authoring a versioned Blender asset, use [runtime GLB](../../3d-modeling/references/runtime-glb.md).
 
 ## Capture decision and provenance
 
@@ -48,3 +74,27 @@ Historical feedback, paraphrased. The user required regression checks before fea
 In the originating run, the production build passed 150 unit and 59 browser checks. All three checkpoints were traversed with real page inputs. The campaign check exercised victory, defeat, and reload. Extensive hardware input feel and visual equivalence to a reference were outside those automated results.
 
 Generalized values include project and repository identities, branch names, local paths, origin and ports, device identity, evidence locations and run identifiers.
+
+
+## Pose-transition extension provenance
+
+| Candidate | Factors | Score | Decision |
+| --- | --- | ---: | --- |
+| full-stack-app-creation | 1, 1, .75, .75, .75 | 85% | Extend the playable fixture. Fixed-step rules, controlled input, real rendering, build isolation and same-origin saves already exist. Add observed joint samples and replay interrupted against continuous motion. |
+| 3d-modeling | .75, .75, .5, .5, .5 | 60% | Link the fit and deformation workflow. Baked clip checks and runtime asset contract cover the geometry view. The live input and action transition belongs in the app workflow. |
+| smoke-test | .5, .5, .5, .5, .75 | 52.5% | Reuse the isolated-browser evidence approach. Its shape and lighting fixtures lack input, simulation timing, and contact traces. |
+
+Historical feedback, paraphrased. The user wanted movement to look credible
+under strict regression review. A settled-speed test missed a one-frame
+neutral-stick discontinuity. The replay compared actual rendered ankles
+against uninterrupted motion at two rates. Separate checks covered combat
+entry during an interrupted vault and restored facial state after a blink.
+A native controller stayed a separate acceptance item.
+
+The runnable subset is [the gait fixture](../assets/playable-3d/gait.js),
+[the rendered replay](../assets/playable-3d/replay-pose.mjs), and the
+existing locked browser app. It generates its own boot geometry and passes
+synthetic input through the real page. The complete original animator, game
+rules, licensed artwork, hardware observations, and release logs remain
+with the original work. Generalized fields include project and repository
+identity, device details, model identifiers, local origins and evidence paths.

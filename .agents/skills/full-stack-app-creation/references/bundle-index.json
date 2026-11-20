@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 9870,
-      "sha256": "4d81d25cb12eb1f00c8e55b0ce5ea376bb02a0b3faec0f5eaadde4cad5e6cacf",
+      "bytes": 9902,
+      "sha256": "c58364600a34beb5ff5099a7967ba1521ab5d1eefd20251dda8ce58e6d28e856",
       "executable": false
     },
     "assets": {
@@ -250,8 +250,8 @@
     },
     "assets/playable-3d/app.js": {
       "type": "file",
-      "bytes": 2858,
-      "sha256": "44a7a7bfb8782cd91a3521a938937b24c32ca1c16a1e21ef3a0e548ad472d630",
+      "bytes": 3495,
+      "sha256": "b2a90cfea322fb23be5e315739d14fa982f3d6fa26a3c265d6fcb95b22edadcb",
       "executable": false
     },
     "assets/playable-3d/core.js": {
@@ -264,6 +264,12 @@
       "type": "file",
       "bytes": 1208,
       "sha256": "bf1f2256a912562fc72a8f97d010bf1574bbf7e0fa0ef0b574876c32e6c5ba8b",
+      "executable": false
+    },
+    "assets/playable-3d/gait.js": {
+      "type": "file",
+      "bytes": 534,
+      "sha256": "031fb848db29a678e790b03bb8d2e12f20188d4411e1da5f4931ba3a306f47ed",
       "executable": false
     },
     "assets/playable-3d/index.html": {
@@ -284,10 +290,16 @@
       "sha256": "fc7117312c2c1d722389e08b59bb8a959634c4cff1d8d3f36686f830a8b364ab",
       "executable": false
     },
+    "assets/playable-3d/replay-pose.mjs": {
+      "type": "file",
+      "bytes": 2394,
+      "sha256": "26e3ef64988facc78c1e51eca0c9f90d2534afa01d056fa537e759b308d3e722",
+      "executable": false
+    },
     "assets/playable-3d/smoke.mjs": {
       "type": "file",
-      "bytes": 3541,
-      "sha256": "2de80670dfecf45d6c13f3b5028ebb7817da3ae6555ae8f3a951e12d713704c3",
+      "bytes": 3689,
+      "sha256": "13e7416c697f005009c1d0f6679a2cf36cbc6e555d5bba57c805628257cd0cff",
       "executable": false
     },
     "assets/storage-app": {
@@ -550,8 +562,8 @@
     },
     "references/playable-3d.md": {
       "type": "file",
-      "bytes": 6789,
-      "sha256": "978c3ab967512b0f291bd47eba06b49fd8ddc3cfd601c192d3b5324059d11a7a",
+      "bytes": 10455,
+      "sha256": "e5fb19e112ccf2230d9378805f0356a7cefbc16c9c06dd3a69fea2b9b9153bce",
       "executable": false
     },
     "references/resources.md": {
@@ -631,8 +643,8 @@
     },
     "tests/test_creation.py": {
       "type": "file",
-      "bytes": 3177,
-      "sha256": "ab70b0071c237865a3138109adbcdb77aeaf1c024e6b3d2f8d18348020279e40",
+      "bytes": 3232,
+      "sha256": "785e3bd722299c9b2b95dc58448d52679c0ec21e69b30c142227a9308d6c0735",
       "executable": false
     },
     "tests/test_storage_creation.py": {

@@ -14,7 +14,8 @@ class CreationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as folder:
             destination = Path(folder) / "fixture"
             result = creator.create(destination, "playable-3d")
-            for name in ("app.js", "core.js", "core.test.js", "smoke.mjs", "index.html", "package-lock.json"):
+            for name in ("app.js", "core.js", "core.test.js", "gait.js", "replay-pose.mjs",
+                         "smoke.mjs", "index.html", "package-lock.json"):
                 self.assertTrue((destination / name).is_file())
             self.assertEqual(result["build_command"], ["npm", "run", "build"])
 

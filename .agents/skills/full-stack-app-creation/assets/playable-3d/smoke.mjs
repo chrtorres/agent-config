@@ -3,6 +3,7 @@ import { mkdir, realpath, writeFile } from "node:fs/promises";
 import { isAbsolute, relative, resolve, sep } from "node:path";
 import { chromium } from "playwright";
 import { preview } from "vite";
+import { checkPoseReplay } from "./replay-pose.mjs";
 
 const output = process.argv[2];
 assert(output, "Usage: npm run smoke -- <evidence-directory-outside-app>");
@@ -52,6 +53,7 @@ try {
     results.cases.push({ mode, status: "pass", consoleErrors: errors });
     await page.close();
   }
+  for (const hz of [20, 60]) results.cases.push(await checkPoseReplay(browser, url.href, hz));
 } catch (error) {
   results.failure = error.message;
   throw error;
