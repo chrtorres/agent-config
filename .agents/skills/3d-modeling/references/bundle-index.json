@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 15763,
-      "sha256": "bd3320bea0f0faac81aaeb4941be6059857fa75a031d990f8df3f354322613fc",
+      "bytes": 16082,
+      "sha256": "ff74fcba55262484de8e609281a2ab091645c75fa69dd5075182fde89228a3b1",
       "executable": false
     },
     "assets": {
@@ -34,8 +34,8 @@
     },
     "assets/interactive-review-viewer/index.html": {
       "type": "file",
-      "bytes": 4100,
-      "sha256": "6bdec49a11f81b32ea3d4d05774d48ef7eca3cfe8734596a78f0a2cd85ac131d",
+      "bytes": 4202,
+      "sha256": "c1245fa9d8ccb7905389fe506db5f1e87fef872a36732fddb549b311c377d3be",
       "executable": false
     },
     "assets/interactive-review-viewer/metadata.json": {
@@ -58,14 +58,14 @@
     },
     "assets/interactive-review-viewer/styles.css": {
       "type": "file",
-      "bytes": 6123,
-      "sha256": "08ac6b5e67b700a7d5f0537a667f8c7fbf42714e019779f49ecd7ff5a182dec8",
+      "bytes": 6214,
+      "sha256": "86349b89f519d245387128fe06db859ca07003d98edfd878073e9f2253a65843",
       "executable": false
     },
     "assets/interactive-review-viewer/viewer.js": {
       "type": "file",
-      "bytes": 19447,
-      "sha256": "8f72fff13150e48a26f59978cb43d182859be4ba7526e6127f63bbdaf6395f30",
+      "bytes": 19505,
+      "sha256": "9d16e073cb77fa95fbb709a09bd6f9b8e44e481a82f06030709c3f5d5b65fe7a",
       "executable": false
     },
     "assets/interactive-review-viewer/workspace": {
@@ -309,6 +309,18 @@
       "type": "file",
       "bytes": 4669,
       "sha256": "f33701f31a256f78e1afffe0587de2f87d83bf2735217bddfe664cae664ea4ac",
+      "executable": false
+    },
+    "references/registered-assembly-provenance.md": {
+      "type": "file",
+      "bytes": 1608,
+      "sha256": "3034c695c52d44e9b16e00d50bdf536053bb24caf206cf409b0011cc5a495fd0",
+      "executable": false
+    },
+    "references/registered-assembly-study.md": {
+      "type": "file",
+      "bytes": 1485,
+      "sha256": "faa5dd985af8c7db1dd7c62625c26a693a3006016721befb73046ec232d83157",
       "executable": false
     },
     "references/research-driven-refinement-provenance.md": {

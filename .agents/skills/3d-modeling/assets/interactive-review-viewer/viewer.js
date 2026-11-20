@@ -358,6 +358,7 @@ new GLTFLoader().load("model.glb", async (gltf) => {
   if (motion) frameView();
   if (initiallyExploded && !explodeButton.disabled) explodeButton.click();
   loading.classList.add("hidden");
+  document.querySelector("#download-glb").hidden = false;
 }, undefined, (error) => { loading.textContent = "Could not load model.glb"; console.error(error); });
 
 explodeButton.addEventListener("click", () => {

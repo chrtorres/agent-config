@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 9902,
-      "sha256": "c58364600a34beb5ff5099a7967ba1521ab5d1eefd20251dda8ce58e6d28e856",
+      "bytes": 10321,
+      "sha256": "ac1eb8da7719d1a04eef1541f2268f4025582107d0cf817ff56fc8c7a1d93e9f",
       "executable": false
     },
     "assets": {
@@ -441,6 +441,27 @@
       "type": "file",
       "bytes": 27699,
       "sha256": "425cb008066a53b3671f078401c19896254260f23699c7323ce36d2d3de3d2bc",
+      "executable": false
+    },
+    "assets/suspension-example": {
+      "type": "directory"
+    },
+    "assets/suspension-example/README.md": {
+      "type": "file",
+      "bytes": 1628,
+      "sha256": "d7ef3c9a52804f0477571e74d3ff9a10173a8aa20d8ef2c4de22933fac593213",
+      "executable": false
+    },
+    "assets/suspension-example/dynamics.mjs": {
+      "type": "file",
+      "bytes": 3677,
+      "sha256": "ce468c709d912b636c424cb1e0c975df034a6816b420ad9842950b93dc2e24fc",
+      "executable": false
+    },
+    "assets/suspension-example/test-dynamics.mjs": {
+      "type": "file",
+      "bytes": 4780,
+      "sha256": "2c75a1d8337d2c05c00488d34def12a44ca59f15512de064265b26012c696b3f",
       "executable": false
     },
     "references": {

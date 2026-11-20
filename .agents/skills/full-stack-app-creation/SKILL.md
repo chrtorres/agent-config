@@ -59,6 +59,10 @@ Use [animated playback review](references/animated-playback-review.md) when a br
 
 Use [multiview review architecture](references/multiview-review.md) to combine existing interactive scenes under a compact tab shell. Test lazy startup, playback suspension, camera preservation, keyboard navigation and independent load failures.
 
+## Secondary motion studies
+
+Use the [suspension example](assets/suspension-example/README.md) for a fixed-step companion view that drives named model pivots with documented support input, joints, readouts and reset behavior. Verify the shared GLB download by bytes and the live study by both node transforms and settled frames. See the [capture decision](../3d-modeling/references/registered-assembly-provenance.md).
+
 ## Deliver and iterate
 
 Provide the verified running view or build artifact, a specific starting action, retained runnable source, setup instructions, evidence, and material limitations. For hosted delivery, publish the exact prepared source through the active provider workflow and verify the deployment result. For a requested local running application, retain its preview when supported and document its lifecycle in task evidence.

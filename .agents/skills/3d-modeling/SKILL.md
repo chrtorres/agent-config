@@ -31,6 +31,10 @@ Use [animated figure review](references/animated-figure-review.md) for a figure 
 
 Use [combined review workspaces](references/combined-review-workspaces.md) when a contextual scene, animated study and a multipart inspection need a shared entry point. Package the tested review assets together and verify each view's visible state, lifecycle, download and source metadata.
 
+## Registered layers and secondary motion
+
+Use [registered assembly study](references/registered-assembly-study.md) to fit layered reference meshes, preserve attachment pivots and verify an exported physics review. See the [capture decision](references/registered-assembly-provenance.md) for provenance and resources.
+
 ## Material variants
 
 When several colorways or finishes share a model, use the [material-variant workflow](references/material-variants.md). Keep shared geometry and UVs consistent, generate editable scenes and textured GLBs for each variant, and use identical studio views and a browser selector that preserves the inspection camera. Run the bundled [worked example](assets/material-variant-example/README.md) to reproduce the texture, export, and review pipeline.

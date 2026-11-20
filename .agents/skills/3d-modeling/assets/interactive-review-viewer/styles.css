@@ -69,3 +69,5 @@ dt { color: #8192ad; } dd { margin: 0; text-align: right; color: #e5efff; }
 #motion-exploded { margin: 0; font-size: .85rem; }
 
 [hidden] { display: none !important; }
+
+.model-download:not([hidden]) { display: inline-block; color: #adcfff; margin: .6rem 0; }

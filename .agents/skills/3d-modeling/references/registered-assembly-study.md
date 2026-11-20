@@ -1,0 +1,7 @@
+# Registered layers and suspended assemblies
+
+1. Review primary imagery and motion references. Record what each reference establishes, and identify artistic choices, source units, and gaps.
+2. Register supplied meshes in a single coordinate frame using independent landmarks. Select alternate source geometry only with compatible coverage and documented attribution. Check outlying samples against the reference surface before accepting a fitted layer. Keep individual names, sources and any adjustments in the artifact metadata and license notices.
+3. Fit coverings around an evaluated surface with positive clearance. Check front, rear and side views for protrusions and false connections. Capture each part's fitting parameters in the generator. Keep dense source meshes editable and reduce only delivery exports, preserving smaller structures, node names, dimensions and explicit suspension pivots.
+4. Validate pivot origins, axes, local transforms and neutral pose in the exported GLB. Use named groups for presets and labeled isolation. Test both the exact reviewed GLB and any optional simplified exterior delivery separately. The review download should deliver the packaged geometry selected for review.
+5. For secondary physics, pair this process with the [suspension solver fixture](../../full-stack-app-creation/assets/suspension-example/README.md). Distinguish measured parameters from estimated ones and verify geometric clearance throughout the motion actually rendered.
