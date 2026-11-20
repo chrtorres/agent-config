@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 10964,
-      "sha256": "a6630b67ccee0f42296ae8467b3f006d629ba8c2298f3ae2fa1cb66996628ad2",
+      "bytes": 11306,
+      "sha256": "035b5df6eb3c625832a739ce4c08ef4558050d6d28af7d4e23a0c1591a561779",
       "executable": false
     },
     "assets": {
@@ -126,6 +126,51 @@
       "type": "file",
       "bytes": 735,
       "sha256": "8d759b1dec8f34086db9b932b8c69da2607b53d520a3d5abfb99da412b34b24d",
+      "executable": false
+    },
+    "assets/footage-motion": {
+      "type": "directory"
+    },
+    "assets/footage-motion/app.mjs": {
+      "type": "file",
+      "bytes": 7060,
+      "sha256": "1917af19e77f75613bb37e49a3b77e09fbb0ea92ffb4930166645d464610cb31",
+      "executable": false
+    },
+    "assets/footage-motion/check.mjs": {
+      "type": "file",
+      "bytes": 5046,
+      "sha256": "c50d539818dd626d68c58c2dc47f5c0e5ed6407815c3b4a0b450eb78d04c5cb2",
+      "executable": false
+    },
+    "assets/footage-motion/index.html": {
+      "type": "file",
+      "bytes": 2553,
+      "sha256": "88aa9d9077b94a18993c3cf9a7229411f2936d11a62ef0a7707830ff1ce453b2",
+      "executable": false
+    },
+    "assets/footage-motion/motion.mjs": {
+      "type": "file",
+      "bytes": 5453,
+      "sha256": "153e6f1e1de274b25c658da65996695755178cd38c31184d1bf116309daed796",
+      "executable": false
+    },
+    "assets/footage-motion/render.mjs": {
+      "type": "file",
+      "bytes": 9730,
+      "sha256": "d6c60f606888b21f3900b7a2240f561c2f1f1732ecaf3ab0740e6d6e50fd0075",
+      "executable": false
+    },
+    "assets/footage-motion/serve.py": {
+      "type": "file",
+      "bytes": 3326,
+      "sha256": "5d1bb5d7b97641e3f50136466256fd9c870f78e0220416c529a5748550bd8958",
+      "executable": false
+    },
+    "assets/footage-motion/style.css": {
+      "type": "file",
+      "bytes": 2387,
+      "sha256": "d8877138495a7e3ce82f09522a0a13f21326b8991b6b61685fda27dbe47f38ea",
       "executable": false
     },
     "assets/monitoring-app": {
@@ -567,6 +612,12 @@
       "type": "file",
       "bytes": 7157,
       "sha256": "78e6f305d7a7bf442141177f0a723cf2577dde56019ba6027275337e5562d29c",
+      "executable": false
+    },
+    "references/footage-motion-review.md": {
+      "type": "file",
+      "bytes": 6176,
+      "sha256": "eef673273e981a5864f469a74dfa6d26ca2f0de802c3c617ead255becacaf0ba",
       "executable": false
     },
     "references/live-state-and-browser-qa.md": {

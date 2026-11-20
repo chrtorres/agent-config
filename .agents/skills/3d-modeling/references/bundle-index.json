@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 16572,
-      "sha256": "a5578ead33bc94b9ddc7733ad225a9a339d2199a2fcf7d6545c68502c84d233c",
+      "bytes": 16942,
+      "sha256": "a33f6be6120109fd24257017a6dbde566653c06ff0fda42534d8dd6ac8ffced0",
       "executable": false
     },
     "assets": {
@@ -42,6 +42,15 @@
       "type": "file",
       "bytes": 7020,
       "sha256": "fed38f1f2f04489990abb8148d6d914bf4d80ff6a57b3e62eca50ad66b7f2138",
+      "executable": false
+    },
+    "assets/footage-motion": {
+      "type": "directory"
+    },
+    "assets/footage-motion/generate.py": {
+      "type": "file",
+      "bytes": 4773,
+      "sha256": "e61322c862488ffd65d7b43694b019dcec237e9a13cde82a993fdf5c27e195b3",
       "executable": false
     },
     "assets/interactive-review-viewer": {
@@ -312,6 +321,18 @@
       "type": "file",
       "bytes": 1358,
       "sha256": "abfe6bc028e61ee3dbe92b449cd08ccfbc5a7b8f8455b7f396207c110d2f9eb2",
+      "executable": false
+    },
+    "references/footage-motion-capture.md": {
+      "type": "file",
+      "bytes": 3698,
+      "sha256": "9cbd272fa85cb8e0d2305c0e04b8c22d1842db5a4e3f17603d3871164a116654",
+      "executable": false
+    },
+    "references/footage-motion.md": {
+      "type": "file",
+      "bytes": 4815,
+      "sha256": "4c51aab579eef2d43e53b1c1b8108eaf99a59775cd3d0d0f613d3a2721fed1b1",
       "executable": false
     },
     "references/interactive-smoke-testing.md": {

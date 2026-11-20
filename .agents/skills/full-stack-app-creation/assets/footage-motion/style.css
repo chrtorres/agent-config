@@ -1,0 +1,30 @@
+:root { color-scheme:dark; font:16px/1.45 "Inter",system-ui,sans-serif; color:#e9eeee; background:#13181b; }
+* { box-sizing:border-box; }
+body { margin:0; }
+main { max-width:1120px; margin:auto; padding:clamp(14px,3vw,34px); }
+header { display:flex; align-items:baseline; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-bottom:18px; }
+h1 { margin:0; font-size:clamp(1.5rem,3vw,2.2rem); letter-spacing:-.035em; }
+p { margin:.45rem 0; }
+#pad { color:#aebbbd; font-size:.92rem; }
+.review { display:grid; grid-template-columns:minmax(0,1.22fr) minmax(275px,.82fr); gap:22px; align-items:start; }
+.screen { background:#0b0e11; border:1px solid #36434a; border-radius:14px; min-height:220px; position:relative; display:grid; place-items:center; padding:8px; }
+canvas { max-width:100%; max-height:77vh; height:auto; width:auto; display:block; border-radius:7px; }
+#source { position:absolute; width:1px; height:1px; opacity:0; pointer-events:none; }
+#loading { position:absolute; right:1rem; bottom:.7rem; background:#182124; padding:.55rem .8rem; border-radius:.5rem; }
+aside { display:grid; gap:12px; }
+.panel { background:#20282b; border:1px solid #374549; border-radius:12px; padding:14px; }
+.row { display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:.55rem; }
+button,select { font:inherit; color:inherit; border:1px solid #587170; background:#293a3c; padding:.48rem .68rem; border-radius:7px; cursor:pointer; }
+button:hover { background:#344f50; }
+button:focus-visible, canvas:focus-visible, input:focus-visible,select:focus-visible { outline:2px solid #96e9d2; outline-offset:3px; }
+input[type=range] { width:100%; accent-color:#83d2bf; }
+output { color:#b9cecb; font-variant-numeric:tabular-nums; font-size:.86rem; }
+#time { margin:.8rem 0; }
+.slider { display:grid; grid-template-columns:5.1rem minmax(0,1fr); gap:.55rem; align-items:center; margin:.55rem 0; font-size:.86rem; }
+.guide dl { display:grid; grid-template-columns:auto 1fr; column-gap:12px; row-gap:.28rem; margin:0; font-size:.86rem; }
+dt { color:#b1eddd; }
+dd { margin:0; }
+.guide p { font-size:.81rem; color:#aabebe; margin-top:.8rem; }
+.visually-hidden { position:absolute; clip-path:inset(50%); width:1px; height:1px; overflow:hidden; }
+[hidden] { display:none!important; }
+@media(max-width:710px) { .review { grid-template-columns:1fr; } canvas { max-height:64vh; } }

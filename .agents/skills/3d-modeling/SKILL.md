@@ -31,6 +31,10 @@ Use [animated figure review](references/animated-figure-review.md) for a figure 
 
 Use [code-generated video](references/code-video.md) for Python or Blender animation delivered as MP4. Generate frames and audio on a declared timeline, encode and verify the actual artifact, and use the included synthetic smoke runner. For authorized recorded-media preservation, verify encoded samples, decoded content and timing, then compare container bytes when required. See the [capture decision](references/code-video-provenance.md).
 
+## Interactive footage motion
+
+Use [reference-driven motion and localized footage edits](references/footage-motion.md) for stable bind landmarks, occlusion-aware retargeting, source-preserving edits, or photo-textured movement over recorded footage. For private source comparisons, use temporary processing and retain only synthetic fixtures and de-identified results.
+
 ## Combined review workspaces
 
 Use [combined review workspaces](references/combined-review-workspaces.md) when a contextual scene, animated study and a multipart inspection need a shared entry point. Package the tested review assets together and verify each view's visible state, lifecycle, download and source metadata.

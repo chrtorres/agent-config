@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Footage movement</title>
+<link rel="stylesheet" href="/style.css">
+<script type="module" src="/app.mjs"></script>
+<main>
+  <header>
+    <h1>Footage movement</h1>
+    <p id="pad" role="status">Connect an Xbox controller and press a button.</p>
+  </header>
+  <div class="review">
+    <section class="screen" aria-label="Interactive recording">
+      <canvas id="screen" tabindex="0" aria-label="Live movement in the video"></canvas>
+      <p id="loading" role="status">Loading the recording</p>
+      <video id="source" src="/video.mp4" preload="auto" playsinline></video>
+    </section>
+    <aside>
+      <section class="panel" aria-label="Playback controls">
+        <div class="row">
+          <button id="play">Play video</button>
+          <output id="clock">0:00.00</output>
+          <output id="resolution"></output>
+        </div>
+        <label class="visually-hidden" for="time">Frame</label>
+        <input id="time" type="range" min="0" max="0" step="1" value="0">
+        <div class="row shots"></div>
+      </section>
+      <section class="panel" aria-label="Movement controls">
+        <div class="row">
+          <label for="part">Selected part</label>
+          <select id="part"></select>
+        </div>
+        <label class="slider">Horizontal <input id="joint-x" type="range" min="-1" max="1" step=".01" value="0"></label>
+        <label class="slider">Vertical <input id="joint-y" type="range" min="-1" max="1" step=".01" value="0"></label>
+        <label class="slider">Rotation <input id="joint-r" type="range" min="-1" max="1" step=".01" value="0"></label>
+        <div class="row">
+          <button id="jump">Jump</button>
+          <button id="reset">Reset movement</button>
+        </div>
+      </section>
+      <section class="panel guide" aria-label="Controller bindings">
+        <dl>
+          <dt>Left stick</dt><dd>Travel across the shot</dd>
+          <dt>Right stick</dt><dd>Move the selected part</dd>
+          <dt>LB / RB</dt><dd>Choose a part</dd>
+          <dt>LT / RT</dt><dd>Rotate the selected part</dd>
+          <dt>A / B</dt><dd>Jump / reset movement</dd>
+          <dt>Y</dt><dd>Play or pause the recording</dd>
+          <dt>D-pad</dt><dd>Step frames or change shots</dd>
+        </dl>
+        <p>Keyboard movement uses WASD, Space to jump, and Q / E to choose a part.</p>
+      </section>
+      <p id="error" role="alert" hidden></p>
+    </aside>
+  </div>
+</main>
+</html>

@@ -59,6 +59,10 @@ Use [animated playback review](references/animated-playback-review.md) when a br
 
 Use the shared [Python and Blender video workflow](../3d-modeling/references/code-video.md) when an application generates or serves video. Exercise the actual encoder output through the download and playback path. Verify MIME type, byte ranges, rendered motion, seeking and playback in the target browser. Keep generation and encoding outside the request path when they need a background job, and publish the file after a successful encode. The shared synthetic example supplies an MP4 generator, a reference-preserving remux, a comparison command and a browser smoke harness.
 
+## Interactive footage motion
+
+Use [interactive motion on recorded footage](references/footage-motion-review.md) for independent live pose control, native media timing, protected source pixels, standard controller input, and isolated browser UAT. When verifying a private recording, retain only synthetic examples and de-identified results.
+
 ## Composing live and inspection views
 
 Use [multiview review architecture](references/multiview-review.md) to combine existing interactive scenes under a compact tab shell. Test lazy startup, playback suspension, camera preservation, keyboard navigation and independent load failures.
