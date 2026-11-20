@@ -10,12 +10,39 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 16082,
-      "sha256": "ff74fcba55262484de8e609281a2ab091645c75fa69dd5075182fde89228a3b1",
+      "bytes": 16572,
+      "sha256": "a5578ead33bc94b9ddc7733ad225a9a339d2199a2fcf7d6545c68502c84d233c",
       "executable": false
     },
     "assets": {
       "type": "directory"
+    },
+    "assets/code-video": {
+      "type": "directory"
+    },
+    "assets/code-video/blender_frames.py": {
+      "type": "file",
+      "bytes": 1570,
+      "sha256": "bd34a1fb08a5218fba80fd1051ce056a64f1db141c9ce7be37beab384fd43f45",
+      "executable": false
+    },
+    "assets/code-video/requirements.txt": {
+      "type": "file",
+      "bytes": 63,
+      "sha256": "9cda8c6aed794b70d9805d85424a6f0293a0024f6460353d32511777e97af0c8",
+      "executable": false
+    },
+    "assets/code-video/smoke.py": {
+      "type": "file",
+      "bytes": 11977,
+      "sha256": "350d62cc30ce61e85670ee4b533df0aa6f88d539ad2fa5cd795e6eee6d4c07e8",
+      "executable": false
+    },
+    "assets/code-video/video.py": {
+      "type": "file",
+      "bytes": 7020,
+      "sha256": "fed38f1f2f04489990abb8148d6d914bf4d80ff6a57b3e62eca50ad66b7f2138",
+      "executable": false
     },
     "assets/interactive-review-viewer": {
       "type": "directory"
@@ -249,6 +276,18 @@
       "type": "file",
       "bytes": 4922,
       "sha256": "97c52a3c726240271acae9c6c74f709903bcea082a447192d5e602793ce08dc8",
+      "executable": false
+    },
+    "references/code-video-provenance.md": {
+      "type": "file",
+      "bytes": 2785,
+      "sha256": "00b95de8154c666abeedb4afee95ef712ce0791fe5b0fa8e384f60e2c9b28e30",
+      "executable": false
+    },
+    "references/code-video.md": {
+      "type": "file",
+      "bytes": 4132,
+      "sha256": "5bcba213b18dd0c927e5b9f55f945bde7d66df67a9346514b132ba226ee80e70",
       "executable": false
     },
     "references/combined-review-provenance.md": {

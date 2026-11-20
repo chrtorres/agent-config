@@ -1,6 +1,6 @@
 ---
 name: full-stack-app-creation
-description: Take a full-stack application from requirements through architecture, implementation, meaningful code comments, backend integration, browser testing, and runnable delivery. Includes monitoring, native authorization, and interactive live-state examples.
+description: Take a full-stack application from requirements through architecture, implementation, meaningful code comments, backend integration, browser testing, and runnable delivery. Includes monitoring, native authorization, interactive live-state examples, and code-generated video delivery.
 ---
 
 # Full-stack app creation
@@ -54,6 +54,10 @@ When an interface explains real structures or factual relationships, use [eviden
 ## Animated 3D review
 
 Use [animated playback review](references/animated-playback-review.md) when a browser app needs clip selection, scrubbing, transport controls, camera tracking, or animated poses alongside static inspection. Validate rendered geometry and state transitions against the same GLB delivered to the user.
+
+## Code-generated video delivery
+
+Use the shared [Python and Blender video workflow](../3d-modeling/references/code-video.md) when an application generates or serves video. Exercise the actual encoder output through the download and playback path. Verify MIME type, byte ranges, rendered motion, seeking and playback in the target browser. Keep generation and encoding outside the request path when they need a background job, and publish the file after a successful encode. The shared synthetic example supplies an MP4 generator, a reference-preserving remux, a comparison command and a browser smoke harness.
 
 ## Composing live and inspection views
 

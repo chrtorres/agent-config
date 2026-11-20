@@ -1,6 +1,6 @@
 ---
 name: 3d-modeling
-description: Create and revise parametric Blender models with versioned browser review. Use for photo-based reconstruction, multipart inspection, material variants, runtime GLB assets with named pivots, and approved print exports.
+description: Create and revise parametric Blender models with versioned browser review. Use for photo-based reconstruction, multipart inspection, material variants, runtime GLB assets with named pivots, code-generated video, and approved print exports.
 ---
 
 # Iterative 3D modeling and print preparation
@@ -26,6 +26,10 @@ For a Blender asset intended for a game or browser scene, use the [runtime GLB w
 ## Research-driven animation
 
 Use [animated figure review](references/animated-figure-review.md) for a figure that deforms, articulates, or travels through a scene. For baked motion, author poses and root motion in Blender, bake named clips, and inspect the exported GLB in the browser. For procedural motion, publish the consumer pose code with the exact GLB and verify motion through rendered observations. The bundled generator covers both rigid pivots and a weighted skeleton. Connect observed motion to measurable checks and state which parameters were inferred.
+
+## Code-generated video
+
+Use [code-generated video](references/code-video.md) for Python or Blender animation delivered as MP4. Generate frames and audio on a declared timeline, encode and verify the actual artifact, and use the included synthetic smoke runner. For authorized recorded-media preservation, verify encoded samples, decoded content and timing, then compare container bytes when required. See the [capture decision](references/code-video-provenance.md).
 
 ## Combined review workspaces
 
