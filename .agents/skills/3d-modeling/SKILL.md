@@ -29,11 +29,13 @@ Use [animated figure review](references/animated-figure-review.md) for a figure 
 
 ## Code-generated video
 
-Use [code-generated video](references/code-video.md) for Python or Blender animation delivered as MP4. Generate frames and audio on a declared timeline, encode and verify the actual artifact, and use the included synthetic smoke runner. For authorized recorded-media preservation, verify encoded samples, decoded content and timing, then compare container bytes when required. See the [capture decision](references/code-video-provenance.md).
+Use [code-generated video](references/code-video.md) for Python or Blender animation delivered as MP4. Generate frames and audio on a declared timeline, encode and verify the actual artifact, and use the included synthetic smoke runner. For authorized recorded-media preservation, verify encoded samples, decoded content and timing, then compare container bytes when required. See the [capture decision](references/code-video-provenance.md). For video from the actual playable renderer, use [deterministic browser gameplay reels](references/browser-gameplay-reel.md).
 
 ## Interactive footage motion
 
 Use [reference-driven motion and localized footage edits](references/footage-motion.md) for stable bind landmarks, occlusion-aware retargeting, source-preserving edits, or photo-textured movement over recorded footage. For private source comparisons, use temporary processing and retain only synthetic fixtures and de-identified results.
+
+For a local editor that regenerates its pose, masks, and editable surface from the caller's video alone, use the source-only preparation and validation procedure in that reference. The [standalone editor](../full-stack-app-creation/assets/footage-editor/) provides the runnable engine and tests.
 
 ## Combined review workspaces
 

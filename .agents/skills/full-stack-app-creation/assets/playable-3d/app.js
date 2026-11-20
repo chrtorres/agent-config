@@ -1,5 +1,6 @@
 import * as T from "three";
 import { BEACON, createGame, frameDelta } from "./core.js";
+import { createPresentation, GRAPHICS_TIERS } from "./presentation.js";
 import { createGait } from "./gait.js";
 
 const game = createGame({ getItem: key => localStorage.getItem(key), setItem: (key, value) => localStorage.setItem(key, value) });
@@ -7,14 +8,22 @@ const canvas = new T.WebGLRenderer({ antialias: true });
 document.querySelector("main").append(canvas.domElement);
 const scene = new T.Scene();
 scene.background = new T.Color("#121d2b");
+canvas.toneMapping = T.ACESFilmicToneMapping;
+const requested = new URLSearchParams(location.search).get("quality");
+let quality = GRAPHICS_TIERS.includes(requested) ? requested : "balanced";
 const camera = new T.PerspectiveCamera(58, 1, .1, 100);
+const presentation = createPresentation(canvas, scene, camera);
 function resize() {
   camera.aspect = innerWidth / innerHeight;
   camera.updateProjectionMatrix();
-  canvas.setSize(innerWidth, innerHeight);
+  presentation.resize(innerWidth, innerHeight, devicePixelRatio, quality);
 }
 resize();
 addEventListener("resize", resize);
+document.querySelector("#quality").addEventListener("click", () => {
+  quality = GRAPHICS_TIERS[(GRAPHICS_TIERS.indexOf(quality) + 1) % GRAPHICS_TIERS.length];
+  resize();
+});
 const material = color => new T.MeshBasicMaterial({ color });
 const player = new T.Group();
 const torso = new T.Mesh(new T.BoxGeometry(.45, .75, .45), material("#ffc777"));
@@ -67,9 +76,10 @@ function frame(now) {
   const status = document.querySelector("#status");
   const message = state.saveError ? "Save unavailable" : state.reached ? "Checkpoint saved" : "Find the cyan beacon";
   if (status.textContent !== message) status.textContent = message;
-  canvas.render(scene, camera);
+  presentation.render(dt);
   window.renderedCheckpoint = {
     ...state, frames: ++frames, cameraDistance: camera.position.distanceTo(player.position),
+    quality, resolution: presentation.resolution,
     boots: boots.map(foot => foot.getWorldPosition(new T.Vector3()).toArray()),
   };
 }

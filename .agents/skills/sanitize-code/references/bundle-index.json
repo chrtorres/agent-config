@@ -1,0 +1,45 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 3717,
+      "sha256": "69e58fc8ca8a2367e77641d5eab214d9b37118308b85c35ff091569b43f8dc22",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/capture.md": {
+      "type": "file",
+      "bytes": 2656,
+      "sha256": "8129f3d904d5ebcb30d188bb7b030f18656a0b07735e92844a9339747e18a085",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/stage_release.py": {
+      "type": "file",
+      "bytes": 2720,
+      "sha256": "39ae4ca7701dd80539357dbfe9c087af72453a0cc893e2de08f4337d6b998c00",
+      "executable": false
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_stage_release.py": {
+      "type": "file",
+      "bytes": 4007,
+      "sha256": "10a52c36ca623876bb5f3bff7330db5b5c476384b887e2bdba8e51b1f9d91f73",
+      "executable": false
+    }
+  }
+}

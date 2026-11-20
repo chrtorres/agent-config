@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 11306,
-      "sha256": "035b5df6eb3c625832a739ce4c08ef4558050d6d28af7d4e23a0c1591a561779",
+      "bytes": 11758,
+      "sha256": "5941fb5b9c175e75e8e1ccaa062b9a2ddc6ea7c4df12f78d38b154f29d779dfb",
       "executable": false
     },
     "assets": {
@@ -126,6 +126,294 @@
       "type": "file",
       "bytes": 735,
       "sha256": "8d759b1dec8f34086db9b932b8c69da2607b53d520a3d5abfb99da412b34b24d",
+      "executable": false
+    },
+    "assets/footage-editor": {
+      "type": "directory"
+    },
+    "assets/footage-editor/.gitignore": {
+      "type": "file",
+      "bytes": 82,
+      "sha256": "e411ac94be28c054e0e558a3b1b4b46d8a7de15378f96269bae76ed4e5df523b",
+      "executable": false
+    },
+    "assets/footage-editor/README.md": {
+      "type": "file",
+      "bytes": 3763,
+      "sha256": "253c860d52187d5e95725ae3cc642d4410ce95fe26827a7ff00d7e486a25d467",
+      "executable": false
+    },
+    "assets/footage-editor/app": {
+      "type": "directory"
+    },
+    "assets/footage-editor/app/app.mjs": {
+      "type": "file",
+      "bytes": 18103,
+      "sha256": "f703c302f603a752ebae07f04858338d49c6b7fb3a19b6cd70ddb97ee0981931",
+      "executable": false
+    },
+    "assets/footage-editor/app/cleanup.mjs": {
+      "type": "file",
+      "bytes": 2280,
+      "sha256": "469216c297e573482100b682b38f7ba5591397fe22b2eb82a1ee94ed6359ca35",
+      "executable": false
+    },
+    "assets/footage-editor/app/index.html": {
+      "type": "file",
+      "bytes": 7961,
+      "sha256": "10ef7f5df363d7ea5d4c5bc2ac6559cfcf4f23727603639c182c36f1343a0b8c",
+      "executable": false
+    },
+    "assets/footage-editor/app/inspect.mjs": {
+      "type": "file",
+      "bytes": 10503,
+      "sha256": "94ac8319491a7e73271c4896ddadbddbf251b50c4bc57384285afdb900c9453b",
+      "executable": false
+    },
+    "assets/footage-editor/app/motion.mjs": {
+      "type": "file",
+      "bytes": 5768,
+      "sha256": "88391542d76cd05924534606f3263c229472abc681f3baa0e4241b990f2fda7d",
+      "executable": false
+    },
+    "assets/footage-editor/app/picking.mjs": {
+      "type": "file",
+      "bytes": 1058,
+      "sha256": "02182dcbddb633b3b771c2c693103635aa9226495b39b95dfa94f5a11c490f27",
+      "executable": false
+    },
+    "assets/footage-editor/app/point-regions.mjs": {
+      "type": "file",
+      "bytes": 1464,
+      "sha256": "23b8c02af7b7d6760383e1f3f8e2b717393762bc91a0ca59a3a6f96c6bfda8e8",
+      "executable": false
+    },
+    "assets/footage-editor/app/regions.mjs": {
+      "type": "file",
+      "bytes": 2481,
+      "sha256": "559e8b171b0bde8542ef7c2083fc19a9d8550b8ce802ebacabd873d6b2c86fe5",
+      "executable": false
+    },
+    "assets/footage-editor/app/render.mjs": {
+      "type": "file",
+      "bytes": 27416,
+      "sha256": "38cab90f663d20538aff3303a0a837d909e7fac14b575961a80cff18e970b226",
+      "executable": false
+    },
+    "assets/footage-editor/app/secondary.mjs": {
+      "type": "file",
+      "bytes": 4915,
+      "sha256": "28d3444e35e1529c473c7ee60278e0bd1b52fef3aa197bf12e79b8fc3073a371",
+      "executable": false
+    },
+    "assets/footage-editor/app/serve.py": {
+      "type": "file",
+      "bytes": 5423,
+      "sha256": "8ed7f507b2b5d1e2956cbebee7e8f369b2aa3bfa6d55758651b4f3df48fcb890",
+      "executable": false
+    },
+    "assets/footage-editor/app/splats.mjs": {
+      "type": "file",
+      "bytes": 5678,
+      "sha256": "8be9d250a97854f50ff6887572f19d612a110c35f964621e0bed28e2345cfa3c",
+      "executable": false
+    },
+    "assets/footage-editor/app/stage-zoom.mjs": {
+      "type": "file",
+      "bytes": 4007,
+      "sha256": "0288c0f97d92dccdbb94ac70d2dfe5b352e18afe6e3079a2eefca0b64e1b5898",
+      "executable": false
+    },
+    "assets/footage-editor/app/style.css": {
+      "type": "file",
+      "bytes": 5670,
+      "sha256": "a80bcf8b38922d4d415055251a800aa12bf6602f9d824c982730238c4ce587ac",
+      "executable": false
+    },
+    "assets/footage-editor/app/transport.mjs": {
+      "type": "file",
+      "bytes": 2718,
+      "sha256": "90be7f0a9e49286d4c33f97183d54a321e48d9866c67e85cfca804687106be2b",
+      "executable": false
+    },
+    "assets/footage-editor/app/uhd.html": {
+      "type": "file",
+      "bytes": 588,
+      "sha256": "11311baf94b8cffb65031ec6d87ea04dc10b94531e5a78dc6afeff2641782abb",
+      "executable": false
+    },
+    "assets/footage-editor/requirements.txt": {
+      "type": "file",
+      "bytes": 494,
+      "sha256": "eba9251e2763b66b28fc929594be8a211efb03cbc68826db5e2b5a01279b50d9",
+      "executable": false
+    },
+    "assets/footage-editor/run.py": {
+      "type": "file",
+      "bytes": 8308,
+      "sha256": "da20f70d3bce24d43a230814754e5e20987f949e7dfb4c026e3aa1d6998dc15c",
+      "executable": false
+    },
+    "assets/footage-editor/tests": {
+      "type": "directory"
+    },
+    "assets/footage-editor/tests/secondary-kernel.mjs": {
+      "type": "file",
+      "bytes": 1710,
+      "sha256": "6991ce7e2644a7eeef4b75ed4aca56b0eacc51c4dddf866a3e019cc59b76e056",
+      "executable": false
+    },
+    "assets/footage-editor/tests/session.mjs": {
+      "type": "file",
+      "bytes": 6467,
+      "sha256": "f629b708c774efe344481b3e111346583debfc15fd66439ed6927f77d4701e71",
+      "executable": false
+    },
+    "assets/footage-editor/tests/stage-zoom.mjs": {
+      "type": "file",
+      "bytes": 6696,
+      "sha256": "654481b4241fea68c9959bd7c351caf8e97fbc3f7cbce06473e4e46e8982c734",
+      "executable": false
+    },
+    "assets/footage-editor/tests/test_anatomy.py": {
+      "type": "file",
+      "bytes": 4305,
+      "sha256": "cdd0742aa2131f9805f044136426feb896c4ca4d04001ec39f5473509f021367",
+      "executable": false
+    },
+    "assets/footage-editor/tests/test_cleanup_axial.py": {
+      "type": "file",
+      "bytes": 5740,
+      "sha256": "f657f527d642c32b099badb749a6b718379fccc814ad22198c8a8307c068acdf",
+      "executable": false
+    },
+    "assets/footage-editor/tests/test_cleanup_lower.py": {
+      "type": "file",
+      "bytes": 4758,
+      "sha256": "276e7813d01d20d30fcd7bdfb8fec6a6eae04b39e8ec35be20ed6fb1a78d9ed4",
+      "executable": false
+    },
+    "assets/footage-editor/tests/test_cleanup_math.py": {
+      "type": "file",
+      "bytes": 2172,
+      "sha256": "c06416e547dba43a7bd34a706d2c62d9fb13b72fd25ae9575e08301ed469c72f",
+      "executable": false
+    },
+    "assets/footage-editor/tests/test_cleanup_upper.py": {
+      "type": "file",
+      "bytes": 3767,
+      "sha256": "74d5adc8c846ca8cdc939512485db12aab843654f458c06106a6fe91675128d8",
+      "executable": false
+    },
+    "assets/footage-editor/tests/test_edit_math.py": {
+      "type": "file",
+      "bytes": 2506,
+      "sha256": "0398063784159fbe7734cd1b2f439640961256ee4fdf410ad52fc13ae0f62e8f",
+      "executable": false
+    },
+    "assets/footage-editor/tests/test_session.py": {
+      "type": "file",
+      "bytes": 908,
+      "sha256": "8c69f457a4e0d2475cac350d351183b0fd1726abb2bcdef36b36d5026d614f17",
+      "executable": false
+    },
+    "assets/footage-editor/tests/test_torso_fill.py": {
+      "type": "file",
+      "bytes": 1032,
+      "sha256": "0264478910cbd74c832403c731e2352d491c2a48b8041ea0565caf50cfeae1a4",
+      "executable": false
+    },
+    "assets/footage-editor/tests/transport.mjs": {
+      "type": "file",
+      "bytes": 1578,
+      "sha256": "1888b9c3484358be6d2f79f0c3635740b4e376882fd17f8eef10526f63b50102",
+      "executable": false
+    },
+    "assets/footage-editor/tools": {
+      "type": "directory"
+    },
+    "assets/footage-editor/tools/anatomy.py": {
+      "type": "file",
+      "bytes": 10248,
+      "sha256": "1558c37be5641eb7d54fc4a4027f1be09e49f1f8c13bb6de5951aed72ebff98c",
+      "executable": false
+    },
+    "assets/footage-editor/tools/augment.py": {
+      "type": "file",
+      "bytes": 17304,
+      "sha256": "ba12a8ababb6fd85ba6c04da125de851c353ef6a6b05aa90f1ba27cc2b65b68a",
+      "executable": false
+    },
+    "assets/footage-editor/tools/build_splats.py": {
+      "type": "file",
+      "bytes": 14515,
+      "sha256": "a38b75e801095876d72fe5dd2f97e62fbbbc0ac41715b7f364fcf7b855ee7416",
+      "executable": false
+    },
+    "assets/footage-editor/tools/cleanup.py": {
+      "type": "file",
+      "bytes": 2395,
+      "sha256": "2643ab2a9e4f575f464edfdd1d215d13604c32b960952b2973a8824a3b641874",
+      "executable": false
+    },
+    "assets/footage-editor/tools/cleanup_axial.py": {
+      "type": "file",
+      "bytes": 2397,
+      "sha256": "a032eb414a52335245c74eebad1814696a5644ef154ae02e0d4f33ca03448a10",
+      "executable": false
+    },
+    "assets/footage-editor/tools/cleanup_lower.py": {
+      "type": "file",
+      "bytes": 1891,
+      "sha256": "c1bbc2388925abe636b8f7bf985dc7c4f2b9c5e7a1df10c93a04880db49fce25",
+      "executable": false
+    },
+    "assets/footage-editor/tools/cleanup_tracks.py": {
+      "type": "file",
+      "bytes": 7245,
+      "sha256": "36e8042ad6932388e64339afeb447f034a70be8892f627335f69cdfe9b5b007b",
+      "executable": false
+    },
+    "assets/footage-editor/tools/cleanup_upper.py": {
+      "type": "file",
+      "bytes": 4052,
+      "sha256": "fe5e3c03a6829436583f58ede6bfeeab1a15e593063060087a9683e2e633e3df",
+      "executable": false
+    },
+    "assets/footage-editor/tools/export_edit.py": {
+      "type": "file",
+      "bytes": 12199,
+      "sha256": "728625efce105b37e90363b8f7a5177ee8297fcee1ba840f604c92ecef73f216",
+      "executable": false
+    },
+    "assets/footage-editor/tools/measure_motion.py": {
+      "type": "file",
+      "bytes": 19465,
+      "sha256": "62346ed4c7a9d3514c8860eed1d414376e99f7296fb92cc8a6ae910c51582293",
+      "executable": false
+    },
+    "assets/footage-editor/tools/media.py": {
+      "type": "file",
+      "bytes": 6684,
+      "sha256": "a7a04f18b942eb060b56306c7bc6db7c49b0fc1f9467403729639b0b1dc6039f",
+      "executable": false
+    },
+    "assets/footage-editor/tools/point_regions.py": {
+      "type": "file",
+      "bytes": 1386,
+      "sha256": "5dc9e5860046e5a91ef5f19950171312b9c8a723979fb2d1350280d5ae7433aa",
+      "executable": false
+    },
+    "assets/footage-editor/tools/prepare.py": {
+      "type": "file",
+      "bytes": 5522,
+      "sha256": "2ccee8eb1801fde0b264f4f3800a42c81ae2c278d880d53a6c2f796266c72767",
+      "executable": false
+    },
+    "assets/footage-editor/tools/skin.py": {
+      "type": "file",
+      "bytes": 3321,
+      "sha256": "3a80c4926b30630cfb0dbae1c09eac624b76981d6e51b3cc84a1a5d41ab25049",
       "executable": false
     },
     "assets/footage-motion": {
@@ -295,8 +583,14 @@
     },
     "assets/playable-3d/app.js": {
       "type": "file",
-      "bytes": 3495,
-      "sha256": "b2a90cfea322fb23be5e315739d14fa982f3d6fa26a3c265d6fcb95b22edadcb",
+      "bytes": 4076,
+      "sha256": "235bd2868a74441ba485bd4f1dbc87023fd329d6d663bd5153bd32a68db40ad4",
+      "executable": false
+    },
+    "assets/playable-3d/capture.mjs": {
+      "type": "file",
+      "bytes": 4288,
+      "sha256": "77817fbc1029083a1a0f9dbce95d10a93a01f07f56a9dde031aefaf52c580d82",
       "executable": false
     },
     "assets/playable-3d/core.js": {
@@ -319,8 +613,8 @@
     },
     "assets/playable-3d/index.html": {
       "type": "file",
-      "bytes": 651,
-      "sha256": "e9cd08d048ab146782e2c1d4914586478d9e4c4dd3dfe02df2e71627be6a3925",
+      "bytes": 833,
+      "sha256": "01fb5c1331c4e0a7f2191d323556583e73975cd2f77faa9e9ba778e6e4f7c551",
       "executable": false
     },
     "assets/playable-3d/package-lock.json": {
@@ -335,6 +629,12 @@
       "sha256": "fc7117312c2c1d722389e08b59bb8a959634c4cff1d8d3f36686f830a8b364ab",
       "executable": false
     },
+    "assets/playable-3d/presentation.js": {
+      "type": "file",
+      "bytes": 3296,
+      "sha256": "4782c9f13a3b0f841a6801f7b115dbfcb81561021a620520bd405a19d77513ff",
+      "executable": false
+    },
     "assets/playable-3d/replay-pose.mjs": {
       "type": "file",
       "bytes": 2394,
@@ -343,8 +643,8 @@
     },
     "assets/playable-3d/smoke.mjs": {
       "type": "file",
-      "bytes": 3689,
-      "sha256": "13e7416c697f005009c1d0f6679a2cf36cbc6e555d5bba57c805628257cd0cff",
+      "bytes": 3910,
+      "sha256": "6e483d09dfb0b52bae0491b46deafeeee02681e11adc9a1a89a6dfa8b5253f70",
       "executable": false
     },
     "assets/storage-app": {
@@ -533,6 +833,18 @@
       "sha256": "bd653ad45331c27c963c9dae860261680d0e0cde9787c90a5bcd1b6bb51ac323",
       "executable": false
     },
+    "references/cinematic-capture-provenance.md": {
+      "type": "file",
+      "bytes": 3409,
+      "sha256": "63401335176b6f650c1c30fd4bc7f43a05fccda9cb97afefb05582f5027be1c4",
+      "executable": false
+    },
+    "references/cinematic-presentation.md": {
+      "type": "file",
+      "bytes": 4332,
+      "sha256": "983c418fc81e4145ce10e5d9fbdad38f73d1604d7645c746ed4aa8bb28a26458",
+      "executable": false
+    },
     "references/dependencies.md": {
       "type": "file",
       "bytes": 4009,
@@ -634,14 +946,26 @@
     },
     "references/playable-3d.md": {
       "type": "file",
-      "bytes": 10455,
-      "sha256": "e5fb19e112ccf2230d9378805f0356a7cefbc16c9c06dd3a69fea2b9b9153bce",
+      "bytes": 10597,
+      "sha256": "5cb0f9a69256d98419e0fa1635c8b30fb8c00472ae422f81baaa51a24bf71dae",
       "executable": false
     },
     "references/resources.md": {
       "type": "file",
       "bytes": 6584,
       "sha256": "425088a8aca57a9bfb1ea4166a8c509356cf02452675fd47cb84a38b89fb4d8d",
+      "executable": false
+    },
+    "references/source-only-footage-capture.md": {
+      "type": "file",
+      "bytes": 2984,
+      "sha256": "cbcfe4a48d5d38b84af6e4c4a8bda61b52bbdc273d03343287f6c5057019cd87",
+      "executable": false
+    },
+    "references/source-only-footage-editor.md": {
+      "type": "file",
+      "bytes": 3047,
+      "sha256": "d628b80b27b18f3b069c8c932181d4991f36f55cff6c03fe16ee355b2afe94cc",
       "executable": false
     },
     "references/storage-and-jit.md": {

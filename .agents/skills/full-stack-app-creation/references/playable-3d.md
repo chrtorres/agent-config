@@ -9,6 +9,8 @@ Use this mode for a stateful browser scene with continuous controls, game or sim
 5. Build the production candidate and serve it in an isolated test instance. Drive input through the real page. Wait for rendered observations during motion and for the actual state transition at the end of a journey. Capture runtime and console errors, tested backend and browser versions, screenshots, and the source revision or hashes. Avoid hot reload during acceptance. For slow software rendering, reduce viewport cost or use a verified hardware backend. When splitting suites, record which cases ran and verify that the app source remained identical.
 6. Test the physical controller separately if it is a requirement. Record operating-system visibility, browser enumeration and mapping, activation, motion, actions, and reconnect. A synthetic pad establishes the application input path only. Make test input streams explicit so an attached physical pad cannot interfere with a keyboard-only script.
 
+For UHD resolution, HDR fallback, scripted gameplay reels, and single-instance UAT, see [cinematic presentation](cinematic-presentation.md).
+
 ## Check rendered pose transitions
 
 - Publish a diagnostic snapshot after the render using the actual joint

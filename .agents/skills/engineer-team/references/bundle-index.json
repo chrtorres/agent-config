@@ -1,0 +1,78 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 11090,
+      "sha256": "b004b194754e7346e6e1003af21e4ad7a57a1f8cbd4673eee63f423dd477097a",
+      "executable": false
+    },
+    "assets": {
+      "type": "directory"
+    },
+    "assets/pm-synthesis-template.md": {
+      "type": "file",
+      "bytes": 1548,
+      "sha256": "33fb7a1617c27defe167d86b09fce1bba12267d43b3fc688f74af5e7d4acaaed",
+      "executable": false
+    },
+    "assets/role-prompts.md": {
+      "type": "file",
+      "bytes": 3496,
+      "sha256": "387a988db7a4fef1cad2d3ecc5eba644192f40198ba45d00223eb3788f9a2e6c",
+      "executable": false
+    },
+    "assets/team-brief-template.md": {
+      "type": "file",
+      "bytes": 2073,
+      "sha256": "1c9012ff7bcdf57e9dddc8b75d70a3c6d00cf8e5d49762d404f7d94ef97495e9",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/capture-provenance.md": {
+      "type": "file",
+      "bytes": 4188,
+      "sha256": "a5acde54f04e409522a58ec56a63b797a73eb6ef4e58123e39f45b28d29ca19b",
+      "executable": false
+    },
+    "references/orchestration.md": {
+      "type": "file",
+      "bytes": 3278,
+      "sha256": "000840df95226e182b95adee804f0396e34308a51bccbd7ab09f37abe60cd8cc",
+      "executable": false
+    },
+    "references/roles.md": {
+      "type": "file",
+      "bytes": 5530,
+      "sha256": "2343f94513a6c8237a65f65922dd3ae8c5e66c905bb0d99b09a2722173ac0601",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/check_team_outputs.py": {
+      "type": "file",
+      "bytes": 4038,
+      "sha256": "2267cb1b522f9e07c55340031b891e91acb61d478e4ff872cabe5afd437b464b",
+      "executable": false
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_check_team_outputs.py": {
+      "type": "file",
+      "bytes": 3542,
+      "sha256": "b56fdb37cc9f5b780e879fa99bf93c9b1b1ff8adddb6b0dc5ab7559d343306e6",
+      "executable": false
+    }
+  }
+}

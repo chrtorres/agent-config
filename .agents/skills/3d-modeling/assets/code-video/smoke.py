@@ -8,14 +8,14 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from re import fullmatch
 from json import dumps, loads
 from pathlib import Path
-from subprocess import DEVNULL, Popen, check_output, run
+from subprocess import DEVNULL, Popen, TimeoutExpired, check_output, run
 from sys import executable
 from tempfile import TemporaryDirectory
 from threading import Thread
 from time import monotonic, sleep
 from urllib.request import Request, urlopen
 
-from websocket import create_connection
+from websocket import WebSocketConnectionClosedException, create_connection
 
 from video import FPS, FRAMES, SIZE, inspect
 
@@ -46,10 +46,16 @@ def browser(executable):
             try:
                 yield connection
             finally:
+                # Let Chromium flush profile writers before removing the temporary profile.
+                with suppress(WebSocketConnectionClosedException):
+                    connection.send(dumps({"id": 0, "method": "Browser.close"}))
                 connection.close()
+                with suppress(TimeoutExpired):
+                    process.wait(timeout=5)
         finally:
-            process.terminate()
-            process.wait(timeout=10)
+            if process.poll() is None:
+                process.terminate()
+                process.wait(timeout=10)
 
 
 class Session:

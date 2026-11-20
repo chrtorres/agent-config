@@ -12,3 +12,10 @@
 ## Synthetic reproduction
 
 The [fixture generator](../assets/footage-motion/generate.py) creates geometric figures, a protected source overlay, two coded widths, and a reflected layer in a three-shot silent MP4. The atlas uses projected landmarks and known synthetic background. This teaches the runtime contract. A production input requires task-local tracking, masks, and plate reconstruction. Use the PyAV, NumPy and Pillow versions in the [video fixture requirements](../assets/code-video/requirements.txt) with a PyAV build that supports libx264. Use the existing video fixture for soundtrack and packet-preservation validation. [Capture inventory and comparison](footage-motion-capture.md)
+
+## Regenerate a source-only editor
+
+1. Index the actual decoded presentation clock. Generate pose and foreground mattes, pose-guided face and hand geometry, then skin weights, stabilization tracks, and motion observations from the same input. Fit motion from chronological samples and retain projected depth as an estimate.
+2. Preserve the original for native display and checksum it in memory during validation. Verify that the 4K encode retains composition, decoded picture timestamps, duration, and AAC content and timing. Carry provider-neutral feature labels and normalized local anchor coordinates across tracked frames.
+3. Keep the model in the source camera plane. Run view zoom and pan separately from deformation. Use bounded local support and foreground-aware reconstruction to preserve surrounding scenery. Treat uncovered background and hidden anatomy as inference limits.
+4. Rebuild with public inference dependencies and the caller's video as the only subject-specific input. Run the browser tests on freshly constructed state. Hold derived media and tracking only in a temporary local session and retain de-identified results. [Runnable engine and launch procedure](../../full-stack-app-creation/references/source-only-footage-editor.md)

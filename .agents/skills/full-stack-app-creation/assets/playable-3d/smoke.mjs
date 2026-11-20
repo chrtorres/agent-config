@@ -4,6 +4,7 @@ import { isAbsolute, relative, resolve, sep } from "node:path";
 import { chromium } from "playwright";
 import { preview } from "vite";
 import { checkPoseReplay } from "./replay-pose.mjs";
+import { capturePresentation } from "./capture.mjs";
 
 const output = process.argv[2];
 assert(output, "Usage: npm run smoke -- <evidence-directory-outside-app>");
@@ -54,6 +55,9 @@ try {
     await page.close();
   }
   for (const hz of [20, 60]) results.cases.push(await checkPoseReplay(browser, url.href, hz));
+  if (process.env.CAPTURE_REEL) {
+    results.cases.push(await capturePresentation(browser, url, resolve(evidence, "frames"), process.env.CAPTURE_REEL === "uhd"));
+  }
 } catch (error) {
   results.failure = error.message;
   throw error;

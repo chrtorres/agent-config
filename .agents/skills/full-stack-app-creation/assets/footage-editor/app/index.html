@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Footage motion review</title>
+<link rel="stylesheet" href="/style.css">
+<script type="module" src="/app.mjs"></script>
+<main>
+  <header>
+    <h1>Footage motion review</h1>
+    <nav aria-label="Video files">
+      <a href="/source.mp4" download="source-quality.mp4">Download original</a>
+      <a href="/4k/">Watch in 4K</a>
+    </nav>
+  </header>
+  <div class="review">
+    <section class="screen" aria-label="Interactive recording">
+      <div class="stage" id="stage-viewport">
+        <div id="stage-content">
+          <canvas id="screen" tabindex="0" aria-label="Live movement in the video" aria-describedby="stage-zoom-help"></canvas>
+          <div id="feature-marker" aria-hidden="true" hidden><span id="feature-marker-label"></span></div>
+        </div>
+      </div>
+      <div class="stage-zoom" id="stage-zoom-controls" hidden>
+        <label for="stage-zoom">Video zoom</label>
+        <input id="stage-zoom" type="range" min="1" max="8" step=".1" value="1" aria-describedby="stage-zoom-help">
+        <output id="stage-zoom-value" for="stage-zoom">1×</output>
+        <button id="stage-zoom-reset" type="button" disabled>Fit video</button>
+        <span id="stage-zoom-help">Ctrl/⌘ + scroll to zoom. Drag or use Alt + arrows to pan.</span>
+      </div>
+      <p id="loading" role="status">Loading the recording</p>
+      <video id="source" preload="auto" playsinline aria-hidden="true"></video>
+    </section>
+    <aside>
+      <section class="panel" aria-label="Playback controls">
+        <h2>Playback</h2>
+        <div class="row">
+          <button id="play" type="button">Play video</button>
+          <output id="clock">0:00.00</output>
+          <output id="resolution"></output>
+        </div>
+        <label class="visually-hidden" for="time">Frame</label>
+        <input id="time" type="range" min="0" max="0" step="1" value="0">
+        <div class="row shots"></div>
+        <a id="toggle-quality" href="/?quality=4k">Use 4K controls</a>
+      </section>
+      <section id="inspection" class="panel" aria-label="Feature inspection" hidden>
+        <h2>Inspect and adjust</h2>
+        <p id="feature-status">Click a feature in the video or select it below.</p>
+        <div class="row">
+          <label for="feature">Feature</label>
+          <select id="feature"><option value="">Select a feature</option></select>
+        </div>
+        <div class="row">
+          <button id="feature-point-mode" type="button" aria-pressed="false">Pick custom area</button>
+          <button id="feature-point-remove" type="button" hidden>Remove custom area</button>
+        </div>
+        <div class="row feature-trail">
+          <output id="feature-path"></output>
+          <button id="feature-parent" type="button" hidden></button>
+        </div>
+        <canvas id="magnifier" width="384" height="216" aria-label="Zoomed view of the selected feature" hidden></canvas>
+        <label class="slider feature-slider">Zoom <input id="feature-zoom" type="range" min="1" max="6" step=".25" value="1"><output id="feature-zoom-value">1.0×</output></label>
+        <label class="slider feature-slider">Width <input id="feature-width" type="range" min="-70" max="110" step=".5" value="0"><output id="feature-width-value">0%</output></label>
+        <label class="slider feature-slider">Height <input id="feature-height" type="range" min="-70" max="110" step=".5" value="0"><output id="feature-height-value">0%</output></label>
+        <label class="slider feature-slider" id="feature-radius-row" hidden>Radius <input id="feature-radius" type="range" min="4" max="100" step="1" value="24"><output id="feature-radius-value">24 px</output></label>
+        <div class="row">
+          <button id="feature-reset" type="button">Reset feature</button>
+          <button id="feature-reset-all" type="button">Reset all shapes</button>
+          <button id="save-edits" type="button" disabled>Download edit settings</button>
+        </div>
+        <div class="row cleanup-actions">
+          <button id="clean-image" type="button" disabled>Clean image</button>
+          <button id="undo-cleanup" type="button" hidden>Undo cleanup</button>
+          <output id="cleanup-status" role="status"></output>
+        </div>
+      </section>
+      <details id="tone-panel" class="panel" hidden>
+        <summary>Skin tone</summary>
+        <label class="slider feature-slider">Lightness <input id="tone-light" type="range" min="-45" max="45" value="0"><output id="tone-light-value">0</output></label>
+        <label class="slider feature-slider">Warmth <input id="tone-warm" type="range" min="-40" max="40" value="0"><output id="tone-warm-value">0</output></label>
+        <label class="slider feature-slider">Saturation <input id="tone-saturation" type="range" min="-40" max="40" value="0"><output id="tone-saturation-value">0</output></label>
+        <button id="tone-reset" type="button">Reset skin tone</button>
+      </details>
+      <section class="panel" aria-label="Movement controls">
+        <div class="row"><h2>Performer</h2><output id="motion-state">Original frame</output></div>
+        <div class="row">
+          <label for="part">Body part</label>
+          <select id="part"></select>
+        </div>
+        <label class="slider">Horizontal <input id="joint-x" type="range" min="-1" max="1" step=".01" value="0"></label>
+        <label class="slider">Vertical <input id="joint-y" type="range" min="-1" max="1" step=".01" value="0"></label>
+        <label class="slider">Rotation <input id="joint-r" type="range" min="-1" max="1" step=".01" value="0"></label>
+        <fieldset>
+          <legend>Hold to move</legend>
+          <div class="row directions">
+            <button data-direction="KeyA" aria-label="Move left">←</button>
+            <button data-direction="KeyW" aria-label="Move up">↑</button>
+            <button data-direction="KeyS" aria-label="Move down">↓</button>
+            <button data-direction="KeyD" aria-label="Move right">→</button>
+          </div>
+        </fieldset>
+        <div class="row">
+          <button id="jump" type="button">Jump</button>
+          <button id="reset" type="button">Reset movement</button>
+        </div>
+      </section>
+      <details id="motion-study-panel" class="panel" hidden>
+        <summary>Recorded motion study</summary>
+        <label class="motion-option"><input id="recorded-motion" type="checkbox"> Use recorded dynamics</label>
+        <output id="motion-study-status"></output>
+        <details id="motion-traces" hidden>
+          <summary>Observed motion traces</summary>
+          <label class="row">Region <select id="motion-region"></select></label>
+          <canvas id="motion-trace" width="330" height="112" aria-label="Measured horizontal and vertical surface residual"></canvas>
+          <output id="motion-trace-value"></output>
+        </details>
+        <label id="splat-option" class="motion-option" hidden><input id="show-splats" type="checkbox"> Inspect time-varying Gaussian splats</label>
+        <canvas id="splat-preview" width="280" height="498" aria-label="Foreground Gaussian splats at the recorded time" hidden></canvas>
+      </details>
+      <section class="panel guide" aria-label="Input bindings">
+        <h2>Controls</h2>
+        <dl>
+          <dt>WASD / Left stick</dt><dd>Move the performer</dd>
+          <dt>Arrows / Right stick</dt><dd>Pose the selected part</dd>
+          <dt>Q / E or LB / RB</dt><dd>Select a part</dd>
+          <dt>LT / RT</dt><dd>Rotate the selected part</dd>
+          <dt>Space / A</dt><dd>Jump</dd>
+          <dt>R / B</dt><dd>Reset movement</dd>
+          <dt>P / Y</dt><dd>Play or pause</dd>
+        </dl>
+        <p id="pad" role="status">Optional Xbox-style controller</p>
+      </section>
+      <p id="error" role="alert" hidden></p>
+    </aside>
+  </div>
+</main>
+</html>

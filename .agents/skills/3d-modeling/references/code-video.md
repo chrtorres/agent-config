@@ -1,5 +1,7 @@
 # Code-generated video
 
+For footage captured from a real-time browser renderer, use [deterministic browser gameplay reels](browser-gameplay-reel.md).
+
 1. Establish the intended artifact and acceptance criteria before implementation. For an authored video, specify resolution, rational frame rate, duration, camera, pose timing, color, codecs and audio. When a reference is available, define how to measure alignment and tolerances at the frame and sample levels. Only use supplied media as input when the user authorizes it.
 2. Generate the imagery from Python or a scripted Blender scene. Use integer frame indexes and a rational time base. Evaluate animation, camera and cuts on that clock. Render zero-padded frame files with explicit dimensions. For sound, compute sample positions from the same timeline and carry oscillator or envelope state across blocks.
 3. Encode with explicit video and audio formats and flush both encoders. For browser delivery, test the chosen codecs, seeking, metadata, media requests and native controls in the intended browser. Keep frames, sidecar data, and rendered evidence in the task directory.
