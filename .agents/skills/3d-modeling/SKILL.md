@@ -19,6 +19,10 @@ Use this skill when the user asks for a new 3D model, a revision to an existing 
 8. Record explicit approval against the exact version and previews reviewed. Material changes to the design restart review. Prepare the requested print exports from the approved geometry at the intended physical scale. Run the relevant mesh and slicer checks, record settings, and distinguish CAD verification from printed fit and strength. Physical printing requires separate authorization.
 9. For multipart print prep, provide separate exploded and individual print-part sheets under `print-prep/preview/`, rendered from the individual meshes being handed off. Label pieces with STL filenames and measured dimensions. Use the [multipart preview builder](references/multipart-preview.md). Viewer-only changes can stay with the approved version when the geometry and print-file identities are verified.
 
+## Refining an existing artifact
+
+Use [product-refinement](../product-refinement/SKILL.md) for a revision that needs a measured baseline and coordinated visual, modeling and browser checks. Keep the modeling version and review gates in this skill.
+
 ## Runtime assets
 
 For a Blender asset intended for a game or browser scene, use the [runtime GLB workflow](references/runtime-glb.md). It defines an engine-facing asset contract, separate studio and runtime exports, and validation of the exact GLB used in the browser. Print approval applies only to physical outputs. For fitted gear and expressive faces, use [runtime character fit](references/runtime-character-fit.md) to check rear clearance, facial poses, and moving attachment anchors.

@@ -13,6 +13,10 @@ Read workspace instructions, existing source, and prior decisions. Identify the 
 
 Write a compact task-local product brief: target users, main journey, acceptance criteria, data sources, persistence, integrations, permissions, and explicit first-pass exclusions. Translate vague aspirations into observable actions and outcomes. Do not impose the worked example's domain or read-only restrictions on unrelated applications.
 
+## Refining an existing artifact
+
+Use [product-refinement](../product-refinement/SKILL.md) when an existing app needs coordinated research, visual, engineering and QA decisions. Reuse the compact decision record for the acceptance criteria and testing plan.
+
 ## Design the product and architecture
 
 Choose the smallest architecture that supports the requested behavior. Decide frontend, backend, data model, API contracts, state ownership, authentication where needed, persistence, integrations, and runtime/deployment requirements. Reuse the user's stack and existing application when appropriate. A buildless interface and standard-library backend are options, not defaults that override the task.
