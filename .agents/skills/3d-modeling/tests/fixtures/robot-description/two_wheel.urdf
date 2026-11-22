@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!-- Synthetic two-wheel-plus-caster robot used only to test check_urdf.py. -->
+<robot name="synthetic_diff_drive">
+  <link name="base_footprint"/>
+  <link name="base_link">
+    <inertial><origin xyz="0.01 0 0.02"/><mass value="2.0"/>
+      <inertia ixx="0.02" iyy="0.02" izz="0.03" ixy="0" ixz="0" iyz="0"/></inertial>
+  </link>
+  <link name="left_wheel"><inertial><mass value="0.1"/>
+      <inertia ixx="0.00003" iyy="0.00005" izz="0.00003" ixy="0" ixz="0" iyz="0"/></inertial></link>
+  <link name="right_wheel"><inertial><mass value="0.1"/>
+      <inertia ixx="0.00003" iyy="0.00005" izz="0.00003" ixy="0" ixz="0" iyz="0"/></inertial></link>
+  <link name="caster_wheel"/>
+  <link name="lid"/>
+  <link name="side_sensor_frame"/>
+  <joint name="base_joint" type="fixed"><parent link="base_footprint"/><child link="base_link"/>
+    <origin xyz="0 0 0.03"/></joint>
+  <joint name="left_wheel_joint" type="continuous"><parent link="base_link"/><child link="left_wheel"/>
+    <origin xyz="0 0.12 0"/><axis xyz="0 1 0"/></joint>
+  <joint name="right_wheel_joint" type="continuous"><parent link="base_link"/><child link="right_wheel"/>
+    <origin xyz="0 -0.12 0"/><axis xyz="0 1 0"/></joint>
+  <joint name="caster_joint" type="continuous"><parent link="base_link"/><child link="caster_wheel"/>
+    <origin xyz="0.13 0 -0.018"/><axis xyz="0 1 0"/></joint>
+  <joint name="lid_joint" type="revolute"><parent link="base_link"/><child link="lid"/>
+    <origin xyz="0.08 0 0.05"/><axis xyz="0 1 0"/><limit lower="0" upper="1.8" effort="1" velocity="1"/></joint>
+  <joint name="side_sensor_joint" type="fixed"><parent link="base_link"/><child link="side_sensor_frame"/>
+    <origin xyz="0.0 -0.17 0.02" rpy="0 0 -1.5707963267949"/></joint>
+</robot>

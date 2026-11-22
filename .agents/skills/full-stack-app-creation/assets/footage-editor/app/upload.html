@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Upload video · Footage Editor</title>
+<link rel="stylesheet" href="/style.css">
+<script type="module" src="/workspace.mjs"></script>
+<script type="module" src="/face-swap.mjs"></script>
+<script type="module" src="/upload.mjs"></script>
+<script type="module" src="/quick-review.mjs"></script>
+<main class="upload-page">
+  <header><h1>Footage Editor</h1><label>Theme <select id="theme"><option value="system">System</option><option value="dark">Dark</option><option value="light">Light</option></select></label></header>
+  <div class="landing-workspace">
+  <div class="landing-controls">
+  <form class="panel upload-form" id="upload-form">
+    <h2>Open video or image</h2>
+    <label class="media-drop" data-media-drop data-mp4-only>
+      <input id="upload-file" type="file" accept="video/mp4,image/*,.mp4,.m4v" aria-label="Video or image file" aria-describedby="upload-help upload-file-status" required>
+      <span class="drop-icon" aria-hidden="true">↑</span>
+      <span class="drop-copy"><strong data-drop-title>Drop a video or image</strong><span data-drop-hint>or choose a file</span></span>
+    </label>
+    <p id="upload-file-status" data-drop-status role="status"></p>
+    <p id="upload-help">Motion tools support MP4 videos (H.264, with AAC or no audio) with a visible performer.</p>
+    <button id="upload-button" type="submit">Upload and prepare</button>
+    <div id="upload-job" hidden>
+      <div class="upload-job-thumbnail">
+        <canvas id="upload-thumbnail" width="112" height="70" role="img" aria-label="Video thumbnail" hidden></canvas>
+        <span id="upload-thumbnail-placeholder" aria-hidden="true">Video</span>
+        <button id="cancel-preparation" type="button" aria-label="Cancel preparation" title="Cancel preparation">×</button>
+      </div>
+    </div>
+    <p id="upload-status" role="status"></p>
+  </form>
+  <div id="face-swap-mount" hidden></div>
+  </div>
+  <section id="quick-review" class="panel" aria-labelledby="quick-heading" data-viewer hidden>
+    <div class="row">
+      <h2 id="quick-heading" tabindex="-1">Quick review</h2>
+      <button id="quick-download" type="button">Download edited media</button>
+      <button id="quick-clear" type="button">Clear selection</button>
+    </div>
+    <div class="quick-frame viewer-frame" data-view-frame data-fit="fit">
+      <div class="quick-picture"><video id="quick-video" playsinline preload="metadata" aria-label="Local video preview"></video><img id="quick-image" alt="Local image preview" hidden></div>
+    </div>
+    <div class="viewer-controls">
+      <label>Display <select data-view-fit>
+        <option value="fit">Fit</option><option value="fill">Fill</option><option value="stretch">Stretch</option><option value="center">Center</option>
+      </select></label>
+      <details class="viewer-size">
+        <summary>Viewer size</summary>
+        <label>Width <input data-view-width type="range" min="50" max="100" value="100"></label>
+        <label>Height <input data-view-height type="range" min="25" max="85" value="62"></label>
+        <button data-view-reset type="button">Reset size</button>
+      </details>
+      <button data-view-fullscreen type="button">Full screen</button>
+    </div>
+    <div class="quick-transport row">
+      <button id="quick-play" type="button">Play preview</button>
+      <button id="quick-back" type="button" aria-label="Go back 5 seconds">−5 s</button>
+      <button id="quick-forward" type="button" aria-label="Go forward 5 seconds">+5 s</button>
+      <label>Speed <select id="quick-speed"><option value=".25">¼×</option><option value=".5">½×</option>
+        <option value="1" selected>1×</option><option value="1.5">1½×</option><option value="2">2×</option>
+      </select></label>
+    </div>
+    <label class="quick-seek">Position <input id="quick-seek" type="range" min="0" max="0" step="any">
+      <output id="quick-time"></output></label>
+    <details class="quick-adjustments">
+      <summary>Adjust preview</summary>
+      <label class="slider">Zoom <input id="quick-zoom" type="range" min="100" max="200" value="100"></label>
+      <label class="slider">Brightness <input id="quick-light" type="range" min="50" max="150" value="100"></label>
+      <label class="slider">Contrast <input id="quick-contrast" type="range" min="50" max="150" value="100"></label>
+      <label class="slider">Saturation <input id="quick-color" type="range" min="0" max="200" value="100"></label>
+      <div class="row">
+        <button id="quick-original" type="button" aria-pressed="false">Show original</button>
+        <button id="quick-reset" type="button">Reset preview</button>
+      </div>
+    </details>
+    <p id="quick-status" role="status" hidden></p>
+  </section>
+  </div>
+</main>
+</html>

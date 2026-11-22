@@ -1,0 +1,77 @@
+<details id="face-swap" class="panel face-tools">
+  <summary>Face Swap <span id="face-inline-status" hidden></span></summary>
+  <form class="face-form" id="face-form">
+    <div id="face-inputs" class="face-inputs">
+    <section class="face-step" aria-labelledby="face-step-target">
+      <h3 id="face-step-target">1. Click the face to replace</h3>
+      <p id="face-target-status"></p>
+      <div id="face-target-controls" hidden>
+        <div id="face-target-picker" class="face-target-picker" role="group" tabindex="0" aria-label="Target face picker" aria-describedby="face-target-help">
+          <div id="face-target-picture">
+          <video id="face-target-video" muted playsinline preload="metadata" aria-label="Target video frame"></video>
+          <img id="face-target-image" alt="Target image" hidden>
+          <img id="face-target-mask" alt="Green preview of the selected face mask" hidden>
+          <div id="face-depth-layers" aria-hidden="true" hidden></div>
+          <span id="face-target-marker" hidden aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="face-target-row">
+          <label for="face-zoom">Target zoom</label>
+          <input id="face-zoom" type="range" min="1" max="6" step=".1" value="1">
+          <output id="face-zoom-value" for="face-zoom">1×</output>
+          <button id="face-zoom-reset" type="button" disabled>Reset zoom</button>
+        </div>
+        <div class="face-target-row" id="face-target-frame">
+          <label for="face-target-time">Target frame</label>
+          <input id="face-target-time" type="range" min="0" max="0" step=".01" value="0">
+        </div>
+        <p id="face-target-help" class="face-hint">Click a face. When zoomed, drag to pan (Alt + arrows); arrows and Enter select by keyboard.</p>
+        <output id="face-target-pick-status" aria-live="polite"></output>
+        <details id="face-curvature" hidden>
+          <summary>Depth bands</summary>
+          <p>Estimated surface depth, near to far.</p>
+          <div id="face-depth-options" role="group" aria-label="Visible depth bands"></div>
+          <output id="face-depth-status" role="status"></output>
+        </details>
+      </div>
+    </section>
+    <section class="face-step" aria-labelledby="face-step-source">
+      <h3 id="face-step-source">2. Choose the new face</h3>
+      <label class="media-drop media-drop-compact" data-media-drop>
+        <input required type="file" id="face-portrait" accept="image/*,video/*" aria-label="Source image or video" aria-describedby="face-file-status">
+        <span class="drop-icon" aria-hidden="true">↑</span>
+        <span class="drop-copy"><strong data-drop-title>Drop a source image or video</strong><span data-drop-hint>or choose a file</span></span>
+      </label>
+      <p id="face-file-status" data-drop-status role="status"></p>
+      <div id="face-source-controls" class="face-source-controls" hidden>
+        <video id="face-source-video" controls muted playsinline preload="metadata" aria-label="Source video"></video>
+        <button id="face-capture" type="button" disabled>Use current frame</button>
+        <output id="face-capture-status" aria-live="polite"></output>
+      </div>
+      <img id="face-still" alt="Selected source face frame" hidden>
+      <label class="face-source-index" title="If the source has several faces, number them from left to right.">Source face
+        <input id="face-source-index" type="number" min="1" max="99" value="1" required></label>
+    </section>
+    </div>
+    <div class="row face-run-row">
+      <button id="face-run" type="submit" disabled>Run Face Swap</button>
+      <button id="face-cancel" type="button" hidden>Cancel</button>
+    </div>
+    <p id="face-status" role="status"></p>
+  </form>
+  <section id="face-result" aria-labelledby="face-result-title" hidden>
+    <div class="row">
+      <h2 id="face-result-title">Verified result</h2>
+      <a id="face-download" href="/face-swap/result.mp4" download="face-swap.mp4">Download lossless MP4</a>
+    </div>
+    <p id="face-report"></p>
+    <div class="row face-result-actions">
+      <button id="face-display" type="button" aria-pressed="false">Show swap</button>
+      <button id="face-clear" type="button" hidden>Clear result</button>
+    </div>
+    <div id="face-preview-home">
+      <video id="face-video" controls playsinline preload="metadata" aria-label="Face swap preview" hidden></video>
+      <img id="face-image-result" alt="Face swap result" hidden>
+    </div>
+  </section>
+</details>

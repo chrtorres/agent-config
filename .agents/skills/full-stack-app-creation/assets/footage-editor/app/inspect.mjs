@@ -67,6 +67,13 @@ export function createInspector(stage, renderer, pause, changed, canMark=()=>tru
     if(!selected)return;
     const dimensions=[...(adjustments[selected.key]??[0,0])];
     dimensions[index]=Number(input.value)/100;
+    // Keep proportions: one percentage on both axes is a uniform resize.
+    if(document.getElementById("feature-lock")?.checked) {
+      dimensions[1-index]=dimensions[index];
+      values[1-index].value=input.value;
+      const output=document.getElementById(values[1-index].id+"-value");
+      if(output)output.value=input.value+"%";
+    }
     if(dimensions.some(Boolean))adjustments[selected.key]=dimensions;
     else delete adjustments[selected.key];
     shapeChanged();
@@ -225,6 +232,8 @@ export function createInspector(stage, renderer, pause, changed, canMark=()=>tru
         adjustments[key]=values.map(v=>v/100);
     }
     cleaned=preset.cleanup===true&&Object.keys(adjustments).length>0;
+    const physics=document.getElementById("soft-physics");
+    if(physics)physics.checked=preset.physics!==false;
     zoom.value=Number.isFinite(preset.zoom)?Math.max(1,Math.min(6,preset.zoom)):1;
     if(available[preset.feature])set(preset.feature);
     syncControls();

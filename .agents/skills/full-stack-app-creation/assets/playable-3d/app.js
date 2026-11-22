@@ -39,6 +39,17 @@ const gait = createGait();
 const beacon = new T.Mesh(new T.CylinderGeometry(.3, .45, 1, 8), material("#58e4f6"));
 beacon.position.set(BEACON.x, .5, BEACON.z);
 scene.add(player, beacon, new T.GridHelper(18, 18, "#aaaabb", "#495c71"));
+let plantings;
+if (new URLSearchParams(location.search).has("plantings")) {
+  void import("./plantings.js").then(({ createPlantings }) => {
+    plantings = createPlantings(scene);
+    const control = document.createElement("button");
+    control.textContent = "Switch planting layout";
+    control.style.cssText = "position:fixed;bottom:1rem;left:1rem;z-index:1";
+    control.onclick = () => plantings.toggle();
+    document.querySelector("main").append(control);
+  });
+}
 const keys = new Set();
 let pending = false, previous = null, previousPad, pressed = false, frames = 0;
 addEventListener("keydown", e => { keys.add(e.code); if (e.code === "KeyE" && !e.repeat) pending = true; });
@@ -76,9 +87,11 @@ function frame(now) {
   const status = document.querySelector("#status");
   const message = state.saveError ? "Save unavailable" : state.reached ? "Checkpoint saved" : "Find the cyan beacon";
   if (status.textContent !== message) status.textContent = message;
+  plantings?.update(player.position);
   presentation.render(dt);
   window.renderedCheckpoint = {
     ...state, frames: ++frames, cameraDistance: camera.position.distanceTo(player.position),
+    plantings: plantings?.observe(),
     quality, resolution: presentation.resolution,
     boots: boots.map(foot => foot.getWorldPosition(new T.Vector3()).toArray()),
   };

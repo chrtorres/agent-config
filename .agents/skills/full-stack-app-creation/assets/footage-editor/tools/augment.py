@@ -13,6 +13,8 @@ import numpy as np
 from PIL import Image
 
 from anatomy import catalog as detail_catalog, facial_details, hand_details, pose_details
+from media import presentation_offset
+from progress import Progress
 
 BODY = {
     "left-arm": ("Left arm", [(11, 13, .29), (13, 15, .31)]),
@@ -263,6 +265,28 @@ def face_regions(landmarks, width, height, pose_nose, foreground):
     return result
 
 
+# Ordered face-mesh contours for the color controls. Image-left features first.
+LIPS_OUTER = (61,146,91,181,84,17,314,405,321,375,291,409,270,269,267,0,37,39,40,185)
+LIPS_INNER = (78,95,88,178,87,14,317,402,318,324,308,415,310,311,312,13,82,81,80,191)
+EYE_OPENINGS = ((33,7,163,144,145,153,154,155,133,173,157,158,159,160,161,246),
+                (362,382,381,380,374,373,390,249,263,466,388,387,386,385,384,398))
+IRISES = ((468,469,470,471,472), (473,474,475,476,477))
+BROWS = ((70,63,105,66,107,55,65,52,53,46), (336,296,334,293,300,276,283,282,295,285))
+
+
+def color_areas(landmarks, width, height):
+    """Polygons (source pixels) for lips, eyes, irises and brows in one frame."""
+    pixels = [(lm.x*width, lm.y*height) for lm in landmarks]
+    polygon = lambda ids: [[round(pixels[i][0],1), round(pixels[i][1],1)] for i in ids]
+    areas = {"lips": polygon(LIPS_OUTER), "mouth": polygon(LIPS_INNER),
+             "eyes": [polygon(ids) for ids in EYE_OPENINGS], "brows": [polygon(ids) for ids in BROWS]}
+    if len(pixels) >= 478:
+        areas["irises"] = [[round(pixels[c][0],1), round(pixels[c][1],1),
+                            round(sum(math.dist(pixels[c], pixels[i]) for i in ring)/len(ring),2)]
+                           for c, *ring in IRISES]
+    return areas
+
+
 def build(source, model, timeline, output, hand_model=None, base_regions=None):
     manifest = json.loads(timeline.read_text())
     base = json.loads(base_regions.read_text()) if base_regions else None
@@ -280,6 +304,7 @@ def build(source, model, timeline, output, hand_model=None, base_regions=None):
         min_face_detection_confidence=.35, min_face_presence_confidence=.42)
     matte = SubjectMatte(manifest,timeline)
     rows = []
+    colors = []
     with ExitStack() as stack:
         container = stack.enter_context(av.open(str(source)))
         finder = stack.enter_context(tasks.FaceLandmarker.create_from_options(options))
@@ -296,10 +321,12 @@ def build(source, model, timeline, output, hand_model=None, base_regions=None):
         stream = container.streams.video[0]
         stream.thread_count = 2
         width,height = stream.width,stream.height
+        progress = Progress(len(manifest["frames"]))
         for index,frame in enumerate(container.decode(stream)):
+            progress.update(index)
             expected_width, layers = manifest["frames"][index]
-            timestamp = float(frame.pts*frame.time_base)
-            if expected_width != width or abs(timestamp-index/manifest["fps"]) > .0006:
+            timestamp = max(0., float(frame.pts*frame.time_base) - manifest.get("presentationStart", 0))
+            if expected_width != width or abs(timestamp-presentation_offset(manifest,index)) > .0006:
                 raise ValueError(f"Timeline mismatch at frame {index}")
             points = {key:(x/4,y/4,confidence) for key,(x,y,confidence) in zip(manifest["landmarks"],layers[0])}
             regions = body_regions(points,width,height)
@@ -312,6 +339,7 @@ def build(source, model, timeline, output, hand_model=None, base_regions=None):
             image = mp.Image(image_format=mp.ImageFormat.SRGB,data=rgb)
             face = finder.detect_for_video(image,int(timestamp*1000))
             facial = face_regions(face.face_landmarks[0],width,height,points[0],foreground) if face.face_landmarks else {}
+            areas = color_areas(face.face_landmarks[0],width,height) if facial else None
             if not facial and points[0][2] > 35:
                 # A head crop gives the same detector more pixels on profile
                 # views. The pose-nose check still rejects unrelated detections.
@@ -326,7 +354,9 @@ def build(source, model, timeline, output, hand_model=None, base_regions=None):
                         projected = [SimpleNamespace(x=(l+lm.x*(right-l))/width,y=(t+lm.y*(bottom-t))/height)
                                      for lm in candidate.face_landmarks[0]]
                         facial = face_regions(projected,width,height,points[0],foreground)
+                        areas = color_areas(projected,width,height) if facial else None
             regions.update(facial)
+            colors.append(areas)
             if hand_finder is not None:
                 detected = hand_finder.detect_for_video(image,int(timestamp*1000))
                 regions.update(hand_regions(detected,points,width,height,foreground))
@@ -349,7 +379,7 @@ def build(source, model, timeline, output, hand_model=None, base_regions=None):
     if base:
         catalog = base["parts"] | {key:label for key,label in catalog.items() if key not in base["parts"]}
     data = {"parts":catalog, "parents":{key:parent for key,(_,parent) in details.items()},
-            "frames":rows}
+            "frames":rows, "colorAreas":colors}
     output.parent.mkdir(parents=True,exist_ok=True)
     staging = output.with_suffix(".partial")
     staging.write_text(json.dumps(data,separators=(",",":")))

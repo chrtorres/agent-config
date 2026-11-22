@@ -11,6 +11,22 @@ Use this mode for a stateful browser scene with continuous controls, game or sim
 
 For UHD resolution, HDR fallback, scripted gameplay reels, and single-instance UAT, see [cinematic presentation](cinematic-presentation.md).
 
+For a scene with authored tree variants, see [playable vegetation](playable-vegetation.md).
+
+For a measured real-world movement baseline, see [real-world physics](real-world-physics.md). Under memory pressure, software GL can stall at a fraction of a frame per second. Check free memory and run the unchanged baseline before attributing timeouts to the change.
+
+## Outfit cloth and close inspection
+
+When the character's costume is simulated (ribbons, swinging panels, sleeves, tied hair; see 3d-modeling's [one cloth style across a whole outfit](../../3d-modeling/references/runtime-outfit-cloth.md)):
+
+- Put every cloth system behind one update call. Run it after the pose for the frame, and refresh the player's world matrices once before it. Free ends reuse the GLB's own material by name, so they match the attached cloth. Hide each system when its anchor node is missing, so a fallback model never shows orphaned ribbons.
+- Replacing a costume replaces the asset hash. Update the metadata and the served-bytes check together, and rerun the motion tests that sample the measured collider.
+- Inspect at character scale. The follow camera shows a 2 m figure as a few hundred pixels, which is too small to judge hems, hair or clipping. [close-camera.mjs](../assets/playable-3d/close-camera.mjs) wraps the game's render call so renders through the main camera come from an inspection camera orbiting the player. Shadow and post-processing passes are untouched, and the game camera, input and simulation keep running. Inject it with Playwright, then capture these views: front, side and rear standing; sprint; turn; leap; the first frames after a stop; settled; and an attack. Many cloth faults appear only for a few frames after a stop or landing. In the originating run, a hair tail flipped over a hat only in those frames.
+- Use a spare port and a production build for these captures. Keep the user's preview origin untouched so its saves survive.
+- If a browser suite times out under memory pressure, run the same suite on a detached worktree of the last commit before calling the change a regression. In the originating run, both stopped at the same screenshot after the same ten passes while swap was full. Report the gate as not run, not as passed.
+
+Capture decision: the user named this skill as a target. The incoming work scored .75, .75, .5, .5, .75 (18.75 + 11.25 + 17.5 + 7.5 + 7.5 = 62.5%) against this skill. The modeling-side method went to 3d-modeling. This section adds only the game-loop integration, close inspection and baseline comparison that the playable workflow lacked.
+
 ## Check rendered pose transitions
 
 - Publish a diagnostic snapshot after the render using the actual joint

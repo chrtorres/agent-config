@@ -4,6 +4,10 @@ import { Motion,PARTS } from "./motion.mjs";
 import { createRenderer } from "./render.mjs";
 import {createStageZoom} from "./stage-zoom.mjs";
 import {anchorPoint,validPoint} from "./point-regions.mjs";
+import {ensureUhd} from "./uhd.mjs";
+import {onStatus, progressBar} from "./status.mjs";
+import {downloadVideo,saveMedia} from "./media-download.mjs";
+import {COLOR_LABELS,COLOR_TARGETS,validColors} from "./colors.mjs";
 
 const $=id=>document.getElementById(id);
 const video=$("source"), canvas=$("screen"), slider=$("time"), menu=$("part");
@@ -21,30 +25,101 @@ for(const [index,input] of toneInputs.entries())input.oninput=()=>{
 $("tone-reset").onclick=()=>{
   for(const input of toneInputs) {input.value=0;input.oninput();}
 };
+// Hair and facial-feature dyes: {target:[hex color, strength 0..100]}.
+const colors={};
+const colorInputs={};
+for(const key of COLOR_TARGETS) {
+  const row=document.createElement("div");
+  row.className="row color-row";row.dataset.target=key;
+  const picker=Object.assign(document.createElement("input"),{type:"color",value:"#8a3b2a",id:"color-"+key});
+  picker.setAttribute("aria-label",COLOR_LABELS[key]+" color");
+  const strength=Object.assign(document.createElement("input"),{type:"range",min:0,max:100,step:1,value:0,id:"color-"+key+"-strength"});
+  const output=Object.assign(document.createElement("output"),{id:"color-"+key+"-value",value:"0%"});
+  const label=Object.assign(document.createElement("label"),{className:"slider feature-slider",textContent:COLOR_LABELS[key]+" "});
+  label.append(picker,strength,output);
+  row.append(label);
+  $("color-rows").append(row);
+  const update=()=>{
+    output.value=strength.value+"%";
+    if(Number(strength.value)>0)colors[key]=[picker.value,Number(strength.value)];
+    else delete colors[key];
+    changed=true;
+  };
+  picker.oninput=strength.oninput=update;
+  colorInputs[key]={row,picker,strength,update};
+}
+$("color-reset").onclick=()=>{
+  for(const {strength,update} of Object.values(colorInputs)) {strength.value=0;update();}
+};
+const colored=()=>Object.keys(colors).length>0;
 let secondary=null,study=null,traceFrame=-1,splatPreview=null,splatLoading=false,splatsAvailable=false,splatFrame=-1,splatPoints=0;
 let inspector=null, renderer=null, ready=false, changed=true, requested=null, pendingFrame=null, position=0;
 let padIndex=null, pressed=[], stamp=null, elapsed=0;
-let limit=0, fps=30, cuts=[];
+let limit=0, fps=30, cuts=[], playbackStart=0, frameTimes=null;
 const pointerDirections=new Map();
 const points=Object.create(null), pointMode=$("feature-point-mode"), radiusInput=$("feature-radius");
 let nextPoint=1;
-$("save-edits").onclick=()=>{
+function editRecipe() {
   const toPercent=values=>values.map(value=>Math.round(value*200)/2);
   const shapes=Object.fromEntries(Object.entries(inspector.adjustments).map(([key,values])=>[key,toPercent(values)]));
   const recipe={version:1,shapes,tone:toPercent(tone)};
+  if(colored())recipe.colors=structuredClone(colors);
   const editedPoints=Object.fromEntries(Object.entries(points).filter(([key])=>Object.hasOwn(shapes,key)));
   if(Object.keys(editedPoints).length)recipe.points=editedPoints;
   if(inspector.cleanup())recipe.cleanup=true;
+  if(!$("soft-physics").checked)recipe.physics=false;
   if(inspector.cleanup()&&secondary?.enabled)recipe.recordedDynamics=true;
-  const link=document.createElement("a");
-  link.href=URL.createObjectURL(new Blob([JSON.stringify(recipe,null,2)+"\n"],{type:"application/json"}));
-  link.download="footage-edit.json";
-  link.click();
-  setTimeout(()=>URL.revokeObjectURL(link.href),1000);
+  return recipe;
+}
+$("save-edits").onclick=()=>{
+  saveMedia(new Blob([JSON.stringify(editRecipe(),null,2)+"\n"],{type:"application/json"}), "footage-edit.json");
+};
+$("download-edited").onclick=async()=>{
+  const button = $("download-edited");
+  const status = $("workspace-status");
+  button.disabled = true;
+  status.hidden = false;
+  status.textContent = "Rendering shape and color edits…";
+  const bar = progressBar(status, "Export progress");
+  bar.show(null);
+  const stop = onStatus(({export: job}) => { if (job.phase === "rendering") bar.show(job); });
+  try {
+    const recipe = editRecipe();
+    if (Object.values(recipe.shapes).some(values => values.some(Boolean)) || recipe.tone.some(Boolean) || recipe.colors) {
+      await downloadVideo("/export-edit", JSON.stringify(recipe), {"Content-Type":"application/json"});
+    } else {
+      const response = await fetch("/video.mp4");
+      if (!response.ok) throw new Error("The prepared video is unavailable.");
+      saveMedia(await response.blob(), "footage-edited.mp4");
+    }
+    status.textContent = "Edited video downloaded.";
+  } catch (error) {
+    status.textContent = error.message;
+  } finally {
+    stop();
+    bar.remove();
+    button.disabled = false;
+  }
+};
+$("download-frame").onclick=()=>{
+  canvas.toBlob(frame => {
+    if (frame) saveMedia(frame, "footage-frame.png");
+  }, "image/png");
 };
 const STEP=1/120;
 const clamp=(n,min,max)=>Math.max(min,Math.min(max,n));
-const frameIndex=time=>clamp(Math.round(time*fps),0,limit);
+const frameTime=index=>frameTimes?.[index] ?? index/fps;
+function frameIndex(time) {
+  const elapsed = time - playbackStart;
+  if (!frameTimes) return clamp(Math.round(elapsed*fps),0,limit);
+  let first = 0, end = frameTimes.length;
+  while (first < end) {
+    const middle = Math.floor((first+end)/2);
+    if (frameTimes[middle] <= elapsed + .0000005) first = middle + 1;
+    else end = middle;
+  }
+  return Math.max(0, first-1);
+}
 const sceneOf=index=>Math.max(0,cuts.findIndex(([a,b])=>index>=a&&index<b));
 const currentShot=()=>sceneOf(position);
 
@@ -98,18 +173,18 @@ document.addEventListener("keydown",event=>{
 for(const [value,name] of PARTS.entries()) menu.add(new Option(name,String(value)));
 const failed=text=>{$("error").textContent=text;$("error").hidden=false;$("loading").hidden=true;};
 function display() {
-  const time=position/fps;
+  const time=frameTime(position);
   $("clock").textContent=String(Math.floor(time/60))+":"+Number(time%60).toFixed(2).padStart(5,"0");
   if(document.activeElement!==slider)slider.value=position;
   $("play").textContent=video.paused?"Play video":"Pause video";
   $("resolution").textContent=canvas.width+" × "+canvas.height;
-  const shaped=Object.keys(inspector?.adjustments??{}).length>0, colored=tone.some(Boolean);
-  $("save-edits").disabled=!shaped&&!colored;
+  const shaped=Object.keys(inspector?.adjustments??{}).length>0, toned=tone.some(Boolean)||colored();
+  $("save-edits").disabled=!shaped&&!toned;
   const rendered=renderer?.inspect();
   $("motion-state").textContent=motion.active()?(
     !rendered?.matteReady?"Loading pose layer":
     rendered.motionScale<.95?"Motion limited to available pixels":"Live pose"
-  ):shaped?"Shape edits":colored?"Skin tone adjusted":"Original frame";
+  ):shaped?"Shape edits":colored()?"Colors adjusted":tone.some(Boolean)?"Skin tone adjusted":"Original frame";
   menu.value=motion.selected;
   for(let i=0;i<3;i++) {
     if(document.activeElement!==knobs[i])knobs[i].value=motion.offsets[motion.selected][i];
@@ -119,13 +194,14 @@ function display() {
 function accept(index) {
   if(!renderer||video.seeking)return;
   pendingFrame=index;
-  const affectsPixels=motion.active()||tone.some(Boolean)||Object.keys(inspector?.adjustments??{}).length>0;
+  const affectsPixels=motion.active()||tone.some(Boolean)||colored()||Object.keys(inspector?.adjustments??{}).length>0;
   if(!renderer.frame(video,index,affectsPixels))return;
   pendingFrame=null;
   position=index;
   if(requested===index)requested=null;
   changed=true;
   ready=true;
+  $("download-frame").disabled = false;
   $("loading").hidden=true;
   display();
 }
@@ -165,7 +241,8 @@ function seek(index) {
   const target=clamp(Math.round(index),0,limit);
   video.pause();
   requested=target;
-  video.currentTime=(target+.23)/fps;
+  const period = target < limit ? frameTime(target+1)-frameTime(target) : 1/fps;
+  video.currentTime=playbackStart+frameTime(target)+.23*period;
   if(target===position&&!video.seeking) {
     requested=null;
     changed=true;
@@ -178,7 +255,7 @@ function cue(direction) {
 }
 function playPause() {
   if(video.paused) {
-    if(position>=limit)video.currentTime=0;
+    if(position>=limit)video.currentTime=playbackStart;
     video.play().catch(()=>failed("Use Play video to activate playback."));
   } else video.pause();
 }
@@ -187,6 +264,9 @@ function jump() { motion.jump();changed=true; }
 function choose(which) {motion.choose(which);display();}
 
 $("play").onclick=playPause;
+$("previous-frame").onclick=()=>step(-1);
+$("next-frame").onclick=()=>step(1);
+$("playback-speed").onchange=event=>{video.playbackRate=Number(event.target.value);};
 $("jump").onclick=jump;
 for(const button of document.querySelectorAll("[data-direction]")) {
   const stop=event=>pointerDirections.delete(event.pointerId);
@@ -226,7 +306,7 @@ const keyboard={
   Space:1,KeyQ:1,KeyE:1,KeyP:1,KeyR:1,
 };
 window.addEventListener("keydown",event=>{
-  if(event.target.closest("input,select,button")||!keyboard[event.code])return;
+  if($("stage-viewport").dataset.facePreview || event.target.closest("input,select,button,video,summary,.face-target-picker")||!keyboard[event.code])return;
   event.preventDefault();
   keys.add(event.code);
   if(event.repeat)return;
@@ -304,8 +384,9 @@ function animate(now) {
   const state=motion.snapshot();
   const adjustments=inspector?.adjustments??{};
   const cleaned=inspector?.cleanup()??false;
+  const physics=$("soft-physics").checked;
   const poseActive=motion.active();
-  const active=poseActive||Object.keys(adjustments).length>0||tone.some(Boolean);
+  const active=poseActive||Object.keys(adjustments).length>0||tone.some(Boolean)||colored();
   secondary?.tick(dt,position,before,state,poseActive);
   const useRecorded=secondary?.enabled??false;
   const response=useRecorded?secondary.result:{};
@@ -314,9 +395,9 @@ function animate(now) {
     splatPoints=splatPreview.draw(position);
     splatFrame=position;
   }
-  const key=active?JSON.stringify([state.root,state.lift,state.offsets,state.gait,state.gait>0?state.phase:0,adjustments,tone,cleaned,useRecorded,response]):"neutral";
+  const key=active?JSON.stringify([state.root,state.lift,state.offsets,state.gait,state.gait>0?state.phase:0,adjustments,tone,cleaned,useRecorded,response,physics,colors]):"neutral";
   if(changed||key!==poseKey) {
-    renderer.draw(state,poseActive,adjustments,tone,cleaned,response,observation,points);
+    renderer.draw(state,poseActive,adjustments,tone,cleaned,response,observation,points,physics,colors);
     inspector?.render();
     syncPointControls();
     changed=false;
@@ -334,6 +415,7 @@ function animate(now) {
 }
 
 window.movementReview={
+  seekSeconds:seconds=>seek(frameIndex(seconds)),
   inspect:()=>({ready,padIndex,position,shot:currentShot(),paused:video.paused,motion:motion.snapshot(),render:renderer?.inspect(),inspection:inspector?.snapshot(),tone:[...tone],
     stageZoom:stageZoom.snapshot(),points:structuredClone(points),
     secondary:secondary?.inspect(position)??{enabled:false,active:false,frame:position,regions:[],amplitude:0,eligibleRegions:0},
@@ -347,6 +429,11 @@ try {
   quality.textContent=useUhd?"Use native resolution":"Use 4K controls";
   renderer=await createRenderer(canvas,useUhd);
   $("tone-panel").hidden=!renderer.hasSkin;
+  // Hair needs the segmentation masks; facial features need tracked mesh polygons.
+  const facialColors=Boolean(renderer.augmentation?.colorAreas?.some(Boolean));
+  for(const [key,{row}] of Object.entries(colorInputs))
+    row.hidden=key==="hair"?!renderer.hasSkin:!facialColors;
+  $("color-panel").hidden=!renderer.hasSkin&&!facialColors;
   study=await fetch("/motion-study.json").then(r=>r.ok?r.json():null);
   if(study&&study.frames.length===renderer.timeline.frames.length) {
     secondary=new SecondaryMotion(study);
@@ -399,6 +486,10 @@ try {
         for(const [key,point] of Object.entries(preset.points??{}))
           if(/^point-[1-9]\d*$/.test(key)&&validPoint(point,renderer.augmentation?.parts??{}))registerPoint(key,point);
         inspector.restore?.(preset);
+        const presetColors=validColors(preset.colors);
+        for(const [key,[value,strength]] of Object.entries(presetColors??{})) {
+          colorInputs[key].picker.value=value;colorInputs[key].strength.value=strength;colorInputs[key].update();
+        }
         if(Array.isArray(preset.tone)&&preset.tone.length===3)
           toneInputs.forEach((input,index)=>{
             if(Number.isFinite(preset.tone[index])) {input.value=preset.tone[index];input.oninput();}
@@ -408,13 +499,24 @@ try {
       // Invalid review links open the neutral state.
     }
   }
+  if (useUhd) {
+    $("loading").textContent = "Preparing and verifying 4K playback…";
+    const bar = progressBar($("loading"), "4K build progress");
+    bar.show(null);
+    try {
+      await ensureUhd(progress => bar.show(progress));
+    } finally {
+      bar.remove();
+    }
+  }
   video.src=useUhd?"/4k.mp4":"/video.mp4";
-  ({fps,shots:cuts}=renderer.timeline);
+  ({fps,shots:cuts,playbackStart=0,frameTimes=null}=renderer.timeline);
   renderer.setPageReady(error=>{
     if(error) {$("motion-state").textContent="Pose layer unavailable";return;}
     if(video.paused&&!video.seeking)accept(pendingFrame??position);
   });
   limit=renderer.timeline.frames.length-1; slider.max=limit;
+  $("download-edited").disabled = false;
   if(cuts.length>1)cuts.forEach(([start],i)=>{const button=document.createElement("button");button.textContent="Shot "+(i+1);button.onclick=()=>seek(start);document.querySelector(".shots").append(button);});
   accept(frameIndex(video.currentTime));
   requestAnimationFrame(animate);

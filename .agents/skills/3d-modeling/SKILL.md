@@ -25,7 +25,7 @@ Use [product-refinement](../product-refinement/SKILL.md) for a revision that nee
 
 ## Runtime assets
 
-For a Blender asset intended for a game or browser scene, use the [runtime GLB workflow](references/runtime-glb.md). It defines an engine-facing asset contract, separate studio and runtime exports, and validation of the exact GLB used in the browser. Print approval applies only to physical outputs. For fitted gear and expressive faces, use [runtime character fit](references/runtime-character-fit.md) to check rear clearance, facial poses, and moving attachment anchors.
+For a Blender asset intended for a game or browser scene, use the [runtime GLB workflow](references/runtime-glb.md). It defines an engine-facing asset contract, separate studio and runtime exports, and validation of the exact GLB used in the browser. Print approval applies only to physical outputs. For authored foliage used in a playable world, see [runtime vegetation](references/runtime-vegetation.md). For fitted gear and expressive faces, use [runtime character fit](references/runtime-character-fit.md) to check rear clearance, facial poses, and moving attachment anchors. For cloth tails, sashes or ribbons that move with the character, use its [soft attachments in motion](references/runtime-character-fit.md#soft-attachments-in-motion) section and the [cloth collider example](assets/cloth-collider-example/README.md): collide against a measured, bone-attached silhouette, not a fixed capsule. To extend that motion across a whole outfit (skirt panels, wide sleeves, tied hair under a hat) or after a fit change, use [one cloth style across a whole outfit](references/runtime-outfit-cloth.md) and re-measure the collider with [measure_body_profile.py](scripts/measure_body_profile.py).
 
 ## Research-driven animation
 
@@ -40,6 +40,16 @@ Use [code-generated video](references/code-video.md) for Python or Blender anima
 Use [reference-driven motion and localized footage edits](references/footage-motion.md) for stable bind landmarks, occlusion-aware retargeting, source-preserving edits, or photo-textured movement over recorded footage. For private source comparisons, use temporary processing and retain only synthetic fixtures and de-identified results.
 
 For a local editor that regenerates its pose, masks, and editable surface from the caller's video alone, use the source-only preparation and validation procedure in that reference. The [standalone editor](../full-stack-app-creation/assets/footage-editor/) provides the runnable engine and tests.
+
+For localized facial edits in video, use [motion-aware face compositing](references/face-motion-compositing.md) to protect current-frame eyes, inspect relative-depth masks, and control seam lag during quick movements. When a face swap blurs, wobbles or lands on the wrong face during fast action, use its [two-pass action tracking](references/face-motion-compositing.md#tracking-faces-through-action) and score it on a synthetic clip with known motion.
+
+When a resized body part looks like a magnifying glass, follow [reshaping without a lens effect](references/footage-motion.md#reshaping-without-a-lens-effect). Add [soft-tissue follow-through](references/footage-motion.md#soft-tissue-follow-through) for enlarged regions that should move with the body, and use [hair and feature colour](references/footage-motion.md#hair-and-feature-colour) for luminance-preserving dyes.
+
+When a tracked edit must survive format conversion, variable frame timing, or a 4K retry, use the [footage clock and rendition checks](references/footage-motion.md#footage-clock-and-rendition-checks).
+
+## Context and inspection for the same asset
+
+For a model shown in a composed environment and at close range, use [context and inspection renders](references/context-and-inspection.md) to stage the surroundings, compare isolated silhouettes and details, and verify the exact runtime exports.
 
 ## Combined review workspaces
 
@@ -58,6 +68,20 @@ When several colorways or finishes share a model, use the [material-variant work
 Use [photo-based refinement](references/photo-based-refinement.md) when matching a physical object from photos, dimensions, manufacturer diagrams, or teardown exhibits. Fit the visible landmarks, document uncertainty and hidden geometry, and verify any requested fidelity threshold against independent evidence. Retain the source, matched views, measurements, and browser smoke results with the version.
 
 For a multipart photo reconstruction, research the exact manufacturer/model first, prioritizing manufacturer pages and manuals, regulatory external/internal photos, and orthogonal teardown or underside views. Record source URLs and what each source establishes. Calibrate visible landmarks before adding detail, then represent every inspection-worthy physical piece as a stable top-level node. Populate the review metadata `parts` contract and require numbered callouts, leader lines, a part key, click-to-isolate behavior, and exact reassembly restoration. A 3D review demonstrates correspondence and inspectability; it cannot prove a 99% visual match without a documented comparison protocol and independent views.
+
+## Robot description from a reconstruction
+
+Use [robot description](references/robot-description.md) when a multipart model must become a URDF for robotics or simulation. That covers a REP-103 frame, parts that pivot on their joint axes, inertials and centre of mass, collision primitives, sensor frames, and a spec that tags each value as sourced or estimated. Verify the result with:
+- [check_interference.py](scripts/check_interference.py), a Blender BVH audit with an allowlist and a joint-pose sweep
+- [check_urdf.py](scripts/check_urdf.py)
+- [merge_glb_animations.py](scripts/merge_glb_animations.py), which builds a single joint-exercise clip
+- [compare_glb_exports.py](scripts/compare_glb_exports.py), for regeneration
+
+Inject faults to confirm the checks catch them. Tests are in [test_robot_description_tools.py](tests/test_robot_description_tools.py). Provenance is in [robot-description-provenance.md](references/robot-description-provenance.md).
+
+## Localized still-photo edits
+
+For an authorized still-image edit, use the [localized photo face-swap workflow](../full-stack-app-creation/references/photo-face-swap.md) to fit facial landmarks to a target portrait. Keep the fit, face mask, full-resolution result, and comparison together in the version directory. Open the comparison in a visible browser when handing it to a desktop reviewer.
 
 ## Research-driven realism
 

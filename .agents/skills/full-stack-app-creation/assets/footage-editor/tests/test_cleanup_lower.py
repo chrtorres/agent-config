@@ -81,7 +81,12 @@ class LowerCleanup(unittest.TestCase):
             self.assertAlmostEqual((cx-kx)*ux+(cy-ky)*uy,.43*length,places=2)
             self.assertAlmostEqual(sx*ux+sy*uy,0,places=2)
             xs,ys=np.array([points[key] for key in (27,29,31)]).T
-            warp=compile_cleanup([(frame["left-calf"][0],(.75,.75))])
+            # A uniformly scaled calf pushes its surroundings, so the observed
+            # ankle and foot pixels are held by the cleanup pins.
+            amount=(.75,.75)
+            visible={key:(x,y,95) for key,(x,y) in points.items()}
+            pins=limb_pins(visible,{"left-calf":frame["left-calf"]},200,200)["left-calf"]
+            warp=compile_cleanup([(frame["left-calf"][0],amount)],{id(amount):pins})
             for delta in warp(xs,ys):
                 np.testing.assert_array_equal(delta,np.zeros_like(delta))
 

@@ -47,8 +47,10 @@ try {
       await seek(page,chosen);
       const original=await raster(page), corner=await raster(page,true);
       const baseState=await state(page);
-      check(quality==="native"?baseState.render.outputWidth===baseState.render.width:
-        baseState.render.outputWidth===2160&&baseState.render.outputHeight===3840,quality+" uses the expected render size");
+      const {width,height,outputWidth,outputHeight}=baseState.render;
+      const longEdge=Math.max(width,height);
+      const side=value=>quality==="native"?value:Math.max(2,2*Math.round(value*1920/longEdge));
+      check(outputWidth===side(width)&&outputHeight===side(height),quality+" uses the expected render size");
       await change(page,"stage-zoom",2);
       check((await state(page)).stageZoom.scale===2&&await raster(page)===original,quality+" zoom preserves video pixels");
       await page.locator("#stage-zoom-reset").click();
@@ -74,6 +76,8 @@ try {
       if(comparison) {
         const sample=async view=>{
           const probes=[];
+          const motionTab=view.getByRole("tab",{name:"Motion",exact:true});
+          if(await motionTab.count())await motionTab.click();
           for(const fraction of [0,.4,1]) {
             const frame=Math.round((regions.frames.length-1)*fraction);
             await seek(view,frame);

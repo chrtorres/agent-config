@@ -4,16 +4,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>4K footage</title>
 <link rel="stylesheet" href="/style.css">
+<script type="module" src="/workspace.mjs"></script>
+<script type="module" src="/uhd.mjs"></script>
 <main>
   <header>
     <h1>4K footage</h1>
     <nav aria-label="Video files">
       <a href="/?quality=4k">Control the performer in 4K</a>
-      <a href="/4k.mp4" download="portrait-4k.mp4">Download 4K</a>
+      <a href="/4k.mp4" id="uhd-download" download="footage-4k.mp4" hidden>Download 4K</a>
+      <label>Theme <select id="theme"><option value="system">System</option><option value="dark">Dark</option><option value="light">Light</option></select></label>
+      <button id="clear-video" type="button" hidden>Clear video</button>
     </nav>
   </header>
-  <section class="screen uhd">
-    <video controls src="/4k.mp4" preload="metadata" playsinline aria-label="4K portrait footage"></video>
+  <p id="workspace-status" role="status" hidden></p>
+  <p id="uhd-status" role="status"></p>
+  <button id="uhd-retry" type="button" hidden>Retry 4K</button>
+  <section class="screen uhd" data-viewer>
+    <div class="viewer-frame" data-view-frame data-fit="fit">
+    <video id="uhd-video" controls preload="metadata" playsinline aria-label="4K footage"></video>
+    </div>
+    <div class="viewer-controls">
+      <label>Display <select data-view-fit>
+        <option value="fit">Fit</option><option value="fill">Fill</option><option value="stretch">Stretch</option><option value="center">Center</option>
+      </select></label>
+      <details class="viewer-size">
+        <summary>Viewer size</summary>
+        <label>Width <input data-view-width type="range" min="50" max="100" value="100"></label>
+        <label>Height <input data-view-height type="range" min="25" max="85" value="62"></label>
+        <button data-view-reset type="button">Reset size</button>
+      </details>
+      <button data-view-fullscreen type="button">Full screen</button>
+    </div>
   </section>
 </main>
 </html>

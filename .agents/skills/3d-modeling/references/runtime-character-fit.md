@@ -75,3 +75,16 @@ poses and views.
 
 Generalized fields include model and attachment names, geometry units and
 thresholds, build and evidence paths, and renderer and application identity.
+
+## Soft attachments in motion
+
+A static or rest-pose fit does not cover cloth that moves. In the originating run, a scarf tail hung cleanly at rest but clipped through the body while running. Its collider was a fixed vertical capsule that was narrower than the cape and did not follow the running lean or the bank into turns.
+
+- Measure the collider from the delivered GLB. For each height band in a bone's rest frame, record back depth, half-width and front depth. Add the ribbon half-thickness and edge reach as clearance. Use one table per bone that covers a height range, such as chest and pelvis.
+- Collide in the bone's local frame, using the inverse of its world matrix after animation, so the collider follows lean, bank, crouch and runtime scale.
+- Use the particle's previous position to choose the exit side, so fast cloth exits behind rather than through the chest. Seat the root on the outside of the collar instead of at an anchor buried in the neck mesh.
+- Test standing, sprint lean, and a banked turn together. Measure penetration against the bare silhouette, with no clearance, in the bone frame. Include faults that must fail: a narrow fixed capsule and an upright collider that ignores the bone.
+
+Run the dependency-free [cloth collider example](../assets/cloth-collider-example/README.md) with `node --test test-cloth-collider.mjs`. Its reference magnitudes are 0 cm for the bone-attached profile, about 14 cm for the narrow capsule and about 7 cm for the upright collider. Then confirm the fix visually in the running app during a sprint and a turn. To carry the same motion to panels, sleeves and tied hair, see [one cloth style across a whole outfit](runtime-outfit-cloth.md).
+
+Capture note. The incoming workflow scored 1, .75, .5, .5, .75, which is 68.75%. The existing fit pass covers moving anchors and directional clearance but not simulated cloth. The user directed extending this skill, so the method was added here and not as a separate skill. Historical feedback, paraphrased: the user reported that the scarf clipped through the body when running. The bone-attached measured profile removed the clipping in the originating game's test, and the old capsule failed it. Generalized fields include character, bone and anchor names, measured rows and project paths.

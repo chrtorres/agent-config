@@ -32,7 +32,7 @@ export function createStageZoom(canvas) {
   }
 
   new ResizeObserver(()=>{
-    const nextWidth=viewport.clientWidth,nextHeight=viewport.clientHeight;
+    const nextWidth=content.clientWidth,nextHeight=content.clientHeight;
     if(!nextWidth||!nextHeight)return;
     // Keep the same normalized point in view as the stage adapts to the layout.
     if(width&&height) {
@@ -42,7 +42,7 @@ export function createStageZoom(canvas) {
     width=nextWidth;
     height=nextHeight;
     paint();
-  }).observe(viewport);
+  }).observe(content);
 
   control.addEventListener("input",()=>zoomTo(Number(control.value)));
   reset.addEventListener("click",()=>zoomTo(1));
@@ -51,7 +51,8 @@ export function createStageZoom(canvas) {
     event.preventDefault();
     const rect=viewport.getBoundingClientRect();
     const unit=event.deltaMode===1?16:event.deltaMode===2?height:1;
-    zoomTo(scale*Math.exp(-event.deltaY*unit*.0025),event.clientX-rect.left,event.clientY-rect.top);
+    zoomTo(scale*Math.exp(-event.deltaY*unit*.0025),
+      event.clientX-rect.left-content.offsetLeft,event.clientY-rect.top-content.offsetTop);
   },{passive:false});
 
   viewport.addEventListener("pointerdown",event=>{

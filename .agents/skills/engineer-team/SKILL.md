@@ -1,9 +1,11 @@
 ---
 name: engineer-team
-description: Deploy a multi-role product engineering team as parallel agents — UX research, UI/visual design, front-end, design systems, motion, QA, and a product manager — to research, plan, implement and verify a refinement of any feature or artifact. Attach at prompt time to another skill (for example "use /engineer-team with /3d-modeling") when the user asks for a team, an overhaul, life-like or polished refinement, multi-perspective planning, or named design/engineering roles.
+description: Archived delegated product engineering workflow, paused pending an explicit user decision after a token-cost review.
 ---
 
 # Engineer team
+
+**Paused pending the user's token-cost review.** The procedures and resources below are retained for that review. Use [product-refinement](../product-refinement/SKILL.md) for active single-session work.
 
 Run a feature refinement the way a small product team would. Specialist role agents research in parallel and each write one plan. A product manager settles where the plans disagree and sets scope. Implementation runs in parallel tracks, each owning separate files, and QA proves the result before the user approves.
 

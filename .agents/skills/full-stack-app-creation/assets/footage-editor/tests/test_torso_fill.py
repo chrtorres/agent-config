@@ -21,10 +21,12 @@ class TorsoFill(unittest.TestCase):
 
         result = bounded_remap(rgb.copy(), matte, fields)
 
-        np.testing.assert_array_equal(result[:, :24], rgb[:, :24])
         np.testing.assert_array_equal(result[50, 50], rgb[50, 50])
+        # The narrower torso exposes background, filled from nearby
+        # background rather than from the old body edge.
         self.assertEqual(int(result[50, 31, 1]), 160)
-        self.assertIn(int(result[50, 31, 0]), range(24, 30))
+        self.assertIn(int(result[50, 31, 0]), range(8, 30))
+        self.assertTrue(np.all(result[:, 31:34, 1] == 160))
 
 
 if __name__ == "__main__":

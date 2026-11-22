@@ -5,6 +5,7 @@ import { chromium } from "playwright";
 import { preview } from "vite";
 import { checkPoseReplay } from "./replay-pose.mjs";
 import { capturePresentation } from "./capture.mjs";
+import { checkPlantings } from "./check-plantings.mjs";
 
 const output = process.argv[2];
 assert(output, "Usage: npm run smoke -- <evidence-directory-outside-app>");
@@ -55,6 +56,9 @@ try {
     await page.close();
   }
   for (const hz of [20, 60]) results.cases.push(await checkPoseReplay(browser, url.href, hz));
+  if (process.env.CHECK_PLANTINGS === "1") {
+    results.cases.push(await checkPlantings(browser, url, evidence));
+  }
   if (process.env.CAPTURE_REEL) {
     results.cases.push(await capturePresentation(browser, url, resolve(evidence, "frames"), process.env.CAPTURE_REEL === "uhd"));
   }

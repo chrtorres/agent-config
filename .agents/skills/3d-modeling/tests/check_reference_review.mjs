@@ -50,7 +50,28 @@ async function exercise(base, label) {
       label+" exploded offset "+part.node);
   }
   check(await page.locator("#part-labels button:visible").count()===meta.parts.length,label+" numbered callouts");
-  check(await page.locator("#part-leaders line").count()===meta.parts.length,label+" leader lines");
+  const leaderLayer=page.locator("#part-leaders");
+  const paintedLeaders=()=>leaderLayer.locator("line").evaluateAll(lines=>lines.filter(line=>{
+    if (!line.checkVisibility({visibilityProperty:true,opacityProperty:true})) return false;
+    const style=getComputedStyle(line);
+    return style.stroke!=="none" && Number(style.strokeOpacity)>0 && parseFloat(style.strokeWidth)>0
+      && line.getTotalLength()>0;
+  }).length);
+  check(await paintedLeaders()===meta.parts.length,label+" visible leader strokes");
+  // An SVG layer can be hidden while every line still exists in the DOM.
+  await leaderLayer.evaluate(layer=>layer.setAttribute("hidden",""));
+  try {
+    // Inline display makes the mutation independent of UA treatment of hidden on SVG.
+    await leaderLayer.evaluate(layer=>layer.style.display="none");
+    check(await leaderLayer.locator("line").count()===meta.parts.length && await paintedLeaders()===0,
+      label+" rejects hidden leader layer with intact lines");
+  } finally {
+    await leaderLayer.evaluate(layer=>{
+      layer.removeAttribute("hidden");
+      layer.style.removeProperty("display");
+    });
+  }
+  check(await paintedLeaders()===meta.parts.length,label+" leader strokes restored after mutation");
   await page.screenshot({path:join(output,label+"-exploded.png"),fullPage:true});
 
   const [index,part]=[...meta.parts.entries()].find(([,entry])=>entry.sources?.length && entry.structures?.length);

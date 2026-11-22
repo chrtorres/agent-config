@@ -13,6 +13,12 @@ import tempfile
 import av
 import cv2
 import numpy as np
+if __package__:
+    from .media import presentation_offset
+    from .progress import Progress
+else:
+    from media import presentation_offset
+    from progress import Progress
 
 
 LINKS = ((0, 7), (0, 8), (7, 11), (8, 12), (11, 12), (11, 13), (13, 15),
@@ -201,11 +207,14 @@ def build(source, timeline, world, output, report=None, step=7, max_points=1450)
         width,height=stream.width,stream.height
         size=(width//2,height//2)
         ratio=np.array([width/size[0],height/size[1]],dtype=np.float32)
+        progress=Progress(len(meta["frames"]))
         for frame_index, frame in enumerate(video.decode(stream)):
+            progress.update(frame_index)
             if frame_index>=len(meta["frames"]):
                 raise ValueError("Source exceeds the region timeline")
-            if abs(float(frame.pts * frame.time_base) - frame_index/meta["fps"]) > .002:
-                raise ValueError("Splat observations require the declared constant frame clock")
+            if abs(float(frame.pts * frame.time_base) - meta.get("presentationStart",0) -
+                   presentation_offset(meta, frame_index)) > .002:
+                raise ValueError("Splat observations require the declared frame clock")
             rgb=cv2.resize(frame.to_ndarray(format="rgb24"), size, interpolation=cv2.INTER_AREA)
             gray=cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY)
             matte=mattes.at(frame_index,size)

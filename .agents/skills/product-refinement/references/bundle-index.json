@@ -1,0 +1,66 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 2819,
+      "sha256": "2680b63854a536b085c48ff4da59bea35b3ac01bee188f4b23c56d1cd31e5175",
+      "executable": false
+    },
+    "assets": {
+      "type": "directory"
+    },
+    "assets/example-refinement.md": {
+      "type": "file",
+      "bytes": 633,
+      "sha256": "e82a800873fbe1ee89972b6438ec6c3cd225fb0b69c86f2959bb85f53c3abb88",
+      "executable": false
+    },
+    "assets/refinement-record.md": {
+      "type": "file",
+      "bytes": 425,
+      "sha256": "8cf3c0b17a254b622b7c57edea27378d946d8756d1d0be400390f16dc92b878c",
+      "executable": false
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/provenance.md": {
+      "type": "file",
+      "bytes": 1692,
+      "sha256": "3f7e8d9803139c4519c5f8a30c59c089144c74f761f60ee55e4b9d418b00d763",
+      "executable": false
+    },
+    "references/role-checklists.md": {
+      "type": "file",
+      "bytes": 1999,
+      "sha256": "bf595db9d3fb57e4874e6c9039638dd94cd493aaaebc753ec238f5ac53d8c44e",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/check_refinement.py": {
+      "type": "file",
+      "bytes": 880,
+      "sha256": "71c47266e51f43d3a55fafdab62e4b1f05624a90ede3070ef77101d1e1bf9d19",
+      "executable": false
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_check_refinement.py": {
+      "type": "file",
+      "bytes": 1182,
+      "sha256": "842fe866a1fcc6814bf123421809a7470c33969e9186d29a4b881f3febe77957",
+      "executable": false
+    }
+  }
+}

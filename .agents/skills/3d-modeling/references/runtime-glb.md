@@ -9,6 +9,8 @@ Use a runtime GLB when a game or browser scene needs reproducible authored geome
 5. For facial deformation and fitted equipment, add the [directional character fit pass](runtime-character-fit.md).
 6. Record visual review and integration state for this version. Apply print-specific approval and slicing checks only when the user requests a physical deliverable.
 
+For repeated vegetation assets, use [runtime vegetation](runtime-vegetation.md) to define specimen, instancing and detail requirements.
+
 ## Reproduce the runtime character fixture
 
 ```sh

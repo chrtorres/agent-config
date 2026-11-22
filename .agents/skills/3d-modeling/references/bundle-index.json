@@ -10,12 +10,45 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 17614,
-      "sha256": "24fe93069d0a7a61ae4845ba038ad061243fa11e9d545616804a5315e8bccd47",
+      "bytes": 21066,
+      "sha256": "76acedcbeccb1b066bda913fe3a38e1409d88d196f3df719af753d3c6abe853e",
       "executable": false
     },
     "assets": {
       "type": "directory"
+    },
+    "assets/cloth-collider-example": {
+      "type": "directory"
+    },
+    "assets/cloth-collider-example/README.md": {
+      "type": "file",
+      "bytes": 2277,
+      "sha256": "9ad1dcd436aaf631948a957f127807ef7dd2c1dee6745a8675c2a16bb8c34a4c",
+      "executable": false
+    },
+    "assets/cloth-collider-example/cloth-collider.mjs": {
+      "type": "file",
+      "bytes": 4351,
+      "sha256": "dda2cb7e3e277a672624400c77a35985a5ce6353d9a56d351590e738e2eacc32",
+      "executable": false
+    },
+    "assets/cloth-collider-example/outfit-cloth.mjs": {
+      "type": "file",
+      "bytes": 4152,
+      "sha256": "886634765a8aaa6af60e8d839feb15bbdb455f1ec022e56ac4b697a5202eea42",
+      "executable": false
+    },
+    "assets/cloth-collider-example/test-cloth-collider.mjs": {
+      "type": "file",
+      "bytes": 3254,
+      "sha256": "6f67ecc75fe44e886fd283add3213de5240196d3e324c4158164845824e2a625",
+      "executable": false
+    },
+    "assets/cloth-collider-example/test-outfit-cloth.mjs": {
+      "type": "file",
+      "bytes": 4383,
+      "sha256": "19d9e6b0b24a4e1230f8f0c38c3c78a5a99cffa29acfcb2bb78a6df0b7ae5e0e",
+      "executable": false
     },
     "assets/code-video": {
       "type": "directory"
@@ -329,10 +362,22 @@
       "sha256": "70d99e54351a6a0163c06cc49ce2524e5f0c2317b169c3aedc8f01e8fa1ef915",
       "executable": false
     },
+    "references/context-and-inspection.md": {
+      "type": "file",
+      "bytes": 5076,
+      "sha256": "0b85d2c1d964c6c1a3dc24949842b7c0872d55dd6ef7ec7da899ad2f77bb42bf",
+      "executable": false
+    },
     "references/exploded-part-labels.md": {
       "type": "file",
-      "bytes": 1358,
-      "sha256": "abfe6bc028e61ee3dbe92b449cd08ccfbc5a7b8f8455b7f396207c110d2f9eb2",
+      "bytes": 1818,
+      "sha256": "d5c732c1d5d2bcf9f57fd32d00c8d751694bf2cc0038eded165845a4b8ab7ad2",
+      "executable": false
+    },
+    "references/face-motion-compositing.md": {
+      "type": "file",
+      "bytes": 6179,
+      "sha256": "02f99e200a29b479f2b184e8d94494092466cc7035fd914dbac0971fc411bc00",
       "executable": false
     },
     "references/footage-motion-capture.md": {
@@ -343,8 +388,8 @@
     },
     "references/footage-motion.md": {
       "type": "file",
-      "bytes": 6070,
-      "sha256": "ddbbcb906ce69e1cbe46c89d2f9f7fae58652f2537f6be31b72ca49f5149a21d",
+      "bytes": 11095,
+      "sha256": "784de06600e3ee404088fe6498e410937e8fd30778b6fa83d6c7723155399a5b",
       "executable": false
     },
     "references/interactive-smoke-testing.md": {
@@ -413,16 +458,40 @@
       "sha256": "6f3b8635f0c22351e3d002036877ca68792944203693641d17f786f30da701d4",
       "executable": false
     },
+    "references/robot-description-provenance.md": {
+      "type": "file",
+      "bytes": 3035,
+      "sha256": "05e319471a29d2a72fd53d8bef52cad31de9c97c98f2da9c869027e8e6e26925",
+      "executable": false
+    },
+    "references/robot-description.md": {
+      "type": "file",
+      "bytes": 7298,
+      "sha256": "87ad2f908bf5b8392972d2f67050bd144d64868410a28072fca86cf5d52c739a",
+      "executable": false
+    },
     "references/runtime-character-fit.md": {
       "type": "file",
-      "bytes": 5396,
-      "sha256": "9cf9b5185a873b12f7c65eb2013657f8009e7f1cede74c7b8322ab3377a92214",
+      "bytes": 7692,
+      "sha256": "e2cb0b50cfdf31e7aac12d90746caac223bcddaff4270aedefd5653c94ee1319",
       "executable": false
     },
     "references/runtime-glb.md": {
       "type": "file",
-      "bytes": 6090,
-      "sha256": "fed6504bcf305e4817db8adff6ca3c0d6c13ecce82177b0e7be81b9da3db2c30",
+      "bytes": 6227,
+      "sha256": "33e9a56362e357f9e2ae1401de4b5c6ac9a349fbef96f2764a38e372a530d7b7",
+      "executable": false
+    },
+    "references/runtime-outfit-cloth.md": {
+      "type": "file",
+      "bytes": 6297,
+      "sha256": "32f5de15024e72e426bdb5c5cc1d42cad5d0f65618a6b177b4671cabd482a894",
+      "executable": false
+    },
+    "references/runtime-vegetation.md": {
+      "type": "file",
+      "bytes": 2414,
+      "sha256": "3b759498e2264b66afeae65d8bac6b18b8a26f111183e84f75042cbfae95f17f",
       "executable": false
     },
     "scripts": {
@@ -432,6 +501,12 @@
       "type": "file",
       "bytes": 4046,
       "sha256": "89524147e60129aad9953c5c737b8fee34fb23d59de715d8715b93cf23ef4d80",
+      "executable": false
+    },
+    "scripts/check_interference.py": {
+      "type": "file",
+      "bytes": 6517,
+      "sha256": "bd1f5f835461eb3d00e18be271e8052d3da3b22ce6460a6525b7c4acfbb61da3",
       "executable": false
     },
     "scripts/check_motion_glb.py": {
@@ -458,6 +533,12 @@
       "sha256": "9193f0b4c4e684120ce23b93aa28c2dd8bafe0e55f5daa43b0ea240ca9209ea5",
       "executable": false
     },
+    "scripts/check_urdf.py": {
+      "type": "file",
+      "bytes": 7869,
+      "sha256": "09650335dc816be8c5492cac3c477f9a926cfbb8accb862aa8367c4b7daa4935",
+      "executable": false
+    },
     "scripts/check_variant_collection.py": {
       "type": "file",
       "bytes": 3007,
@@ -470,10 +551,22 @@
       "sha256": "72e4f18874da26acac994a7963d301a0ab0bfec03f53c31c28c871f1c2c12b4b",
       "executable": false
     },
+    "scripts/compare_glb_exports.py": {
+      "type": "file",
+      "bytes": 2499,
+      "sha256": "c91723723d1e0c1eb7cdd24b67d6ef553015851639235c0a3974a247280a1770",
+      "executable": false
+    },
     "scripts/compare_landmarks.py": {
       "type": "file",
       "bytes": 1995,
       "sha256": "6e2122902aa808c28ad34d009fe8a5bbfdf535f4fad1e2dda8245d38108ae7a0",
+      "executable": false
+    },
+    "scripts/compare_runtime_geometry.py": {
+      "type": "file",
+      "bytes": 1766,
+      "sha256": "7104b6af3672f5b00668ffebc4df3532c4236aa5d813551cc35ceab3eb0ec09f",
       "executable": false
     },
     "scripts/create_box_frame.py": {
@@ -494,6 +587,12 @@
       "sha256": "3408ddaa130162bd45f91bc31e413406102393c49707b42dbf1566ecbbe32ff4",
       "executable": false
     },
+    "scripts/create_planting_fixture.py": {
+      "type": "file",
+      "bytes": 2756,
+      "sha256": "515fb706d593e43376640f3e63ad991976ec038ee0795adbbd529527d071cf27",
+      "executable": false
+    },
     "scripts/create_reference_fixture.py": {
       "type": "file",
       "bytes": 2546,
@@ -510,6 +609,18 @@
       "type": "file",
       "bytes": 946,
       "sha256": "51f307ac8cf83edaeb2cdd759ac7ac96715cf7548f41c505b01b2023b2568469",
+      "executable": false
+    },
+    "scripts/measure_body_profile.py": {
+      "type": "file",
+      "bytes": 2869,
+      "sha256": "aac021e3ebedd6ad28e7fa5594740cb260e02ff7d9766fa63e9da54dd892b770",
+      "executable": false
+    },
+    "scripts/merge_glb_animations.py": {
+      "type": "file",
+      "bytes": 1912,
+      "sha256": "14777ea6145ccad3e3262dabbf9be25b9fa6e14fb875dd42e3b7b15c92dfcf55",
       "executable": false
     },
     "scripts/prepare_reference_review.py": {
@@ -571,8 +682,8 @@
     },
     "tests/check_reference_review.mjs": {
       "type": "file",
-      "bytes": 6177,
-      "sha256": "e946c516791c46064065e3c8554fc7210e0c4a33b5b9ebae823bdfeb1a9c5234",
+      "bytes": 7312,
+      "sha256": "a1a5bd01bd3f895de0766e0a35600e68aa1a685eebb6b45e0c5b15c543db8e7c",
       "executable": false
     },
     "tests/fixtures": {
@@ -596,6 +707,21 @@
       "sha256": "71610537e29b0ffb949cfb0f65a19695c834b1b2de513e27c866b9be6cadefbd",
       "executable": false
     },
+    "tests/fixtures/robot-description": {
+      "type": "directory"
+    },
+    "tests/fixtures/robot-description/expect.json": {
+      "type": "file",
+      "bytes": 295,
+      "sha256": "9d3ac76e186d21a77c6bbdf3d9d9b0fd5bbd8b073a18ebbc9a7085463fe0466e",
+      "executable": false
+    },
+    "tests/fixtures/robot-description/two_wheel.urdf": {
+      "type": "file",
+      "bytes": 1760,
+      "sha256": "35aaab7b941791d2c86a738508d9ff458bb00555a3b589f0cfc58d889f4d561c",
+      "executable": false
+    },
     "tests/test_box_frame_workflow.py": {
       "type": "file",
       "bytes": 1986,
@@ -612,6 +738,18 @@
       "type": "file",
       "bytes": 1174,
       "sha256": "a8a1f304658e24928462d4f011ba12c69eac805f4c7eeaa494bb2f43d6b55994",
+      "executable": false
+    },
+    "tests/test_measure_body_profile.py": {
+      "type": "file",
+      "bytes": 2936,
+      "sha256": "48fd48394077cb0cf48f51e0c6f0bada76469ac6f2d14bfbe35bde84dbdad556",
+      "executable": false
+    },
+    "tests/test_robot_description_tools.py": {
+      "type": "file",
+      "bytes": 5857,
+      "sha256": "2e895fe726bcb222f822c750c766cbef5967fc5159ec28eeaf4762bc8b67cf33",
       "executable": false
     }
   }

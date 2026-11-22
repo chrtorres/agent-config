@@ -16,6 +16,40 @@ The [fixture generator](../assets/footage-motion/generate.py) creates geometric 
 ## Regenerate a source-only editor
 
 1. Index the actual decoded presentation clock. Generate pose and foreground mattes, pose-guided face and hand geometry, then skin weights, stabilization tracks, and motion observations from the same input. Fit motion from chronological samples and retain projected depth as an estimate.
-2. Preserve the original for native display and checksum it in memory during validation. Verify that the 4K encode retains composition, decoded picture timestamps, duration, and AAC content and timing. Carry provider-neutral feature labels and normalized local anchor coordinates across tracked frames.
+2. Preserve the original bytes for download and checksum them in memory during validation. Use the original for native display when compatible, and derive an upright compatible rendition when needed. Verify that the 4K encode retains composition, decoded picture timestamps, duration, and AAC content and timing. Carry provider-neutral feature labels and normalized local anchor coordinates across tracked frames.
 3. Keep the model in the source camera plane. Run view zoom and pan separately from deformation. Use bounded local support and foreground-aware reconstruction to preserve surrounding scenery. Treat uncovered background and hidden anatomy as inference limits.
 4. Rebuild with public inference dependencies and the caller's video as the only subject-specific input. Run the browser tests on freshly constructed state. Hold derived media and tracking only in a temporary local session and retain de-identified results. [Runnable engine and launch procedure](../../full-stack-app-creation/references/source-only-footage-editor.md)
+
+## Footage clock and rendition checks
+
+1. Build the pose, matte, local geometry, and observations against the same decoded frames of the working rendition. For variable cadence, retain each frame's offset from the first presentation time. A nominal rate can describe temporal filters, while playback lookup, frame stepping, and export use the observed clock. Resolve the current image from its presentation interval and seek inside the selected interval.
+2. Preserve the original recording independently of a compatibility conversion. Check frame counts and relative presentation times against each file's own source. Different test encoders can produce different counts even when given the same fixture duration. Check original container bytes separately from converted media.
+3. Treat 4K as a separate rendition. Publish it only after verifying source-relative timing, duration, framing and audio where present. Inject a failed 4K encode and demonstrate that native review remains available and the retry produces playable media.
+4. In a rendered shape or tone export, compare pixels at the edited location and check frame timestamps, durations and soundtrack. For a live pose snapshot, save the settled viewport canvas and check its raster dimensions. [Runnable import, export and failure tests](../../full-stack-app-creation/references/media-intake-and-export.md)
+
+## Reshaping without a lens effect
+
+A radial displacement that peaks inside the region and fades to the boundary scales the centre more than the rim. That reads as a magnifying glass sliding over the body rather than a body part changing size.
+
+1. Scale the core of the region uniformly by the requested width and height, for example everything inside 90% of the normalised radius. Fade the displacement magnitude in a ring outside it with a smoothstep. Do not fade the scale factor itself.
+2. Derive the ring's reach from the requested growth and a minimum Jacobian, such as 0.3, so the mapping cannot fold. The fade must be wide enough for the largest expansion. Bound the inverse-mapping search by that reach.
+3. Combine segments of one feature with a partition of unity: sum weight times displacement, then divide by the larger of 1 and the summed weights. Overlapping limb segments then move together instead of adding up.
+4. Offer a proportional lock that sets one percentage on both axes. Equal width and height is a uniform resize of the part.
+5. Test the Jacobian over a dense grid, uniform scale at the core, zero displacement beyond the reach, and identical results in the browser shader and the exporter.
+
+## Soft-tissue follow-through
+
+Edits that track the pose rigidly look pasted on when the performer moves. Add a damped spring to each edited region so the added volume lags and settles.
+
+1. Smooth the tracked region centre lightly, for example with a 5-tap binomial filter, so detector jitter does not excite the spring.
+2. Let a damped spring follow that centre. Use semi-implicit Euler with substeps. Clamp the offset to a tether, about 15% of the smaller radius, so a fast move or a missed frame cannot fling the region.
+3. Scale the response by the share of the region that was added and by a material softness. Use soft settings for chest, breasts and buttocks, firmer ones for hips and torso, and nearly rigid ones for limbs and shoulders. A region that was not enlarged gets no follow-through.
+4. Run the simulation per shot and per contiguous tracked run, from frame times rather than a nominal rate. Reset at cuts and gaps, so preview and export produce identical offsets from the same inputs.
+5. Provide a toggle. Test that a still pose gives zero offset, that a step settles inside the tether, that rigid materials barely move, and that the JavaScript and Python implementations agree to within numerical tolerance.
+
+## Hair and feature colour
+
+1. Store a hair weight during preparation, for example as another channel of the skin atlas from a multiclass selfie segmenter. Save facial polygons per frame from the face mesh: outer lips minus the mouth opening, iris discs clipped to the eye openings, and eyebrows.
+2. Dye with the W3C colour blend: SetLum plus ClipColor. The pixel keeps its luminance and takes the chosen hue and saturation. Lift luminance part of the way toward the dye's own luminance, further for hair, so dark hair can become lighter.
+3. Rasterise the feature masks identically in the browser (an OffscreenCanvas uploaded as a texture) and the exporter (filled polygons with a sub-pixel blur). Apply the dye after tone grading.
+4. Validate recipe values strictly: allowed targets, hex colours and strength from 0 to 100. Test that a zero mask or zero strength changes nothing, that teeth and eyelids are excluded, that only the dyed features change, and that luminance remains strongly correlated after dyeing. Check hair on real footage. Cartoon or synthetic hair may not be segmented at all.

@@ -43,11 +43,13 @@ Derive checks from the acceptance criteria and risks rather than copying the exa
 
 If the user supplies an acceptance threshold, declare its scoring rubric and critical gates before running it. Label engineering acceptance separately from human usability measurements; a passing permission-denied test does not establish a successful privileged integration. Recheck access after dependency installation, then arrange an authorized human test when native authentication is necessary.
 
+Start the application through the same entry point users launch. If a dependency or runtime mismatch can leave the UI reachable before its core action fails, exercise that launch path and the core action as one smoke test. Check setup failure before the service opens when recovery is unavailable.
+
 Drive the actual browser through the primary journey and important error paths. Wait for observable completion. Compare rendered state, backend results, stored bytes, and downloaded artifacts where relevant. Test relevant viewport sizes and keyboard interactions. Inspect settled screenshots alongside assertions.
 
 For animated interfaces wired to live state, verify that controls cause real motion or geometry changes. Wait for a rendered state before measuring it. When modifying a regression check, reproduce the defect or inject a narrowly scoped fault in an isolated copy to show the check still rejects it. See [the live-state example](references/live-state-and-browser-qa.md) for fixture isolation, low-resource browser rendering, and local review practice.
 
-When extending a playable browser 3D app, use [playable 3D regression and delivery](references/playable-3d.md) for a fixed-step simulation, frame-aware input checks, same-origin saves, controller acceptance, frame-by-frame pose continuity, and an isolated production-build smoke test. For UHD rendering, effects readability, gameplay capture, and single-instance UAT, use [cinematic presentation](references/cinematic-presentation.md).
+When a playable character's costume is simulated as cloth, use its [outfit cloth and close inspection](references/playable-3d.md#outfit-cloth-and-close-inspection) section and [close-camera.mjs](assets/playable-3d/close-camera.mjs) to integrate the update and inspect hems, hair and clipping at character scale. When extending a playable browser 3D app, use [playable 3D regression and delivery](references/playable-3d.md) for a fixed-step simulation, frame-aware input checks, same-origin saves, controller acceptance, frame-by-frame pose continuity, and an isolated production-build smoke test. For UHD rendering, effects readability, gameplay capture, and single-instance UAT, use [cinematic presentation](references/cinematic-presentation.md). For importing specimen variants, staging mixed groves and checking traversal clearance, use [playable vegetation](references/playable-vegetation.md). When movement must start from real-world physics (speed, braking, turning, jumps, climbing and collision), use the [real-world physics baseline](references/real-world-physics.md) and its runnable [locomotion example](assets/locomotion-example/README.md). It covers a measured parameter table, smooth transitions, formula-derived test bounds, sensitivity checks, headless level feasibility and the pitfalls observed.
 
 Use isolated task storage and explicitly declared dependencies. Preserve actual commands, working directories, runtime versions, exit codes, assertions, screenshots, relevant requests/artifacts, and a manifest tying evidence to authored source hashes. Exclude dependency trees, credentials, runtime identities, and private data from reusable resources. Record failures and rerun checks affected by fixes; do not borrow another application's passing results.
 
@@ -59,6 +61,10 @@ When an interface explains real structures or factual relationships, use [eviden
 
 Use [animated playback review](references/animated-playback-review.md) when a browser app needs clip selection, scrubbing, transport controls, camera tracking, or animated poses alongside static inspection. Validate rendered geometry and state transitions against the same GLB delivered to the user.
 
+## Robot-description review
+
+For a review that shows a robot description, with frame and collision presets and a joint-exercise clip, use [robot-description-review.md](references/robot-description-review.md). It extends the shared multipart harness with checks that each preset shows exactly its listed nodes, that scrubbing the clip reaches the keyed joint states, and that reassembly returns to the paused pose.
+
 ## Code-generated video delivery
 
 Use the shared [Python and Blender video workflow](../3d-modeling/references/code-video.md) when an application generates or serves video. Exercise the actual encoder output through the download and playback path. Verify MIME type, byte ranges, rendered motion, seeking and playback in the target browser. Keep generation and encoding outside the request path when they need a background job, and publish the file after a successful encode. The shared synthetic example supplies an MP4 generator, a reference-preserving remux, a comparison command and a browser smoke harness.
@@ -69,9 +75,21 @@ Use [interactive motion on recorded footage](references/footage-motion-review.md
 
 Use the [source-only local editor](references/source-only-footage-editor.md) when a runnable application must regenerate its geometry and media from a caller-supplied recording. It includes precision picking, main-stage zoom, custom-area reshaping, pinned dependencies, and a volatile local session.
 
+Use [inline video Face Swap](references/inline-video-face-swap.md) for explicit destination selection, source video stills, background rendering, and lossless verification through the actual editor. Its [action benchmark](references/inline-video-face-swap.md#benchmark-tracking-through-action) measures placement error, jitter and coverage through fast motion.
+
+For real resizing (not a magnifier effect), soft-tissue physics in playback, hair and feature colour, and a proportional lock in the editor, follow the [source-only editor](references/source-only-footage-editor.md) and keep each browser module matched to its Python export twin with parity tests.
+
+Use the [media intake and export workflow](references/media-intake-and-export.md) for browser-compatible conversion, staged preparation, on-demand 4K recovery, and edited downloads during a session.
+
+## Localized still-photo edits
+
+Use the [localized photo face-swap workflow](references/photo-face-swap.md) for a local Python CLI that takes two portraits, produces a lossless composite and mask, and verifies that decoded pixels outside the mask match the target. Validate the exact comparison image in the browser and open a visible window for desktop review.
+
 ## Composing live and inspection views
 
 Use [multiview review architecture](references/multiview-review.md) to combine existing interactive scenes under a compact tab shell. Test lazy startup, playback suspension, camera preservation, keyboard navigation and independent load failures.
+
+When related views share assets and can use one renderer, use the [shared-renderer workflow](references/multiview-review.md#shared-renderer-views) to preserve camera and selection state, handle asset retries and test rendered overlays.
 
 ## Secondary motion studies
 

@@ -1,0 +1,4 @@
+{"total_mass_kg": [2.2, 0.001],
+ "frames": {"side_sensor_frame": {"xyz": [0.0, -0.17, 0.05], "rpy": [0, 0, -1.5707963267949]}},
+ "min_z": {"left_wheel": [0.03, 1e-6], "right_wheel": [0.03, 1e-6], "caster_wheel": [0.012, 1e-6]},
+ "support_polygon": ["left_wheel", "right_wheel", "caster_wheel"]}

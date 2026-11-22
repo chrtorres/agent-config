@@ -1,24 +1,41 @@
 import {followObservation,secondaryField} from "./secondary.mjs";
 import {edgeAxisWeight,fitTransport} from "./transport.mjs";
 import {compileCleanup} from "./cleanup.mjs";
-import {deformation} from "./regions.mjs";
+import {deformation,supportExtent} from "./regions.mjs";
+import {softBodyTrack,withOffsets} from "./soft-body.mjs";
 import {pointShape} from "./point-regions.mjs";
 import { LINKS,evaluated } from "./motion.mjs";
+import {drawFeatureMask,tint} from "./colors.mjs";
 
 const VERTEX = "attribute vec2 p; attribute vec2 uv; varying vec2 q; varying vec2 xy; uniform vec2 size;"+
  "void main(){q=uv; xy=p;gl_Position=vec4(p.x/size.x*2.0-1.0,1.0-p.y/size.y*2.0,0,1);}";
 const FRAGMENT = [
   "precision highp float; varying vec2 q; varying vec2 xy; uniform vec2 size;",
-  "uniform vec2 tile; uniform sampler2D frame; uniform sampler2D matte; uniform sampler2D skin; uniform vec3 tone; uniform float raster;",
+  "uniform vec2 tile; uniform sampler2D frame; uniform sampler2D matte; uniform sampler2D skin; uniform vec3 tone; uniform vec2 raster;",
   "uniform int kind; uniform vec4 protect; uniform float verticalTravel;",
+  "uniform sampler2D features; uniform vec4 hairTint; uniform vec4 lipTint; uniform vec4 eyeTint; uniform vec4 browTint;",
+  "vec2 tileUV(vec2 sourceUV);",
+  // A dye keeps the pixel's lightness, lifted partly toward the chosen color,
+  // and takes the chosen hue and saturation (W3C SetLum/ClipColor). tools/colors.py mirrors it.
+  "float lum(vec3 c){return dot(c,vec3(.2126,.7152,.0722));}",
+  "vec3 setLum(vec3 c,float l){c+=l-lum(c);float L=lum(c);float n=min(min(c.r,c.g),c.b);float x=max(max(c.r,c.g),c.b);",
+  " if(n<0.)c=L+(c-L)*L/max(L-n,1e-6); if(x>1.)c=L+(c-L)*(1.-L)/max(x-L,1e-6); return clamp(c,0.,1.);}",
+  "vec3 dye(vec3 v,vec4 t,float mask,float lift){ if(t.a<=0.||mask<=.002)return v; float l=lum(v);",
+  " vec3 dyed=setLum(t.rgb,clamp(l+(lum(t.rgb)-l)*lift,0.,1.)); return mix(v,dyed,t.a*mask);}",
   "bool protectedPixel(vec2 p){return p.x>=protect.x&&p.y>=protect.y&&p.x<protect.z&&p.y<protect.w;}",
-  "vec4 grade(vec4 v,vec2 atlas){",
-  " if(tone==vec3(0.0))return v;",
-  " float weight=texture2D(skin,atlas).r; if(weight<.004)return v;",
-  " float y=dot(v.rgb,vec3(.2126,.7152,.0722));",
-  " float midtone=4.0*y*(1.0-y);",
-  " vec3 rgb=v.rgb+(v.rgb-y)*tone.z*.42+midtone*(tone.x*.16+tone.y*vec3(.085,.012,-.085));",
-  " return vec4(mix(v.rgb,clamp(rgb,0.0,1.0),weight),v.a); }",
+  "vec4 grade(vec4 v,vec2 uv){",
+  " vec4 masks=texture2D(skin,tileUV(uv));",
+  " float weight=masks.r;",
+  " if(tone!=vec3(0.0)&&weight>=.004){",
+  "  float y=dot(v.rgb,vec3(.2126,.7152,.0722));",
+  "  float midtone=4.0*y*(1.0-y);",
+  "  vec3 rgb=v.rgb+(v.rgb-y)*tone.z*.42+midtone*(tone.x*.16+tone.y*vec3(.085,.012,-.085));",
+  "  v.rgb=mix(v.rgb,clamp(rgb,0.0,1.0),weight); }",
+  // Hair lifts further toward the dye so dark hair can take a lighter color.
+  " v.rgb=dye(v.rgb,hairTint,masks.g,.6);",
+  " if(lipTint.a+eyeTint.a+browTint.a>0.){vec3 f=texture2D(features,uv).rgb;",
+  "  v.rgb=dye(v.rgb,lipTint,f.r,.35); v.rgb=dye(v.rgb,eyeTint,f.g,.35); v.rgb=dye(v.rgb,browTint,f.b,.35);}",
+  " return v; }",
   "vec2 tileUV(vec2 sourceUV){",
   " return (tile+clamp(sourceUV*size/PIXEL_SCALE,vec2(.5),vec2(TILE_RIGHT,TILE_BOTTOM)))/vec2(ATLAS_WIDTH,ATLAS_HEIGHT); }",
   "float opacityAt(vec2 uv){vec2 a=texture2D(matte,tileUV(uv)).rg;return max(a.r,a.g);}",
@@ -44,10 +61,10 @@ const FRAGMENT = [
   "void main(){ vec4 v=texture2D(frame,q);",
   " if(kind==0){gl_FragColor=v;return;}",
   " vec2 atlas=tileUV(q);",
-  " v=grade(v,atlas); if(kind==4){gl_FragColor=v;return;}",
+  " v=grade(v,q); if(kind==4){gl_FragColor=v;return;}",
   " vec2 target=(floor(xy*raster)+.5)/(size*raster);",
   " vec2 dest=tileUV(target);",
-  " if(protectedPixel(xy)||length((q-target)*size)<.045){gl_FragColor=grade(texture2D(frame,target),dest);return;}",
+  " if(protectedPixel(xy)||length((q-target)*size)<.045){gl_FragColor=grade(texture2D(frame,target),target);return;}",
   " if(kind==6){",
   "   vec2 newMask=texture2D(matte,atlas).rg;",
   "   vec2 stepUV=vec2(PIXEL_SCALE)/size;",
@@ -58,7 +75,7 @@ const FRAGMENT = [
   "   oldMask=max(oldMask,.78*texture2D(matte,tileUV(target-vec2(0.,stepUV.y))).rg);",
   "   float before=smoothstep(.018,.68,max(oldMask.r,oldMask.g));",
   "   float after=smoothstep(.018,.68,max(newMask.r,newMask.g));",
-  "   vec4 original=grade(texture2D(frame,target),dest);",
+  "   vec4 original=grade(texture2D(frame,target),target);",
   "   if(before==0.0&&after==0.0){gl_FragColor=original;return;}",
   "   vec2 onRow=vec2(q.x,target.y);",
   "   float sameRow=(1.-smoothstep(.012,.17,opacityAt(onRow)))*(1.-after)*.55;",
@@ -77,7 +94,7 @@ const FRAGMENT = [
   " }",
   " float before=smoothstep(.015,.14,texture2D(matte,dest).r);",
   " float after=texture2D(matte,atlas).r;",
-  " gl_FragColor=mix(grade(texture2D(frame,target),dest),v,max(before,after)); }",
+  " gl_FragColor=mix(grade(texture2D(frame,target),target),v,max(before,after)); }",
 ].join("\n");
 
 function program(gl,timeline) {
@@ -245,7 +262,6 @@ export async function createRenderer(canvas, useUhd=false) {
     if(!response.ok)throw new Error("Motion timeline unavailable.");
     return response.json();
   });
-  const rasterScale=useUhd?3840/timeline.height:1;
   const augmentation=await fetch("/regions.json").then(response=>response.ok?response.json():null)
     .catch(()=>null);
   if(augmentation&&augmentation.frames.length!==timeline.frames.length)
@@ -258,9 +274,10 @@ export async function createRenderer(canvas, useUhd=false) {
   if(!gl)throw new Error("Movement control needs WebGL.");
   const pipeline=program(gl,timeline);
   const position=gl.getAttribLocation(pipeline,"p"),uv=gl.getAttribLocation(pipeline,"uv");
-  const uniform=Object.fromEntries(["size","tile","kind","protect","frame","matte","skin","tone","raster","verticalTravel"]
+  const uniform=Object.fromEntries(["size","tile","kind","protect","frame","matte","skin","tone","raster","verticalTravel",
+    "features","hairTint","lipTint","eyeTint","browTint"]
     .map(k=>[k,gl.getUniformLocation(pipeline,k)]));
-  gl.uniform1i(uniform.frame,0);gl.uniform1i(uniform.matte,1);gl.uniform1f(uniform.raster,rasterScale);gl.uniform1i(uniform.skin,2);
+  gl.uniform1i(uniform.frame,0);gl.uniform1i(uniform.matte,1);gl.uniform1i(uniform.skin,2);gl.uniform1i(uniform.features,3);
   gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL,gl.NONE);
   const texture=(bitmap,filter)=>{
     const t=gl.createTexture();
@@ -271,6 +288,23 @@ export async function createRenderer(canvas, useUhd=false) {
     return t;
   };
   const source=texture(null,gl.NEAREST);
+  // Feature masks (lips, irises, brows) are drawn per frame at source size
+  // from the tracked face-mesh polygons and bound on texture unit 3.
+  const featureTexture=texture(null,gl.LINEAR);
+  let featureCanvas=null,featureFrame=-1;
+  function featureMask() {
+    const areas=augmentation?.colorAreas?.[current];
+    if(!areas)return false;
+    if(featureFrame!==current) {
+      if(featureCanvas?.width!==width)featureCanvas=new OffscreenCanvas(width,timeline.height);
+      drawFeatureMask(featureCanvas.getContext("2d"),areas,width,timeline.height);
+      gl.activeTexture(gl.TEXTURE3);gl.bindTexture(gl.TEXTURE_2D,featureTexture);
+      gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,featureCanvas);
+      gl.activeTexture(gl.TEXTURE0);gl.bindTexture(gl.TEXTURE_2D,source);
+      featureFrame=current;
+    }
+    return true;
+  }
   const atlases=new Map();
   let requestRender;
   const setPageReady=callback=>{requestRender=callback;};
@@ -323,18 +357,34 @@ export async function createRenderer(canvas, useUhd=false) {
   };
   const [tw,th]=timeline.tile, grid=timeline.grid, height=timeline.height;
   let current=-1,layers=[],width=0,seenFrame=-1,renders=0,subjects=[],requestedSubjects=[],displayRegions={};
+  let rasterX=1,rasterY=1;
   let shapeMesh=null,motionMesh=null,motionScale=1,cleanupEffect=0,attachedCleanup=false;
   let heldForMatte=false, liveMotion=false;
   let pickSurface=null,protectedRect=null;
+  const softBody=new Map();
+  // Precompute the added volume's spring motion over the same track the edit
+  // follows, so playback and seeking agree frame for frame with the export.
+  function dynamicsFor(key,adjustment,cleaned) {
+    const frames=cleaned&&cleanupTracks?cleanupTracks.frames:augmentation?.frames;
+    if(!frames||!Object.hasOwn(augmentation.parts??{},key))return null;
+    const id=JSON.stringify([key,adjustment,Boolean(cleaned&&cleanupTracks)]);
+    if(!softBody.has(id)) {
+      if(softBody.size>48)softBody.clear();
+      softBody.set(id,softBodyTrack(frames,key,adjustment,
+        {times:timeline.frameTimes,fps:timeline.fps,shots:timeline.shots}));
+    }
+    return softBody.get(id)?.[current]??null;
+  }
   function baseAt(i) {
     return timeline.frames[i][1].map(row=>Object.fromEntries(row.map(([x,y,c],n)=>[
       timeline.landmarks[n],[x/4,y/4,c/100]
     ])));
   }
   function frame(video,index,requireMatte=false) {
-    if(video.readyState<2||video.videoHeight!==Math.round(height*rasterScale))return false;
+    if(video.readyState<2)return false;
     const [w]=timeline.frames[index];
-    if(video.videoWidth!==Math.round(w*rasterScale))return false;
+    const uhdSide=side=>Math.max(2,2*Math.round(side*1920/Math.max(w,height)));
+    if(video.videoWidth!==(useUhd?uhdSide(w):w)||video.videoHeight!==(useUhd?uhdSide(height):height))return false;
     const tile=index%slots,page=Math.floor(index/slots);
     const textures=selectPage(page);
     heldForMatte=Boolean(requireMatte&&!textures&&seenFrame>=0);
@@ -343,7 +393,9 @@ export async function createRenderer(canvas, useUhd=false) {
       // Pose geometry stays in source pixels at both raster sizes. Only the
       // viewport and decoded texture change when reviewing the UHD export.
       width=w;canvas.width=video.videoWidth;canvas.height=video.videoHeight;
+      rasterX=canvas.width/width;rasterY=canvas.height/height;
       gl.viewport(0,0,canvas.width,canvas.height);
+      gl.uniform2f(uniform.raster,rasterX,rasterY);
       gl.uniform2f(uniform.size,width,height);
       gl.bindBuffer(gl.ARRAY_BUFFER,quad);
       gl.bufferData(gl.ARRAY_BUFFER,new Float32Array([0,0,0,0,width,0,1,0,0,height,0,1,width,height,1,1]),gl.STATIC_DRAW);
@@ -469,7 +521,7 @@ export async function createRenderer(canvas, useUhd=false) {
     repaint(grid,fitted.points,6);
   }
 
-  function draw(state,poseActive,adjustments={},tone=[0,0,0],cleaned=false,response={},observation=null,points={}) {
+  function draw(state,poseActive,adjustments={},tone=[0,0,0],cleaned=false,response={},observation=null,points={},physics=true,colors={}) {
     if(current<0)return;
     const named=augmentation?.frames[current]??{};
     const observed={...named};
@@ -478,14 +530,25 @@ export async function createRenderer(canvas, useUhd=false) {
       if(shape&&sourceVisible(shape[0],shape[1]))observed[key]=[shape];
     }
     const stabilized=cleaned&&cleanupTracks?.frames[current];
-    const base=stabilized?Object.fromEntries(Object.entries(observed).map(([key,shapes])=>
+    const tracked=stabilized?Object.fromEntries(Object.entries(observed).map(([key,shapes])=>
       [key,adjustments[key]&&stabilized[key]?
         followObservation(stabilized[key],shapes,observation?.[key]):shapes])):observed;
+    const offsets=Object.fromEntries(Object.keys(tracked).filter(key=>physics&&adjustments[key]&&!points[key])
+      .map(key=>[key,dynamicsFor(key,adjustments[key],cleaned)]));
+    const base=Object.fromEntries(Object.entries(tracked).map(([key,shapes])=>[key,withOffsets(shapes,offsets[key])]));
     const entries=Object.entries(base).filter(([key])=>adjustments[key]);
     const active=(poseActive||entries.length>0)&&activePage>=0;
-    const graded=hasSkin&&activePage>=0&&tone.some(Boolean);
+    const masked=hasSkin&&activePage>=0;
+    const hair=masked?tint(colors.hair):[0,0,0,0];
+    const facial=["lips","eyes","brows"].map(key=>tint(colors[key]));
+    const faceReady=facial.some(value=>value[3]>0)&&featureMask();
+    const tinted=hair[3]>0||faceReady;
+    const graded=masked&&tone.some(Boolean)||tinted;
     liveMotion=Boolean(active&&poseActive);
-    gl.uniform3f(uniform.tone,...(graded?tone:[0,0,0]));
+    gl.uniform3f(uniform.tone,...(masked&&tone.some(Boolean)?tone:[0,0,0]));
+    gl.uniform4f(uniform.hairTint,...hair);
+    for(const [name,value] of [["lipTint",facial[0]],["eyeTint",facial[1]],["browTint",facial[2]]])
+      gl.uniform4f(uniform[name],...(faceReady?value:[0,0,0,0]));
     gl.disable(gl.BLEND);
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
     gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);
@@ -498,11 +561,12 @@ export async function createRenderer(canvas, useUhd=false) {
     if(!active)return;
 
     const shaped=Object.fromEntries(entries);
-    const rawShapes=Object.fromEntries(entries.map(([key])=>[key,observed[key]]));
-    attachedCleanup=Boolean(stabilized&&entries.some(([key,shapes])=>JSON.stringify(shapes)!==JSON.stringify(observed[key])));
+    const rawShapes=Object.fromEntries(entries.map(([key])=>[key,withOffsets(observed[key],offsets[key])]));
+    attachedCleanup=Boolean(stabilized&&entries.some(([key])=>JSON.stringify(tracked[key])!==JSON.stringify(observed[key])));
     const signature=(cleaned?"clean:":"")+(observation?"flow:":"")+
       entries.map(([key])=>points[key]?key+"@"+points[key].radius:key).join(",");
-    const details=entries.flatMap(([,items])=>items).filter(Boolean)
+    // Mesh refinement and the redraw bounds cover the pushed surroundings too.
+    const details=entries.flatMap(([key,items])=>items.filter(Boolean).map(shape=>supportExtent(shape,adjustments[key])))
       .sort((a,b)=>Math.min(a[4],a[5])-Math.min(b[4],b[5]));
     const raw=(x,y)=>entries.length?deformation(x,y,rawShapes,adjustments):[x,y];
     const pins=cleaned?cleanupTracks?.pins?.[current]:null;
@@ -543,7 +607,7 @@ export async function createRenderer(canvas, useUhd=false) {
     subjects=[evaluated(layers[0].points,state)];
     pickSurface={frame:current,grid,points:fitted,bounds};
     gl.enable(gl.SCISSOR_TEST);
-    gl.scissor(left*rasterScale,(height-bottom)*rasterScale,(right-left)*rasterScale,(bottom-top)*rasterScale);
+    gl.scissor(left*rasterX,(height-bottom)*rasterY,(right-left)*rasterX,(bottom-top)*rasterY);
     repaint(grid,fitted,5);
     gl.disable(gl.SCISSOR_TEST);
   }

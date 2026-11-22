@@ -1,12 +1,22 @@
 """Measure visible secondary motion relative to tracked anatomical carriers."""
 
 import argparse
+from collections import deque
+from concurrent.futures import ThreadPoolExecutor
 import json
+import os
 from pathlib import Path
+import threading
 
 import av
 import cv2
 import numpy as np
+if __package__:
+    from .media import presentation_offset
+    from .progress import Progress
+else:
+    from media import presentation_offset
+    from progress import Progress
 
 
 def write_json(data, path):
@@ -14,6 +24,19 @@ def write_json(data, path):
     staged = path.with_suffix(".partial")
     staged.write_text(json.dumps(data, separators=(",", ":"), allow_nan=False))
     staged.replace(path)
+
+
+def world_frame(fit):
+    if not fit.pose_world_landmarks:
+        return None
+    return [[round(point.x, 5), round(point.y, 5), round(point.z, 5),
+             round(min(point.visibility, point.presence), 3)]
+            for point in fit.pose_world_landmarks[0]]
+
+
+def world_track(fps, frames):
+    return {"version": 1, "fps": fps, "frames": frames,
+            "source": "MediaPipe Pose Landmarker monocular world estimates"}
 
 
 def world_pose(source, model):
@@ -35,15 +58,8 @@ def world_pose(source, model):
         for frame in video.decode(stream):
             timestamp = int(frame.pts*frame.time_base*1000)
             image = mp.Image(image_format=mp.ImageFormat.SRGB, data=frame.to_ndarray(format="rgb24"))
-            fit = detector.detect_for_video(image, timestamp)
-            if not fit.pose_world_landmarks:
-                frames.append(None)
-                continue
-            frames.append([[round(point.x, 5), round(point.y, 5), round(point.z, 5),
-                            round(min(point.visibility, point.presence), 3)]
-                           for point in fit.pose_world_landmarks[0]])
-    return {"version": 1, "fps": fps, "frames": frames,
-            "source": "MediaPipe Pose Landmarker monocular world estimates"}
+            frames.append(world_frame(detector.detect_for_video(image, timestamp)))
+    return world_track(fps, frames)
 
 
 class MatteFrames:
@@ -143,58 +159,93 @@ def robust_region(previous, current, before, after, flow, quality, factor):
     return combined[0], combined[1], min(1.,max(trust)/.47)
 
 
+def flow_workers():
+    # Frame pairs are independent, so a few single-pair workers keep the cores busy
+    # while the other preparation workers run.
+    return max(1, min(4, (os.cpu_count() or 2) // 3))
+
+
 def analyze_flow(source, manifest, timeline_dir, regions, factor):
     cv2.setNumThreads(2)
     source_width, source_height = manifest["frames"][0][0], manifest["height"]
     width,height = round(source_width*factor),round(source_height*factor)
     if min(width,height)<16:
         raise ValueError("Flow resolution too small")
-    if abs(width/source_width-height/source_height)>.001:
-        raise ValueError("Flow must scale both image axes equally")
-    factor=width/source_width
+    # Integer flow dimensions can round differently on each axis. Use their mean scale for local distances.
+    factor=(width/source_width+height/source_height)/2
     matte_frames = MatteFrames(manifest, timeline_dir, (width,height))
     anchors = list(joint_frames(manifest, regions))
     yy,xx = np.mgrid[:height,:width].astype("float32")
-    forward = cv2.DISOpticalFlow_create(cv2.DISOPTICAL_FLOW_PRESET_FAST)
-    backward = cv2.DISOpticalFlow_create(cv2.DISOPTICAL_FLOW_PRESET_FAST)
-    forward.setFinestScale(0)
-    backward.setFinestScale(0)
+    local = threading.local()
+
+    def estimators():
+        # DIS objects keep internal buffers, so every worker thread owns its own pair.
+        if not hasattr(local, "pair"):
+            pair = []
+            for _ in range(2):
+                estimator = cv2.DISOpticalFlow_create(cv2.DISOPTICAL_FLOW_PRESET_FAST)
+                estimator.setFinestScale(0)
+                pair.append(estimator)
+            local.pair = pair
+        return local.pair
+
+    def measure(index, prev_gray, gray, prev_matte, matte):
+        forward, backward = estimators()
+        values = {}
+        flow = forward.calc(prev_gray,gray,None)
+        reverse = backward.calc(gray,prev_gray,None)
+        map_x, map_y = xx+flow[...,0], yy+flow[...,1]
+        returned = cv2.remap(reverse,map_x,map_y,cv2.INTER_LINEAR)
+        err = np.linalg.norm(flow+returned,axis=2)
+        foreground = np.minimum(prev_matte,cv2.remap(matte,map_x,map_y,cv2.INTER_LINEAR))
+        dx = cv2.Sobel(prev_gray,cv2.CV_32F,1,0,ksize=3)
+        dy = cv2.Sobel(prev_gray,cv2.CV_32F,0,1,ksize=3)
+        texture = np.clip((np.hypot(dx,dy)-4)/42,0,1)
+        confidence = texture*np.exp(-.5*(err/1.2)**2)*np.clip((foreground.astype(float)-135)/92,0,1)
+        confidence[(map_x<0)|(map_y<0)|(map_x>=width-1)|(map_y>=height-1)] = 0
+        old, new = regions[index-1],regions[index]
+        for key in old.keys()&new.keys()&anchors[index-1].keys()&anchors[index].keys():
+            result = robust_region(old[key],new[key],anchors[index-1][key],anchors[index][key],
+                                   flow,confidence,factor)
+            if result is not None:
+                values[key]=result
+        return values
+
     shots = {start for start,_ in manifest["shots"]}
     measured = []
+    pending = deque()
+    workers = flow_workers()
+    progress = Progress(len(regions))
+
+    def collect(limit):
+        while len(pending) > limit:
+            item = pending.popleft()
+            measured.append(item.result() if hasattr(item, "result") else item)
+            progress.update(len(measured))
+
     prev_gray = prev_matte = None
-    with av.open(str(source)) as video:
+    with av.open(str(source)) as video, ThreadPoolExecutor(workers) as pool:
         stream = video.streams.video[0]
         stream.codec_context.thread_count=3
         if (stream.width,stream.height)!=(source_width,source_height):
             raise ValueError("Optical flow must analyze the region track's source resolution")
         for index,frame in enumerate(video.decode(stream)):
-            if abs(float(frame.pts*frame.time_base)-index/manifest["fps"])>.002:
+            if abs(float(frame.pts*frame.time_base)-manifest.get("presentationStart",0)-
+                   presentation_offset(manifest,index))>.002:
                 raise ValueError("Motion and source timestamps do not match")
             gray = cv2.resize(frame.to_ndarray(format="gray"), (width,height), interpolation=cv2.INTER_AREA)
             matte = matte_frames.read(index)
-            values = {}
             if index not in shots and prev_gray is not None:
-                flow = forward.calc(prev_gray,gray,None)
-                reverse = backward.calc(gray,prev_gray,None)
-                map_x, map_y = xx+flow[...,0], yy+flow[...,1]
-                returned = cv2.remap(reverse,map_x,map_y,cv2.INTER_LINEAR)
-                err = np.linalg.norm(flow+returned,axis=2)
-                foreground = np.minimum(prev_matte,cv2.remap(matte,map_x,map_y,cv2.INTER_LINEAR))
-                dx = cv2.Sobel(prev_gray,cv2.CV_32F,1,0,ksize=3)
-                dy = cv2.Sobel(prev_gray,cv2.CV_32F,0,1,ksize=3)
-                texture = np.clip((np.hypot(dx,dy)-4)/42,0,1)
-                confidence = texture*np.exp(-.5*(err/1.2)**2)*np.clip((foreground.astype(float)-135)/92,0,1)
-                confidence[(map_x<0)|(map_y<0)|(map_x>=width-1)|(map_y>=height-1)] = 0
-                old, new = regions[index-1],regions[index]
-                for key in old.keys()&new.keys()&anchors[index-1].keys()&anchors[index].keys():
-                    result = robust_region(old[key],new[key],anchors[index-1][key],anchors[index][key],
-                                           flow,confidence,factor)
-                    if result is not None:
-                        values[key]=result
-            measured.append(values)
+                pending.append(pool.submit(measure, index, prev_gray, gray, prev_matte, matte))
+            else:
+                pending.append({})
+            # Results are collected in frame order with a bounded number in flight.
+            collect(workers * 3)
             prev_gray,prev_matte=gray,matte
             if index%120==0:
                 print(f"Measured motion frame {index}",flush=True)
+        collect(0)
+    progress.finish()
     if len(measured)!=len(regions):
         raise ValueError("Decoded frame count and regions differ")
     return measured
