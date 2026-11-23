@@ -83,6 +83,10 @@ The matrix deliberately fails the first 4K encode, checks native playback, and r
 
 For parity testing when an approved comparison viewer is available, pass its URL as a fourth argument to `session.mjs`. It compares large images in browser memory and reports pass/fail. Keep real-source validation transient and retain aggregate results only.
 
+## Recording style
+
+Prepare a video and open **Style** to learn its recording profile. The library keeps aggregate measurements between sessions. Pass `--styles <library-directory>` to choose its location. The optional offline model directory also needs the checksum-verified `style.onnx` for learning with CNN statistics. Use **Export saved styles…** to save the library as a ZIP. Extract its JSON files into a directory and pass that directory to `--styles` to reuse them.
+
 ## Face Swap
 
 Install the pinned dependencies, then fetch the public checksummed models:
@@ -93,7 +97,7 @@ Install the pinned dependencies, then fetch the public checksummed models:
 
 Open a target MP4 or a still image, then choose **Face Swap** in the editing tabs or expand it in Quick Review. For a video, scrub to a target frame. Use Target zoom and pan for small faces, click the face, and check its green mask. A click on or next to a face selects the nearest one; tilted, turned, small and motion-blurred faces are found by a second search that tries rotated copies, an enlarged window around the click and a lower detection score. An image target produces a verified lossless PNG (**Download lossless PNG**), and **Show swap** shows it in place of the Quick Review picture. Drop or choose a source image or video. For a video, pause or scrub to the frame you want and choose **Use current frame**. Only the selected still is sent from the source video. Start the swap and continue using the other tools while the result renders in the background. Model weights can also be supplied with `run.py --face-models <directory>`.
 
-**Show swap** and **Show original** switch the editor preview at the current playhead. Playback uses a smaller H.264 rendition. **Download lossless MP4** returns the verified RGB H.264 export with its copied AAC audio. Use **Clear result** to release the volatile output files.
+**Show swap** and **Show original** switch the main viewer at the current playhead. The sidebar mirrors the swap. GPU allocation failure triggers one CPU retry in a fresh worker. Playback uses a smaller H.264 rendition. **Download lossless MP4** returns the verified RGB H.264 export with its copied AAC audio. Use **Clear result** to release the volatile output files.
 
 After selecting a face, open **Depth bands** to see six independently toggleable green overlays, ordered from near to far. The bands use MediaPipe landmarks to estimate relative depth across the visible face and stay inside the semantic mask. They are an inspection aid for the selected frame, and are based on the camera image rather than measured anatomical depth. [MediaPipe Face Mesh](https://github.com/google-ai-edge/mediapipe/wiki/MediaPipe-Face-Mesh)
 

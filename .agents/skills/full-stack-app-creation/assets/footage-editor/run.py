@@ -35,6 +35,13 @@ MODELS = {
 }
 
 
+# Pretrained SqueezeNet 1.1 (ONNX model zoo) for the deep look statistics of recording styles.
+STYLE_MODELS = {
+    "style.onnx": ("https://github.com/onnx/models/raw/main/validated/vision/classification/squeezenet/model/"
+                   "squeezenet1.1-7.onnx", "1eeff551a67ae8d565ca33b572fc4b66e3ef357b0eb2863bb9ff47a918cc4088"),
+}
+
+
 def ensure_runtime(parser):
     required = ("av", "cv2", "imageio_ffmpeg", "mediapipe", "numpy", "PIL", "scipy")
     missing = [name for name in required if find_spec(name) is None]
@@ -69,7 +76,8 @@ def session_directory():
         yield Path(directory)
 
 
-def model_files(directory, offline, names=None):
+def model_files(directory, offline, names=None, catalog=None):
+    catalog = MODELS if catalog is None else catalog
     directory.mkdir(exist_ok=True)
     print("Verifying public inference models", flush=True)
     def verify_model(item):
@@ -83,7 +91,8 @@ def model_files(directory, offline, names=None):
             else:
                 for attempt in range(3):
                     try:
-                        with urlopen(MODEL_ORIGIN + relative, timeout=30) as response:
+                        url = relative if relative.startswith("https://") else MODEL_ORIGIN + relative
+                        with urlopen(url, timeout=30) as response:
                             data = response.read(24 * 1024 * 1024 + 1)
                         break
                     except (URLError, TimeoutError):
@@ -99,7 +108,7 @@ def model_files(directory, offline, names=None):
             pending.write_bytes(data)
             pending.replace(destination)
 
-    items = [(name, MODELS[name]) for name in names] if names is not None else list(MODELS.items())
+    items = [(name, catalog[name]) for name in names] if names is not None else list(catalog.items())
     if offline:
         for item in items:
             verify_model(item)
@@ -254,6 +263,9 @@ def main():
     parser.add_argument("--face-models", type=Path, default=Path.home() / ".cache/footage-editor/face-models",
                         help="Verified Face Swap model directory")
     parser.add_argument("--port", type=int, default=0, help="Listen on a specific loopback port")
+    parser.add_argument("--styles", type=Path,
+                        default=Path(os.environ.get("XDG_DATA_HOME") or Path.home()/".local/share")/"footage-editor/styles",
+                        help="Private directory for learned recording styles (kept between sessions)")
     args = parser.parse_args()
     ensure_runtime(parser)
     if sys.stdin.isatty():
@@ -355,7 +367,13 @@ def main():
                     return
             else:
                 review = None
-            review_handler = upload_handler(session, build, review, build_swap, build_mask, export_preview)
+            def style_model():
+                cache = session / "models"
+                model_files(cache, args.models, ("style.onnx",), STYLE_MODELS)
+                return cache / "style.onnx"
+
+            review_handler = upload_handler(session, build, review, build_swap, build_mask, export_preview,
+                                            {"library": args.styles, "model": style_model})
             with SessionServer(("127.0.0.1", args.port), review_handler) as server:
                 print(f"http://127.0.0.1:{server.server_port}/", flush=True)
                 try:

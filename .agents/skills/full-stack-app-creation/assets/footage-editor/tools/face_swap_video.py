@@ -15,11 +15,12 @@ from threading import Event, Thread, local
 import av
 import cv2
 import numpy as np
+from onnxruntime.capi.onnxruntime_pybind11_state import Fail, RuntimeException
 
 from build_splats import TIME_SIGMA_FRAMES, advect
 from face_fragments import FRAGMENTED, audio_sample_durations, fragment_audio, merge
 from face_curvature import create_mesh_detector
-from face_models import (ARCFACE_112, ARCFACE_128, aligned_crop, detect_faces, encode, face_alpha, landmark_alpha,
+from face_models import (ARCFACE_112, ARCFACE_128, aligned_crop, detect_faces, encode, face_alpha, gpu_available, landmark_alpha,
                          parse_face, read_photo, render, session)
 from face_motion_blend import FaceBlend, soften_color_seam
 from face_tracking import ActionTracker, face_from_points, mesh_five, motion_measures, smooth_track
@@ -783,3 +784,12 @@ if __name__ == "__main__":
                                                              label="Preparing smooth playback"))
     except (ValueError, OSError) as error:
         cli.exit(1, f"{error}\n")
+    except (Fail, RuntimeException) as error:
+        detail = str(error).lower()
+        if gpu_available() and any(text in detail for text in
+                                   ("failed to allocate memory", "out of memory", "cudnn_status_alloc_failed")):
+            # Replace the worker to release all CUDA arenas, including sessions held by
+            # inference threads. The server can still cancel the same process group.
+            os.execve(sys.executable, [sys.executable, "-B", *sys.argv],
+                      {**os.environ, "FOOTAGE_FACE_CPU": "1"})
+        raise

@@ -77,6 +77,8 @@ Use the [source-only local editor](references/source-only-footage-editor.md) whe
 
 Use [inline video Face Swap](references/inline-video-face-swap.md) for explicit destination selection, source video stills, background rendering, and lossless verification through the actual editor. Its [action benchmark](references/inline-video-face-swap.md#benchmark-tracking-through-action) measures placement error, jitter and coverage through fast motion.
 
+When a swap fails during inference, a reviewer needs both the original and swapped views, or learned profiles need a portable export, follow [worker recovery, main-view comparison and style export](references/footage-comparison-and-export.md).
+
 For real resizing (not a magnifier effect), soft-tissue physics in playback, hair and feature colour, and a proportional lock in the editor, follow the [source-only editor](references/source-only-footage-editor.md) and keep each browser module matched to its Python export twin with parity tests.
 
 Use the [media intake and export workflow](references/media-intake-and-export.md) for browser-compatible conversion, staged preparation, on-demand 4K recovery, and edited downloads during a session.

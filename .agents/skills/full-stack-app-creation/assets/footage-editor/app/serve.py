@@ -42,7 +42,8 @@ def handler(assets, video=None, source=None, uhd=None, regions=None, skin=None, 
     files = {"/": app/"index.html", "/4k/": app/"uhd.html"}
     modules = ("app.mjs","motion.mjs","render.mjs","regions.mjs","inspect.mjs","cleanup.mjs",
                "transport.mjs","secondary.mjs","splats.mjs","stage-zoom.mjs","picking.mjs","point-regions.mjs",
-               "workspace.mjs","viewer-size.mjs","uhd.mjs","media-download.mjs","status.mjs","soft-body.mjs","colors.mjs")
+               "workspace.mjs","viewer-size.mjs","uhd.mjs","media-download.mjs","status.mjs","soft-body.mjs","colors.mjs",
+               "style.mjs")
     files.update({"/"+name:app/name for name in (*modules,"style.css")})
     files["/video.mp4"]=video if video is not None else assets/"video.mp4"
     if source is not None:
@@ -77,7 +78,8 @@ def handler(assets, video=None, source=None, uhd=None, regions=None, skin=None, 
     return result
 
 
-def upload_handler(directory, build, initial_editor=None, build_swap=None, build_mask=None, export_preview=None):
+def upload_handler(directory, build, initial_editor=None, build_swap=None, build_mask=None, export_preview=None,
+                   style_setup=None):
     app = Path(__file__).resolve().parent
     landing = file_handler({"/": app / "upload.html", "/upload.mjs": app / "upload.mjs",
                             "/style.css": app / "style.css", "/workspace.mjs": app / "workspace.mjs",
@@ -90,6 +92,11 @@ def upload_handler(directory, build, initial_editor=None, build_swap=None, build
         face = FaceRoutes(directory, build_swap, file_handler, build_mask)
     else:
         face = None
+    if style_setup is not None:
+        from app.style_routes import StyleRoutes
+        style = StyleRoutes(directory, style_setup["library"], style_setup["model"], file_handler)
+    else:
+        style = None
     active = Lock()
     state = Lock()
     closing = Event()
@@ -122,6 +129,8 @@ def upload_handler(directory, build, initial_editor=None, build_swap=None, build
             if exporting is not None else {"phase": "idle"}
         if face is not None:
             result["face"] = face.status()
+        if style is not None:
+            result["style"] = style.status()
         return result
 
     class Upload(landing):
@@ -147,6 +156,8 @@ def upload_handler(directory, build, initial_editor=None, build_swap=None, build
                     export_job.set()
             if face is not None:
                 face.cancel()
+            if style is not None:
+                style.cancel()
 
         def loopback_host(self):
             return f"127.0.0.1:{self.server.server_port}"
@@ -158,6 +169,8 @@ def upload_handler(directory, build, initial_editor=None, build_swap=None, build
                 return
             if face is not None and (self.path.startswith("/face-swap/") or self.path == "/face-swap.mjs"):
                 return face.get(self, body)
+            if style is not None and self.path.startswith("/style/"):
+                return style.get(self, body)
             if body and self.path == "/events":
                 return self.events()
             if body and self.path == "/preparation":
@@ -292,7 +305,8 @@ def upload_handler(directory, build, initial_editor=None, build_swap=None, build
         def do_POST(self):
             nonlocal editor, job, uhd_job, uhd_error, uhd_attempt
             is_face = face is not None and self.path.startswith("/face-swap/")
-            if not is_face and self.path not in ("/upload", "/clear", "/cancel", "/prepare-4k", "/export-preview", "/export-edit"):
+            is_style = style is not None and self.path.startswith("/style/")
+            if not is_face and not is_style and self.path not in ("/upload", "/clear", "/cancel", "/prepare-4k", "/export-preview", "/export-edit"):
                 return self.reply(404, "Upload endpoint not found.")
             # Match the actual listener so a different site or a rebound hostname cannot submit footage.
             host = self.loopback_host()
@@ -301,6 +315,8 @@ def upload_handler(directory, build, initial_editor=None, build_swap=None, build
             if is_face:
                 current = editor
                 return face.post(self, current.editable_source if current is not None else None)
+            if is_style:
+                return style.post(self, editor)
             if self.path in ("/export-preview", "/export-edit"):
                 return self.edited_media(self.path == "/export-preview")
             if self.path == "/cancel":
@@ -337,6 +353,8 @@ def upload_handler(directory, build, initial_editor=None, build_swap=None, build
                     if editor is not None:
                         if face is not None:
                             face.discard()
+                        if style is not None:
+                            style.discard()
                         editor.retired.set()
                         rmtree(directory / "upload")
                         editor = None

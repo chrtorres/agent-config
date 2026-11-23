@@ -37,6 +37,6 @@ python -B tests/make_action_face_clip.py <portrait.png> ../fixtures/action.mp4
 python -B tests/face_tracking_benchmark.py <portrait.png> ../fixtures/action.mp4 <verified-model-directory> <verified-model-directory>/face.task
 ```
 
-The benchmark prints placement error, jitter and coverage for both trackers, including a run with detections removed. The method is in [tracking faces through action](../../3d-modeling/references/face-motion-compositing.md#tracking-faces-through-action), and historical numbers are in the [capture record](footage-reshape-tracking-capture.md). The browser test `tests/face-swap.mjs` predates the tabbed editor and needs its panel selector updated before use.
+The benchmark prints placement error, jitter and coverage for both trackers, including a run with detections removed. The method is in [tracking faces through action](../../3d-modeling/references/face-motion-compositing.md#tracking-faces-through-action), and historical numbers are in the [capture record](footage-reshape-tracking-capture.md). The browser test exercises the Quick Review panel and both comparison controls.
 
 See the [capture record](inline-video-face-swap-capture.md) for implementation scope, resource disposition, and historical results.

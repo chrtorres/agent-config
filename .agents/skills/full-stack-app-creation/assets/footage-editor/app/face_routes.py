@@ -177,6 +177,7 @@ class FaceRoutes:
                 source.unlink()
                 target.unlink()
                 self.ready = json.loads((self.directory / "verification.json").read_text())
+                self.ready["prepared_target"] = reuse_target
                 self.result = self.file_handler({
                     "/face-swap/result.png": self.directory / "face-swap.png",
                 } if image else {

@@ -7,6 +7,7 @@
 <script type="module" src="/workspace.mjs"></script>
 <script type="module" src="/face-swap.mjs"></script>
 <script type="module" src="/app.mjs"></script>
+<script type="module" src="/style.mjs"></script>
 <main>
   <header>
     <h1>Footage motion review</h1>
@@ -29,6 +30,7 @@
         </div>
       </div>
       <div class="viewer-controls">
+      <button id="face-stage-display" type="button" aria-pressed="false" hidden>Show swap</button>
       <label>Display <select data-view-fit>
         <option value="fit">Fit</option><option value="fill">Fill</option><option value="stretch">Stretch</option><option value="center">Center</option>
       </select></label>
@@ -74,6 +76,7 @@
         <button id="tab-edit" type="button" role="tab" aria-selected="true" aria-controls="tools-edit">Edit</button>
         <button id="tab-motion" type="button" role="tab" aria-selected="false" aria-controls="tools-motion" tabindex="-1">Motion</button>
         <button id="tab-face" type="button" role="tab" aria-selected="false" aria-controls="face-swap-mount" tabindex="-1">Face Swap <span id="face-tab-status" hidden></span></button>
+        <button id="tab-style" type="button" role="tab" aria-selected="false" aria-controls="tools-style" tabindex="-1">Style</button>
         <button id="tab-help" type="button" role="tab" aria-selected="false" aria-controls="tools-help" tabindex="-1">Shortcuts</button>
       </div>
       <div class="tool-panel" id="face-swap-mount" role="tabpanel" aria-labelledby="tab-face" tabindex="0" hidden></div>
@@ -161,6 +164,47 @@
         <label id="splat-option" class="motion-option" hidden><input id="show-splats" type="checkbox"> Inspect time-varying Gaussian splats</label>
         <canvas id="splat-preview" width="280" height="498" aria-label="Foreground Gaussian splats at the recorded time" hidden></canvas>
       </details>
+      </div>
+      <div class="tool-panel" id="tools-style" role="tabpanel" aria-labelledby="tab-style" tabindex="0" hidden>
+      <section class="panel style-panel" aria-label="Recording style">
+        <h2>Recording style</h2>
+        <p class="style-help">Learn how this video was recorded: frame size and rate, encoding, colour grade, grain and sharpness, vignette, camera shake and sound. Learned styles are kept for later sessions, and any video can then be rendered in one of them.</p>
+        <div class="row">
+          <label for="style-name">Name</label>
+          <input id="style-name" type="text" maxlength="60" placeholder="Optional, e.g. Phone vlog">
+        </div>
+        <div class="row">
+          <button id="style-learn" type="button" disabled>Learn this video's style</button>
+          <button id="style-cancel" type="button" hidden>Cancel</button>
+        </div>
+        <p id="style-status" role="status"></p>
+      </section>
+      <section class="panel style-panel" aria-label="Apply a saved style">
+        <h2>Apply a saved style</h2>
+        <div class="row">
+          <label for="style-choice">Saved style</label>
+          <select id="style-choice" disabled><option value="">No saved styles</option></select>
+        </div>
+        <label class="row style-switch"><input id="style-apply" type="checkbox" role="switch" disabled> Show the loaded video in this style</label>
+        <p id="style-apply-status" role="status"></p>
+      </section>
+      <section class="panel style-panel" aria-label="Learned styles">
+        <h2>Learned styles</h2>
+        <p id="style-empty">No styles learned yet.</p>
+        <ul id="style-list"></ul>
+        <button id="style-export" type="button" disabled>Export saved styles…</button>
+        <p id="style-export-status" role="status"></p>
+      </section>
+      <section id="style-result" class="panel style-panel" aria-label="Styled video" hidden>
+        <h2>Styled video</h2>
+        <div id="style-preview-home"><video id="style-video" controls playsinline preload="metadata" aria-label="Video in the saved style"></video></div>
+        <p id="style-match"></p>
+        <table id="style-groups"><tbody></tbody></table>
+        <div class="row">
+          <a id="style-download" href="/style/result.mp4" download="styled.mp4">Download styled MP4</a>
+          <button id="style-clear" type="button">Clear result</button>
+        </div>
+      </section>
       </div>
       <div class="tool-panel" id="tools-help" role="tabpanel" aria-labelledby="tab-help" tabindex="0" hidden>
       <section class="panel guide" aria-label="Input bindings">

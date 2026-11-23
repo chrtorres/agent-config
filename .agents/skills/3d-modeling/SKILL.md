@@ -43,6 +43,8 @@ For a local editor that regenerates its pose, masks, and editable surface from t
 
 For localized facial edits in video, use [motion-aware face compositing](references/face-motion-compositing.md) to protect current-frame eyes, inspect relative-depth masks, and control seam lag during quick movements. When a face swap blurs, wobbles or lands on the wrong face during fast action, use its [two-pass action tracking](references/face-motion-compositing.md#tracking-faces-through-action) and score it on a synthetic clip with known motion.
 
+For reviewer feedback on a completed swap, compare the original and composite in the main viewer at the same playhead. Keep a sidebar inspection view synchronized to the displayed frame. Verify a switch back after playback or seeking, then check protected pixels in the lossless export. See [the comparison and recovery workflow](../full-stack-app-creation/references/footage-comparison-and-export.md).
+
 When a resized body part looks like a magnifying glass, follow [reshaping without a lens effect](references/footage-motion.md#reshaping-without-a-lens-effect). Add [soft-tissue follow-through](references/footage-motion.md#soft-tissue-follow-through) for enlarged regions that should move with the body, and use [hair and feature colour](references/footage-motion.md#hair-and-feature-colour) for luminance-preserving dyes.
 
 When a tracked edit must survive format conversion, variable frame timing, or a 4K retry, use the [footage clock and rendition checks](references/footage-motion.md#footage-clock-and-rendition-checks).

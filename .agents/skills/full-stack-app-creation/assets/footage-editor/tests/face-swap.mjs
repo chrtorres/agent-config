@@ -99,7 +99,7 @@ try {
   const preview = await page.request.get(route("/face-swap/preview.mp4"),{headers:{Range:"bytes=0-31"}});
   check(preview.status() === 206 && preview.headers()["content-range"] !== result.headers()["content-range"],
     "Separate playback rendition uses byte ranges");
-  await page.getByRole("button",{name:"Show swap"}).click();
+  await page.locator("#face-display").click();
   const video = page.getByLabel("Face swap preview");
   check(await video.evaluate(media=>Boolean(media.closest(".quick-frame"))),"Swap uses the existing Quick Review viewport");
   await page.waitForFunction(() => document.querySelector("#face-video").readyState >= 2);
@@ -114,6 +114,7 @@ try {
       media.currentTime=.25;
     });
   });
+  check(await page.locator("#face-monitor").isVisible(),"Sidebar also shows the swapped frame");
   const rgb = await video.evaluate(media => {
     const canvas = document.createElement("canvas");
     canvas.width = media.videoWidth;
@@ -127,7 +128,9 @@ try {
   if (process.env.FOOTAGE_SYNTHETIC_SCREENSHOT) {
     await page.screenshot({path:process.env.FOOTAGE_SYNTHETIC_SCREENSHOT});
   }
-  await page.getByRole("button",{name:"Show original",exact:true}).first().click();
+  await page.locator("#face-stage-display").click();
+  check(await page.locator("#face-monitor").isHidden(),"Show original clears the sidebar mirror");
+  check(Math.abs(await page.locator("#quick-video").evaluate(media=>media.currentTime)-.25)<.02,"Comparison keeps the playhead");
   check(await page.locator("#quick-video").isVisible(),"Original returns in the same editor viewport");
   await page.getByRole("button",{name:"Clear result"}).click();
   await page.getByRole("heading",{name:"Verified result"}).waitFor({state:"hidden"});

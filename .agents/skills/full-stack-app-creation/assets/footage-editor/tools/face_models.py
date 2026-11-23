@@ -1,4 +1,5 @@
 """Landmark alignment and inference adapted from the bundled photo face-swap example."""
+import os
 from threading import Lock
 
 import cv2
@@ -145,7 +146,7 @@ def gpu_available():
     with _GPU_LOCK:
         if _GPU is None:
             ready = False
-            if "CUDAExecutionProvider" in ort.get_available_providers():
+            if os.environ.get("FOOTAGE_FACE_CPU") != "1" and "CUDAExecutionProvider" in ort.get_available_providers():
                 try:
                     # onnxruntime-gpu[cuda,cudnn] ships the libraries as wheels that are not on the
                     # loader path, so preload them before the first CUDA session.

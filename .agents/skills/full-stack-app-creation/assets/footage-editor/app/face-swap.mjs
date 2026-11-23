@@ -23,6 +23,8 @@ function setup() {
   const section = $("face-result");
   const video = $("face-video");
   const display = $("face-display");
+  const stageDisplay = $("face-stage-display");
+  const monitor = $("face-monitor");
   const home = $("face-preview-home");
   const picker = $("upload-file");
   const originalVideo = $("source") || $("quick-video");
@@ -360,61 +362,76 @@ function setup() {
   const imageResult = () => state.report?.kind === "image";
   const previewShown = () => !(imageResult() ? resultImage : video).hidden;
 
-  // A still-image result replaces the Quick Review picture while "Show swap" is on.
-  function showImagePreview(visible) {
-    const inStage = stage && intendedTarget && target() === intendedTarget && !$("quick-review").hidden;
-    if (visible) {
-      if (!resultImage.hasAttribute("src")) resultImage.src = base + "result.png";
-      if (inStage) {
-        originalPicture.hidden = true;
-        stage.append(resultImage);
-        stage.dataset.facePreview = "true";
-        stage.scrollIntoView({block:"nearest"});
-      }
-    } else if (resultImage.parentElement === stage) {
-      originalPicture.hidden = false;
-      delete stage.dataset.facePreview;
-      home.append(resultImage);
-    }
-    resultImage.hidden = !visible;
-    display.setAttribute("aria-pressed", String(visible));
-    display.textContent = visible ? "Show original" : "Show swap";
+  function canCompare() {
+    if (prepared) return !imageResult() && state.report?.prepared_target !== false;
+    return intendedTarget && target() === intendedTarget && !$("quick-review").hidden;
   }
 
-  function showPreview(visible) {
-    if (imageResult() || resultImage.parentElement === stage) {
-      showImagePreview(visible && imageResult());
-      if (imageResult()) return;
+  // Both views share a decoder and playhead. The small sidebar canvas only
+  // copies presented frames while the comparison is visible.
+  function paintMonitor() {
+    if (monitor.hidden) return;
+    const media = imageResult() ? resultImage : video;
+    const width = media.videoWidth || media.naturalWidth;
+    const height = media.videoHeight || media.naturalHeight;
+    if (!width || !height || (media === video && media.readyState < 2)) return;
+    const scale = Math.min(1, 440 / Math.max(width, height));
+    const w = Math.max(1, Math.round(width * scale)), h = Math.max(1, Math.round(height * scale));
+    if (monitor.width !== w || monitor.height !== h) {
+      monitor.width = w;
+      monitor.height = h;
     }
-    const inStage = stage && intendedTarget && target() === intendedTarget &&
-      (prepared || !$("quick-review").hidden);
-    const wasInStage = video.parentElement === stage;
+    monitor.getContext("2d").drawImage(media, 0, 0, w, h);
+  }
+  let frameCallback;
+  function nextFrame() {
+    paintMonitor();
+    if (!monitor.hidden && video.parentElement === stage)
+      frameCallback = video.requestVideoFrameCallback?.(nextFrame);
+  }
+  for (const event of ["loadeddata", "seeked", "timeupdate"]) video.addEventListener(event, paintMonitor);
+  resultImage.addEventListener("load", paintMonitor);
+
+  function showPreview(visible) {
+    const media = imageResult() || resultImage.parentElement === stage ? resultImage : video;
+    if (frameCallback !== undefined) video.cancelVideoFrameCallback(frameCallback);
+    frameCallback = undefined;
     if (visible) {
-      if (inStage) {
+      if (canCompare()) {
+        const style = $("style-apply");
+        if (style?.checked) style.click();
         originalVideo.pause();
         originalPicture.hidden = true;
-        stage.append(video);
+        stage.append(media);
         stage.dataset.facePreview = "true";
-        if (video.readyState >= 1) video.currentTime = originalVideo.currentTime;
-        else video.addEventListener("loadedmetadata", () => {
-          if (!video.hidden && video.parentElement === stage) video.currentTime = originalVideo.currentTime;
-        }, {once:true});
+        if (media === video) {
+          const seek = () => {
+            if (video.parentElement === stage) video.currentTime = originalVideo.currentTime;
+          };
+          if (video.readyState >= 1) seek();
+          else video.addEventListener("loadedmetadata", seek, {once:true});
+        }
       }
-      if (!video.hasAttribute("src")) video.src = base + "preview.mp4";
-      if (inStage) stage.scrollIntoView({block:"nearest"});
+      if (!media.hasAttribute("src")) media.src = base + (media === video ? "preview.mp4" : "result.png");
     } else {
       video.pause();
-      if (wasInStage) {
-        if (prepared && window.movementReview?.seekSeconds) window.movementReview.seekSeconds(video.currentTime);
-        else if (!prepared && originalVideo.readyState >= 1) originalVideo.currentTime = video.currentTime;
+      if (media.parentElement === stage) {
+        if (media === video && video.readyState >= 2) {
+          if (prepared) window.movementReview?.seekSeconds(video.currentTime);
+          else if (originalVideo.readyState >= 1) originalVideo.currentTime = video.currentTime;
+        }
         originalPicture.hidden = false;
         delete stage.dataset.facePreview;
-        home.append(video);
+        home.append(media);
       }
     }
-    video.hidden = !visible;
-    display.setAttribute("aria-pressed", String(visible));
-    display.textContent = visible ? "Show original" : "Show swap";
+    media.hidden = !visible;
+    monitor.hidden = !(visible && media.parentElement === stage);
+    if (!monitor.hidden) nextFrame();
+    for (const button of [display, stageDisplay]) {
+      button.setAttribute("aria-pressed", String(visible));
+      button.textContent = visible ? "Show original" : "Show swap";
+    }
   }
 
   function render() {
@@ -443,6 +460,7 @@ function setup() {
     cancel.disabled = state.phase !== "processing";
     clear.hidden = !ready;
     section.hidden = !ready;
+    stageDisplay.hidden = !ready || !canCompare();
     $("face-target-status").textContent = media ?
       (prepared ? "Target: the current editor video." :
         isImage(media) ? "Target: the image in Quick Review." : "Target: the video selected in Quick Review.") :
@@ -460,7 +478,7 @@ function setup() {
     } else {
       if (video.hasAttribute("src") || resultImage.hasAttribute("src")) showPreview(false);
       if (resultImage.hasAttribute("src")) {
-        showImagePreview(false);
+        resultImage.hidden = true;
         resultImage.removeAttribute("src");
       }
       if (video.hasAttribute("src")) {
@@ -543,7 +561,7 @@ function setup() {
   tools.addEventListener("toggle", () => {
     if (tools.open) update();
     else {
-      showPreview(false);
+      if (!stage.dataset.facePreview) showPreview(false);
       sourceVideo.pause();
     }
   });
@@ -552,15 +570,14 @@ function setup() {
     new MutationObserver(() => {
       if (!mount.hidden) update();
       else {
-        showPreview(false);
+        if (!stage.dataset.facePreview) showPreview(false);
         sourceVideo.pause();
       }
     }).observe(mount,{attributeFilter:["hidden"]});
   }
-  display.addEventListener("click", () => {
-    showPreview(!previewShown());
-    if (!video.hidden) video.focus({preventScroll:true});
-  });
+  for (const button of [display, stageDisplay]) {
+    button.addEventListener("click", () => showPreview(!previewShown()));
+  }
   video.addEventListener("error", () => {
     if (video.hasAttribute("src")) status.textContent = "Playback preview unavailable. The verified download is still available.";
   });

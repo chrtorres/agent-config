@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 15641,
-      "sha256": "37edfb626609aa4943a62d86a622f893b98fed5e2d0151aefa3d56c48d6b912f",
+      "bytes": 15886,
+      "sha256": "7ce0c9c9f4e253b9e2016065c2438abb7649dd4ff3e39f2ca18f3c86bde42c43",
       "executable": false
     },
     "assets": {
@@ -139,8 +139,8 @@
     },
     "assets/footage-editor/README.md": {
       "type": "file",
-      "bytes": 14826,
-      "sha256": "70a5216e9b51e80429825fb55be96c31cb3385082b5f28a9e74a04d39cf9753e",
+      "bytes": 15396,
+      "sha256": "5a0c9bdd1acbcb205ea306f855ecb267f25b93644e6feeb738c35c873fea281f",
       "executable": false
     },
     "assets/footage-editor/app": {
@@ -166,26 +166,26 @@
     },
     "assets/footage-editor/app/face-swap-panel.html": {
       "type": "file",
-      "bytes": 4522,
-      "sha256": "1a8fc7340c284b410ce9da55ed8d9eb58d6f15b5cf5a59fbecc5971ec4f313fc",
+      "bytes": 4619,
+      "sha256": "0ef2b462299b05e08c2b0f3329c8b4dd0062ca292346de212a4836be95d4b3c7",
       "executable": false
     },
     "assets/footage-editor/app/face-swap.mjs": {
       "type": "file",
-      "bytes": 24383,
-      "sha256": "22437b8b4cb66ba8a7af5bad751ca0e593e0c105a2547462ebab4a231e04b1a7",
+      "bytes": 25221,
+      "sha256": "381a8f54e7ff00eb6057bf2a3c8ba9f2ca08425600adfcd96a3d385f19a26a90",
       "executable": false
     },
     "assets/footage-editor/app/face_routes.py": {
       "type": "file",
-      "bytes": 11376,
-      "sha256": "b31be01b57ca23b47754e2a1db2084288f3a67ba56071d6338175d2935772ee8",
+      "bytes": 11437,
+      "sha256": "2bd6da2370efa88ca5c81f5a9fcca7310e4246f4dfc3e4f93c56f7084a53628c",
       "executable": false
     },
     "assets/footage-editor/app/index.html": {
       "type": "file",
-      "bytes": 11514,
-      "sha256": "6bb49557466b01c5fce53767bc555e57d50e25d9b584673fef12291009022684",
+      "bytes": 14226,
+      "sha256": "bf0cb0971591a0a0e2cf488f7b6da32a2d32eb358beea28dfaba90a1eec8b64f",
       "executable": false
     },
     "assets/footage-editor/app/inspect.mjs": {
@@ -244,8 +244,8 @@
     },
     "assets/footage-editor/app/serve.py": {
       "type": "file",
-      "bytes": 24877,
-      "sha256": "52d6c054cb1be0058db981d422bdeb71f2e06d431566049141d7e10aa78c4bb0",
+      "bytes": 25665,
+      "sha256": "baee0bf5ebd318700ddec072747b7f275c262031f2d89100e62b79d9b3034d5e",
       "executable": false
     },
     "assets/footage-editor/app/soft-body.mjs": {
@@ -274,8 +274,20 @@
     },
     "assets/footage-editor/app/style.css": {
       "type": "file",
-      "bytes": 20145,
-      "sha256": "b62e3665de3377a2f4a45448046fb86073c91454119e2e2cc38b40cdf43eef3a",
+      "bytes": 21741,
+      "sha256": "a7487e32d8a5c75cf14c0af5b2efef6fae1fa3bcd022f66403f843aa721f8a63",
+      "executable": false
+    },
+    "assets/footage-editor/app/style.mjs": {
+      "type": "file",
+      "bytes": 11208,
+      "sha256": "a3fa07741fe3c1c77b9a9a9d384cfc67b61b4f2312523cbee7ea70efc435d55c",
+      "executable": false
+    },
+    "assets/footage-editor/app/style_routes.py": {
+      "type": "file",
+      "bytes": 13868,
+      "sha256": "0b2602b4cb8a614e80cb27f916633118e1b111b88883c9ebfc3174bb9d5ae2b3",
       "executable": false
     },
     "assets/footage-editor/app/transport.mjs": {
@@ -298,8 +310,8 @@
     },
     "assets/footage-editor/app/upload.html": {
       "type": "file",
-      "bytes": 4873,
-      "sha256": "00408eefa1cb54922f10acc0785118ed2e8413be9fb37fa71184acb5f9bb815e",
+      "bytes": 4972,
+      "sha256": "03fd19ea7c766921c1b59a537dce06f7b6e5649ab0d9e3b6db41892b6ab2149d",
       "executable": false
     },
     "assets/footage-editor/app/upload.mjs": {
@@ -328,17 +340,35 @@
     },
     "assets/footage-editor/run.py": {
       "type": "file",
-      "bytes": 18212,
-      "sha256": "eb6ea6636449d1324072feac660304fff0e273d91743d8c8a6d7a5eef27b7e1c",
+      "bytes": 19268,
+      "sha256": "9c15810b5847898db1eb070e9df7a6019545a24e3cf041f95d887506546fff4c",
       "executable": false
     },
     "assets/footage-editor/tests": {
       "type": "directory"
     },
+    "assets/footage-editor/tests/check_comparison_modes.mjs": {
+      "type": "file",
+      "bytes": 2292,
+      "sha256": "ceb03d0447203ef651483b92e038d733789ded9deaf9af987292ea6e37be56bf",
+      "executable": false
+    },
+    "assets/footage-editor/tests/check_cpu_retry.py": {
+      "type": "file",
+      "bytes": 2188,
+      "sha256": "8b1c2030bc73bd7a0bae050a3744daab26f7bee31cfcb2e0d9a994d95b50792c",
+      "executable": false
+    },
+    "assets/footage-editor/tests/check_style_export.mjs": {
+      "type": "file",
+      "bytes": 1705,
+      "sha256": "e4f4d95f3e9e7ebb2d09974651e538ffb11b361b865b911b54a8a4c2afd337f5",
+      "executable": false
+    },
     "assets/footage-editor/tests/face-swap.mjs": {
       "type": "file",
-      "bytes": 9110,
-      "sha256": "4b3624dbd4fe41bb5ce8bc1327519efe99db9299534a7031e9348daafdf5da7c",
+      "bytes": 9391,
+      "sha256": "f23c15a0d2bfba7b0df78af6d373bbd2832de8ed7e6cdd39a1566e933e047f16",
       "executable": false
     },
     "assets/footage-editor/tests/face_tracking_benchmark.py": {
@@ -363,6 +393,12 @@
       "type": "file",
       "bytes": 1898,
       "sha256": "fd667af3c0a3d0e1ebcbfac5298a016ccf80140e0b914800146ae020351e44f1",
+      "executable": false
+    },
+    "assets/footage-editor/tests/make_style_clips.py": {
+      "type": "file",
+      "bytes": 7223,
+      "sha256": "4942e4114cb310ea6b50c3c0d94f45c940ce1ad42a3b7c457f0dfee37a65bf83",
       "executable": false
     },
     "assets/footage-editor/tests/media-workflow.mjs": {
@@ -399,6 +435,18 @@
       "type": "file",
       "bytes": 6696,
       "sha256": "654481b4241fea68c9959bd7c351caf8e97fbc3f7cbce06473e4e46e8982c734",
+      "executable": false
+    },
+    "assets/footage-editor/tests/style_benchmark.py": {
+      "type": "file",
+      "bytes": 1788,
+      "sha256": "4a1b0acbb2ebb556e318d6a912f01e83edaba3419a493a8e9ff5a1cc769ebc5a",
+      "executable": false
+    },
+    "assets/footage-editor/tests/style_export_fixture.py": {
+      "type": "file",
+      "bytes": 1089,
+      "sha256": "bd64c6319a7bd85d815b2253e156a0419c63d45aa3bead3bb51166f844f8216d",
       "executable": false
     },
     "assets/footage-editor/tests/test_anatomy.py": {
@@ -465,6 +513,12 @@
       "type": "file",
       "bytes": 5110,
       "sha256": "89b02444a3787d9d7e1a56674a8029579e85ea790cd391e50bcbbe06e5f68380",
+      "executable": false
+    },
+    "assets/footage-editor/tests/test_recording_style.py": {
+      "type": "file",
+      "bytes": 8296,
+      "sha256": "6ef536fce2aba0fea0803422de93a24227538a921b426eb2dd319c030fb7e20c",
       "executable": false
     },
     "assets/footage-editor/tests/test_session.py": {
@@ -574,8 +628,8 @@
     },
     "assets/footage-editor/tools/face_models.py": {
       "type": "file",
-      "bytes": 9054,
-      "sha256": "79116cdf8a01a2fecf8b1699eb13f321d694b19549d65fdbd9dfa6a326bbba2d",
+      "bytes": 9110,
+      "sha256": "ba6a6bdbf3e915ba50f17ba07d2fbd28719908b8299eb72942b8d20dcf9713f7",
       "executable": false
     },
     "assets/footage-editor/tools/face_motion_blend.py": {
@@ -586,8 +640,8 @@
     },
     "assets/footage-editor/tools/face_swap_video.py": {
       "type": "file",
-      "bytes": 40143,
-      "sha256": "d67d19aacc2b2746e575e9c1ea9fa4dd58c5207ccb605c20b01fa325541d4d1a",
+      "bytes": 40817,
+      "sha256": "5c164072fa48db50d041ee0173e8928656302c9c6e0ef389743310094500d92b",
       "executable": false
     },
     "assets/footage-editor/tools/face_target_mask.py": {
@@ -636,6 +690,12 @@
       "type": "file",
       "bytes": 3962,
       "sha256": "2101bd084ad7a5b6c5ed90d0535ab8dfce364759b7bf0ef98cf46ecaa15fe778",
+      "executable": false
+    },
+    "assets/footage-editor/tools/recording_style.py": {
+      "type": "file",
+      "bytes": 64263,
+      "sha256": "753851535f3829916c26c70d43e9658b5fe1027148634a8161b8b21f726fbc34",
       "executable": false
     },
     "assets/footage-editor/tools/skin.py": {
@@ -1283,6 +1343,12 @@
       "sha256": "78e6f305d7a7bf442141177f0a723cf2577dde56019ba6027275337e5562d29c",
       "executable": false
     },
+    "references/footage-comparison-and-export.md": {
+      "type": "file",
+      "bytes": 6581,
+      "sha256": "2f9af006eaefafedd1775061a5a1f4d67a1df234f10baf5c777c6dbdb7adf8e7",
+      "executable": false
+    },
     "references/footage-motion-review.md": {
       "type": "file",
       "bytes": 6176,
@@ -1303,8 +1369,8 @@
     },
     "references/inline-video-face-swap.md": {
       "type": "file",
-      "bytes": 4699,
-      "sha256": "001b4bfa63989f72d2ee75f9d194aa67518c52bb0270098dacf7d83297fc5d96",
+      "bytes": 4664,
+      "sha256": "907cf312a8ce5d58686a9a23e3fda64384dcae9bb915390ebe0ff800c1d69cd4",
       "executable": false
     },
     "references/lightning-and-mode-vfx.md": {
