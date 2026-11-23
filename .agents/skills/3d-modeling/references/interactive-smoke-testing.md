@@ -29,3 +29,15 @@ python3 <skill-dir>/scripts/run_interactive_review_smoke.py \
 ```
 
 The cleanup flag requires the marker and safe-path checks. Keep the evidence until the user approves cleanup.
+
+## Stopping a review server safely
+
+When you launch the viewer or a smoke server yourself (for example on a spare port) and need to stop it, do not run `pkill -f <pattern>` or `for p in $(pgrep -f <pattern>)` in a shell command whose own text contains that pattern: `-f` matches the full command line, so it matches and kills the calling shell (exit 144), silently aborting anything queued after it. List the PID with a bracket-grep that cannot match itself, then kill it in a separate call, and confirm the port is released:
+
+```sh
+ps -eo pid,args | grep -E "[l]aunch_interactive_viewer"   # the bracket avoids self-match
+kill <pid>
+ss -ltnp | grep <port> || echo "released"
+```
+
+Stop any server you start as soon as the review is captured, and leave the user's own preview servers alone.

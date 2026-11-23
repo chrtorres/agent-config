@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 15319,
-      "sha256": "669d6502880e5f2b248c34744d25f2aa6d29b2b7dea7e486dd237fe809de126d",
+      "bytes": 15641,
+      "sha256": "37edfb626609aa4943a62d86a622f893b98fed5e2d0151aefa3d56c48d6b912f",
       "executable": false
     },
     "assets": {
@@ -695,6 +695,45 @@
       "sha256": "d8877138495a7e3ce82f09522a0a13f21326b8991b6b61685fda27dbe47f38ea",
       "executable": false
     },
+    "assets/lightning-vfx": {
+      "type": "directory"
+    },
+    "assets/lightning-vfx/README.md": {
+      "type": "file",
+      "bytes": 2662,
+      "sha256": "de2a713fc56f7a1be8b57a71baf27248f10f056ba564a3b1fbc2df1be7d8d5f5",
+      "executable": false
+    },
+    "assets/lightning-vfx/crown.js": {
+      "type": "file",
+      "bytes": 8737,
+      "sha256": "71095c22ce51bdc156e210dbb7cdcc1ae9142adf928849e0ce6ecdb5d5d7fcf5",
+      "executable": false
+    },
+    "assets/lightning-vfx/lightning.js": {
+      "type": "file",
+      "bytes": 10255,
+      "sha256": "aa79375ce095cfd47e2f7a448e0da7fc12cae5405ab95c5db57ee6b25a9626d2",
+      "executable": false
+    },
+    "assets/lightning-vfx/start-mode.js": {
+      "type": "file",
+      "bytes": 840,
+      "sha256": "eaeb0bca8353cc0b9c5cec9e8f2c33d9980cd31242a2ec6d4f386d9198fe6b9f",
+      "executable": false
+    },
+    "assets/lightning-vfx/test-lightning.mjs": {
+      "type": "file",
+      "bytes": 8441,
+      "sha256": "ba34fbf5e6b2ae46f34d63847a3446d693636dfb15570d41244b648b7a0f2dfa",
+      "executable": false
+    },
+    "assets/lightning-vfx/three-stub.mjs": {
+      "type": "file",
+      "bytes": 3740,
+      "sha256": "de6c6eac23c38a2ced410bd203a1d3ae0cb864f24d463cad6451d696ff807ab1",
+      "executable": false
+    },
     "assets/locomotion-example": {
       "type": "directory"
     },
@@ -1159,8 +1198,8 @@
     },
     "references/cinematic-presentation.md": {
       "type": "file",
-      "bytes": 4332,
-      "sha256": "983c418fc81e4145ce10e5d9fbdad38f73d1604d7645c746ed4aa8bb28a26458",
+      "bytes": 4552,
+      "sha256": "dee2bd14e7f7abb7e6841d5a595d61379e6785a1a97ab0114d90371ba8297fcf",
       "executable": false
     },
     "references/dependencies.md": {
@@ -1266,6 +1305,12 @@
       "type": "file",
       "bytes": 4699,
       "sha256": "001b4bfa63989f72d2ee75f9d194aa67518c52bb0270098dacf7d83297fc5d96",
+      "executable": false
+    },
+    "references/lightning-and-mode-vfx.md": {
+      "type": "file",
+      "bytes": 8417,
+      "sha256": "6549aee19295ca7ded58eefb2b16b1810be4c2a7e31a7a5566f7d7c0adbffd92",
       "executable": false
     },
     "references/live-state-and-browser-qa.md": {

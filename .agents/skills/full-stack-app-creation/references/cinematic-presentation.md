@@ -1,6 +1,6 @@
 # Cinematic presentation for a playable browser scene
 
-Apply this procedure to a working game when upgrading visual fidelity, adding an internal render-resolution option, or preparing a gameplay reel. Start with [playable 3D regression and delivery](playable-3d.md) and use [the browser reel workflow](../../3d-modeling/references/browser-gameplay-reel.md) for media.
+Apply this procedure to a working game when upgrading visual fidelity, adding an internal render-resolution option, or preparing a gameplay reel. Start with [playable 3D regression and delivery](playable-3d.md) and use [the browser reel workflow](../../3d-modeling/references/browser-gameplay-reel.md) for media. For dramatic lightning around the player and in the sky, a wide effect crown, photosensitivity-safe flashes, and a main-game/tutorial mode start, see [electric weather effects and mode start](lightning-and-mode-vfx.md).
 
 ## Integrate and inspect
 
