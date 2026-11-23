@@ -9,3 +9,13 @@ Use this pattern for an inspection interface that makes factual claims about a p
 5. Ship the source-to-feature record, asset identity, runnable source, inspection tools, and limits together. A rendered interface and fully passing implementation tests establish behavior. Factual fidelity still depends on independent evidence about the object.
 
 Reproduce the [layered Blender and web review fixture](../../3d-modeling/references/research-driven-refinement.md). This sibling skill supplies the generator, generic HTML/JS/CSS, preparation CLI, fit check, and Chromium tests. See the [shared capture inventory and scores](../../3d-modeling/references/research-driven-refinement-provenance.md). Use the application pattern on other domains with stable object identifiers and source-aware evidence, even when no 3D modeling is required.
+
+## Scores and class-versus-individual evidence in review metadata
+
+When the reviewed artifact mixes evidence classes (for example class-correct form from a published standard and individual surface detail from photos), show the version's rule and each class's sources beside the viewport, so a reviewer can tell which features are meant to match the individual. Report each numeric score with its role:
+
+- **Check results** (clauses measured on the delivered geometry): show passes over total and the previous version's count.
+- **Fit scores** (parameters were tuned on that same reference): label them as fit, not as independent verification. [sweep_params.py](../../3d-modeling/scripts/sweep_params.py) writes this label for you.
+- **Information-only scores** (the version deliberately departs from the reference): show them with that label and the expected direction of change.
+
+Smoke-test the metadata panel with the shared multipart harness, which copies every viewer module (including `embedding.js`, `motion.js` and `path-trace.js`), requests a frame from the on-demand renderer and hides the callout overlay during canvas comparisons. See [standard anatomy and coat](../../3d-modeling/references/standard-anatomy-and-coat.md) for the modelling workflow and its capture record.

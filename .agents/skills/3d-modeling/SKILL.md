@@ -1,6 +1,6 @@
 ---
 name: 3d-modeling
-description: Create and revise parametric Blender models with versioned browser review. Use for photo-based reconstruction, multipart inspection, material variants, runtime GLB assets with named pivots, code-generated video, and approved print exports.
+description: Create and revise parametric Blender models with versioned browser review. Use for photo-based reconstruction, breed- or standard-correct anatomy with an individual's coat markings, multipart inspection, material variants, runtime GLB assets with named pivots, code-generated video, and approved print exports.
 ---
 
 # Iterative 3D modeling and print preparation
@@ -86,6 +86,10 @@ For an authorized still-image edit, use the [localized photo face-swap workflow]
 ## Research-driven realism
 
 Use [research-driven refinement](references/research-driven-refinement.md) when a model will be referenced for accurate form, internal structure, or material appearance. Tie each correction to a source and an observable check. Use the bundled Blender and browser fixture to reproduce scripted fit checks, layered presets, nested isolation and evidence-linked review.
+
+## Breed-standard anatomy with an individual's coat
+
+Use [standard anatomy and coat](references/standard-anatomy-and-coat.md) when a specific animal or unit should take its form from the governing public standard while only named features (coat colour and markings) stay individual. Turn clauses into checks measured on the mesh, register side renders on the standard's exemplar figures, carry markings through the same warp that reshapes the form, research anatomy before fixing reported faults, identify photo sides before reading markings, and build printable fleck colours with a grid-boundary guard. Synthetic helpers: [sdf_coat_demo.py](scripts/sdf_coat_demo.py), [register_exemplar_overlay.py](scripts/register_exemplar_overlay.py), [sweep_params.py](scripts/sweep_params.py) and [photo_measure_grid.py](scripts/photo_measure_grid.py), tested by [test_standard_and_coat_tools.py](tests/test_standard_and_coat_tools.py).
 
 ## Patterned spherical frame workflow
 

@@ -55,7 +55,7 @@ Use isolated task storage and explicitly declared dependencies. Preserve actual 
 
 ## Evidence-linked review
 
-When an interface explains real structures or factual relationships, use [evidence-linked review](references/evidence-linked-review.md). Carry research and uncertainty into the data contract and inspection UI. Test that selections change the rendered artifact and restore its state, then validate factual claims against independent evidence.
+When an interface explains real structures or factual relationships, use [evidence-linked review](references/evidence-linked-review.md). When its metadata reports check, fit and information-only scores, or mixes population and individual evidence, follow its [score-labelling section](references/evidence-linked-review.md#scores-and-class-versus-individual-evidence-in-review-metadata). Carry research and uncertainty into the data contract and inspection UI. Test that selections change the rendered artifact and restore its state, then validate factual claims against independent evidence.
 
 ## Animated 3D review
 

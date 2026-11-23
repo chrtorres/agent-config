@@ -18,7 +18,7 @@ import websocket
 from PIL import Image, ImageChops
 
 
-VIEWER_FILES = ("index.html", "viewer.js", "styles.css")
+VIEWER_FILES = ("index.html", "viewer.js", "styles.css", "embedding.js", "motion.js", "path-trace.js")
 
 
 def wait_for(probe):
@@ -73,6 +73,8 @@ class Browser:
           };
           window.reviewThree = three;
         })()""")
+        # The current viewer renders on demand; request one frame after installing the observer.
+        self.evaluate("window.dispatchEvent(new Event('resize'))")
         wait_for(lambda: self.evaluate("!!window.renderedModel && !!window.renderedCamera"))
 
     def click(self, selector):
@@ -110,10 +112,15 @@ def assert_visible(browser, screenshot):
       const { left, top, right, bottom } = document.querySelector("#viewer canvas").getBoundingClientRect();
       return [left, top, right, bottom].map(Math.round);
     })()""")
-    browser.evaluate("window.renderedModel.visible = false")
+    # Compare canvas pixels only: hide the HTML/SVG callout overlay in both captures.
+    hide = "for (const id of ['part-labels', 'part-leaders']) document.getElementById(id).style.opacity = '0';"
+    browser.evaluate(hide + " window.dispatchEvent(new Event('resize'))")
+    browser.evaluate("new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
+    screenshot = browser.screenshot()
+    browser.evaluate("window.renderedModel.visible = false; window.dispatchEvent(new Event('resize'))")
     browser.evaluate("new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)))")
     background = browser.screenshot()
-    browser.evaluate("window.renderedModel.visible = true")
+    browser.evaluate("window.renderedModel.visible = true; for (const id of ['part-labels', 'part-leaders']) document.getElementById(id).style.opacity = ''; window.dispatchEvent(new Event('resize'))")
     difference = ImageChops.difference(screenshot.crop(rect), background.crop(rect))
     bounds = difference.getbbox()
     width, height = difference.size

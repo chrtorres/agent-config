@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 21066,
-      "sha256": "76acedcbeccb1b066bda913fe3a38e1409d88d196f3df719af753d3c6abe853e",
+      "bytes": 22065,
+      "sha256": "7101c48d83883209e822f94bc7e51e35e20e905d8ae71fa88fc3a997c4a9dec0",
       "executable": false
     },
     "assets": {
@@ -494,6 +494,18 @@
       "sha256": "3b759498e2264b66afeae65d8bac6b18b8a26f111183e84f75042cbfae95f17f",
       "executable": false
     },
+    "references/standard-anatomy-and-coat-provenance.md": {
+      "type": "file",
+      "bytes": 3788,
+      "sha256": "9e9139d1333beb293f775d0e3fc50e14c3813b6ef988925c29a29a73257d09ec",
+      "executable": false
+    },
+    "references/standard-anatomy-and-coat.md": {
+      "type": "file",
+      "bytes": 7223,
+      "sha256": "2f5016ba34050c82cd6a0ab68d7af0f366956ab84bb952083895758a6cb7d879",
+      "executable": false
+    },
     "scripts": {
       "type": "directory"
     },
@@ -623,10 +635,22 @@
       "sha256": "14777ea6145ccad3e3262dabbf9be25b9fa6e14fb875dd42e3b7b15c92dfcf55",
       "executable": false
     },
+    "scripts/photo_measure_grid.py": {
+      "type": "file",
+      "bytes": 1648,
+      "sha256": "a50f22b0768ab14b05a9a186acd226830d064aa60963eaed0d2ebe7576102c6c",
+      "executable": false
+    },
     "scripts/prepare_reference_review.py": {
       "type": "file",
       "bytes": 11869,
       "sha256": "7d8f4e0d64bb507fecdfbfebbab28a9c666e79a9eb84fc384b12b3cada8eb4a6",
+      "executable": false
+    },
+    "scripts/register_exemplar_overlay.py": {
+      "type": "file",
+      "bytes": 4369,
+      "sha256": "99df15b06911a29f286c554c509f806e172d4d9bb92ab6028e9898d72b53288d",
       "executable": false
     },
     "scripts/render_preview.py": {
@@ -647,10 +671,22 @@
       "sha256": "ad69df4d62b4989046930a9d868a71487d75a696a34962ae441dabf67ce5ae1c",
       "executable": false
     },
+    "scripts/sdf_coat_demo.py": {
+      "type": "file",
+      "bytes": 8979,
+      "sha256": "0cd0c6fd545e1944bb3c93917d9c20035947b51e41fb3af49f1eb2eb15f574f8",
+      "executable": false
+    },
     "scripts/smoke_model_generator.py": {
       "type": "file",
       "bytes": 3723,
       "sha256": "062b87d83850e8a7c3a9eaad1df7d9cbabce93268b8ea5508391bf53f421992a",
+      "executable": false
+    },
+    "scripts/sweep_params.py": {
+      "type": "file",
+      "bytes": 4113,
+      "sha256": "82bc65bd4ca35239591a565e60cdcb4793449af05bf7b5fe2e7c4af1b7336b9a",
       "executable": false
     },
     "tests": {
@@ -676,8 +712,8 @@
     },
     "tests/check_multipart_viewer.py": {
       "type": "file",
-      "bytes": 14198,
-      "sha256": "960cc1d3edec9797db34cffee8d4a3b89b1801fc305ad987d9c21bbcf004ae8c",
+      "bytes": 15010,
+      "sha256": "b89f2af156d76b50a667c659ef99b472fe1ddd7c23c02053ec37cca107918f8a",
       "executable": false
     },
     "tests/check_reference_review.mjs": {
@@ -750,6 +786,12 @@
       "type": "file",
       "bytes": 5857,
       "sha256": "2e895fe726bcb222f822c750c766cbef5967fc5159ec28eeaf4762bc8b67cf33",
+      "executable": false
+    },
+    "tests/test_standard_and_coat_tools.py": {
+      "type": "file",
+      "bytes": 6203,
+      "sha256": "d0de9585f2390f4b3e7f1b755ada9613e59f4473c843e7984459a707987c5bdd",
       "executable": false
     }
   }

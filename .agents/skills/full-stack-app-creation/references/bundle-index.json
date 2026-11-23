@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 15069,
-      "sha256": "5a63f379b3961926db28e0e566a3dbc1ceeca9da19df794e0b07afa5ad7fc147",
+      "bytes": 15319,
+      "sha256": "669d6502880e5f2b248c34744d25f2aa6d29b2b7dea7e486dd237fe809de126d",
       "executable": false
     },
     "assets": {
@@ -1177,8 +1177,8 @@
     },
     "references/evidence-linked-review.md": {
       "type": "file",
-      "bytes": 2561,
-      "sha256": "f355b7c2589c6c9b83fd93cfe34580aa707b197e1f6f114e7302f696e9f2e8e4",
+      "bytes": 3847,
+      "sha256": "138ce6679725527e4dc874814f9b3bec3211205d68a9b731362b3bfc8f74b6f1",
       "executable": false
     },
     "references/example-evidence": {
