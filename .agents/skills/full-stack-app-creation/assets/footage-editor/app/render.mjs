@@ -15,6 +15,7 @@ const FRAGMENT = [
   "uniform int kind; uniform vec4 protect; uniform float verticalTravel;",
   "uniform sampler2D features; uniform vec4 hairTint; uniform vec4 lipTint; uniform vec4 eyeTint; uniform vec4 browTint;",
   "vec2 tileUV(vec2 sourceUV);",
+  "float hairAt(vec2 sourceUV,float l);",
   // A dye keeps the pixel's lightness, lifted partly toward the chosen color,
   // and takes the chosen hue and saturation (W3C SetLum/ClipColor). tools/colors.py mirrors it.
   "float lum(vec3 c){return dot(c,vec3(.2126,.7152,.0722));}",
@@ -24,7 +25,7 @@ const FRAGMENT = [
   " vec3 dyed=setLum(t.rgb,clamp(l+(lum(t.rgb)-l)*lift,0.,1.)); return mix(v,dyed,t.a*mask);}",
   "bool protectedPixel(vec2 p){return p.x>=protect.x&&p.y>=protect.y&&p.x<protect.z&&p.y<protect.w;}",
   "vec4 grade(vec4 v,vec2 uv){",
-  " vec4 masks=texture2D(skin,tileUV(uv));",
+  " vec4 masks=texture2D(skin,tileUV(uv)); float original=lum(v.rgb);",
   " float weight=masks.r;",
   " if(tone!=vec3(0.0)&&weight>=.004){",
   "  float y=dot(v.rgb,vec3(.2126,.7152,.0722));",
@@ -32,12 +33,26 @@ const FRAGMENT = [
   "  vec3 rgb=v.rgb+(v.rgb-y)*tone.z*.42+midtone*(tone.x*.16+tone.y*vec3(.085,.012,-.085));",
   "  v.rgb=mix(v.rgb,clamp(rgb,0.0,1.0),weight); }",
   // Hair lifts further toward the dye so dark hair can take a lighter color.
-  " v.rgb=dye(v.rgb,hairTint,masks.g,.6);",
+  " if(hairTint.a>0.)v.rgb=dye(v.rgb,hairTint,hairAt(uv,original),.6);",
   " if(lipTint.a+eyeTint.a+browTint.a>0.){vec3 f=texture2D(features,uv).rgb;",
   "  v.rgb=dye(v.rgb,lipTint,f.r,.35); v.rgb=dye(v.rgb,eyeTint,f.g,.35); v.rgb=dye(v.rgb,browTint,f.b,.35);}",
   " return v; }",
   "vec2 tileUV(vec2 sourceUV){",
   " return (tile+clamp(sourceUV*size/PIXEL_SCALE,vec2(.5),vec2(TILE_RIGHT,TILE_BOTTOM)))/vec2(ATLAS_WIDTH,ATLAS_HEIGHT); }",
+  // Joint bilateral upsample of the hair weight: the four nearest atlas texels
+  // count by distance and by how close their stored lightness (blue) is to
+  // this pixel's, so the dye stops at the hair outline. tools/colors.py
+  // guided_hair mirrors it.
+  "float hairAt(vec2 sourceUV,float l){",
+  " vec2 t=clamp(sourceUV*size/PIXEL_SCALE,vec2(.5),vec2(TILE_RIGHT,TILE_BOTTOM))-.5;",
+  " vec2 b=floor(t); vec2 f=t-b; float sum=0.; float weight=0.;",
+  " for(int j=0;j<2;j++)for(int i=0;i<2;i++){",
+  "  vec2 c=min(b+vec2(float(i),float(j)),vec2(TILE_RIGHT-.5,TILE_BOTTOM-.5));",
+  "  vec4 m=texture2D(skin,(tile+c+.5)/vec2(ATLAS_WIDTH,ATLAS_HEIGHT));",
+  "  float d=(l-m.b)/HAIR_GUIDE;",
+  "  float w=(i==0?1.-f.x:f.x)*(j==0?1.-f.y:f.y)*(exp(-d*d)+.002);",
+  "  sum+=m.g*w; weight+=w; }",
+  " return sum/max(weight,1e-6); }",
   "float opacityAt(vec2 uv){vec2 a=texture2D(matte,tileUV(uv)).rg;return max(a.r,a.g);}",
   "vec4 visibleRow(vec2 dest, vec2 warped){",
   " vec2 row=vec2(warped.x,dest.y);",
@@ -104,7 +119,7 @@ function program(gl,timeline) {
     throw new Error("Invalid atlas geometry.");
   // Compile stable atlas constants so shader arithmetic agrees with a build
   // using the same dimensions as literals, including on pixel comparisons.
-  const fragment=Object.entries({PIXEL_SCALE:pixelScale,TILE_RIGHT:w-.5,TILE_BOTTOM:h-.5,
+  const fragment=Object.entries({PIXEL_SCALE:pixelScale,TILE_RIGHT:w-.5,TILE_BOTTOM:h-.5,HAIR_GUIDE:.1,
     ATLAS_WIDTH:w*grid,ATLAS_HEIGHT:h*grid}).reduce((shader,[token,value])=>
       shader.replaceAll(token,value.toFixed(1)),FRAGMENT);
   const p=gl.createProgram();

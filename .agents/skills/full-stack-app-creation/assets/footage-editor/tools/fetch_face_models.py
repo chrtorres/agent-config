@@ -23,6 +23,10 @@ MODELS = {
     "bisenet_resnet_18.onnx": (
         ASSETS + "models-3.1.0/", "2218b6183c26ca5c83303232d682a536c670c13ea9695f716c777d1f244eefe9"
     ),
+    # XSeg occlusion mask: face pixels not covered by hands, food, cups or hair.
+    "xseg_1.onnx": (
+        ASSETS + "models-3.1.0/", "c4d1498b8a03b5fe2a3a5d2ef2a0402ab03bd51edaf5b2d8d5fb764702a97dd3"
+    ),
 }
 CHUNK_SIZE = 1024 * 1024
 

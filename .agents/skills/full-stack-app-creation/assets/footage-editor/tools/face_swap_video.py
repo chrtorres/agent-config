@@ -20,8 +20,8 @@ from onnxruntime.capi.onnxruntime_pybind11_state import Fail, RuntimeException
 from build_splats import TIME_SIGMA_FRAMES, advect
 from face_fragments import FRAGMENTED, audio_sample_durations, fragment_audio, merge
 from face_curvature import create_mesh_detector
-from face_models import (ARCFACE_112, ARCFACE_128, aligned_crop, detect_faces, encode, face_alpha, gpu_available, landmark_alpha,
-                         parse_face, read_photo, render, session)
+from face_models import (ARCFACE_112, ARCFACE_128, FACE_LABELS, aligned_crop, detect_faces, encode, face_alpha,
+                         gpu_available, landmark_alpha, occlusion, parse_face, read_photo, render, session)
 from face_motion_blend import FaceBlend, soften_color_seam
 from face_tracking import ActionTracker, face_from_points, mesh_five, motion_measures, smooth_track
 from fetch_face_models import MODELS, file_hash
@@ -144,7 +144,7 @@ class FaceTrack:
         self.tracked += int(np.count_nonzero(weight > .05))
 
 
-def mask_from_labels(shape, crop, matrix, labels, refine=None, fallback=False):
+def mask_from_labels(shape, crop, matrix, labels, refine=None, fallback=False, visible=None):
     try:
         base = face_alpha(labels, 20)
     except ValueError:
@@ -153,8 +153,12 @@ def mask_from_labels(shape, crop, matrix, labels, refine=None, fallback=False):
         if not fallback:
             raise
         base = landmark_alpha(crop.shape[0], 20)
+    if visible is not None:
+        # Hands, food and anything else in front of the face keep their own pixels.
+        base = base*visible
     eyes = None
     if refine is not None:
+        # Eyes and the mouth interior are kept from the frame itself.
         base, eyes = refine(crop, labels, base)
     inverse = cv2.invertAffineTransform(matrix)
     alpha = cv2.warpAffine(base, inverse, shape[1::-1])
@@ -482,13 +486,21 @@ class FrameReader(Thread):
         self.pool.shutdown(cancel_futures=True)
 
 
+def covered_share(labels, visible):
+    """Share of the parsed face hidden behind something, for the report."""
+    # The occlusion weight is conservative at the face outline, so only the
+    # inner face counts.
+    face = cv2.erode(np.isin(labels, FACE_LABELS).astype(np.uint8), np.ones((25, 25), np.uint8)) > 0
+    return float(np.mean(visible[face] < .5)) if face.any() else 0.
+
+
 def skin_weight(labels):
     """Soft skin-class weight in crop space, kept away from feature edges."""
     skin = cv2.erode((labels == 1).astype(np.uint8), np.ones((5, 5), np.uint8)).astype(np.float32)
     return cv2.GaussianBlur(skin, (0, 0), 2)
 
 
-def analyse(target, models, recognizer, mesh, identity, rivals, target_index, progress):
+def analyse(target, models, recognizer, mesh, identity, rivals, target_index, progress, occluder=None):
     """First pass: follow the face through every frame, then smooth the track."""
     records = []
     with av.open(str(target), format="mp4") as movie:
@@ -499,7 +511,7 @@ def analyse(target, models, recognizer, mesh, identity, rivals, target_index, pr
         reader = FrameReader(movie, video, None, models / "face_detection_yunet_2023mar.onnx")
         reader.start()
         try:
-            tracker = ActionTracker(recognizer, mesh, identity, rivals, target_index)
+            tracker = ActionTracker(recognizer, mesh, identity, rivals, target_index, occluder)
             for _, _, image, detection in reader:
                 records.append(tracker.step(image, detection.result()))
                 progress.update(ANALYSE_SHARE * 1000 * min(1, len(records) / max(total, 1)),
@@ -522,12 +534,13 @@ def run(source, target, output, models, source_index=0, target_index=0, target_p
     progress = Progress(1000, path=output / "progress")
     progress.update(0, label="Loading Face Swap models", force=True)
     workers = inference_workers()
-    with ThreadPoolExecutor(3) as loader:
+    with ThreadPoolExecutor(4) as loader:
         # ONNX Runtime optimizes each graph on load. Building the sessions together saves several seconds.
         sessions = [loader.submit(session, models / name, threads) for name, threads in
-                    (("arcface_w600k_r50.onnx", 4), ("hyperswap_1a_256.onnx", 2), ("bisenet_resnet_18.onnx", 2))]
+                    (("arcface_w600k_r50.onnx", 4), ("hyperswap_1a_256.onnx", 2), ("bisenet_resnet_18.onnx", 2),
+                     ("xseg_1.onnx", 2))]
         verified_models(models)
-        recognizer, swapper, parser = (job.result() for job in sessions)
+        recognizer, swapper, parser, occluder = (job.result() for job in sessions)
     detector = cv2.FaceDetectorYN.create(str(models / "face_detection_yunet_2023mar.onnx"), "", (320,320), .78)
     actor, _ = read_photo(source)
     faces = detect_faces(actor, detector)
@@ -537,13 +550,14 @@ def run(source, target, output, models, source_index=0, target_index=0, target_p
     identity = encode(recognizer, crop)
     locked_identity, rivals = selected_identity(target, target_point, detector, recognizer) if target_point is not None else (None, ())
     hashes = []
-    changed_frames = 0
+    changed_frames = occluded_frames = 0
     pending = output / "pending.mp4"
     # The reader thread uses the container, so release the pipeline before the container closes.
     with av.open(str(target), format="mp4") as original, ExitStack() as resources:
         mesh = resources.enter_context(create_mesh_detector(mesh_model)) if mesh_model is not None else None
         tracking_mesh = resources.enter_context(create_mesh_detector(mesh_model)) if mesh_model is not None else None
-        plan, tracking = analyse(target, models, recognizer, tracking_mesh, locked_identity, rivals, target_index, progress)
+        plan, tracking = analyse(target, models, recognizer, tracking_mesh, locked_identity, rivals, target_index, progress,
+                                 occluder)
         blend = FaceBlend(mesh)
         pool = resources.enter_context(ThreadPoolExecutor(workers * 2))
 
@@ -585,7 +599,7 @@ def run(source, target, output, models, source_index=0, target_index=0, target_p
             window = deque()
 
             def finish(entry):
-                nonlocal changed_frames, queued
+                nonlocal changed_frames, occluded_frames, queued
                 if entry[0] == "audio":
                     # Audio keeps its original place relative to the frames demuxed before it.
                     if entry[1].size:
@@ -598,11 +612,13 @@ def run(source, target, output, models, source_index=0, target_index=0, target_p
                 if job is None:
                     blend.reset()
                 else:
-                    crop, matrix, motion, cut, velocity, labels, swapped = job
+                    crop, matrix, motion, cut, velocity, labels, swapped, uncovered = job
                     try:
-                        parsed = labels.result()
+                        parsed, visible = labels.result(), uncovered.result()
+                        occluded_frames += int(covered_share(parsed, visible) > .02)
                         alpha = mask_from_labels(image.shape, crop, matrix, parsed,
-                                                 lambda crop, labels, alpha: blend.refine(crop, labels, alpha, motion, cut))
+                                                 lambda crop, labels, alpha: blend.refine(crop, labels, alpha, motion, cut),
+                                                 visible=visible)
                         edited, roi = blend_swap(image, matrix, alpha, swapped.result(), True, velocity, skin_weight(parsed))
                     except ValueError:
                         blend.reset()
@@ -644,7 +660,7 @@ def run(source, target, output, models, source_index=0, target_index=0, target_p
                     try:
                         crop, matrix = aligned_crop(image, face, ARCFACE_128, 256)
                         job = (crop, matrix, motion, cut, velocity, pool.submit(parse_face, parser, crop),
-                               pool.submit(render, swapper, crop, identity))
+                               pool.submit(render, swapper, crop, identity), pool.submit(occlusion, occluder, crop))
                     except ValueError:
                         job = None
                 window.append(("video", frame, image, job))
@@ -687,6 +703,7 @@ def run(source, target, output, models, source_index=0, target_index=0, target_p
     report = {"frames":len(hashes), "swapped":changed_frames, "unchanged":len(hashes)-changed_frames,
               "tracking": tracking, "video": "verified", "audio": "verified",
               "outside_mask": "byte exact", "eye_detail_frames":blend.eyes,
+              "mouth_detail_frames":blend.mouths, "tongue_frames":blend.tongues, "occluded_frames":occluded_frames,
               "seam_stabilized_frames":blend.steadied, "rapid_motion_resets":blend.rapid}
     (output / "verification.json").write_text(json.dumps(report))
     progress.update(1000 * (RENDER_SHARE + VERIFY_SHARE), label="Preparing smooth playback", force=True)
@@ -700,11 +717,12 @@ def run_image(source, target, output, models, source_index=0, target_point=None,
     cv2.setNumThreads(2)
     progress = Progress(1000, path=output / "progress")
     progress.update(0, label="Loading Face Swap models", force=True)
-    with ThreadPoolExecutor(3) as loader:
+    with ThreadPoolExecutor(4) as loader:
         sessions = [loader.submit(session, models / name, threads) for name, threads in
-                    (("arcface_w600k_r50.onnx", 4), ("hyperswap_1a_256.onnx", 4), ("bisenet_resnet_18.onnx", 4))]
+                    (("arcface_w600k_r50.onnx", 4), ("hyperswap_1a_256.onnx", 4), ("bisenet_resnet_18.onnx", 4),
+                     ("xseg_1.onnx", 2))]
         verified_models(models)
-        recognizer, swapper, parser = (job.result() for job in sessions)
+        recognizer, swapper, parser, occluder = (job.result() for job in sessions)
     detector = cv2.FaceDetectorYN.create(str(models / "face_detection_yunet_2023mar.onnx"), "", (320,320), .78)
     actor, _ = read_photo(source)
     faces = detect_faces(actor, detector, thorough=True)
@@ -736,7 +754,8 @@ def run_image(source, target, output, models, source_index=0, target_point=None,
         labels = parse_face(parser, crop)
         blend = FaceBlend(mesh)
         alpha = mask_from_labels(image.shape, crop, matrix, labels,
-                                 lambda crop, labels, alpha: blend.refine(crop, labels, alpha, 0., True), True)
+                                 lambda crop, labels, alpha: blend.refine(crop, labels, alpha, 0., True), True,
+                                 occlusion(occluder, crop))
     edited, roi = blend_swap(image, matrix, alpha, render(swapper, crop, identity), True, skin=skin_weight(labels))
     if roi is None:
         raise ValueError("The selected face could not be masked. Choose a clearer face.")

@@ -36,3 +36,7 @@ The fixture uses authored Blender Python plus Blender's bundled modules. Acquire
 | Browser interaction and source objects | The [multipart test](../tests/check_multipart_viewer.py) uses the caller's review or the bundled [synthetic generator](../tests/fixtures/create_multipart_review.py). The generator produces the STL inputs, manifests, Blend, render, and GLB. The existing single-shape browser matrix remains available. |
 | Run-specific assets and evidence | Original source and print binaries, model-specific labels and offsets, screenshots, browser profiles, ports, and result logs stay with the originating or fresh run outside this skill. Rebuild synthetic evidence with [the reproduction recipe](multipart-preview.md). |
 | External dependencies | Use Blender, Chromium/WebGL, pinned Three.js from its CDN, Python Pillow, DejaVu Sans, and Python websocket-client. No installed dependency tree is bundled. |
+
+## Versioned concept and handoff extension
+
+See [versioned-concept-handoff.md](versioned-concept-handoff.md) for the comparison, feedback trace and resource inventory. New reusable resources are the exact Blend subassembly comparator, its regression test and the cross-linked application lifecycle procedure. Project models, hardware data, renders and current evidence remain with their originating run.

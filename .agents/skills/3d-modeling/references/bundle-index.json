@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 22469,
-      "sha256": "88aae850f97911ce2e16d4af5dc1034d2dffaec96071dfb69878443f187fc05b",
+      "bytes": 23714,
+      "sha256": "1cc01080ad81638becbead0b8d5c5143583c900a84d0f93632ad12c62c22c518",
       "executable": false
     },
     "assets": {
@@ -376,8 +376,8 @@
     },
     "references/face-motion-compositing.md": {
       "type": "file",
-      "bytes": 6179,
-      "sha256": "02f99e200a29b479f2b184e8d94494092466cc7035fd914dbac0971fc411bc00",
+      "bytes": 7785,
+      "sha256": "84dcb13269d4dc45a56914d8581f1b71758a1aa2d9ea037ec06f62dc5fcef080",
       "executable": false
     },
     "references/footage-motion-capture.md": {
@@ -388,8 +388,8 @@
     },
     "references/footage-motion.md": {
       "type": "file",
-      "bytes": 11095,
-      "sha256": "784de06600e3ee404088fe6498e410937e8fd30778b6fa83d6c7723155399a5b",
+      "bytes": 11683,
+      "sha256": "a8fd5084a76f1acaa89030a4943368e77fb91c34f8f18d655d920608b4f925db",
       "executable": false
     },
     "references/interactive-smoke-testing.md": {
@@ -454,8 +454,8 @@
     },
     "references/resource-disposition.md": {
       "type": "file",
-      "bytes": 4410,
-      "sha256": "6f3b8635f0c22351e3d002036877ca68792944203693641d17f786f30da701d4",
+      "bytes": 4815,
+      "sha256": "d2717f49f940537686889abfabad1a03edd27118a8d2000bd1454beda1aafaad",
       "executable": false
     },
     "references/robot-description-provenance.md": {
@@ -506,6 +506,12 @@
       "sha256": "2f5016ba34050c82cd6a0ab68d7af0f366956ab84bb952083895758a6cb7d879",
       "executable": false
     },
+    "references/versioned-concept-handoff.md": {
+      "type": "file",
+      "bytes": 6221,
+      "sha256": "c8b1b0af717108c80c10479493c3f13940ddc71dedf5a6838f6c6bdb8c52cc11",
+      "executable": false
+    },
     "scripts": {
       "type": "directory"
     },
@@ -525,6 +531,12 @@
       "type": "file",
       "bytes": 5406,
       "sha256": "f16b9683946ecebcf6e48f20437302e3620e014ca00985538fce7b89e32c515d",
+      "executable": false
+    },
+    "scripts/check_preserved_subassembly.py": {
+      "type": "file",
+      "bytes": 3506,
+      "sha256": "3fe317be378c13a8672bb73b0d5bc60246ba33f6fe4dba8ad285901f024b3cb4",
       "executable": false
     },
     "scripts/check_reference_envelope.py": {
@@ -780,6 +792,12 @@
       "type": "file",
       "bytes": 2936,
       "sha256": "48fd48394077cb0cf48f51e0c6f0bada76469ac6f2d14bfbe35bde84dbdad556",
+      "executable": false
+    },
+    "tests/test_preserved_subassembly.py": {
+      "type": "file",
+      "bytes": 2521,
+      "sha256": "a625f6f389e7496ceec5bb60b271fff32514dfffdc2c195de4c4ed272c58d294",
       "executable": false
     },
     "tests/test_robot_description_tools.py": {

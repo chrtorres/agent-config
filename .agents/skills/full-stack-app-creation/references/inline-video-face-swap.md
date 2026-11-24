@@ -39,4 +39,20 @@ python -B tests/face_tracking_benchmark.py <portrait.png> ../fixtures/action.mp4
 
 The benchmark prints placement error, jitter and coverage for both trackers, including a run with detections removed. The method is in [tracking faces through action](../../3d-modeling/references/face-motion-compositing.md#tracking-faces-through-action), and historical numbers are in the [capture record](footage-reshape-tracking-capture.md). The browser test exercises the Quick Review panel and both comparison controls.
 
+## Benchmark expression preservation and occlusion
+
+Build synthetic clips with exact ground-truth masks for mouth expressions and hand occlusion, then score how the compositor preserves them. Run from the copied editor with a fictional portrait.
+
+```sh
+python -B tests/make_expression_face_clip.py <portrait.png> ../fixtures/expression.mp4
+python -B tests/mouth_expression_benchmark.py ../fixtures/expression.mp4 <swap-output-directories...>
+python -B tests/make_feeding_face_clip.py <portrait.png> ../fixtures/feeding.mp4
+```
+
+The expression clip covers a neutral hold, a smile with teeth, a wide-open mouth, a stuck-out tongue, and fast talking. Its `.truth.npz` holds per-frame masks of the mouth interior, tongue, and lips. The mouth benchmark scores how well the swap preserves teeth, tongue, and cavity while still replacing the lips, and reports motion mismatch per expression phase.
+
+The feeding clip draws a hand bringing food to the mouth with exact occluder masks. Its `.truth.npz` holds per-frame hand-and-food ("occluder") and lip masks. Use these to verify the XSeg occlusion model keeps fingers, food, and hand pixels untouched while the swap continues around them.
+
+The compositor methods are in [motion-aware face compositing](../../3d-modeling/references/face-motion-compositing.md).
+
 See the [capture record](inline-video-face-swap-capture.md) for implementation scope, resource disposition, and historical results.

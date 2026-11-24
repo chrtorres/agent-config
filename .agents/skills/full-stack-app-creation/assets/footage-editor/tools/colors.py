@@ -82,6 +82,44 @@ def feature_masks(areas, size):
     return [cv2.GaussianBlur(mask, (0, 0), .8) for mask in (lips, irises, brows)]
 
 
+# Lightness difference (0..1) at which an atlas texel's say in the hair weight
+# falls to 1/e. app/render.mjs uses the same value.
+HAIR_GUIDE = .1
+
+
+def guided_hair(tile, size, scale, luma):
+    """Hair weight at full resolution, upsampled along the frame's own edges.
+
+    tile: (th, tw, 3) uint8 atlas tile (green hair, blue lightness guide);
+    size: (width, height); scale: source pixels per atlas texel; luma: (H, W)
+    lightness 0..1 of the original frame. A joint bilateral upsample: each of
+    the four nearest texels counts by bilinear distance and by how close its
+    lightness is to this pixel's, so hair stops at the hair outline. Pages
+    without a guide (blue zero everywhere) reduce to plain bilinear.
+    """
+    th, tw = tile.shape[:2]
+    width, height = size
+    tx = np.clip((np.arange(width, dtype=np.float32)+.5)/scale, .5, tw-.5)-.5
+    ty = np.clip((np.arange(height, dtype=np.float32)+.5)/scale, .5, th-.5)-.5
+    x0, y0 = np.floor(tx).astype(np.int32), np.floor(ty).astype(np.int32)
+    fx, fy = tx-x0, ty-y0
+    hair = tile[..., 1].astype(np.float32)/255
+    guide = tile[..., 2].astype(np.float32)/255
+    total = np.zeros((height, width), np.float32)
+    weight = np.zeros_like(total)
+    for dy in (0, 1):
+        rows = np.minimum(y0+dy, th-1)
+        wy = (fy if dy else 1-fy)[:, None]
+        for dx in (0, 1):
+            cols = np.minimum(x0+dx, tw-1)
+            wx = (fx if dx else 1-fx)[None, :]
+            d = (luma-guide[rows][:, cols])/HAIR_GUIDE
+            w = wy*wx*(np.exp(-d*d)+.002)
+            total += w*hair[rows][:, cols]
+            weight += w
+    return total/np.maximum(weight, 1e-6)
+
+
 def apply_colors(rgb, colors, hair=None, areas=None):
     """Dye hair (from the segmentation weight) and facial features in one frame."""
     if not colors:

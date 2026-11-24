@@ -26,9 +26,9 @@ import cv2
 import numpy as np
 
 if __package__:
-    from .face_models import ARCFACE_112, ARCFACE_128, aligned_crop, encode
+    from .face_models import ARCFACE_112, ARCFACE_128, aligned_crop, encode, occlusion
 else:
-    from face_models import ARCFACE_112, ARCFACE_128, aligned_crop, encode
+    from face_models import ARCFACE_112, ARCFACE_128, aligned_crop, encode, occlusion
 
 # Eye contours of the 468-point face mesh, image-left eye first.
 MESH_EYES = (
@@ -38,9 +38,13 @@ MESH_EYES = (
 # Points that follow the swap model's alignment convention (pupil centers,
 # nose tip, mouth corners). Iris centers 468/473 exist in the 478-point mesh.
 MESH_IRIS, MESH_NOSE, MESH_MOUTH = (468, 473), 1, (61, 291)
-# Stable mesh points for flow tracking: cheeks, brows, nose bridge and jaw.
-FLOW_POINTS = (10, 67, 297, 109, 338, 103, 332, 70, 300, 105, 334, 6, 197, 195, 5, 4, 48, 278, 205, 425,
-               50, 280, 187, 411, 147, 376, 58, 288, 172, 397, 136, 365, 150, 379, 152, 148, 377, 176, 400, 18)
+# Mesh points for flow tracking that move with the skull: forehead, temples,
+# nose bridge, cheekbones and upper cheeks. The jaw, chin and lips are left
+# out because talking, smiling or a stuck-out tongue moves them on their own
+# and would pull the predicted head transform.
+FLOW_POINTS = (10, 151, 9, 67, 297, 109, 338, 103, 332, 70, 300, 105, 334, 8, 168, 6, 197, 195, 5, 4,
+               48, 278, 127, 356, 234, 454, 93, 323, 116, 345, 117, 346, 123, 352, 50, 280, 205, 425, 187, 411,
+               36, 266, 101, 330, 118, 347, 119, 348, 207, 427)
 # A wider version of the swap template keeps the whole face and some margin in
 # the mesh crop, which the landmarker needs to lock on.
 MESH_TEMPLATE = (ARCFACE_128-.5)*.72+.5
@@ -133,15 +137,15 @@ def histogram(image):
 class ActionTracker:
     """Frame-ordered analysis. ``step`` returns a record for each frame."""
 
-    def __init__(self, recognizer, mesh=None, identity=None, rivals=(), index=0):
-        self.recognizer, self.mesh = recognizer, mesh
+    def __init__(self, recognizer, mesh=None, identity=None, rivals=(), index=0, occluder=None):
+        self.recognizer, self.mesh, self.occluder = recognizer, mesh, occluder
         self.identity, self.rivals = identity, rivals
         self.require_identity = identity is not None
         self.index = index
         self.gray = self.hist = self.five = self.anchors = None
         self.carried = 0
         self.since_check = 0
-        self.stats = {"detected": 0, "flow_carried": 0, "mesh_refined": 0, "lost": 0, "cuts": 0}
+        self.stats = {"detected": 0, "flow_carried": 0, "mesh_refined": 0, "lost": 0, "cuts": 0, "mouth_covered": 0}
 
     def embedding(self, image, face):
         crop, _ = aligned_crop(image, face, ARCFACE_112, 112)
@@ -221,6 +225,8 @@ class ActionTracker:
             else:
                 five = np.asarray(estimate, np.float32)
                 self.anchors = self.corner_anchors(gray, five)
+            if self.occluder is not None:
+                five = self.uncover(image, five, cut)
             self.stats["detected" if source == "detect" else "flow_carried"] += 1
             record.update(points=five.astype(np.float64), source=source)
             self.five = five
@@ -229,6 +235,36 @@ class ActionTracker:
             self.five = self.anchors = None
         self.gray, self.hist = gray, hist
         return record
+
+    def uncover(self, image, five, cut):
+        """Keep alignment and flow off whatever is in front of the face.
+
+        A hand or food at the mouth hides the mouth corners, and the mesh then
+        guesses them, so the crop jumps and the swap smears. While the eyes and
+        nose stay visible, the corners follow the head rigidly from the last
+        frame instead. Flow points on the covering object are dropped too.
+        """
+        try:
+            crop, matrix = aligned_crop(image, face_from_points(five), ARCFACE_128, 256)
+        except ValueError:
+            return five
+        visible = occlusion(self.occluder, crop)
+        seen = lambda points: visible[np.clip(np.rint(points @ matrix[:, :2].T + matrix[:, 2]).astype(int)[:, 1], 0, 255),
+                                      np.clip(np.rint(points @ matrix[:, :2].T + matrix[:, 2]).astype(int)[:, 0], 0, 255)]
+        if self.anchors is not None and len(self.anchors):
+            clear = seen(np.asarray(self.anchors, np.float32)) >= .5
+            if np.count_nonzero(clear) >= 8:
+                self.anchors = self.anchors[clear]
+        shown = seen(five)
+        if cut or self.five is None or shown[3:].min() >= .5 or shown[:3].min() < .5:
+            return five
+        transform, _ = cv2.estimateAffinePartial2D(self.five[:3], five[:3], method=cv2.LMEDS)
+        if transform is None:
+            return five
+        five = five.copy()
+        five[3:] = self.five[3:] @ transform[:, :2].T + transform[:, 2]
+        self.stats["mouth_covered"] += 1
+        return five
 
     @staticmethod
     def corner_anchors(gray, five):

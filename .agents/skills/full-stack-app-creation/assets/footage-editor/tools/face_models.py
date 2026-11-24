@@ -189,6 +189,21 @@ def render(swapper, crop, identity):
     return np.clip(pred.transpose(1, 2, 0)[:, :, ::-1] * 127.5 + 127.5, 0, 255)
 
 
+def occlusion(model, crop):
+    """Visible-face weight (1 = face, 0 = covered) for a 256 px ARCFACE_128 crop.
+
+    The face parser has no hand class: fingers, a spoon or food in front of the
+    mouth are labelled skin or lips, so the swap would paint lips onto them.
+    XSeg is trained to separate the face from whatever covers it. The weight is
+    blurred and its lower half dropped, so the kept area stops just short of
+    the occluder's edge.
+    """
+    tensor = cv2.resize(crop, (256, 256))[None].astype(np.float32)/255
+    raw = model.run(None, {model.get_inputs()[0].name: tensor})[0][0, ..., 0]
+    raw = cv2.resize(np.clip(raw, 0, 1).astype(np.float32), crop.shape[1::-1])
+    return (np.clip(cv2.GaussianBlur(raw, (0, 0), 5), .5, 1)-.5)*2
+
+
 def parse_face(parser, crop):
     tensor = rgb_tensor(cv2.resize(crop, (512, 512)))
     mean = np.array([0.485, 0.456, 0.406], dtype=np.float32)[None, :, None, None]

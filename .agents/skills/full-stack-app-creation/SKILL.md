@@ -57,6 +57,8 @@ Use isolated task storage and explicitly declared dependencies. Preserve actual 
 
 When an interface explains real structures or factual relationships, use [evidence-linked review](references/evidence-linked-review.md). When its metadata reports check, fit and information-only scores, or mixes population and individual evidence, follow its [score-labelling section](references/evidence-linked-review.md#scores-and-class-versus-individual-evidence-in-review-metadata). Carry research and uncertainty into the data contract and inspection UI. Test that selections change the rendered artifact and restore its state, then validate factual claims against independent evidence.
 
+For a local planner that discovers complete model revisions, remembers a valid selection and opens the exact GLB in integrated and standalone review, use [versioned 3D review applications](references/versioned-3d-review-app.md). Preserve pending engineering states in the UI and give retained preview processes an explicit cleanup lifecycle.
+
 ## Animated 3D review
 
 Use [animated playback review](references/animated-playback-review.md) when a browser app needs clip selection, scrubbing, transport controls, camera tracking, or animated poses alongside static inspection. Validate rendered geometry and state transitions against the same GLB delivered to the user.
@@ -75,7 +77,7 @@ Use [interactive motion on recorded footage](references/footage-motion-review.md
 
 Use the [source-only local editor](references/source-only-footage-editor.md) when a runnable application must regenerate its geometry and media from a caller-supplied recording. It includes precision picking, main-stage zoom, custom-area reshaping, pinned dependencies, and a volatile local session.
 
-Use [inline video Face Swap](references/inline-video-face-swap.md) for explicit destination selection, source video stills, background rendering, and lossless verification through the actual editor. Its [action benchmark](references/inline-video-face-swap.md#benchmark-tracking-through-action) measures placement error, jitter and coverage through fast motion.
+Use [inline video Face Swap](references/inline-video-face-swap.md) for explicit destination selection, source video stills, background rendering, and lossless verification through the actual editor. Its [action benchmark](references/inline-video-face-swap.md#benchmark-tracking-through-action) measures placement error, jitter and coverage through fast motion. Its [expression and occlusion benchmarks](references/inline-video-face-swap.md#benchmark-expression-preservation-and-occlusion) score mouth-interior preservation (teeth, tongue, cavity), stuck-out tongue detection, and XSeg-based occlusion handling for hands and objects covering the face.
 
 When a swap fails during inference, a reviewer needs both the original and swapped views, or learned profiles need a portable export, follow [worker recovery, main-view comparison and style export](references/footage-comparison-and-export.md).
 

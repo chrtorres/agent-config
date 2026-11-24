@@ -12,7 +12,7 @@ from PIL import Image
 from cleanup import compile_cleanup, displacement, reach
 from progress import Progress
 from soft_body import soft_body_track, with_offsets
-from colors import apply_colors, valid_colors
+from colors import LUMA, apply_colors, guided_hair, valid_colors
 from cleanup_tracks import build_tracks
 from face_fragments import audio_sample_durations, fragment_audio, merge
 from media import inspect, presentation_offset, restore_audio_timing, uhd_size, upright_source, write_atomically
@@ -183,16 +183,21 @@ def render(source, timeline, region_file, skin_dir, target, shapes, tone, uhd, *
                             if masks_needed:
                                 skin_atlas = np.array(Image.open(skin_dir/f"skin-{page:03d}.png"))
                                 # Pages are RGB (red skin, green hair); older pages are skin only.
+                                # Pages without a blue lightness guide upsample hair bilinearly.
                                 if skin_atlas.ndim == 2:
                                     skin_atlas = np.dstack([skin_atlas, np.zeros_like(skin_atlas)])
+                                if skin_atlas.shape[2] == 2:
+                                    skin_atlas = np.dstack([skin_atlas, np.zeros_like(skin_atlas[...,0])])
                         x,y = slot%grid*tw,slot//grid*th
                         tile = np.s_[y:y+th,x:x+tw]
                         rgb = frame.to_ndarray(format="rgb24")
+                        # The hair guide compares against the frame's own lightness, before any grade.
+                        luma = (rgb.astype(np.float32)/255) @ LUMA if "hair" in colors else None
                         if tone_active:
                             skin = cv2.resize(skin_atlas[tile][...,0],size,interpolation=cv2.INTER_LINEAR)/np.float32(255)
                             rgb = grade(rgb,skin,tone)
                         if colors:
-                            hair = cv2.resize(skin_atlas[tile][...,1],size,interpolation=cv2.INTER_LINEAR)/np.float32(255) \
+                            hair = guided_hair(skin_atlas[tile],size,manifest["pixelScale"],luma) \
                                 if "hair" in colors else None
                             rgb = apply_colors(rgb,colors,hair,areas[index])
                         if shape_active:

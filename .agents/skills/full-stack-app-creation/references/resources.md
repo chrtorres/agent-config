@@ -43,3 +43,7 @@ See [live-state-and-browser-qa.md](live-state-and-browser-qa.md) for the compari
 ## Playable 3D workflow extension
 
 See [playable-3d.md](playable-3d.md) for the capture decision, controller and save acceptance, resource inventory, and the runnable `--example playable-3d` fixture.
+
+## Versioned 3D review extension
+
+See [versioned-3d-review-app.md](versioned-3d-review-app.md) for complete-revision discovery, saved-selection fallback, uncertainty-aware metrics, exact GLB delivery, integrated and standalone browser checks, and preview lifecycle cleanup. It reuses the 3D skill's viewer resources. Task-specific model and planner source stays with the originating project.

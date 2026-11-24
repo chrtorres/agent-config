@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 15886,
-      "sha256": "7ce0c9c9f4e253b9e2016065c2438abb7649dd4ff3e39f2ca18f3c86bde42c43",
+      "bytes": 16519,
+      "sha256": "28bb1991595d3be898ed6b5c6df97a2fb07e6d802e6089f3c7613920ea67e48c",
       "executable": false
     },
     "assets": {
@@ -139,8 +139,8 @@
     },
     "assets/footage-editor/README.md": {
       "type": "file",
-      "bytes": 15396,
-      "sha256": "5a0c9bdd1acbcb205ea306f855ecb267f25b93644e6feeb738c35c873fea281f",
+      "bytes": 21453,
+      "sha256": "cc3450573ba3d920da11970ae803f3d00bc59b4ce9a06677cda2ad74a1feecb4",
       "executable": false
     },
     "assets/footage-editor/app": {
@@ -232,8 +232,8 @@
     },
     "assets/footage-editor/app/render.mjs": {
       "type": "file",
-      "bytes": 31445,
-      "sha256": "77a3dff7461feae53d16321a9e70c585e3653f1a8f39ae9e2e444bc7159e7b86",
+      "bytes": 32387,
+      "sha256": "74ff0fda1ea98da4c12598130d2aa6857dcd31f8c03d152ea31888d6ec02ae26",
       "executable": false
     },
     "assets/footage-editor/app/secondary.mjs": {
@@ -383,10 +383,22 @@
       "sha256": "38463088361de21dc04783fd7d83b977db4e576ef0c02df72fb00ba1e6cdd893",
       "executable": false
     },
+    "assets/footage-editor/tests/make_expression_face_clip.py": {
+      "type": "file",
+      "bytes": 6680,
+      "sha256": "26cb4853e4e0a14d28df5caf8275b8a25020123fd80cddce8fadd1946efabcfa",
+      "executable": false
+    },
     "assets/footage-editor/tests/make_face_swap_clips.py": {
       "type": "file",
       "bytes": 1301,
       "sha256": "2bcaa0f3c46f0febed737acab0ec80ab37564c1d747470d262411b5d909c3252",
+      "executable": false
+    },
+    "assets/footage-editor/tests/make_feeding_face_clip.py": {
+      "type": "file",
+      "bytes": 5410,
+      "sha256": "fe16eeebfaa0081218beeaa530fe13d6d8904581e1f85329ced539c7364cb477",
       "executable": false
     },
     "assets/footage-editor/tests/make_media_fixtures.py": {
@@ -405,6 +417,12 @@
       "type": "file",
       "bytes": 5984,
       "sha256": "6b8b9d680469da4ce015936619604705163e0b983c37822aa99f02752d600458",
+      "executable": false
+    },
+    "assets/footage-editor/tests/mouth_expression_benchmark.py": {
+      "type": "file",
+      "bytes": 2896,
+      "sha256": "291143d717d5e892504a12d783e8b2a1379bbc30f5e5fd79b1f3c69a43770a8c",
       "executable": false
     },
     "assets/footage-editor/tests/secondary-kernel.mjs": {
@@ -604,14 +622,14 @@
     },
     "assets/footage-editor/tools/colors.py": {
       "type": "file",
-      "bytes": 4146,
-      "sha256": "9f890a07bb0852da4d992f04ba6879e41391bfa3c4858eba9cac66941148a096",
+      "bytes": 5793,
+      "sha256": "c225f459148f1f1ca3e9d579ef9a0c027bbcd68499a8e7b96665281ca4029c8e",
       "executable": false
     },
     "assets/footage-editor/tools/export_edit.py": {
       "type": "file",
-      "bytes": 17115,
-      "sha256": "a2d9ccf62adc23cb4729dca71c3bc8355a074f12691eea948d60f897b90fa529",
+      "bytes": 17574,
+      "sha256": "85fcfe2d8e08dd3419074bfc95fb92aeebcda57d09a31f7ffec0112e970ea57a",
       "executable": false
     },
     "assets/footage-editor/tools/face_curvature.py": {
@@ -628,20 +646,20 @@
     },
     "assets/footage-editor/tools/face_models.py": {
       "type": "file",
-      "bytes": 9110,
-      "sha256": "ba6a6bdbf3e915ba50f17ba07d2fbd28719908b8299eb72942b8d20dcf9713f7",
+      "bytes": 9865,
+      "sha256": "698ba093e0f0ba47bd3ae9ff5942025af0a1f1c823b3450c2a054eb588272d06",
       "executable": false
     },
     "assets/footage-editor/tools/face_motion_blend.py": {
       "type": "file",
-      "bytes": 3420,
-      "sha256": "be62e4cbe10e237f56c23a8f9bdfaec8bef9289d0d7b242c5bd51bf2485b71e8",
+      "bytes": 9582,
+      "sha256": "a9026e665416ee363147fcc847a7e7d020258a24a55495ed37b880a534839a2e",
       "executable": false
     },
     "assets/footage-editor/tools/face_swap_video.py": {
       "type": "file",
-      "bytes": 40817,
-      "sha256": "5c164072fa48db50d041ee0173e8928656302c9c6e0ef389743310094500d92b",
+      "bytes": 42061,
+      "sha256": "d9f8df8528c57c95beb0fe38d8a4a6d264f157c1da1cd1edf1d5ca3a2ff1d6c7",
       "executable": false
     },
     "assets/footage-editor/tools/face_target_mask.py": {
@@ -652,14 +670,14 @@
     },
     "assets/footage-editor/tools/face_tracking.py": {
       "type": "file",
-      "bytes": 16517,
-      "sha256": "1da948c54637d05f5ea7495085c8ec35094b42345805cfe654b83d99cbd6bfbd",
+      "bytes": 18513,
+      "sha256": "eda67fe1a993023699ae238c6face90571d0f8ad4ddd309d8acb4c0d0e4dea9c",
       "executable": false
     },
     "assets/footage-editor/tools/fetch_face_models.py": {
       "type": "file",
-      "bytes": 2654,
-      "sha256": "a99b89ea68157371d6537c6b455a5545fb3f8ebc125ffdf52b6c8abc3b1cd733",
+      "bytes": 2864,
+      "sha256": "96c5a8ba8abef7e2c2ab6c2fd32a9468da9a785f7eb54e59a25cb5dd024c5849",
       "executable": false
     },
     "assets/footage-editor/tools/measure_motion.py": {
@@ -700,8 +718,8 @@
     },
     "assets/footage-editor/tools/skin.py": {
       "type": "file",
-      "bytes": 6019,
-      "sha256": "0b3af172aec3c962cfb399bda6869b18d0c2c59d1e5ed2c9c584dc940be326f2",
+      "bytes": 9703,
+      "sha256": "a5af651127701f3d3e2fd28ba15edbc15dfbae7b8c6085c6f51f1fa46eeb2cc8",
       "executable": false
     },
     "assets/footage-editor/tools/soft_body.py": {
@@ -1369,8 +1387,8 @@
     },
     "references/inline-video-face-swap.md": {
       "type": "file",
-      "bytes": 4664,
-      "sha256": "907cf312a8ce5d58686a9a23e3fda64384dcae9bb915390ebe0ff800c1d69cd4",
+      "bytes": 5967,
+      "sha256": "db126e2d921d699fcba281dae3124e5bd30d0c9cce45547de5f21ec9342371f4",
       "executable": false
     },
     "references/lightning-and-mode-vfx.md": {
@@ -1429,8 +1447,8 @@
     },
     "references/resources.md": {
       "type": "file",
-      "bytes": 6584,
-      "sha256": "425088a8aca57a9bfb1ea4166a8c509356cf02452675fd47cb84a38b89fb4d8d",
+      "bytes": 6977,
+      "sha256": "d60aeb139f59b4ec3679e93e6a6dbeb823a2ee2adca239cd5da0b09e6ada5ede",
       "executable": false
     },
     "references/robot-description-review.md": {
@@ -1488,6 +1506,12 @@
       "type": "file",
       "bytes": 2813,
       "sha256": "a704a3c805f2faf7d5b4c66a37380da2dc4fd4d15a07b7aab0f4d78a617bc672",
+      "executable": false
+    },
+    "references/versioned-3d-review-app.md": {
+      "type": "file",
+      "bytes": 4354,
+      "sha256": "9fa0c4f2fa80fcf4d5f680607935bc5b809ab1c65577d3c182a87c280b0effb3",
       "executable": false
     },
     "references/worked-example.md": {
