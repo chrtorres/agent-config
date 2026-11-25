@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 23714,
-      "sha256": "1cc01080ad81638becbead0b8d5c5143583c900a84d0f93632ad12c62c22c518",
+      "bytes": 24982,
+      "sha256": "049146c599d2391b63d20f698b237f46360d26385f2f7a8238b7b28cc8e04a74",
       "executable": false
     },
     "assets": {
@@ -320,6 +320,12 @@
       "sha256": "3af1420d4d8898ebec7a610f44ca149174f8d9e3b7366392d4da178f335d66b1",
       "executable": false
     },
+    "references/appearance-fidelity-scoring.md": {
+      "type": "file",
+      "bytes": 10012,
+      "sha256": "6d265f4b6150d2e48fe6b7a1af41733b8b747f7d1f68632b430a2bd6d56e45c6",
+      "executable": false
+    },
     "references/assembly-refinement.md": {
       "type": "file",
       "bytes": 4922,
@@ -438,6 +444,12 @@
       "type": "file",
       "bytes": 1485,
       "sha256": "faa5dd985af8c7db1dd7c62625c26a693a3006016721befb73046ec232d83157",
+      "executable": false
+    },
+    "references/reproducible-project-build.md": {
+      "type": "file",
+      "bytes": 6360,
+      "sha256": "29ac810e18a410d8988044104b24930ef980cf1d3c401cc9e58744606b0197b2",
       "executable": false
     },
     "references/research-driven-refinement-provenance.md": {
@@ -683,6 +695,12 @@
       "sha256": "ad69df4d62b4989046930a9d868a71487d75a696a34962ae441dabf67ce5ae1c",
       "executable": false
     },
+    "scripts/score_appearance.py": {
+      "type": "file",
+      "bytes": 11355,
+      "sha256": "5a7039db6ebbc97f937a2ae38892c8913d8db0e5f38835ee8c06534c267d3689",
+      "executable": false
+    },
     "scripts/sdf_coat_demo.py": {
       "type": "file",
       "bytes": 8979,
@@ -699,6 +717,12 @@
       "type": "file",
       "bytes": 4113,
       "sha256": "82bc65bd4ca35239591a565e60cdcb4793449af05bf7b5fe2e7c4af1b7336b9a",
+      "executable": false
+    },
+    "scripts/verify_reproduction.py": {
+      "type": "file",
+      "bytes": 6012,
+      "sha256": "e3b719a8f0326d6ce591fee82ace1ab48f2ec51b3ed14fdf9306e4f5d5ebb7df",
       "executable": false
     },
     "tests": {
@@ -747,6 +771,12 @@
       "type": "file",
       "bytes": 2418,
       "sha256": "e8668323de1a4ce1941eb469147f802b635de433bde59e09dd23431e0c098cf7",
+      "executable": false
+    },
+    "tests/fixtures/make_appearance_fixture.py": {
+      "type": "file",
+      "bytes": 2095,
+      "sha256": "c2c97c6b8238db60e35cd62d5cdb66920f98cd35475f28d7d3757a9725c58299",
       "executable": false
     },
     "tests/fixtures/photo-landmarks.json": {
@@ -806,10 +836,22 @@
       "sha256": "2e895fe726bcb222f822c750c766cbef5967fc5159ec28eeaf4762bc8b67cf33",
       "executable": false
     },
+    "tests/test_score_appearance.py": {
+      "type": "file",
+      "bytes": 2637,
+      "sha256": "6de768235a78164a64ea2db53c0810677b76485a90074b35ee77008dfdd916d1",
+      "executable": false
+    },
     "tests/test_standard_and_coat_tools.py": {
       "type": "file",
       "bytes": 6203,
       "sha256": "d0de9585f2390f4b3e7f1b755ada9613e59f4473c843e7984459a707987c5bdd",
+      "executable": false
+    },
+    "tests/test_verify_reproduction.py": {
+      "type": "file",
+      "bytes": 2900,
+      "sha256": "55fbf2827efdd56b01a16547cbc44c94ac31c9ecbe3118561442d33cf2837b99",
       "executable": false
     }
   }

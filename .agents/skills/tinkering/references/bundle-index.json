@@ -1,0 +1,69 @@
+{
+  "format_version": 1,
+  "scope": "Resource identity snapshot, not semantic or security validation",
+  "ignored_entry_names": [
+    ".git",
+    ".venv",
+    "__pycache__",
+    "node_modules"
+  ],
+  "entries": {
+    "SKILL.md": {
+      "type": "file",
+      "bytes": 13054,
+      "sha256": "32575a24ca5fc2ca386d5eb723f0316bf2259f621d7ec9238b9be9476cde5fc5",
+      "executable": false
+    },
+    "assets": {
+      "type": "directory"
+    },
+    "references": {
+      "type": "directory"
+    },
+    "references/3d-printer-serial-reference.md": {
+      "type": "file",
+      "bytes": 6620,
+      "sha256": "f77760b8a7e3e7b179eab3739b7bec7627106a8784dbf4073d9a93fd20ee782f",
+      "executable": false
+    },
+    "references/adb-inspection-reference.md": {
+      "type": "file",
+      "bytes": 3021,
+      "sha256": "72f734e2df44d27f473518bc8a9f894e69775329caae94e63bf6544159764be1",
+      "executable": false
+    },
+    "references/audio-diagnosis-reference.md": {
+      "type": "file",
+      "bytes": 2656,
+      "sha256": "e366dbd39656051df7ae7431681dd53c1ec22209912394a6fe008aaee0f566b8",
+      "executable": false
+    },
+    "references/hardware-evaluation-matrix.md": {
+      "type": "file",
+      "bytes": 3121,
+      "sha256": "cdb5061e21fb10d8d4bcab5347d178563c6537125c174d88222923be55e24ee7",
+      "executable": false
+    },
+    "scripts": {
+      "type": "directory"
+    },
+    "scripts/adhesion_patch.py": {
+      "type": "file",
+      "bytes": 3042,
+      "sha256": "238b9a4351ca423e6f40a465795e9809f87a524ab5b6fc22c1f1c3a4e9f6bbf9",
+      "executable": false
+    },
+    "scripts/printer_serial.py": {
+      "type": "file",
+      "bytes": 3471,
+      "sha256": "d15d464fbfcaddd1fa6e80029a572e9f1fba18b504451b17afbb558465d0f56c",
+      "executable": false
+    },
+    "scripts/printer_stream.py": {
+      "type": "file",
+      "bytes": 4291,
+      "sha256": "97f64df65871d55178f039122eb55ec319ba827e46164ed295e159ba686b5d63",
+      "executable": false
+    }
+  }
+}
