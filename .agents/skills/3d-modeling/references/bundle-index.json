@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 24982,
-      "sha256": "049146c599d2391b63d20f698b237f46360d26385f2f7a8238b7b28cc8e04a74",
+      "bytes": 27116,
+      "sha256": "2e6b5e7729111b022b0da31aeb9114d9942a9cf9e2b56aa4b07f206e5e0eb968",
       "executable": false
     },
     "assets": {
@@ -326,6 +326,12 @@
       "sha256": "6d265f4b6150d2e48fe6b7a1af41733b8b747f7d1f68632b430a2bd6d56e45c6",
       "executable": false
     },
+    "references/assembly-install-guide.md": {
+      "type": "file",
+      "bytes": 5830,
+      "sha256": "3bbffce18fa1cd05418f5e466fbc0649a73dbccda701330c21563eee13152f2c",
+      "executable": false
+    },
     "references/assembly-refinement.md": {
       "type": "file",
       "bytes": 4922,
@@ -366,6 +372,18 @@
       "type": "file",
       "bytes": 5367,
       "sha256": "70d99e54351a6a0163c06cc49ce2524e5f0c2317b169c3aedc8f01e8fa1ef915",
+      "executable": false
+    },
+    "references/constrained-bed-window-tiling-provenance.md": {
+      "type": "file",
+      "bytes": 5565,
+      "sha256": "a950269004d249d518ca88787397c4ded7da1c7218a6a39b38b924e757fc05b4",
+      "executable": false
+    },
+    "references/constrained-bed-window-tiling.md": {
+      "type": "file",
+      "bytes": 6146,
+      "sha256": "e2f359858bb62d410cc5c178889dd83e03b47482618ccbdf45800b9181d2bf66",
       "executable": false
     },
     "references/context-and-inspection.md": {
@@ -527,6 +545,12 @@
     "scripts": {
       "type": "directory"
     },
+    "scripts/build_install_pdf.py": {
+      "type": "file",
+      "bytes": 5248,
+      "sha256": "37a9dc4c192637e142eef6b1106f14c27f90cf347a174a208ad23e727e8a5e85",
+      "executable": false
+    },
     "scripts/build_print_previews.py": {
       "type": "file",
       "bytes": 4046,
@@ -665,6 +689,12 @@
       "sha256": "a50f22b0768ab14b05a9a186acd226830d064aa60963eaed0d2ebe7576102c6c",
       "executable": false
     },
+    "scripts/plan_window_tiles.py": {
+      "type": "file",
+      "bytes": 8304,
+      "sha256": "94c6e04def0b6d22885430d35f7c688a398fbe0c07598188be7d61ca31613480",
+      "executable": false
+    },
     "scripts/prepare_reference_review.py": {
       "type": "file",
       "bytes": 11869,
@@ -675,6 +705,12 @@
       "type": "file",
       "bytes": 4369,
       "sha256": "99df15b06911a29f286c554c509f806e172d4d9bb92ab6028e9898d72b53288d",
+      "executable": false
+    },
+    "scripts/render_install_views.py": {
+      "type": "file",
+      "bytes": 7323,
+      "sha256": "051ab06d355293b5f45f783406b0af2058e6cd26c9b6a61557c340266d0779d5",
       "executable": false
     },
     "scripts/render_preview.py": {
@@ -822,6 +858,12 @@
       "type": "file",
       "bytes": 2936,
       "sha256": "48fd48394077cb0cf48f51e0c6f0bada76469ac6f2d14bfbe35bde84dbdad556",
+      "executable": false
+    },
+    "tests/test_plan_window_tiles.py": {
+      "type": "file",
+      "bytes": 5682,
+      "sha256": "a6a96f408cf46ec3007b5a8413c27f024985c0f5685abc6f093dc161cbda2be9",
       "executable": false
     },
     "tests/test_preserved_subassembly.py": {

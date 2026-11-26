@@ -117,6 +117,9 @@ the board (DTR) to a clean state; wait ~4 s.
 **Safety invariants:**
 - **Closing the port does NOT cool many 8-bit boards.** After any stop, send `M104 S0` +
   `M140 S0` and confirm with `M105`. Verify after a kill-signalled background streamer too.
+- **Repeated spaghetti/clumping on every part, including small ones, is a first-layer problem, not a
+  model problem.** Zero any Z offset, print the vendor's own SD demo as a control, and rebuild the profile
+  from it: [first-layer-adhesion-recipe.md](references/first-layer-adhesion-recipe.md).
 - **Keep every move inside the bed, clear of bed clips** — a print reaching the edge can
   knock a glass bed off. Parse the sliced G-code's min/max X/Y and bound prime/print/end moves.
 - Never leave it printing unattended.
@@ -141,12 +144,29 @@ don't delete the user's old files) over USB streaming (`scripts/printer_stream.p
 `M290` babystep via a nudge file, aborts cold) which tethers the host for the whole job.
 Full command tables, slicing, and the babystep workflow: [3d-printer-serial-reference.md](references/3d-printer-serial-reference.md).
 
+**Quote time with every print job.** Whenever you recommend, queue or hand off prints, list each file's
+slicer estimate (`grep -m1 "estimated printing time (normal mode)" <file>.gcode`) and grams
+(`filament used [g]`). Multiply the time by the number of copies, give the batch total, and add a 10–15%
+buffer for a slower hobby printer. Record the times in the project handoff's print queue as well.
+
+**Identify printed parts from evidence, not memory.** When the user can't fit printed pieces together, first look
+at their photos, then compare each piece with the extrusion footprint of the real G-code: parse `;Z:`/`;TYPE:`,
+draw the extruding `G1` moves, and leave out Support and Custom types. A piece that matches none of the intended
+files means the wrong file was printed. Old files left on the SD card are a common cause. Have the user check the
+first layers of each reprint against the expected shape. For assembly instructions, use the 3d-modeling
+[assembly install guide](../3d-modeling/references/assembly-install-guide.md).
+
 ## Reproduction resources
 
 - [audio-diagnosis-reference.md](references/audio-diagnosis-reference.md) — extended ALSA/PulseAudio command cheat sheet
 - [adb-inspection-reference.md](references/adb-inspection-reference.md) — ADB setup, common errors, full spec-pull command block
 - [hardware-evaluation-matrix.md](references/hardware-evaluation-matrix.md) — axes and scoring table for satellite hardware options
 - [3d-printer-serial-reference.md](references/3d-printer-serial-reference.md) — Marlin serial commands, safety invariants, manual leveling, slicing, SD workflow
+- [first-layer-adhesion-recipe.md](references/first-layer-adhesion-recipe.md) — when every print spaghettis: derive the first-layer recipe from the vendor's own SD demo, the negative-Z-offset trap, clean-tearaway raft settings and raft footprint budget, and how to raise strength without touching the proven first layer
+- [first-layer-adhesion-provenance.md](references/first-layer-adhesion-provenance.md) — capture record for the above: extend-or-create comparison, user feedback and what each change did or did not verify, resource disposition, validation run
+- `scripts/check_print_window.py` — measure sliced G-code's real extrusion extents (start-block prime lines excluded by default) and check every file against a clip-safe window with an optional safety margin; non-zero exit on any violation
+- `scripts/vendor_gcode_profile.py` — summarise or `--diff` the first-layer settings of vendor/SD-card G-code (Simplify3D and PrusaSlicer dialects); reports the true first-layer height from the first extruding move
+- `tests/test_print_window_tools.py` — behavioural tests for both helpers, synthetic fixtures only (`python3 -m unittest discover -s tests`)
 - `scripts/printer_serial.py` — one-off G-code / inspection / PID-tune-then-save / SD list / cooldown
 - `scripts/printer_stream.py` — stream a G-code file with live `M290` babystep injection; aborts cold
 - `scripts/adhesion_patch.py` — generate a slow concentric single-layer squish-finder patch

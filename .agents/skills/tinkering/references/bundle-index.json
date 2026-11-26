@@ -10,8 +10,8 @@
   "entries": {
     "SKILL.md": {
       "type": "file",
-      "bytes": 13054,
-      "sha256": "32575a24ca5fc2ca386d5eb723f0316bf2259f621d7ec9238b9be9476cde5fc5",
+      "bytes": 15557,
+      "sha256": "13d294e8c5fc0d0b1c13a32145fc85ca84c1c8db6ecddb28ca2648538821e57f",
       "executable": false
     },
     "assets": {
@@ -38,6 +38,18 @@
       "sha256": "e366dbd39656051df7ae7431681dd53c1ec22209912394a6fe008aaee0f566b8",
       "executable": false
     },
+    "references/first-layer-adhesion-provenance.md": {
+      "type": "file",
+      "bytes": 6720,
+      "sha256": "346be7c26b61fd714f443eca604da56ebcbb0ab6355a3f24bc662220c64f203b",
+      "executable": false
+    },
+    "references/first-layer-adhesion-recipe.md": {
+      "type": "file",
+      "bytes": 6945,
+      "sha256": "77cfef234766ea599e0499ed4dbdf665c4f25cbc23c3b4ea44841d6d2e4e118b",
+      "executable": false
+    },
     "references/hardware-evaluation-matrix.md": {
       "type": "file",
       "bytes": 3121,
@@ -53,6 +65,12 @@
       "sha256": "238b9a4351ca423e6f40a465795e9809f87a524ab5b6fc22c1f1c3a4e9f6bbf9",
       "executable": false
     },
+    "scripts/check_print_window.py": {
+      "type": "file",
+      "bytes": 6451,
+      "sha256": "45b178684ffb6e6b509e7b9ed4151aa2446fe5fba7edf18a87fb7e5e44f28889",
+      "executable": false
+    },
     "scripts/printer_serial.py": {
       "type": "file",
       "bytes": 3471,
@@ -63,6 +81,21 @@
       "type": "file",
       "bytes": 4291,
       "sha256": "97f64df65871d55178f039122eb55ec319ba827e46164ed295e159ba686b5d63",
+      "executable": false
+    },
+    "scripts/vendor_gcode_profile.py": {
+      "type": "file",
+      "bytes": 6248,
+      "sha256": "84409f78ebbdfdef683273b4c929908899d9f18f98842fb66c3467d1ff5a5aea",
+      "executable": false
+    },
+    "tests": {
+      "type": "directory"
+    },
+    "tests/test_print_window_tools.py": {
+      "type": "file",
+      "bytes": 8743,
+      "sha256": "20be48af44c61d2037d1652f66e290d228e95b2106c59c60130afd24c6ce2569",
       "executable": false
     }
   }
